@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>筠玲數字 · 排盤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&display=swap" rel="stylesheet">
+<style>
+/* ===== 基礎 ===== */
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+  --paper:#ECE6D9;
+  --paper2:#F8F4EC;
+  --ink:#1F1C19;
+  --ink2:#655B4D;
+  --zhu:#8C2E26;
+  --qing:#4E6470;
+  --huang:#A88338;
+  --line:#CFC5B3;
+  --ser:"Noto Serif TC",serif;
+  --sans:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.8;
+  padding:0 0 72px;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{
+  width:100%;
+  max-width:560px;
+  margin:0 auto;
+  padding:0 18px;
+}
+
+/* ===== 頁首 ===== */
+header{
+  padding:34px 0 24px;
+  margin-bottom:24px;
+  border-bottom:1px solid var(--line);
+}
+
+.hero{
+  text-align:center;
+}
+
+.teacher{
+  display:block;
+  width:170px;
+  max-width:62%;
+  aspect-ratio:1/1;
+  margin:0 auto 22px;
+  object-fit:cover;
+  object-position:center 22%;
+  border:1px solid var(--line);
+  outline:1px solid var(--line);
+  outline-offset:5px;
+  background:var(--paper2);
+}
+
+h1{
+  margin:0;
+  font-family:var(--ser);
+  font-size:29px;
+  font-weight:900;
+  letter-spacing:.26em;
+  color:var(--ink);
+}
+
+.sub{
+  margin-top:12px;
+  color:var(--ink2);
+  font-size:12px;
+  letter-spacing:.4em;
+}
+
+.hero-text{
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid rgba(207,197,179,.6);
+  color:var(--ink2);
+  font-family:var(--ser);
+  font-size:14px;
+  letter-spacing:.2em;
+  line-height:1.9;
+}
+
+/* ===== 卡片 ===== */
+.card{
+  background:var(--paper2);
+  border:1px solid var(--line);
+  padding:20px;
+  margin-bottom:22px;
+  box-shadow:0 1px 0 rgba(255,255,255,.75) inset;
+}
+
+.card > *:last-child{
+  margin-bottom:0;
+}
+
+h2{
+  margin:0 0 16px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--line);
+  font-family:var(--ser);
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.34em;
+  color:var(--ink);
+}
+
+/* ===== 輸入 ===== */
+.lab{
+  margin-bottom:10px;
+  color:var(--ink2);
+  font-size:11px;
+  letter-spacing:.26em;
+}
+
+.seg{
+  display:flex;
+  margin-bottom:18px;
+  border:1px solid var(--ink);
+  overflow:hidden;
+}
+
+.seg button{
+  flex:1;
+  border:0;
+  border-right:1px solid var(--ink);
+  background:transparent;
+  color:var(--ink);
+  padding:12px 4px;
+  cursor:pointer;
+  font-family:var(--sans);
+  font-size:13px;
+  letter-spacing:.06em;
+  transition:background-color .18s ease,color .18s ease;
+}
+
+.seg button:last-child{
+  border-right:0;
+}
+
+.seg button[aria-pressed="true"]{
+  background:var(--ink);
+  color:var(--paper2);
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px 12px;
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  margin-bottom:6px;
+  color:var(--ink2);
+  font-size:11px;
+  letter-spacing:.18em;
+}
+
+select,input{
+  width:100%;
+  min-height:46px;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  background:#FFFDFA;
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  border-radius:0;
+  appearance:none;
+  transition:border-color .18s ease,box-shadow .18s ease;
+}
+
+select:focus,input:focus{
+  outline:none;
+  border-color:var(--qing);
+  box-shadow:0 0 0 2px rgba(78,100,112,.15);
+  background:#fff;
+}
+
+.go{
+  width:100%;
+  min-height:54px;
+  border:0;
+  background:var(--ink);
+  color:var(--paper2);
+  cursor:pointer;
+  font-family:var(--ser);
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:.4em;
+  transition:background-color .18s ease;
+}
+
+.go:active{
+  background:var(--zhu);
+}
+
+.note{
+  margin-top:12px;
+  color:var(--ink2);
+  font-size:12px;
+  line-height:1.8;
+}
+
+.err{
+  min-height:1.4em;
+  margin-top:12px;
+  color:var(--zhu);
+  font-size:13px;
+  font-weight:600;
+}
+
+/* ===== 六柱環 ===== */
+.ringbox{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:14px 0 10px;
+  margin-bottom:12px;
+  border-top:1px solid rgba(207,197,179,.55);
+  border-bottom:1px solid rgba(207,197,179,.55);
+}
+
+svg{
+  width:100%;
+  max-width:330px;
+  height:auto;
+  overflow:visible;
+  touch-action:manipulation;
+}
+
+.pill{
+  cursor:pointer;
+}
+
+.pbg{
+  fill:var(--paper2);
+  stroke:var(--line);
+  stroke-width:1.4;
+  transition:fill .18s ease,stroke .18s ease;
+}
+
+.pnum{
+  fill:var(--ink);
+  font-family:var(--ser);
+  font-size:20px;
+  font-weight:700;
+  transition:fill .18s ease;
+}
+
+.plab{
+  fill:var(--ink2);
+  font-family:var(--sans);
+  font-size:9px;
+  letter-spacing:.18em;
+  transition:fill .18s ease;
+}
+
+.pill[data-on="1"] .pbg{
+  fill:var(--ink);
+  stroke:var(--ink);
+  stroke-width:2;
+}
+
+.pill[data-on="1"] .pnum{
+  fill:var(--paper2);
+}
+
+.pill[data-on="1"] .plab{
+  fill:var(--paper2);
+}
+
+.pill[data-win="1"] .pbg{
+  fill:#E7DECD;
+  stroke:var(--huang);
+  stroke-width:1.8;
+}
+
+.rline{
+  fill:none;
+  stroke:#BFB39E;
+  stroke-width:1.2;
+  stroke-dasharray:3 3;
+}
+
+.rarc{
+  fill:none;
+  stroke:var(--huang);
+  stroke-width:3;
+  stroke-linecap:round;
+}
+
+.read{
+  text-align:center;
+  margin:18px 0 8px;
+  padding:8px 0;
+  min-height:86px;
+  font-family:var(--ser);
+}
+
+.read .gt{
+  color:var(--ink);
+  font-size:33px;
+  font-weight:900;
+  letter-spacing:.12em;
+  line-height:1.25;
+}
+
+.read .gn{
+  margin-top:8px;
+  color:var(--zhu);
+  font-size:16px;
+  font-weight:600;
+  letter-spacing:.16em;
+}
+
+.read .yy{
+  margin-top:10px;
+  color:var(--ink2);
+  font-family:var(--sans);
+  font-size:13px;
+  letter-spacing:.14em;
+}
+
+.hint{
+  margin-top:10px;
+  text-align:center;
+  color:var(--ink2);
+  font-size:11px;
+  letter-spacing:.22em;
+}
+
+/* ===== 解盤 ===== */
+.jie{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+}
+
+.jie h3{
+  margin:0 0 12px;
+  color:var(--zhu);
+  font-family:var(--ser);
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.28em;
+}
+
+.duan{
+  padding:20px 14px;
+  border-left:3px solid var(--huang);
+  background:rgba(255,255,255,.3);
+  font-family:var(--ser);
+  font-size:16px;
+  line-height:2.3;
+  letter-spacing:.1em;
+  text-align:center;
+  white-space:pre-line;
+  color:var(--ink);
+}
+
+.jdu{
+  margin-top:18px;
+  color:var(--ink2);
+  font-size:14px;
+  line-height:2.05;
+  text-align:justify;
+  white-space:pre-line;
+}
+
+.tabs{
+  display:flex;
+  margin-bottom:18px;
+  border-bottom:1px solid var(--line);
+}
+
+.tabs button{
+  flex:1;
+  padding:11px 4px;
+  border:0;
+  border-bottom:2px solid transparent;
+  background:transparent;
+  color:var(--ink2);
+  font-family:var(--sans);
+  font-size:12.5px;
+  cursor:pointer;
+  transition:color .18s ease,border-color .18s ease;
+}
+
+.tabs button[aria-pressed="true"]{
+  color:var(--zhu);
+  border-bottom-color:var(--zhu);
+  font-weight:600;
+}
+
+/* ===== 表格 ===== */
+table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:auto;
+  font-size:13px;
+  background:#FCFBF8;
+}
+
+th,td{
+  padding:9px 5px;
+  text-align:center;
+  border-bottom:1px solid var(--line);
+  word-break:break-word;
+}
+
+th{
+  background:#F2EEE5;
+  color:var(--ink2);
+  font-family:var(--ser);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+}
+
+td.n{
+  font-family:var(--ser);
+  font-size:17px;
+  font-weight:700;
+  color:var(--ink);
+}
+
+/* ===== 大運分段條 ===== */
+.bar{
+  display:flex;
+  height:42px;
+  margin-bottom:14px;
+  border:1px solid var(--line);
+  background:#FAF8F3;
+  overflow:hidden;
+}
+
+.bar div{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-width:0;
+  padding:2px;
+  border-right:1px solid var(--line);
+  font-family:var(--ser);
+  font-size:12px;
+  color:var(--ink);
+}
+
+.bar div.v{
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  font-size:10px;
+}
+
+.bar div:last-child{
+  border-right:0;
+}
+
+/* ===== 捲動區 ===== */
+.scroll{
+  overflow:auto;
+  max-height:360px;
+  border:1px solid var(--line);
+  background:#fff;
+  -webkit-overflow-scrolling:touch;
+}
+
+.scroll table{
+  min-width:100%;
+  font-size:12px;
+}
+
+.scroll thead th{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background:#F4F0E7;
+  border-bottom:1px solid var(--ink);
+}
+
+.hide{
+  display:none;
+}
+
+/* ===== 待建置 ===== */
+.todo{
+  border:1px dashed #B9AA93;
+  background:rgba(255,255,255,.32);
+}
+
+.todo h2{
+  color:var(--ink2);
+  border-bottom:1px dashed #B9AA93;
+}
+
+.tlist{
+  list-style:none;
+  margin:0;
+  padding:0;
+  font-size:13px;
+}
+
+.tlist li{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px dashed #CFC5B3;
+}
+
+.tlist li:last-child{
+  border-bottom:0;
+}
+
+.tag{
+  flex:0 0 auto;
+  min-width:56px;
+  text-align:center;
+  margin-top:3px;
+  padding:3px 7px;
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.1em;
+  border:1px solid currentColor;
+}
+
+.t-wait{
+  color:var(--zhu);
+}
+
+.t-next{
+  color:var(--qing);
+}
+
+.tlist b{
+  display:block;
+  margin-bottom:5px;
+  font-family:var(--ser);
+  font-size:15px;
+  font-weight:700;
+  color:var(--ink);
+}
+
+.tlist span{
+  color:var(--ink2);
+  font-size:13px;
+  line-height:1.8;
+}
+
+/* ===== 專業版 ===== */
+.pro{
+  border-color:var(--qing);
+}
+
+.pro h2{
+  color:var(--qing);
+  border-bottom-color:var(--qing);
+}
+
+.lock{
+  display:flex;
+  gap:10px;
+  align-items:stretch;
+}
+
+.lock input{
+  flex:1;
+}
+
+.lock button{
+  min-width:90px;
+  padding:0 18px;
+  border:1px solid var(--qing);
+  background:var(--qing);
+  color:#fff;
+  cursor:pointer;
+  font-family:var(--sans);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.1em;
+  transition:background-color .18s ease;
+}
+
+.lock button:active{
+  background:var(--zhu);
+  border-color:var(--zhu);
+}
+
+footer{
+  margin-top:30px;
+  padding:24px 0 8px;
+  text-align:center;
+  color:var(--ink2);
+  font-family:var(--ser);
+  font-size:11px;
+  letter-spacing:.32em;
+  border-top:1px solid var(--line);
+}
+
+/* ===== Focus ===== */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible{
+  outline:2px solid var(--qing);
+  outline-offset:2px;
+}
+
+/* ===== 捲軸 ===== */
+.scroll::-webkit-scrollbar{
+  width:8px;
+  height:8px;
+}
+
+.scroll::-webkit-scrollbar-track{
+  background:#EFE9DE;
+}
+
+.scroll::-webkit-scrollbar-thumb{
+  background:#B7AA95;
+}
+
+/* ===== 小螢幕 ===== */
+@media (max-width:380px){
+  .wrap{
+    padding-left:13px;
+    padding-right:13px;
+  }
+  .card{
+    padding:16px;
+  }
+  .teacher{
+    width:140px;
+    margin-bottom:18px;
+  }
+  h1{
+    font-size:25px;
+    letter-spacing:.16em;
+  }
+  .hero-text{
+    font-size:13px;
+    letter-spacing:.13em;
+  }
+  h2{
+    font-size:14px;
+    letter-spacing:.22em;
+  }
+  .go{
+    letter-spacing:.26em;
+  }
+  .read .gt{
+    font-size:28px;
+  }
+  .read .gn{
+    font-size:15px;
+  }
+  .duan{
+    font-size:15px;
+    line-height:2.15;
+  }
+  table{
+    font-size:12px;
+  }
+  td.n{
+    font-size:15px;
+  }
+  .lock{
+    flex-direction:column;
+  }
+  .lock button{
+    width:100%;
+    min-height:46px;
+  }
+}
+
+/* ===== 減少動態 ===== */
+@media (prefers-reduced-motion:reduce){
+  .seg button,select,input,.go,
+  .pbg,.pnum,.plab,.tabs button,.lock button{
+    transition:none;
+  }
+}
+
+/* ===== 列印 ===== */
+@media print{
+  body{
+    background:#fff;
+    color:#000;
+    padding:0;
+  }
+  .go,.lock,.seg,footer{
+    display:none;
+  }
+  .card{
+    border:1px solid #999;
+    box-shadow:none;
+    break-inside:avoid;
+  }
+  .scroll{
+    max-height:none;
+    overflow:visible;
+    border:0;
+  }
+}
+
+
+/* ===================================================
+   宣紙質感 · 頁首 · 印章 · 特色列
+   =================================================== */
+
+body{
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 0%,
+      rgba(255,252,245,.9) 0%, rgba(255,252,245,0) 60%),
+    radial-gradient(ellipse 90% 40% at 10% 100%,
+      rgba(198,186,164,.30) 0%, rgba(198,186,164,0) 70%),
+    radial-gradient(ellipse 90% 35% at 95% 88%,
+      rgba(198,186,164,.24) 0%, rgba(198,186,164,0) 70%),
+    var(--paper);
+  background-attachment:fixed;
+}
+
+header{
+  position:relative;
+  padding:30px 0 26px;
+}
+
+/* --- 印章 --- */
+.seal{
+  position:absolute;
+  top:22px;
+  right:0;
+  display:flex;
+  flex-direction:row-reverse;
+  align-items:flex-start;
+  gap:7px;
+}
+
+.seal-mark{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+  border:1.5px solid var(--zhu);
+  color:var(--zhu);
+  font-family:var(--ser);
+  font-size:11px;
+  font-weight:700;
+  line-height:1.15;
+  letter-spacing:0;
+  writing-mode:vertical-rl;
+  padding:2px;
+}
+
+.seal-txt{
+  writing-mode:vertical-rl;
+  color:var(--ink2);
+  font-family:var(--ser);
+  font-size:10.5px;
+  letter-spacing:.16em;
+  line-height:1.5;
+  max-height:96px;
+}
+
+/* --- 左圖右文 --- */
+.hero{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  text-align:left;
+  padding-right:52px;
+}
+
+.teacher{
+  flex:0 0 auto;
+  display:block;
+  width:118px;
+  height:150px;
+  margin:0;
+  object-fit:cover;
+  object-position:center 18%;
+  border:1px solid var(--line);
+  outline:1px solid rgba(207,197,179,.55);
+  outline-offset:4px;
+  background:var(--paper2);
+}
+
+.hero-main{
+  flex:1 1 auto;
+  min-width:0;
+}
+
+h1{
+  margin:0;
+  font-family:var(--ser);
+  font-size:31px;
+  font-weight:900;
+  letter-spacing:.16em;
+  line-height:1.25;
+  color:var(--ink);
+}
+
+h1 small{
+  display:inline-block;
+  margin-left:2px;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:.04em;
+  color:var(--zhu);
+  vertical-align:6px;
+}
+
+.sub{
+  margin-top:8px;
+  color:var(--ink2);
+  font-family:var(--ser);
+  font-size:14px;
+  letter-spacing:.2em;
+}
+
+.orn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:12px 0 10px;
+}
+
+.orn i{
+  flex:1;
+  height:1px;
+  background:linear-gradient(90deg,
+    rgba(168,131,56,0), var(--huang), rgba(168,131,56,0));
+}
+
+.orn b{
+  color:var(--huang);
+  font-size:11px;
+  line-height:1;
+}
+
+.hero-text{
+  margin:0;
+  padding:0;
+  border:0;
+  color:var(--ink2);
+  font-family:var(--ser);
+  font-size:13.5px;
+  letter-spacing:.12em;
+  line-height:1.8;
+}
+
+/* --- 卡片微調 --- */
+.card{
+  border-radius:3px;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.8) inset,
+    0 2px 10px rgba(120,105,80,.07);
+}
+
+h2{
+  text-align:center;
+  border-bottom:0;
+  position:relative;
+  padding-bottom:14px;
+}
+
+h2::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:64px;
+  height:1px;
+  background:linear-gradient(90deg,
+    rgba(168,131,56,0), var(--huang), rgba(168,131,56,0));
+}
+
+/* --- 選項鈕改硃砂 --- */
+.seg{
+  border-color:var(--line);
+  border-radius:2px;
+}
+
+.seg button{
+  border-right-color:var(--line);
+}
+
+.seg button[aria-pressed="true"]{
+  background:var(--zhu);
+  color:#FBF7EF;
+}
+
+/* --- 排盤鈕 --- */
+.go{
+  position:relative;
+  background:var(--zhu);
+  border-radius:2px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.28),
+             inset 0 0 0 5px rgba(255,255,255,.10);
+}
+
+.go:active{
+  background:#71241E;
+}
+
+/* --- 四格特色 --- */
+.feats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:0;
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid var(--line);
+}
+
+.feats div{
+  padding:0 4px;
+  text-align:center;
+  border-right:1px solid var(--line);
+}
+
+.feats div:last-child{
+  border-right:0;
+}
+
+.feats b{
+  display:block;
+  font-family:var(--ser);
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:.06em;
+}
+
+.feats span{
+  display:block;
+  margin-top:3px;
+  color:var(--ink2);
+  font-size:10px;
+  line-height:1.5;
+  letter-spacing:.02em;
+}
+
+/* --- 頁尾 --- */
+footer{
+  border-top:0;
+  padding-top:28px;
+}
+
+.f-motto{
+  font-family:var(--ser);
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:.34em;
+  color:var(--ink);
+}
+
+.f-sub{
+  margin-top:10px;
+  font-family:var(--ser);
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--ink2);
+}
+
+/* --- 小螢幕 --- */
+@media (max-width:400px){
+  .hero{
+    gap:12px;
+    padding-right:44px;
+  }
+  .teacher{
+    width:96px;
+    height:126px;
+  }
+  h1{
+    font-size:26px;
+    letter-spacing:.1em;
+  }
+  h1 small{
+    font-size:13px;
+  }
+  .sub{
+    font-size:12.5px;
+    letter-spacing:.14em;
+  }
+  .hero-text{
+    font-size:12.5px;
+    letter-spacing:.06em;
+  }
+  .seal-txt{
+    display:none;
+  }
+  .feats b{
+    font-size:11.5px;
+  }
+  .feats span{
+    font-size:9px;
+  }
+  .f-motto{
+    font-size:15px;
+    letter-spacing:.24em;
+  }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="seal"><span class="seal-mark">紫鹿</span><span class="seal-txt">數有定律，人生有道</span></div>
+  <div class="hero">
+    <img class="teacher" src="teacher.jpg" alt="筠玲老師"
+         onerror="this.classList.add('hide')">
+    <div class="hero-main">
+      <h1>筠玲<small>（紫鹿）</small></h1>
+      <div class="sub">數字命理 ｜ 生辰排盤</div>
+      <div class="orn"><i></i><b>❖</b><i></i></div>
+      <div class="hero-text">以數字觀人生，以命盤明方向</div>
+    </div>
+  </div>
+</header>
+
+<div class="card">
+  <div class="lab">曆 別</div>
+  <div class="seg" id="cal">
+    <button data-c="ad" aria-pressed="true">西元國曆</button>
+    <button data-c="roc" aria-pressed="false">民國國曆</button>
+    <button data-c="lun" aria-pressed="false">農曆</button>
+  </div>
+  <div class="grid">
+    <div><label id="ylab">年</label><input id="y" type="number" inputmode="numeric" value="1980"></div>
+    <div><label>月</label><select id="m"></select></div>
+    <div><label>日</label><select id="d"></select></div>
+    <div><label>時辰</label><select id="h"></select></div>
+    <div><label>性別</label><select id="g"><option>男</option><option>女</option></select></div>
+    <div><label>關注點</label><select id="k">
+      <option>財運</option><option>婚姻</option><option>學業</option>
+      <option>官運</option><option>能量</option><option>健康</option></select></div>
+  </div>
+  <button class="go" id="go">排 盤</button>
+  <div class="err" id="err"></div>
+  <div class="note" id="lunote"></div>
+  <div class="feats">
+    <div><b>精準排盤</b><span>傳統命理演算法</span></div>
+    <div><b>六柱解析</b><span>全面深入分析</span></div>
+    <div><b>命理解讀</b><span>古籍智慧結合</span></div>
+    <div><b>人生指引</b><span>趨吉避凶建議</span></div>
+  </div>
+</div>
+
+<div id="plugs0"></div>
+
+<div id="out" class="hide">
+
+  <div class="card">
+    <h2>六 柱 環</h2>
+    <div class="ringbox"><svg id="ring" viewBox="0 0 300 300" role="img"
+      aria-label="六柱環，點選任一柱查看卦體"></svg></div>
+    <div class="read" id="read"></div>
+    <div class="hint">點 選 任 一 柱 · 查 看 卦 體</div>
+    <div class="jie" id="jie"></div>
+  </div>
+
+  <div class="card">
+    <h2>先 天 · 後 天</h2>
+    <table id="tp"></table>
+  </div>
+
+  <div class="card">
+    <h2>大 運 分 段</h2>
+    <div class="bar" id="bar"></div>
+    <table id="td"></table>
+  </div>
+
+  <div class="card">
+    <h2>流 年 一 至 九 九</h2>
+    <div class="scroll"><table id="tl"></table></div>
+  </div>
+
+  <div id="plug"></div>
+  <div id="plugs"></div>
+
+  <div class="card todo">
+    <h2>尚 未 建 置</h2>
+    <ul class="tlist">
+      <li><span class="tag t-wait">等資料</span><div><b>八星磁場</b>
+        <span>天醫、五鬼、延年、禍害等，等老師的數字組合對照表</span></div></li>
+      <li><span class="tag t-wait">等規則</span><div><b>時間起卦</b>
+        <span>問事當下起卦，等老師說明兩個數字怎麼取</span></div></li>
+      <li><span class="tag t-next">下一步</span><div><b>看日子</b>
+        <span>農民曆通用版，與生辰系統各自獨立</span></div></li>
+    </ul>
+  </div>
+
+  <div class="card pro">
+    <h2>專 業 版</h2>
+    <div id="lockrow" class="lock">
+      <input id="pw" type="password" inputmode="text" placeholder="輸入密碼" autocomplete="off">
+      <button id="unlock">解鎖</button>
+    </div>
+    <div id="proout" class="hide"></div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="f-motto">命由數起 · 運由心轉</div>
+  <div class="f-sub">筠玲（紫鹿）數字命理研究中心</div>
+</footer>
+</div>
+
+<script src="gua169.js"></script>
+<script src="data-leixiang.js"></script>
+<script src="data-score.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
+<script>
+const XUN=[[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"]];
+const GZ='零子丑寅卯辰巳午未申酉戌亥';
+const ZHI=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+const HRS=['子 23-01','丑 01-03','寅 03-05','卯 05-07','辰 07-09','巳 09-11',
+           '午 11-13','未 13-15','申 15-17','酉 17-19','戌 19-21','亥 21-23'];
+const PLAB=['年','月','日','日','日','時'];
+
+/* ---------- 引擎 ---------- */
+const XY=y=>((y-3)%12)||12;
+function splitDay(d){
+  if(d<=12)return[null,null,d];
+  if(d===20)return[null,2,10];
+  if(d===30)return[null,3,10];
+  if(d<20)  return[1,10,d-10];
+  return[2,10,d-20];
+}
+function slotsOf(y,m,d,h){const s=splitDay(d);return[XY(y),m,s[0],s[1],s[2],h];}
+const hou=n=>n==null?null:(n>6?n-6:n+6);
+function bounds(s){
+  const E5=s[0],F5=s[1],G5=s[2],H5=s[3],I5=s[4],J5=s[5];
+  const E7=E5%10+20,F7=F5%10+40,I7=I5%10+60,J7=J5%10+80;
+  const G7=G5!=null?F7+7:null;
+  let H7=null;
+  if(H5!=null)H7=(G5==null)?F7+10:(((F7+13)>I7)?I7:F7+13);
+  const b=[E7,F7,G7,H7,I7,J7].filter(x=>x!=null);
+  b.push(E7+80);return b;
+}
+const ringOf=s=>s.filter(x=>x!=null);
+function windows(r){const n=r.length,o=[];
+  for(let k=0;k<n;k++)o.push([r[(k-1+n)%n],r[k],r[(k+1)%n]]);return o;}
+function segs(s){const r=ringOf(s),n=r.length,o=[];
+  for(let k=0;k<=n;k++)o.push([r[(k-1+n)%n],r[k%n],r[(k+1)%n]]);return o;}
+const gname=(a,b)=>(a>=0&&a<=12&&b>=0&&b<=12)?GZ[a]+GZ[b]+'卦':'';
+function xunOf(year){
+  let i=((year-3)%60+60)%60; if(i===0)i=60;
+  return XUN[i-1]||[null,''];
+}
+function labelsOf(s){
+  const o=[];for(let i=0;i<6;i++)if(s[i]!=null)o.push(PLAB[i]);return o;}
+
+/* ---------- 介面 ---------- */
+const $=id=>document.getElementById(id);
+let cal='ad', cur=null, sel=0;
+
+(function init(){
+  for(let i=1;i<=12;i++)$('m').add(new Option(i+' 月',i));
+  for(let i=1;i<=31;i++)$('d').add(new Option(i+' 日',i));
+  HRS.forEach((t,i)=>$('h').add(new Option(t,i+1)));
+  $('m').value=1;$('d').value=1;$('h').value=1;
+  $('cal').addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    cal=b.dataset.c;
+    [...$('cal').children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+    $('ylab').textContent = cal==='roc'?'民國年':(cal==='lun'?'農曆年（西元）':'年');
+    if(cal==='roc'&&+$('y').value>1911)$('y').value=+$('y').value-1911;
+    if(cal!=='roc'&&+$('y').value<1000)$('y').value=+$('y').value+1911;
+    const n=[...$('d').options].length;
+    if(cal==='lun'&&n>30)$('d').remove(30);
+    if(cal!=='lun'&&n<31)$('d').add(new Option('31 日',31));
+    refreshNote();
+  });
+  $('go').addEventListener('click',run);
+  setTimeout(()=>{
+    if(!window.GUA169){
+      const d=document.createElement('div');
+      d.className='card';
+      d.style.cssText='border-color:var(--zhu);background:#F7EFEE';
+      d.innerHTML='<div style="color:var(--zhu);font-size:13px;line-height:1.7">'
+        +'<b>解盤資料檔沒有載入</b><br>gua169.js 沒有跟本頁放在同一層資料夾，'
+        +'或檔名不符（需為全小寫 gua169.js）。排盤仍可使用，但不會顯示卦義。</div>';
+      document.querySelector('.wrap').insertBefore(d,document.querySelector('.card'));
+    }
+  },600);
+  $('unlock').addEventListener('click',unlock);
+  $('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock();});
+  refreshNote();
+})();
+
+function hasLunar(){return typeof Solar!=='undefined';}
+function refreshNote(){
+  if(cal==='lun'){$('lunote').textContent='農曆直接輸入，不需連線換算。';return;}
+  $('lunote').textContent = hasLunar()
+    ? '國曆會自動換算成農曆。'
+    : '換算元件尚未載入，請確認網路，或改用「農曆」直接輸入。';
+}
+
+function toLunar(y,m,d){
+  if(!hasLunar())return null;
+  try{
+    const l=Solar.fromYmd(y,m,d).getLunar();
+    let lm=l.getMonth(), leap=false;
+    if(lm<0){lm=-lm;leap=true;}
+    return {y:l.getYear(),m:lm,d:l.getDay(),leap:leap};
+  }catch(e){return null;}
+}
+
+function run(){
+  $('err').textContent='';
+  let y=parseInt($('y').value,10);
+  const m=+$('m').value, d=+$('d').value, h=+$('h').value;
+  if(!y||isNaN(y)){$('err').textContent='請輸入年份。';return;}
+  if(cal==='roc')y=y+1911;
+  let ly=y,lm=m,ld=d,conv='';
+  if(cal!=='lun'){
+    const L=toLunar(y,m,d);
+    if(!L){$('err').textContent='國曆換算元件沒有載入。請檢查網路後重試，或切換到「農曆」直接輸入。';return;}
+    ly=L.y;lm=L.m;ld=L.d;
+    conv='國曆 '+y+'/'+m+'/'+d+' → 農曆 '+ly+' 年 '+(L.leap?'閏':'')+lm+' 月 '+ld+' 日';
+  }else{
+    if(d>30){$('err').textContent='農曆日最大為 30。';return;}
+    conv='農曆 '+ly+' 年 '+lm+' 月 '+ld+' 日';
+  }
+  const s=slotsOf(ly,lm,ld,h);
+  cur={s:s,r:ringOf(s),b:bounds(s),lab:labelsOf(s),ly:ly,lm:lm,ld:ld,h:h,conv:conv,
+       g:$('g').value,k:$('k').value};
+  sel=0;
+  render();
+  $('out').classList.remove('hide');
+  $('out').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function render(){
+  drawRing();drawPillars();drawDayun();drawFlow();
+  if(!$('proout').classList.contains('hide'))drawPro();
+  runPlugins();
+}
+
+/* ===== 外掛掛載點 =====
+   新功能寫成獨立 JS 檔，最後加一行：
+     PP.add('面板標題', function(chart){ return 'HTML字串'; });
+   本檔不需要再修改。
+   chart 物件內容：
+     chart.slots  六格原始（含 null）
+     chart.ring   實際柱數字陣列
+     chart.lab    每柱標籤 年/月/日/時
+     chart.bounds 大運分界陣列
+     chart.segs   運段 [天,人,地]
+     chart.wins   各柱卦體 [左,中,右]
+     chart.ly/lm/ld/h 農曆年月日與時辰序
+     chart.sex    性別   chart.focus 關注點
+   可用工具：PP.hou(n) 後天數　PP.gname(a,b) 卦名
+             PP.gua(a,b) 解盤 [卦名,解讀,斷曰]
+*/
+const PLUGINS=[];
+const STATICS=[];
+window.PP={
+  add:(title,fn)=>{PLUGINS.push({t:title,f:fn});if(cur)runPlugins();},
+  addStatic:(title,fn)=>{STATICS.push({t:title,f:fn});runStatics();},
+  refresh:()=>{runPlugins();runStatics();},
+  hou:hou, gname:gname, gua:guaOf,
+  get chart(){return chartData();}
+};
+function chartData(){
+  if(!cur)return null;
+  return {slots:cur.s,ring:cur.r,lab:cur.lab,bounds:cur.b,
+          segs:segs(cur.s),wins:windows(cur.r),xun:xunOf(cur.ly),
+          ly:cur.ly,lm:cur.lm,ld:cur.ld,h:cur.h,
+          sex:cur.g,focus:cur.k,conv:cur.conv};
+}
+function runStatics(){
+  const box=$('plugs0');if(!box)return;
+  let h='';
+  STATICS.forEach(p=>{
+    let body='';
+    try{ body=p.f()||''; }
+    catch(e){ body='<div class="jdu">此區塊發生錯誤：'+e.message+'</div>'; }
+    if(body)h+='<div class="card"><h2>'+p.t+'</h2>'+body+'</div>';
+  });
+  box.innerHTML=h;
+}
+function runPlugins(){
+  const box=$('plug');if(!box)return;
+  const c=chartData();if(!c){box.innerHTML='';return;}
+  let h='';
+  PLUGINS.forEach(p=>{
+    let body='';
+    try{ body=p.f(c)||''; }
+    catch(e){ body='<div class="jdu">此區塊發生錯誤：'+e.message+'</div>'; }
+    if(body)h+='<div class="card"><h2>'+p.t+'</h2>'+body+'</div>';
+  });
+  box.innerHTML=h;
+}
+
+function drawRing(){
+  const r=cur.r,n=r.length,R=104,cx=150,cy=150,sv=$('ring');
+  let h='<circle cx="150" cy="150" r="104" class="rline"/>';
+  const pos=i=>{const a=-Math.PI/2+i*2*Math.PI/n;
+    return[cx+R*Math.cos(a),cy+R*Math.sin(a)];};
+  const w=[(sel-1+n)%n,sel,(sel+1)%n];
+  const arc=(f,t)=>{const p1=pos(f),p2=pos(t);
+    return '<path class="rarc" d="M'+p1[0]+' '+p1[1]+' A'+R+' '+R+' 0 0 1 '+p2[0]+' '+p2[1]+'"/>';};
+  h+=arc(w[0],w[1])+arc(w[1],w[2]);
+  for(let i=0;i<n;i++){
+    const p=pos(i),on=i===sel?1:0,inw=(w.indexOf(i)>=0&&!on)?1:0;
+    h+='<g class="pill" data-i="'+i+'" data-on="'+on+'" data-win="'+inw+'">'
+      +'<circle class="pbg" cx="'+p[0]+'" cy="'+p[1]+'" r="25"/>'
+      +'<text class="pnum" x="'+p[0]+'" y="'+(p[1]+3)+'" text-anchor="middle">'+r[i]+'</text>'
+      +'<text class="plab" x="'+p[0]+'" y="'+(p[1]+16)+'" text-anchor="middle">'+cur.lab[i]+'</text>'
+      +'</g>';
+  }
+  sv.innerHTML=h;
+  sv.querySelectorAll('.pill').forEach(g=>{
+    g.addEventListener('click',()=>{sel=+g.dataset.i;drawRing();});
+  });
+  const win=windows(r)[sel],a=win[0],b=win[1],c=win[2];
+  $('read').innerHTML='<div class="gt">'+a+' - '+b+' - '+c+'</div>'
+    +'<div class="gn">'+(gname(a,b)||'')+'　'+(gname(b,c)||'')+'</div>'
+    +'<div class="yy">天運 '+(b-a)+'　地運 '+(b-c)+'</div>';
+  jieSel=0;drawJie(a,b,c);
+}
+
+let jieSel=0;
+function guaOf(a,b){
+  const G=window.GUA169;if(!G)return null;
+  return G[a+'-'+b]||null;
+}
+function drawJie(a,b,c){
+  const box=$('jie');
+  const pair=[[a,b],[b,c]];
+  const g=guaOf(pair[jieSel][0],pair[jieSel][1]);
+  let h='<div class="tabs">';
+  pair.forEach((p,i)=>{h+='<button data-t="'+i+'" aria-pressed="'+(i===jieSel)+'">'
+    +p[0]+'-'+p[1]+'　'+(gname(p[0],p[1])||'')+'</button>';});
+  h+='</div>';
+  if(!g){
+    h+='<div class="jdu">解盤資料檔沒有載入。請確認 gua169.js 與本頁放在同一層資料夾。</div>';
+  }else{
+    h+='<h3>斷 曰</h3><div class="duan">'+g[2]+'</div>';
+    h+='<h3 style="margin-top:16px">詳 細 解 讀</h3><div class="jdu">'+g[1]+'</div>';
+  }
+  box.innerHTML=h;
+  box.querySelectorAll('.tabs button').forEach(bt=>{
+    bt.addEventListener('click',()=>{jieSel=+bt.dataset.t;drawJie(a,b,c);});
+  });
+}
+
+function drawPillars(){
+  const r=cur.r;
+  let t='<tr><th>柱</th>';r.forEach((_,i)=>t+='<th>'+cur.lab[i]+'</th>');t+='</tr>';
+  t+='<tr><td>先天</td>';r.forEach(v=>t+='<td class="n">'+v+'</td>');t+='</tr>';
+  t+='<tr><td>後天</td>';r.forEach(v=>t+='<td class="n">'+hou(v)+'</td>');t+='</tr>';
+  $('tp').innerHTML=t;
+}
+
+function drawDayun(){
+  const b=cur.b,sg=segs(cur.s);
+  const tot=b[b.length-1];let bar='',prev=0;
+  b.forEach((x,i)=>{const w=(x-prev)/tot*100;
+    const cls=w<7.5?' class="v"':'';
+    bar+='<div'+cls+' style="flex:0 0 '+w+'%;background:'+(i%2?'#DFD8C4':'#F3F1EA')+'">'
+      +x+'</div>';prev=x;});
+  $('bar').innerHTML=bar;
+  let t='<tr><th>運段</th><th>年齡</th><th>天-人-地</th><th>天運</th><th>地運</th></tr>';
+  prev=0;
+  b.forEach((x,i)=>{const g=sg[i]||sg[sg.length-1];
+    t+='<tr><td>'+(i+1)+'</td><td>'+(prev+(prev?0:1))+'–'+(x-1)+'</td>'
+      +'<td class="n">'+g[0]+'-'+g[1]+'-'+g[2]+'</td>'
+      +'<td>'+(g[1]-g[0])+'</td><td>'+(g[1]-g[2])+'</td></tr>';prev=x;});
+  $('td').innerHTML=t;
+}
+
+function drawFlow(){
+  const b=cur.b,sg=segs(cur.s);
+  let t='<thead><tr><th>歲</th><th>西元</th><th>運段</th><th>天-人-地</th><th>太歲</th></tr></thead><tbody>';
+  let tai=cur.s[0];
+  for(let age=1;age<=99;age++){
+    let si=b.findIndex(x=>age<x); if(si<0)si=b.length-1;
+    const g=sg[si]||sg[sg.length-1];
+    t+='<tr><td>'+age+'</td><td>'+(cur.ly+age-1)+'</td><td>'+(si+1)+'</td>'
+      +'<td class="n">'+g[0]+'-'+g[1]+'-'+g[2]+'</td><td>'+tai+'</td></tr>';
+    tai=tai===12?1:tai+1;
+  }
+  $('tl').innerHTML=t+'</tbody>';
+}
+
+function unlock(){
+  const v=$('pw').value.trim();
+  if(v!=='1314'){$('pw').value='';$('pw').placeholder='密碼不對，再試一次';return;}
+  $('lockrow').classList.add('hide');
+  $('proout').classList.remove('hide');
+  drawPro();
+}
+
+function drawPro(){
+  const r=cur.r,b=cur.b,sg=segs(cur.s),xn=xunOf(cur.ly);
+  let h='<table><tr><th>項目</th><th>內容</th></tr>';
+  h+='<tr><td>換算</td><td>'+cur.conv+'</td></tr>';
+  h+='<tr><td>時辰</td><td>'+ZHI[cur.h-1]+'時（'+cur.h+'）</td></tr>';
+  h+='<tr><td>性別 / 關注點</td><td>'+cur.g+'　'+cur.k+'</td></tr>';
+  h+='<tr><td>柱數</td><td>'+r.length+' 柱</td></tr>';
+  h+='<tr><td>出生旬</td><td>第 '+xn[0]+' 旬　旬空 '+xn[1]+'</td></tr>';
+  h+='</table>';
+  h+='<h2 style="margin-top:18px">後 天 運 段</h2><table>'
+    +'<tr><th>運段</th><th>天-人-地</th><th>天運</th><th>地運</th></tr>';
+  b.forEach((x,i)=>{const g=sg[i]||sg[sg.length-1];
+    const a=hou(g[0]),c=hou(g[1]),d=hou(g[2]);
+    h+='<tr><td>'+(i+1)+'</td><td class="n">'+a+'-'+c+'-'+d+'</td>'
+      +'<td>'+(c-a)+'</td><td>'+(c-d)+'</td></tr>';});
+  h+='</table>';
+  h+='<h2 style="margin-top:18px">卦 體 一 覽</h2><table>'
+    +'<tr><th>柱</th><th>卦體</th><th>卦名</th><th>天運</th><th>地運</th></tr>';
+  windows(r).forEach((w,i)=>{
+    h+='<tr><td>'+cur.lab[i]+'</td><td class="n">'+w[0]+'-'+w[1]+'-'+w[2]+'</td>'
+      +'<td>'+gname(w[0],w[1])+'</td><td>'+(w[1]-w[0])+'</td><td>'+(w[1]-w[2])+'</td></tr>';});
+  h+='</table>';
+  $('proout').innerHTML=h;
+}
+</script>
+<script src="patch-wuxing.js"></script>
+<script src="patch-leixiang.js"></script>
+<script src="patch-score.js"></script>
+<script src="patch-zi.js"></script>
+</body>
+</html>
