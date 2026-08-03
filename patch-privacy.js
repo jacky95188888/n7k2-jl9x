@@ -1,0 +1,123 @@
+/* 筠玲易數 · 個資告知外掛
+   首次進站跳一次告知視窗，同意後記在本機不再跳。
+   頁尾會留一個「隱私與個資說明」連結，隨時可以再打開。
+   全程不用 alert / confirm / prompt，iframe 內也能正常運作。
+*/
+(function () {
+  'use strict';
+
+  var KEY = 'jl_privacy_ack_v1';
+
+  // localStorage 在某些隱私模式下會直接丟例外，全部包起來
+  function readAck() {
+    try { return localStorage.getItem(KEY) === '1'; } catch (e) { return false; }
+  }
+  function writeAck() {
+    try { localStorage.setItem(KEY, '1'); } catch (e) { /* 記不住就每次問，不影響使用 */ }
+  }
+
+  var CSS = [
+    '.jlp-mask{position:fixed;top:0;left:0;right:0;bottom:0;inset:0;z-index:99999;background:rgba(23,19,15,.72);',
+    'display:flex;align-items:center;justify-content:center;padding:20px;',
+    '-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);}',
+    '.jlp-card{width:100%;max-width:420px;max-height:86vh;overflow:auto;',
+    'background:#F5EEDF;color:#2A241E;border:1px solid #D8C9A8;border-radius:6px;',
+    'box-shadow:0 18px 50px rgba(0,0,0,.45);padding:26px 22px 20px;',
+    'font-family:"Noto Serif TC","Songti TC",serif;line-height:1.85;',
+    'animation:jlp-in .28s ease-out;}',
+    '@keyframes jlp-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
+    '@media (prefers-reduced-motion:reduce){.jlp-card{animation:none}}',
+    '.jlp-eyebrow{font-size:11px;letter-spacing:.32em;color:#8C2F26;margin:0 0 6px;}',
+    '.jlp-title{font-size:19px;font-weight:700;margin:0 0 14px;letter-spacing:.05em;}',
+    '.jlp-rule{height:1px;border:0;margin:0 0 16px;',
+    'background:linear-gradient(90deg,#C9A227,rgba(201,162,39,0));}',
+    '.jlp-card p{font-size:14px;margin:0 0 12px;}',
+    '.jlp-card ul{font-size:14px;margin:0 0 14px;padding-left:1.15em;}',
+    '.jlp-card li{margin:0 0 7px;}',
+    '.jlp-card b{color:#8C2F26;}',
+    '.jlp-note{font-size:12px;color:#6B6259;margin:0 0 18px;}',
+    '.jlp-btn{display:block;width:100%;padding:13px;border:0;border-radius:4px;',
+    'background:#8C2F26;color:#F5EEDF;font-size:15px;letter-spacing:.12em;cursor:pointer;',
+    'font-family:inherit;}',
+    '.jlp-btn:hover{background:#75261E;}',
+    '.jlp-btn:focus-visible,.jlp-link:focus-visible{outline:2px solid #C9A227;outline-offset:2px;}',
+    '.jlp-foot{text-align:center;padding:26px 16px 34px;}',
+    '.jlp-link{font-size:12px;color:#6B6259;text-decoration:none;border-bottom:1px solid #C9A227;',
+    'padding-bottom:2px;cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;',
+    'font-family:inherit;}'
+  ].join('');
+
+  var HTML =
+    '<div class="jlp-card" role="dialog" aria-modal="true" aria-label="關於你輸入的生辰" >' +
+      '<p class="jlp-eyebrow">筠玲易數</p>' +
+      '<h2 class="jlp-title jlp-t">關於你輸入的生辰</h2>' +
+      '<hr class="jlp-rule">' +
+      '<p>排盤需要你的<b>出生年月日與時辰</b>。這幾項屬於個人資料，先說清楚我們怎麼處理：</p>' +
+      '<ul>' +
+        '<li><b>全部在你的手機裡算完</b>，不會上傳到任何伺服器。</li>' +
+        '<li><b>不建立會員、不留存紀錄</b>，關掉頁面資料就沒了。</li>' +
+        '<li>只在你按下排盤的當下使用，用途僅限於命理分析。</li>' +
+        '<li>不會提供給第三方，也不做廣告追蹤。</li>' +
+      '</ul>' +
+      '<p class="jlp-note">依個人資料保護法第八條告知。你可以隨時關閉頁面停止使用；' +
+      '若替他人排盤，請先取得對方同意。</p>' +
+      '<button class="jlp-btn jlp-ok" type="button">我了解，開始排盤</button>' +
+    '</div>';
+
+  function ensureStyle() {
+    if (document.getElementById('jlp-style')) return;
+    var s = document.createElement('style');
+    s.id = 'jlp-style';
+    s.textContent = CSS;
+    document.head.appendChild(s);
+  }
+
+  function open(remember) {
+    if (document.querySelector('.jlp-mask')) return;
+    ensureStyle();
+    var mask = document.createElement('div');
+    mask.className = 'jlp-mask';
+    mask.innerHTML = HTML;
+    document.body.appendChild(mask);
+    var prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    function close() {
+      if (remember) writeAck();
+      document.body.style.overflow = prevOverflow;
+      if (mask.parentNode) mask.parentNode.removeChild(mask);
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(e) { if (e.key === 'Escape' && !remember) close(); }
+
+    mask.querySelector('.jlp-ok').addEventListener('click', close);
+    if (!remember) {
+      mask.querySelector('.jlp-ok').textContent = '關閉';
+      mask.addEventListener('click', function (e) { if (e.target === mask) close(); });
+    }
+    document.addEventListener('keydown', onKey);
+    setTimeout(function () { mask.querySelector('.jlp-ok').focus(); }, 60);
+  }
+
+  function addFooterLink() {
+    if (document.getElementById('jlp-foot')) return;
+    var d = document.createElement('div');
+    d.className = 'jlp-foot';
+    d.id = 'jlp-foot';
+    d.innerHTML = '<button class="jlp-link" type="button">隱私與個資說明</button>';
+    d.querySelector('button').addEventListener('click', function () { open(false); });
+    document.body.appendChild(d);
+  }
+
+  function boot() {
+    ensureStyle();
+    addFooterLink();
+    if (!readAck()) open(true);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
