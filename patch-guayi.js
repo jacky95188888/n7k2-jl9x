@@ -178,10 +178,28 @@ function buildHTML(){
 }
 
 /* ---------- 掛進專業版 ---------- */
+/* patch-pro.js 也做了一版卦義（標題「卦義詳解」，無八卦符號）。
+   它排在專業版最後，本檔的內容接在它後面，會變成兩份。
+   這裡先把舊的那一段整段移除，只留本檔這版。               */
+function dropOld(box){
+  var kids = [].slice.call(box.children);
+  var start = -1;
+  for (var i = 0; i < kids.length; i++){
+    var el = kids[i];
+    if (el.tagName !== 'H2') continue;
+    if (el.textContent.replace(/\s/g, '') === '卦義詳解'){ start = i; break; }
+  }
+  if (start < 0) return;
+  for (var j = kids.length - 1; j >= start; j--){
+    kids[j].parentNode.removeChild(kids[j]);
+  }
+}
+
 function append(){
   var box = document.getElementById('proout');
   if (!box || box.classList.contains('hide')) return;
   if (box.querySelector('.gy-wrap')) return;   /* 已經加過 */
+  dropOld(box);
   injectCSS();
   var html = buildHTML();
   if (!html) return;
