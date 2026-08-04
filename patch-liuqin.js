@@ -147,7 +147,7 @@ function boot(){
   if (boot.done) return true;
   boot.done = true;
   css();
-  window.PP.add('五 行 含 量', function(c){
+  window.PP.add('陰 陽 斷', function(c){
     try { return wuxingPanel(c); }
     catch(e){ return '<div class="jdu">五行含量發生錯誤：' + esc(e.message) + '</div>'; }
   });
