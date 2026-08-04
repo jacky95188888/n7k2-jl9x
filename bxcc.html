@@ -10,7 +10,7 @@
 <style>
 :root{
   --paper:#F2EAD9; --paper2:#F7F1E4; --ink:#241E19; --ink2:#6B6259;
-  --seal:#8C2F26; --gold:#C9A227; --line:#D8C9A8;
+  --seal:#8C2F26; --gold:#C9A227; --line:#D8C9A8; --jade:#2F6B4F;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -24,106 +24,130 @@ body{
 }
 .wrap{max-width:520px;margin:0 auto;padding:0 18px}
 
-/* 抬頭 */
-header{padding:34px 0 24px;text-align:center}
+.back{display:inline-block;margin:18px 0 0;font-size:12.5px;letter-spacing:.12em;
+  color:var(--seal);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px}
+.back:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+header{padding:22px 0 24px;text-align:center}
 .eyebrow{font-size:11px;letter-spacing:.4em;color:var(--seal);margin:0 0 8px}
 h1{font-size:27px;letter-spacing:.22em;margin:0 0 10px;font-weight:700}
 .sub{font-size:13px;color:var(--ink2);margin:0}
 .rule{height:1px;border:0;margin:20px 0 0;
   background:linear-gradient(90deg,rgba(201,162,39,0),var(--gold),rgba(201,162,39,0))}
 
-/* 卡片 */
 .card{background:var(--paper2);border:1px solid var(--line);border-radius:5px;
   padding:20px 18px;margin:22px 0}
 .card h2{font-size:15px;letter-spacing:.18em;margin:0 0 4px;color:var(--seal)}
 .card .hint{font-size:12px;color:var(--ink2);margin:0 0 16px}
 
 label{display:block;font-size:12px;letter-spacing:.14em;color:var(--ink2);margin:0 0 6px}
+.fieldnote{font-size:11.5px;color:var(--ink2);margin:6px 0 0;line-height:1.6}
 input[type=text]{width:100%;padding:12px 13px;font-size:19px;letter-spacing:.16em;
   font-family:inherit;color:var(--ink);background:#fff;
   border:1px solid var(--line);border-radius:4px}
 input[type=text]:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
-.btn{display:block;width:100%;margin-top:14px;padding:13px;border:0;border-radius:4px;
+.btn{display:block;width:100%;margin-top:16px;padding:13px;border:0;border-radius:4px;
   background:var(--seal);color:var(--paper);font-family:inherit;font-size:15px;
   letter-spacing:.18em;cursor:pointer}
 .btn:hover{background:#75261E}
 .btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
-.modes{display:flex;gap:8px;margin-top:12px}
-.modes button{flex:1;padding:9px 4px;font-family:inherit;font-size:12px;letter-spacing:.1em;
+.switch{margin-top:14px}
+.switch > span{display:block;font-size:12px;letter-spacing:.14em;color:var(--ink2);margin:0 0 6px}
+.modes{display:flex;gap:8px}
+.modes button{flex:1;padding:9px 4px;font-family:inherit;font-size:12px;letter-spacing:.06em;
   background:transparent;color:var(--ink2);border:1px solid var(--line);border-radius:4px;cursor:pointer}
 .modes button[aria-pressed=true]{background:var(--seal);color:var(--paper);border-color:var(--seal)}
+.modes button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
-/* 結果 */
+.flag{margin-top:14px;padding:10px 12px;border-left:3px solid var(--gold);
+  background:#F0E8D4;font-size:12px;color:var(--ink2);line-height:1.7}
+.flag b{color:var(--seal)}
+
 #out{margin-top:18px}
-.pair{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+.pair{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
 .pair:last-child{border-bottom:0}
-.num{font-size:22px;letter-spacing:.1em;min-width:56px;color:var(--ink)}
+.num{font-size:20px;letter-spacing:.06em;min-width:62px;color:var(--ink);white-space:nowrap}
+.num small{display:block;font-size:11px;color:var(--ink2);letter-spacing:.04em;line-height:1.5}
 .star{font-size:16px;letter-spacing:.1em;min-width:44px;font-weight:700}
-.star.ji{color:#2F6B4F}
+.star.ji{color:var(--jade)}
 .star.xiong{color:var(--seal)}
-.star.ping{color:var(--ink2)}
 .desc{font-size:12.5px;color:var(--ink2);line-height:1.6}
 .tally{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13px}
 .tally b{color:var(--seal)}
 .empty{font-size:13px;color:var(--ink2);text-align:center;padding:14px 0}
 
-/* 速查表 */
-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+table{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed}
 th,td{border:1px solid var(--line);padding:6px 2px;text-align:center}
 th{background:#EFE5CE;color:var(--seal);font-weight:700}
-td.ji{color:#2F6B4F}
+td.ji{color:var(--jade)}
 td.xiong{color:var(--seal)}
 td.self{color:var(--ink2);background:#F0E8D4}
-.legend{font-size:12px;color:var(--ink2);margin:10px 0 0}
+.legend{font-size:12px;color:var(--ink2);margin:10px 0 0;line-height:1.7}
 
-/* 八星說明 */
+.pairs-list{margin:0;padding:0;list-style:none}
+.pairs-list li{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}
+.pairs-list li:last-child{border-bottom:0}
+.pairs-list .nm{min-width:44px;font-weight:700;letter-spacing:.08em}
+.pairs-list .nm.ji{color:var(--jade)}
+.pairs-list .nm.xiong{color:var(--seal)}
+.pairs-list .gp{color:var(--ink2)}
+
 dl{margin:0}
 dt{font-size:14px;font-weight:700;letter-spacing:.1em;margin:14px 0 3px}
-dt.ji{color:#2F6B4F}
+dt.ji{color:var(--jade)}
 dt.xiong{color:var(--seal)}
 dd{margin:0;font-size:12.5px;color:var(--ink2)}
 
 footer{text-align:center;font-size:11.5px;color:var(--ink2);padding:26px 18px 0;line-height:1.9}
-footer a{color:var(--ink2)}
-@media (prefers-reduced-motion:no-preference){
-  .card{transition:border-color .2s}
-}
 </style>
 </head>
 <body>
 <div class="wrap">
 
+<a class="back" href="./index.html">← 回排盤</a>
+
 <header>
   <p class="eyebrow">筠玲易數</p>
   <h1>八星磁場</h1>
-  <p class="sub">兩數相生成一場．號碼即是磁場</p>
+  <p class="sub">兩數相接成一場．數起於支，場定於卦</p>
   <hr class="rule">
 </header>
 
-<!-- 號碼分析 -->
 <section class="card">
-  <h2>查號碼</h2>
-  <p class="hint">手機、車牌、門牌、帳號都可以，只取其中的數字。</p>
-  <label for="num">輸入號碼</label>
-  <input type="text" id="num" inputmode="numeric" autocomplete="off" placeholder="0912345678">
-  <div class="modes" role="group" aria-label="拆組方式">
-    <button type="button" id="m2" aria-pressed="true">兩兩分組</button>
-    <button type="button" id="m1" aria-pressed="false">相鄰重疊</button>
+  <h2>起場</h2>
+  <p class="hint">命盤六柱、手機、車牌、門牌都可以查。</p>
+
+  <label for="num">輸入數字</label>
+  <input type="text" id="num" inputmode="numeric" autocomplete="off" placeholder="5 8 2 10 5 12">
+  <p class="fieldnote">用空格或逗號隔開就是命盤數（可到 12）；直接連著打就是號碼，一個字一個數。</p>
+
+  <div class="switch">
+    <span>判定規則</span>
+    <div class="modes" role="group" aria-label="判定規則">
+      <button type="button" id="r1" aria-pressed="true">遊年法</button>
+      <button type="button" id="r2" aria-pressed="false">通行數字能量學</button>
+    </div>
   </div>
+
+  <div class="switch">
+    <span>相接方式</span>
+    <div class="modes" role="group" aria-label="相接方式">
+      <button type="button" id="p1" aria-pressed="true">相鄰重疊</button>
+      <button type="button" id="p2" aria-pressed="false">兩兩分組</button>
+    </div>
+  </div>
+
   <button class="btn" type="button" id="go">開始查</button>
-  <div id="out"><p class="empty">輸入號碼後按「開始查」</p></div>
+  <div id="out"><p class="empty">輸入數字後按「開始查」</p></div>
 </section>
 
-<!-- 速查表 -->
 <section class="card">
-  <h2>兩數速查</h2>
-  <p class="hint">橫豎交叉即為該組磁場。1 至 9 之中，5 為連接數不成場。</p>
+  <h2>兩數對照</h2>
   <div id="grid"></div>
-  <p class="legend">綠為四吉星，紅為四凶星。0 依附前一數，5 為中央連接。</p>
+  <p class="legend" id="gridnote"></p>
 </section>
 
-<!-- 八星說明 -->
 <section class="card">
   <h2>八星釋義</h2>
   <p class="hint">四吉四凶，各有其用。凶星非災，是能量走偏了方向。</p>
@@ -131,7 +155,7 @@ footer a{color:var(--ink2)}
 </section>
 
 <footer>
-  本頁為傳統數字能量學之參考對照，供思考與自我覺察之用，非命定之論。<br>
+  本頁為八星磁場之參考對照，供思考與自我覺察之用，非命定之論。<br>
   所有計算皆在本機完成，不上傳、不留存任何資料。<br>
   ＿ 筠玲易數 ＿
 </footer>
@@ -142,20 +166,50 @@ footer a{color:var(--ink2)}
 (function(){
 'use strict';
 
-/* ── 八星資料 ── */
+/* ─────────── 八星 ─────────── */
 var STAR = {
-  '天醫':{t:'ji', s:'財富、療癒', d:'錢財順、貴人多、身體與心緒穩定。最上等的財星，來得自然不費力。'},
   '生氣':{t:'ji', s:'貴人、活力', d:'人緣好、機會多、遇事有人幫。心態樂觀，容易得到支持。'},
+  '天醫':{t:'ji', s:'財富、療癒', d:'錢財順、貴人多、身心穩定。最上等的財星，來得自然不費力。'},
   '延年':{t:'ji', s:'領導、專業', d:'意志堅定、有主見，適合當責任者。做事到位，但容易硬。'},
   '伏位':{t:'ji', s:'蓄勢、守成', d:'穩定、耐性好、能長久經營。力道偏柔，衝勁需要自己補。'},
-  '禍害':{t:'xiong', s:'口舌、爭執', d:'口才好但話多易惹事，容易因一句話得罪人，也容易被說服而吃虧。'},
-  '六煞':{t:'xiong', s:'桃花、情緒', d:'感情豐富、人緣佳，但關係易糾纏，情緒起伏牽動判斷。'},
+  '絕命':{t:'xiong', s:'極端、破財', d:'魄力足、敢賭敢衝，成敗兩極。大起大落，最忌貪快。'},
   '五鬼':{t:'xiong', s:'機變、小人', d:'頭腦快、反應靈、想法多，但變動大，易遇小人與突發狀況。'},
-  '絕命':{t:'xiong', s:'極端、破財', d:'魄力足、敢賭敢衝，成敗兩極。大起大落，最忌貪快。'}
+  '六煞':{t:'xiong', s:'桃花、情緒', d:'感情豐富、人緣佳，但關係易糾纏，情緒起伏牽動判斷。'},
+  '禍害':{t:'xiong', s:'口舌、爭執', d:'口才好但話多易惹事，容易因一句話得罪人，也容易被說服而吃虧。'}
 };
+var ORDER = ['生氣','天醫','延年','伏位','絕命','五鬼','六煞','禍害'];
 
-/* 兩數 → 磁場（1-9，不含 5） */
-var MAP = {
+/* ─────────── 規則一：遊年法（已驗證） ───────────
+   數字 → 地支 → 八卦 → 八宅遊年
+   1子坎 2丑艮 3寅艮 4卯震 5辰巽 6巳巽
+   7午離 8未坤 9申坤 10酉兌 11戌乾 12亥乾           */
+var ZHI  = ['','子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+var GUA  = ['','坎','艮','艮','震','巽','巽','離','坤','坤','兌','乾','乾'];
+
+/* 八宅八組關係（對稱） */
+var YOUNIAN_GROUPS = {
+  '生氣':[['乾','兌'],['坤','艮'],['離','震'],['坎','巽']],
+  '天醫':[['乾','艮'],['坤','兌'],['震','坎'],['巽','離']],
+  '延年':[['乾','坤'],['艮','兌'],['震','巽'],['坎','離']],
+  '絕命':[['乾','離'],['坤','坎'],['艮','震'],['兌','巽']],
+  '五鬼':[['乾','震'],['坤','巽'],['艮','坎'],['兌','離']],
+  '六煞':[['乾','坎'],['坤','離'],['艮','巽'],['兌','震']],
+  '禍害':[['乾','巽'],['坤','震'],['艮','離'],['兌','坎']]
+};
+var YOUNIAN = {};
+(function(){
+  var g = ['乾','坤','艮','兌','坎','離','震','巽'];
+  g.forEach(function(x){ YOUNIAN[x+x] = '伏位'; });
+  Object.keys(YOUNIAN_GROUPS).forEach(function(name){
+    YOUNIAN_GROUPS[name].forEach(function(p){
+      YOUNIAN[p[0]+p[1]] = name;
+      YOUNIAN[p[1]+p[0]] = name;
+    });
+  });
+})();
+
+/* ─────────── 規則二：通行數字能量學（1-9，去 5） ─────────── */
+var TONGXING = {
   '13':'天醫','31':'天醫','68':'天醫','86':'天醫','49':'天醫','94':'天醫','27':'天醫','72':'天醫',
   '14':'生氣','41':'生氣','67':'生氣','76':'生氣','39':'生氣','93':'生氣','28':'生氣','82':'生氣',
   '19':'延年','91':'延年','78':'延年','87':'延年','34':'延年','43':'延年','26':'延年','62':'延年',
@@ -166,50 +220,68 @@ var MAP = {
   '12':'絕命','21':'絕命','69':'絕命','96':'絕命','48':'絕命','84':'絕命','37':'絕命','73':'絕命'
 };
 
-function lookup(a,b){ return MAP[String(a)+String(b)] || null; }
-
-/* ── 號碼拆組 ── */
-/* 0 依附前一數（視為與前一數同性質，本身不另起一組）；5 為連接數，跳過不成場。 */
-function clean(s){
-  var digits = (s.match(/\d/g) || []);
-  var out = [];
-  for (var i=0;i<digits.length;i++){
-    var d = digits[i];
-    if (d === '0'){ continue; }        // 0 依附前數，不獨立成數
-    if (d === '5'){ continue; }        // 5 為中央連接，不成場
-    out.push(d);
-  }
-  return out;
-}
-
-function split(arr, mode){
-  var pairs = [];
-  if (mode === 'overlap'){
-    for (var i=0;i+1<arr.length;i++) pairs.push([arr[i],arr[i+1]]);
-  } else {
-    for (var j=0;j+1<arr.length;j+=2) pairs.push([arr[j],arr[j+1]]);
-  }
-  return pairs;
-}
-
-/* ── 畫面 ── */
-var mode = 'group';
+/* ─────────── 狀態 ─────────── */
+var rule = 'younian';   /* younian | tongxing */
+var pairMode = 'overlap'; /* overlap | group */
 var out = document.getElementById('out');
 
-function esc(s){ return String(s).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; }); }
+function esc(s){
+  return String(s).replace(/[&<>]/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];
+  });
+}
+
+/* 解析輸入：有分隔符 → 多位數；沒有 → 逐字 */
+function parseInput(raw){
+  var s = String(raw || '');
+  if (/[^0-9]/.test(s.trim())){
+    return (s.match(/\d+/g) || []).map(Number);
+  }
+  return (s.match(/\d/g) || []).map(Number);
+}
+
+/* 依規則過濾可成場的數 */
+function usable(nums){
+  return nums.filter(function(n){
+    if (rule === 'younian') return n >= 1 && n <= 12;
+    return n >= 1 && n <= 9 && n !== 5;
+  });
+}
+
+function lookup(a, b){
+  if (rule === 'younian'){
+    var ga = GUA[a], gb = GUA[b];
+    if (!ga || !gb) return null;
+    return YOUNIAN[ga + gb] || null;
+  }
+  return TONGXING[String(a) + String(b)] || null;
+}
+
+function makePairs(arr){
+  var p = [], i;
+  if (pairMode === 'overlap'){
+    for (i = 0; i + 1 < arr.length; i++) p.push([arr[i], arr[i+1]]);
+  } else {
+    for (i = 0; i + 1 < arr.length; i += 2) p.push([arr[i], arr[i+1]]);
+  }
+  return p;
+}
 
 function render(raw){
-  var digits = (raw.match(/\d/g) || []);
-  if (digits.length < 2){
-    out.innerHTML = '<p class="empty">至少要有兩個數字才能成場。</p>';
+  var all = parseInput(raw);
+  if (all.length < 2){
+    out.innerHTML = '<p class="empty">至少要有兩個數字才能相接成場。</p>';
     return;
   }
-  var arr = clean(raw);
+  var arr = usable(all);
   if (arr.length < 2){
-    out.innerHTML = '<p class="empty">扣掉 0 與 5 之後不足兩位，這組號碼不成磁場。</p>';
+    out.innerHTML = '<p class="empty">' + (rule === 'younian'
+      ? '可用的數字不足兩個。遊年法取 1 至 12，0 不成場。'
+      : '扣掉 0 與 5 之後不足兩位，這組號碼不成磁場。') + '</p>';
     return;
   }
-  var pairs = split(arr, mode);
+
+  var pairs = makePairs(arr);
   var html = '', ji = 0, xiong = 0, tally = {};
 
   pairs.forEach(function(p){
@@ -217,78 +289,134 @@ function render(raw){
     if (!name) return;
     var info = STAR[name];
     if (info.t === 'ji') ji++; else xiong++;
-    tally[name] = (tally[name]||0) + 1;
+    tally[name] = (tally[name] || 0) + 1;
+
+    var sub = '';
+    if (rule === 'younian'){
+      sub = '<small>' + ZHI[p[0]] + GUA[p[0]] + '　' + ZHI[p[1]] + GUA[p[1]] + '</small>';
+    }
     html += '<div class="pair">'
-          +   '<div class="num">' + esc(p[0]+p[1]) + '</div>'
+          +   '<div class="num">' + esc(p[0] + '－' + p[1]) + sub + '</div>'
           +   '<div class="star ' + info.t + '">' + name + '</div>'
           +   '<div class="desc">' + info.s + '｜' + info.d + '</div>'
           + '</div>';
   });
 
   if (!html){
-    out.innerHTML = '<p class="empty">這組號碼沒有成形的磁場。</p>';
+    out.innerHTML = '<p class="empty">這組數字沒有成形的磁場。</p>';
     return;
   }
 
-  var names = Object.keys(tally).sort(function(a,b){ return tally[b]-tally[a]; });
-  var strongest = names[0];
-  var line = '共 <b>' + (ji+xiong) + '</b> 組：吉星 <b>' + ji + '</b>、凶星 <b>' + xiong + '</b>。'
-           + '主導磁場為 <b>' + strongest + '</b>（' + tally[strongest] + ' 組）。';
-  if (arr.length !== digits.length){
-    line += '<br><span style="color:var(--ink2)">已略去 ' + (digits.length-arr.length)
-          + ' 個 0 或 5：0 依附前數，5 為連接數，兩者本身不成場。</span>';
+  var names = Object.keys(tally).sort(function(a, b){ return tally[b] - tally[a]; });
+  var top = names[0];
+  var line = '共 <b>' + (ji + xiong) + '</b> 組：吉星 <b>' + ji + '</b>、凶星 <b>' + xiong + '</b>。'
+           + '主導磁場為 <b>' + top + '</b>（' + tally[top] + ' 組）。';
+  var dropped = all.length - arr.length;
+  if (dropped > 0){
+    line += '<br><span style="color:var(--ink2)">已略去 ' + dropped + ' 個數：'
+          + (rule === 'younian' ? '遊年法只取 1 至 12。' : '0 依附前數，5 為連接數，兩者本身不成場。')
+          + '</span>';
   }
-
   out.innerHTML = html + '<div class="tally">' + line + '</div>';
 }
 
+/* ─────────── 對照表 ─────────── */
+function drawGrid(){
+  var g = document.getElementById('grid');
+  var note = document.getElementById('gridnote');
+
+  if (rule === 'younian'){
+    var h = '<table><tr><th>數</th><th>支</th><th>卦</th><th>數</th><th>支</th><th>卦</th></tr>';
+    for (var i = 1; i <= 6; i++){
+      var j = i + 6;
+      h += '<tr><th>' + i + '</th><td>' + ZHI[i] + '</td><td>' + GUA[i] + '</td>'
+         +     '<th>' + j + '</th><td>' + ZHI[j] + '</td><td>' + GUA[j] + '</td></tr>';
+    }
+    h += '</table>';
+
+    h += '<ul class="pairs-list">';
+    ORDER.forEach(function(name){
+      if (name === '伏位'){
+        h += '<li><span class="nm ji">伏位</span><span class="gp">兩數同卦</span></li>';
+        return;
+      }
+      var groups = YOUNIAN_GROUPS[name].map(function(p){ return p[0] + p[1]; }).join('、');
+      h += '<li><span class="nm ' + STAR[name].t + '">' + name + '</span>'
+         + '<span class="gp">' + groups + '</span></li>';
+    });
+    h += '</ul>';
+
+    g.innerHTML = h;
+    note.innerHTML = '數字先轉地支，地支再配卦，兩卦查八宅遊年。'
+      + '此法 1 至 12 全部成場，5（辰巽）也算，0 不參與。'
+      + '<br>已用老師的排盤截圖驗算過六組，全數吻合。';
+    return;
+  }
+
+  var ns = [1,2,3,4,6,7,8,9];
+  var t = '<table><tr><th></th>';
+  ns.forEach(function(n){ t += '<th>' + n + '</th>'; });
+  t += '</tr>';
+  ns.forEach(function(a){
+    t += '<tr><th>' + a + '</th>';
+    ns.forEach(function(b){
+      var name = TONGXING[String(a) + String(b)];
+      var cls = (a === b) ? 'self' : STAR[name].t;
+      t += '<td class="' + cls + '">' + name + '</td>';
+    });
+    t += '</tr>';
+  });
+  t += '</table>';
+  g.innerHTML = t;
+  note.innerHTML = '坊間通行的數字能量學，取 1 至 9，5 為連接數不成場，0 依附前數。'
+    + '<br>此法與老師排盤上的標示不同，僅供比對。';
+}
+
+/* ─────────── 事件 ─────────── */
+function refresh(){
+  drawGrid();
+  var v = document.getElementById('num').value;
+  if (parseInput(v).length >= 2) render(v);
+}
+
+function setRule(r){
+  rule = r;
+  document.getElementById('r1').setAttribute('aria-pressed', r === 'younian');
+  document.getElementById('r2').setAttribute('aria-pressed', r === 'tongxing');
+  refresh();
+}
+function setPair(p){
+  pairMode = p;
+  document.getElementById('p1').setAttribute('aria-pressed', p === 'overlap');
+  document.getElementById('p2').setAttribute('aria-pressed', p === 'group');
+  var v = document.getElementById('num').value;
+  if (parseInput(v).length >= 2) render(v);
+}
+
+document.getElementById('r1').addEventListener('click', function(){ setRule('younian'); });
+document.getElementById('r2').addEventListener('click', function(){ setRule('tongxing'); });
+document.getElementById('p1').addEventListener('click', function(){ setPair('overlap'); });
+document.getElementById('p2').addEventListener('click', function(){ setPair('group'); });
 document.getElementById('go').addEventListener('click', function(){
   render(document.getElementById('num').value);
 });
 document.getElementById('num').addEventListener('keydown', function(e){
-  if (e.key === 'Enter') render(this.value);
+  if (e.key === 'Enter'){ e.preventDefault(); render(this.value); }
 });
-
-function setMode(m){
-  mode = m;
-  document.getElementById('m2').setAttribute('aria-pressed', m==='group');
-  document.getElementById('m1').setAttribute('aria-pressed', m==='overlap');
-  var v = document.getElementById('num').value;
-  if ((v.match(/\d/g)||[]).length >= 2) render(v);
-}
-document.getElementById('m2').addEventListener('click', function(){ setMode('group'); });
-document.getElementById('m1').addEventListener('click', function(){ setMode('overlap'); });
-
-/* 速查表 */
-(function(){
-  var ns = [1,2,3,4,6,7,8,9];
-  var h = '<table><tr><th></th>';
-  ns.forEach(function(n){ h += '<th>'+n+'</th>'; });
-  h += '</tr>';
-  ns.forEach(function(a){
-    h += '<tr><th>'+a+'</th>';
-    ns.forEach(function(b){
-      var name = lookup(a,b);
-      var cls = a===b ? 'self' : STAR[name].t;
-      h += '<td class="'+cls+'">'+name+'</td>';
-    });
-    h += '</tr>';
-  });
-  h += '</table>';
-  document.getElementById('grid').innerHTML = h;
-})();
 
 /* 八星釋義 */
 (function(){
-  var order = ['天醫','生氣','延年','伏位','禍害','六煞','五鬼','絕命'];
   var h = '';
-  order.forEach(function(n){
+  ORDER.forEach(function(n){
     var s = STAR[n];
-    h += '<dt class="'+s.t+'">'+n+'　<span style="font-size:12px;font-weight:400">'+s.s+'</span></dt>'
-       + '<dd>'+s.d+'</dd>';
+    h += '<dt class="' + s.t + '">' + n
+       + '　<span style="font-size:12px;font-weight:400">' + s.s + '</span></dt>'
+       + '<dd>' + s.d + '</dd>';
   });
   document.getElementById('dict').innerHTML = h;
 })();
+
+drawGrid();
 
 })();
 </script>
