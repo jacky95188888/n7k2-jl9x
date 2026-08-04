@@ -265,7 +265,8 @@ function render(date){
   /* 生肖 */
   var g=dz?shengxiaoGroups(dz):null;
   if(g){
-    var chongSX=safe(function(){return lunar.getDayChongShengXiao();},'');
+    /* lunar 套件回傳簡體，改用日支自行推沖，不讓簡體字漏進頁面 */
+    var chongSX=SX[chong(idx(dz))]||'';
     h+='<div class="card"><h2>今 日 生 肖</h2><div class="sx">'
      + '<div class="t1"><b>特吉</b><span>'+(g.good.join('　')||'—')+'</span></div>'
      + '<div class="t2"><b>次吉</b><span>'+(g.mid.join('　')||'—')+'</span></div>'
