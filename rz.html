@@ -275,25 +275,31 @@ function render(date){
      + (chongSX?('，本日沖'+esc(chongSX)):'')+'。</div></div>';
   }
 
-  /* 吉時 */
-  var times=safe(function(){return lunar.getTimes();},[]);
-  if(times&&times.length){
-    var seen={},cells='';
-    times.forEach(function(t){
-      var gzT=safe(function(){return t.getGanZhi();},'');
-      var z=gzT?gzT.charAt(1):'';
-      if(!z||seen[z])return; seen[z]=1;
-      var good=safe(function(){return t.getTianShenType();},'')==='黄';
-      var shen=safe(function(){return t.getTianShen();},'');
-      var lo=safe(function(){return t.getMinHm();},'');
-      var hi=safe(function(){return t.getMaxHm();},'');
-      cells+='<div class="'+(good?'':'bad')+'"><b>'+esc(z)+'時</b>'
-           + '<span>'+esc(lo)+'–'+esc(hi)+'</span>'
-           + '<em>'+(good?'吉　'+esc(shen):'&nbsp;')+'</em></div>';
-    });
-    if(cells){
+  /* 吉時：自行以日支推青龍，不依賴套件的天神方法 */
+  if(dz){
+    var HR=[['子','23:00','00:59'],['丑','01:00','02:59'],['寅','03:00','04:59'],
+            ['卯','05:00','06:59'],['辰','07:00','08:59'],['巳','09:00','10:59'],
+            ['午','11:00','12:59'],['未','13:00','14:59'],['申','15:00','16:59'],
+            ['酉','17:00','18:59'],['戌','19:00','20:59'],['亥','21:00','22:59']];
+    /* 青龍起例：子午起申、丑未起戌、寅申起子、卯酉起寅、辰戌起辰、巳亥起午 */
+    var QL={0:8,6:8, 1:10,7:10, 2:0,8:0, 3:2,9:2, 4:4,10:4, 5:6,11:6};
+    /* 自青龍順數：青龍 明堂 天刑 朱雀 金匱 寶光 白虎 玉堂 天牢 玄武 司命 勾陳 */
+    var SHEN=['青龍','明堂','天刑','朱雀','金匱','寶光','白虎','玉堂','天牢','玄武','司命','勾陳'];
+    var HUANG={0:1,1:1,4:1,5:1,7:1,10:1};
+    var start=QL[idx(dz)];
+    if(start!=null){
+      var cells='',good=[];
+      for(var k=0;k<12;k++){
+        var off=(k-start+12)%12;
+        var isJi=!!HUANG[off];
+        if(isJi) good.push(HR[k][0]);
+        cells+='<div class="'+(isJi?'':'bad')+'"><b>'+HR[k][0]+'時</b>'
+             + '<span>'+HR[k][1]+'\u2013'+HR[k][2]+'</span>'
+             + '<em>'+(isJi?'吉\u3000'+SHEN[off]:'&nbsp;')+'</em></div>';
+      }
       h+='<div class="card"><h2>今 日 時 辰</h2><div class="hrs">'+cells+'</div>'
-       + '<div class="note">綠字為黃道吉時。</div></div>';
+       + '<div class="note">綠字為黃道吉時，共 '+good.length+' 個：'+good.join('、')+'時。<br>'
+       + '以日支 '+esc(dz)+' 起青龍於 '+HR[start][0]+'時，順取青龍、明堂、金匱、寶光、玉堂、司命六黃道神。</div></div>';
     }
   }
 
