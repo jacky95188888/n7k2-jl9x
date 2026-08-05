@@ -43,17 +43,39 @@ function star(a, b){
   return Y[ga + gb] || null;
 }
 
+/* 爻線，由上而下：1 陽（整條）、0 陰（中斷） */
+var YAO = {
+  '乾':'111', '兌':'011', '離':'101', '震':'001',
+  '巽':'110', '坎':'010', '艮':'100', '坤':'000'
+};
+
+function tri(n){
+  var g = GUA[n];
+  if (!g) return '';
+  var y = YAO[g], h = '';
+  for (var i = 0; i < 3; i++){
+    h += y.charAt(i) === '1'
+      ? '<span><b></b></span>'
+      : '<span><b></b><b></b></span>';
+  }
+  return '<em class="zh-t">' + h + '</em>';
+}
+
 var CSS =
 '#tp.zhu{table-layout:auto}' +
 '#tp.zhu th,#tp.zhu td{padding:9px 2px}' +
 '#tp.zhu td.zh-n{font-family:var(--ser,serif);font-size:19px;font-weight:700;' +
-  'color:#5d2c20;white-space:nowrap}' +
+  'color:#5d2c20;white-space:nowrap;line-height:1.25}' +
 '#tp.zhu td.zh-s{font-family:var(--ser,serif);font-size:11px;letter-spacing:.02em;' +
-  'line-height:1.35;white-space:nowrap;padding:9px 1px}' +
+  'line-height:1.35;white-space:nowrap;padding:9px 1px;vertical-align:middle}' +
 '#tp.zhu td.zh-s.ji{color:#2f6b4f}' +
 '#tp.zhu td.zh-s.xiong{color:var(--zhu,#7d1d1d)}' +
 '#tp.zhu th.zh-lab{font-size:11px;letter-spacing:0}' +
 '#tp.zhu td.zh-row{font-size:12px;color:#75553c;white-space:nowrap}' +
+/* 八卦符號：CSS 畫爻線，不用 Unicode 卦符 */
+'.zh-t{display:flex;flex-direction:column;gap:2.5px;width:22px;margin:4px auto 0}' +
+'.zh-t span{display:flex;gap:3px;height:3px}' +
+'.zh-t span b{flex:1;background:#8a6a4a;border-radius:1px}' +
 '.zh-note{margin-top:12px;font-size:12px;color:#85776c;line-height:1.8}' +
 '.zh-note b{color:#2f6b4f;font-weight:400}' +
 '.zh-note i{color:var(--zhu,#7d1d1d);font-style:normal}';
@@ -93,7 +115,7 @@ function build(){
     var name = row[0], arr = row[1];
     h += '<tr><td class="zh-row">' + name + '</td>';
     for (var i = 0; i < arr.length; i++){
-      h += '<td class="zh-n">' + arr[i] + '</td>';
+      h += '<td class="zh-n">' + arr[i] + tri(arr[i]) + '</td>';
       if (i < arr.length - 1){
         var s = star(arr[i], arr[i + 1]);
         h += '<td class="zh-s ' + (s ? (JI[s] ? 'ji' : 'xiong') : '') + '">'
@@ -111,7 +133,8 @@ function build(){
   if (box && !box.querySelector('.zh-note')){
     var p = document.createElement('p');
     p.className = 'zh-note';
-    p.innerHTML = '磁場標在兩數之間，即該兩數所成之卦。'
+    p.innerHTML = '數字下方為該數所配八卦（數轉地支、地支配卦）。'
+                + '磁場標在兩數之間，即該兩數所成之卦。'
                 + '<b>綠為四吉</b>：生氣、天醫、延年、伏位；'
                 + '<i>紅為四凶</i>：絕命、五鬼、六煞、禍害。';
     box.appendChild(p);
