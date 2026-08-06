@@ -22,6 +22,33 @@ var GAN_WX = {甲:'木',乙:'木',丙:'火',丁:'火',戊:'土',己:'土',庚:'�
 var ZHI_WX = {子:'水',丑:'土',寅:'木',卯:'木',辰:'土',巳:'火',午:'火',未:'土',申:'金',酉:'金',戌:'土',亥:'水'};
 var COL = {木:'#3d6b3d',火:'#a13a2a',土:'#8a6a24',金:'#7a6f5e',水:'#2f5d8a'};
 
+/* 六十甲子納音（繁體）—— lunar-javascript 回傳簡體，故自備此表 */
+var GAN10 = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+var NAYIN = ['海中金','爐中火','大林木','路旁土','劍鋒金','山頭火',
+             '澗下水','城頭土','白蠟金','楊柳木','泉中水','屋上土',
+             '霹靂火','松柏木','長流水','沙中金','山下火','平地木',
+             '壁上土','金箔金','覆燈火','天河水','大驛土','釵釧金',
+             '桑柘木','大溪水','沙中土','天上火','石榴木','大海水'];
+function jiaziIndex(gz) {
+  var g = GAN10.indexOf(gz.charAt(0)), z = ZHI.indexOf(gz.charAt(1));
+  if (g < 0 || z < 0) return -1;
+  for (var i = 0; i < 60; i++) if (i % 10 === g && i % 12 === z) return i;
+  return -1;
+}
+function nayinOf(gz) {
+  var i = jiaziIndex(gz);
+  return i < 0 ? '' : NAYIN[Math.floor(i / 2)];
+}
+/* 地支轉數字（子1 … 亥12），與網站其他區塊一致 */
+function zhiNum(s) {
+  var o = [];
+  for (var i = 0; i < s.length; i++) {
+    var k = ZHI.indexOf(s.charAt(i));
+    if (k > -1) o.push(k + 1);
+  }
+  return o.join('、');
+}
+
 function css() {
   if (document.getElementById('sz-style')) return;
   var s = document.createElement('style');
@@ -79,15 +106,16 @@ function build() {
   }
 
   var p = [
-    { lab:'年 柱', gz: safe(function(){return ec.getYear();}, ''),  ny: safe(function(){return ec.getYearNaYin();}, '') },
-    { lab:'月 柱', gz: safe(function(){return ec.getMonth();}, ''), ny: safe(function(){return ec.getMonthNaYin();}, '') },
-    { lab:'日 柱', gz: safe(function(){return ec.getDay();}, ''),   ny: safe(function(){return ec.getDayNaYin();}, '') },
-    { lab:'時 柱', gz: safe(function(){return ec.getTime();}, ''),  ny: safe(function(){return ec.getTimeNaYin();}, '') }
+    { lab:'年 柱', gz: safe(function(){return ec.getYear();}, '') },
+    { lab:'月 柱', gz: safe(function(){return ec.getMonth();}, '') },
+    { lab:'日 柱', gz: safe(function(){return ec.getDay();}, '') },
+    { lab:'時 柱', gz: safe(function(){return ec.getTime();}, '') }
   ];
   for (var i = 0; i < 4; i++) {
     if (!p[i].gz || p[i].gz.length < 2) {
       return { warn: '四柱資料不完整（' + p[i].lab.replace(/\s/g, '') + '取不到），請確認 lunar-javascript 版本。' };
     }
+    p[i].ny = nayinOf(p[i].gz);
   }
 
   return {
@@ -144,7 +172,10 @@ function draw() {
     h += '<div class="szfoot"><b>日主</b>　' + d.p[2].gz.charAt(0) +
          '（' + (GAN_WX[d.p[2].gz.charAt(0)] || '') + '）';
     if (d.xun)  h += '　　<b>日柱旬</b>　' + d.xun;
-    if (d.kong) h += '　　<b>旬空</b>　' + d.kong;
+    if (d.kong) {
+      var kn = zhiNum(d.kong);
+      h += '　　<b>旬空</b>　' + d.kong + (kn ? '（' + kn + '）' : '');
+    }
     h += '<br>時辰　' + (ZHI[(d.h || 1) - 1] || '') + '時' +
          (ZI_NEXT_DAY ? '（子時以晚子計，跨日）' : '');
     if (d.conv) h += '<br>' + d.conv;
