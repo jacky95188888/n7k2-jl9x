@@ -72,7 +72,28 @@ function css(){
   '.qm-ly .vl{color:var(--zhu);font-weight:600}',
   '.qm-ly .bd{padding:0 2px 14px;font-size:15px;color:#3b332c;line-height:1.8}',
   '.qm-ly .rl{font-size:12px;color:#8a7a64;display:block;margin-bottom:4px}',
-  '.qm-jie{background:#fff;border:1px dashed var(--gold);border-radius:2px;padding:14px 15px;font-size:15px;color:#3b332c;line-height:1.8}'
+  '.qm-jie{background:#fff;border:1px dashed var(--gold);border-radius:2px;padding:14px 15px;font-size:15px;color:#3b332c;line-height:1.8}',
+  '.qm-zg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 12px}',
+  '.qm-zg button{padding:11px 2px;border:1px solid var(--line);border-radius:2px;background:#fff;color:#3b332c;font-family:var(--ser);font-size:13px;letter-spacing:.06em;cursor:pointer;line-height:1.4}',
+  '.qm-zg button:active{opacity:.8}',
+  '.qm-zg button.on{background:var(--zhu);color:#f7f3ea;border-color:var(--zhu)}',
+  '.qm-zg button.self{border-color:var(--gold);box-shadow:inset 0 0 0 1px var(--gold)}',
+  '.qm-zg button.mid{background:#4a1a17;color:#f2e6d2;border-color:#4a1a17}',
+  '.qm-zg button.mid.on{background:var(--zhu);border-color:var(--zhu)}',
+  '.qm-zg em{display:block;font-style:normal;font-size:10px;color:#a08d72;margin-top:2px}',
+  '.qm-zg button.on em,.qm-zg button.mid em{color:rgba(255,255,255,.65)}',
+  '.qm-zi{border:1px solid var(--line);background:#fff;border-radius:2px;padding:14px 15px}',
+  '.qm-zi h5{margin:0 0 8px;font-size:17px;color:var(--zhu);letter-spacing:.1em;font-weight:700}',
+  '.qm-zi h5 span{font-size:11px;color:#a08d72;letter-spacing:.12em;margin-left:8px;font-weight:400}',
+  '.qm-zi dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px}',
+  '.qm-zi dt{font-size:12px;color:#8a7a64;letter-spacing:.1em;white-space:nowrap}',
+  '.qm-zi dd{margin:0;font-size:14px;color:#3b332c;line-height:1.75}',
+  '.qm-zi p.xs{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:15px;color:#3b332c;line-height:1.85}',
+  '.qm-zs{margin:0;padding:0;list-style:none}',
+  '.qm-zs li{padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.75;color:#3b332c}',
+  '.qm-zs li:last-child{border-bottom:0}',
+  '.qm-zs b{color:var(--zhu);font-weight:700;letter-spacing:.08em}',
+  '.qm-zs i{font-style:normal;font-size:11px;color:#a08d72;letter-spacing:.1em;margin-left:6px}'
   ].join('');
   document.head.appendChild(s);
 }
@@ -98,8 +119,9 @@ function view(){
     '<div class="qm-gj" id="qmGj"></div>'+
     '<div class="qm-h">逐碼詳解</div>'+
     '<div id="qmLy"></div>'+
-    '<div class="qm-h">增運建議</div>'+
-    '<div class="qm-jie" id="qmJie"></div>'+
+    '<div class="qm-h">九宮增運</div>'+
+    '<div class="qm-zg" id="qmZg"></div>'+
+    '<div id="qmZi"></div>'+
     '<p class="qm-note" style="margin-top:18px">'+
       '取數：第五碼定宮位、第六碼引干、第七碼八神、第八碼九星、第九碼八門、第十碼天盤干、第十一碼地盤干。<br>'+
       '判定：六儀擊刑依甲子戊震宮之例；入墓依十天干陰陽順逆十二長生之墓庫；門迫取門五行剋宮五行。<br>'+
@@ -185,14 +207,72 @@ function run(){
         '<div class="bd"><span class="rl">'+L[j][3]+'</span>'+L[j][4]+'</div></details>';
   }
   el('qmLy').innerHTML=lh;
-  el('qmJie').innerHTML=D.jie[gong].t;
+  drawZeng(gong);
   el('qmOut').style.display='block';
+}
+
+/* ---------- 九宮增運 ---------- */
+/* 洛書排列：巽4 離9 坤2 ／ 震3 中(八神) 兌7 ／ 艮8 坎1 乾6 */
+var ZGRID=[4,9,2,3,'S',7,8,1,6];
+var SELF=0;          /* 本命所落之宮，用金框標示 */
+var CUR=null;        /* 目前選取 */
+
+function drawZeng(gong){
+  SELF=gong; CUR=(gong===0||gong===5)?'S':gong;
+  var h='';
+  for(var i=0;i<9;i++){
+    var c=ZGRID[i];
+    if(c==='S'){
+      h+='<button type="button" data-z="S" class="mid'+(CUR==='S'?' on':'')+'">八神增運<em>八 神</em></button>';
+    }else{
+      var g=D.jie[c];
+      h+='<button type="button" data-z="'+c+'" class="'+(CUR===c?'on ':'')+(c===SELF?'self':'')+'">'+
+         g.n.replace(/[一二三四五六七八九]/,'')+'增運<em>'+g.fw+'</em></button>';
+    }
+  }
+  document.getElementById('qmZg').innerHTML=h;
+  showZeng(CUR);
+}
+
+function showZeng(key){
+  var box=document.getElementById('qmZi');
+  if(!box) return;
+  var h='';
+  if(key==='S'){
+    h='<div class="qm-zi"><h5>八神增運<span>依盤中八神調整</span></h5><ul class="qm-zs">';
+    Object.keys(D.shenzeng).forEach(function(n){
+      var s=D.shenzeng[n];
+      h+='<li><b>'+n+'</b><i>'+s.k+'</i><br>'+s.t+'</li>';
+    });
+    h+='</ul></div>';
+  }else{
+    var g=D.jie[key];
+    if(!g) return;
+    h='<div class="qm-zi"><h5>'+g.n+'<span>五行 '+g.wx+(Number(key)===SELF?'　本命所落':'')+'</span></h5>'+
+      '<dl><dt>方位</dt><dd>'+g.fw+'</dd>'+
+      '<dt>顏色</dt><dd>'+g.ys+'</dd>'+
+      '<dt>擺設</dt><dd>'+g.bs+'</dd></dl>'+
+      '<p class="xs">'+g.xs+'</p></div>';
+  }
+  box.innerHTML=h;
+  var btns=document.getElementById('qmZg').getElementsByTagName('button');
+  for(var i=0;i<btns.length;i++){
+    var k=btns[i].getAttribute('data-z');
+    if(k===String(key)) btns[i].className+=(btns[i].className.indexOf('on')<0?' on':'');
+    else btns[i].className=btns[i].className.replace(/\s*\bon\b/,'');
+  }
 }
 
 /* ---------- 綁定（用事件委派，不怕外掛何時被插進 DOM）---------- */
 document.addEventListener('click',function(e){
   var t=e.target;
-  if(t&&t.id==='qmGo'){ e.preventDefault(); run(); }
+  if(t&&t.id==='qmGo'){ e.preventDefault(); run(); return; }
+  if(t&&t.getAttribute&&t.getAttribute('data-z')!==null){
+    e.preventDefault();
+    var k=t.getAttribute('data-z');
+    CUR=(k==='S')?'S':Number(k);
+    showZeng(CUR);
+  }
 });
 document.addEventListener('keydown',function(e){
   if(e.key==='Enter'&&e.target&&e.target.id==='qmNum'){ e.preventDefault(); run(); }
