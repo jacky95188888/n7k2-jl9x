@@ -1,5 +1,5 @@
 /* ============================================================
-   patch-zhu.js　先天後天表：數字中間標磁場
+   patch-zhu.js　先天後天表：數字中間標磁場、八卦爻線依五行上色
    ------------------------------------------------------------
    老師要求卦象要看得出來：兩個數字之間留空，中間標八星磁場。
    本檔改寫「先 天 · 後 天」那張表，不動其他任何區塊。
@@ -9,6 +9,18 @@
 
    磁場規則與 patch-bx.js／bxcc.html 一致：
    數字 → 地支 → 八卦 → 八宅遊年。
+
+   2026-08-08 修正【老師指出 5-10 磁場應為六煞】
+     原本寫死的遊年對照表，絕命與六煞的四組寫顛倒：
+       艮震・兌巽 原標絕命 → 應為六煞
+       艮巽・兌震 原標六煞 → 應為絕命
+     已改為用變爻法即時推導，乾宮八關係 8/8 驗證通過。
+     ※ patch-bx.js 與 bxcc.html 使用同一張表，需一併修正。
+
+   2026-08-08 更新【老師指示：卦的顏色要調】
+     爻線原本全部同一色（#8a6a4a），八個卦分不出來。
+     改為依八卦五行上色，與四柱八字卡的干支配色同一套：
+       乾兌 金 · 震巽 木 · 坎 水 · 離 火 · 艮坤 土
    ============================================================ */
 (function(){
 'use strict';
@@ -16,25 +28,50 @@
 var ZHI = ['','子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
 var GUA = ['','坎','艮','艮','震','巽','巽','離','坤','坤','兌','乾','乾'];
 
-var GROUPS = {
-  '生氣':[['乾','兌'],['坤','艮'],['離','震'],['坎','巽']],
-  '天醫':[['乾','艮'],['坤','兌'],['震','坎'],['巽','離']],
-  '延年':[['乾','坤'],['艮','兌'],['震','巽'],['坎','離']],
-  '絕命':[['乾','離'],['坤','坎'],['艮','震'],['兌','巽']],
-  '五鬼':[['乾','震'],['坤','巽'],['艮','坎'],['兌','離']],
-  '六煞':[['乾','坎'],['坤','離'],['艮','巽'],['兌','震']],
-  '禍害':[['乾','巽'],['坤','震'],['艮','離'],['兌','坎']]
+/* 八卦五行 */
+var GWX = {
+  '乾':'金', '兌':'金',
+  '震':'木', '巽':'木',
+  '坎':'水',
+  '離':'火',
+  '艮':'土', '坤':'土'
+};
+/* 五行 → CSS class 尾碼（避免中文類名） */
+var WXC = { '木':'mu', '火':'huo', '土':'tu', '金':'jin', '水':'shui' };
+
+/* 爻線，由上而下：1 陽（整條）、0 陰（中斷） */
+var YAO = {
+  '乾':'111', '兌':'011', '離':'101', '震':'001',
+  '巽':'110', '坎':'010', '艮':'100', '坤':'000'
+};
+
+/* --------------------------------------------------------
+   八宅遊年：不寫死對照表，改用「變爻法」即時推導。
+   兩卦逐爻比對，變動的爻位決定遊年：
+     不變      伏位      上爻變    生氣
+     中爻變    絕命      下爻變    禍害
+     上中變    五鬼      中下變    天醫
+     上下變    六煞      三爻全變  延年
+   （2026-08-08 老師指出 5-10 應為六煞。原本寫死的表把
+     絕命／六煞 的 艮震・兌巽・艮巽・兌震 四組寫顛倒了，
+     改成推導後不可能再錯。）
+   -------------------------------------------------------- */
+var RULE = {
+  '000':'伏位', '100':'生氣', '010':'絕命', '001':'禍害',
+  '110':'五鬼', '011':'天醫', '101':'六煞', '111':'延年'
 };
 var JI = {'生氣':1,'天醫':1,'延年':1,'伏位':1};
+
 var Y = {};
 (function(){
-  ['乾','坤','艮','兌','坎','離','震','巽'].forEach(function(g){ Y[g+g] = '伏位'; });
-  Object.keys(GROUPS).forEach(function(name){
-    GROUPS[name].forEach(function(p){
-      Y[p[0]+p[1]] = name;
-      Y[p[1]+p[0]] = name;
-    });
-  });
+  var G = ['乾','兌','離','震','巽','坎','艮','坤'];
+  for (var i = 0; i < G.length; i++){
+    for (var j = 0; j < G.length; j++){
+      var a = YAO[G[i]], b = YAO[G[j]], x = '';
+      for (var k = 0; k < 3; k++) x += (a.charAt(k) === b.charAt(k)) ? '0' : '1';
+      Y[G[i] + G[j]] = RULE[x];
+    }
+  }
 })();
 
 function star(a, b){
@@ -42,12 +79,6 @@ function star(a, b){
   if (!ga || !gb) return null;
   return Y[ga + gb] || null;
 }
-
-/* 爻線，由上而下：1 陽（整條）、0 陰（中斷） */
-var YAO = {
-  '乾':'111', '兌':'011', '離':'101', '震':'001',
-  '巽':'110', '坎':'010', '艮':'100', '坤':'000'
-};
 
 function tri(n){
   var g = GUA[n];
@@ -58,7 +89,8 @@ function tri(n){
       ? '<span><b></b></span>'
       : '<span><b></b><b></b></span>';
   }
-  return '<em class="zh-t">' + h + '</em>';
+  var cls = 'zh-t zh-' + (WXC[GWX[g]] || 'tu');
+  return '<em class="' + cls + '" title="' + g + '（' + GWX[g] + '）">' + h + '</em>';
 }
 
 var CSS =
@@ -76,9 +108,20 @@ var CSS =
 '.zh-t{display:flex;flex-direction:column;gap:2.5px;width:22px;margin:4px auto 0}' +
 '.zh-t span{display:flex;gap:3px;height:3px}' +
 '.zh-t span b{flex:1;background:#8a6a4a;border-radius:1px}' +
+/* 依八卦五行上色（與四柱八字卡同一套配色） */
+'.zh-mu   span b{background:#3d6b3d}' +   /* 震巽 木 */
+'.zh-huo  span b{background:#a13a2a}' +   /* 離   火 */
+'.zh-tu   span b{background:#8a6a24}' +   /* 艮坤 土 */
+'.zh-jin  span b{background:#7a6f5e}' +   /* 乾兌 金 */
+'.zh-shui span b{background:#2f5d8a}' +   /* 坎   水 */
 '.zh-note{margin-top:12px;font-size:12px;color:#85776c;line-height:1.8}' +
 '.zh-note b{color:#2f6b4f;font-weight:400}' +
-'.zh-note i{color:var(--zhu,#7d1d1d);font-style:normal}';
+'.zh-note i{color:var(--zhu,#7d1d1d);font-style:normal}' +
+'.zh-key{margin-top:6px;font-size:12px;color:#85776c;line-height:1.9}' +
+'.zh-key u{text-decoration:none;font-weight:600;margin-right:2px}' +
+'.zh-key .k-mu{color:#3d6b3d}.zh-key .k-huo{color:#a13a2a}' +
+'.zh-key .k-tu{color:#8a6a24}.zh-key .k-jin{color:#7a6f5e}' +
+'.zh-key .k-shui{color:#2f5d8a}';
 
 function css(){
   if (document.getElementById('zh-css')) return;
@@ -128,7 +171,7 @@ function build(){
   tp.className = 'zhu';
   tp.innerHTML = h;
 
-  /* 表格下方補一行說明 */
+  /* 表格下方補說明 */
   var box = tp.parentNode;
   if (box && !box.querySelector('.zh-note')){
     var p = document.createElement('p');
@@ -138,6 +181,17 @@ function build(){
                 + '<b>綠為四吉</b>：生氣、天醫、延年、伏位；'
                 + '<i>紅為四凶</i>：絕命、五鬼、六煞、禍害。';
     box.appendChild(p);
+  }
+  if (box && !box.querySelector('.zh-key')){
+    var k = document.createElement('p');
+    k.className = 'zh-key';
+    k.innerHTML = '爻線顏色依八卦五行：'
+                + '<span class="k-mu"><u>震巽</u>木</span>　'
+                + '<span class="k-huo"><u>離</u>火</span>　'
+                + '<span class="k-tu"><u>艮坤</u>土</span>　'
+                + '<span class="k-jin"><u>乾兌</u>金</span>　'
+                + '<span class="k-shui"><u>坎</u>水</span>';
+    box.appendChild(k);
   }
 }
 
