@@ -101,16 +101,16 @@ function css(){
 /* ---------- 版面 ---------- */
 function view(){
   return ''+
-  '<p class="qm-note">輸入十一碼手機號碼，取末七碼落宮，觀處境、心念與門路。號碼僅在本機換算，不上傳、不留存。</p>'+
+  '<p class="qm-note">輸入手機號碼（台灣 10 碼、大陸 11 碼皆可），取末七碼落宮，觀處境、心念與門路。號碼僅在本機換算，不上傳、不留存。</p>'+
   '<div class="qm-in">'+
-    '<input type="tel" id="qmNum" inputmode="numeric" maxlength="11" placeholder="0912345678">'+
+    '<input type="tel" id="qmNum" inputmode="numeric" maxlength="11" placeholder="0912345678" autocomplete="off">'+
     '<button type="button" id="qmGo">起盤</button>'+
   '</div>'+
   '<p class="qm-err" id="qmErr"></p>'+
   '<div id="qmOut" style="display:none">'+
     '<div class="qm-h">四綱</div>'+
     '<div class="qm-sg" id="qmSg"></div>'+
-    '<p class="qm-cap">前四碼為綱，主根源背景，僅取記號，不入盤。</p>'+
+    '<p class="qm-cap" id="qmSgCap">前幾碼為綱，主根源背景，僅取記號，不入盤。</p>'+
     '<div class="qm-h">落宮</div>'+
     '<div class="qm-plate" id="qmPlate"></div>'+
     '<p class="qm-cap" id="qmCap"></p>'+
@@ -123,7 +123,7 @@ function view(){
     '<div class="qm-zg" id="qmZg"></div>'+
     '<div id="qmZi"></div>'+
     '<p class="qm-note" style="margin-top:18px">'+
-      '取數：第五碼定宮位、第六碼引干、第七碼八神、第八碼九星、第九碼八門、第十碼天盤干、第十一碼地盤干。<br>'+
+      '取數：一律取末七碼。倒數第7碼定宮位、第6碼引干、第5碼八神、第4碼九星、第3碼八門、第2碼天盤干、最末碼地盤干；其餘前碼作綱。<br>'+
       '判定：六儀擊刑依甲子戊震宮之例；入墓依十天干陰陽順逆十二長生之墓庫；門迫取門五行剋宮五行。<br>'+
       '本模組斷語僅供參考，不構成醫療、法律、投資或人身建議。'+
     '</p>'+
@@ -141,16 +141,24 @@ function mark(d,gong){
 function run(){
   var el=function(i){return document.getElementById(i);};
   var v=(el('qmNum').value||'').replace(/\D/g,'');
-  if(v.length!==11){ el('qmErr').textContent='請輸入完整的十一碼手機號碼。'; el('qmOut').style.display='none'; return; }
+  if(v.length<8||v.length>11){
+    el('qmErr').textContent='請輸入手機號碼（台灣 10 碼、大陸 11 碼）。';
+    el('qmOut').style.display='none'; return;
+  }
   el('qmErr').textContent='';
 
-  var n=v.split('').map(Number);
-  var gong=n[4],yin=n[5],shen=n[6],xing=n[7],men=n[8],tian=n[9],di=n[10];
+  var all=v.split('').map(Number);
+  var k=all.length-7;              /* 末七碼的起點：台灣 3、大陸 4 */
+  var t=all.slice(k);              /* 末七碼，落宮用 */
+  var n=all.slice(0,k);            /* 前面剩下的，作綱 */
+  var gong=t[0],yin=t[1],shen=t[2],xing=t[3],men=t[4],tian=t[5],di=t[6];
   var G=D.gong[gong];
 
   var sg='';
-  for(var i=0;i<4;i++) sg+='<div class="c"><b>'+n[i]+'</b><s>'+GAN[n[i]]+'</s><em>'+mark(n[i],gong)+'</em></div>';
+  for(var i=0;i<n.length;i++) sg+='<div class="c"><b>'+n[i]+'</b><s>'+GAN[n[i]]+'</s><em>'+mark(n[i],gong)+'</em></div>';
   el('qmSg').innerHTML=sg;
+  var cap=el('qmSgCap');
+  if(cap) cap.textContent='前 '+n.length+' 碼為綱，主根源背景，僅取記號，不入盤。';
 
   var p='';
   for(var k=0;k<9;k++){
