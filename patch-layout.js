@@ -32,7 +32,8 @@ var ORDER = [
   ['八星磁場'],
   ['大運分段'],
   ['流年'],
-  ['奇門'],
+  ['奇門手機號'],
+  ['奇門數字九宮'],
   ['尚未建置'],
   ['專業版']
 ];
@@ -46,8 +47,10 @@ function css(){
   s.id = 'ly-css';
   s.appendChild(document.createTextNode([
     /* 讓 #out 變成可排序的容器，外掛容器透明化 */
-    '#out{display:flex;flex-direction:column}',
-    '#out > #plug,#out > #plugs{display:contents}',
+    /* 注意：一定要用 :not(.hide)，否則 ID 優先權會壓過 .hide{display:none}，
+       導致還沒排盤時整個結果區就被顯示出來（一堆空卡片）。 */
+    '#out:not(.hide){display:flex;flex-direction:column}',
+    '#out:not(.hide) > #plug,#out:not(.hide) > #plugs{display:contents}',
     '#out > .card{width:100%}',
     /* 首頁功能選單 */
     '#ly-menu .ly-m{display:grid;grid-template-columns:1fr 1fr;gap:10px}',
@@ -91,6 +94,7 @@ function rankOf(t){
 var MENU = [
   {k:'paipan', c:'main', n:'生 辰 排 盤', d:'六柱、卦義、大運流年'},
   {k:'qimen',  n:'手機號論斷',   d:'奇門．末七碼落宮'},
+  {k:'jiugong',n:'數字九宮盤',   d:'後七碼倒填九宮'},
   {k:'pro',    n:'專 業 版',     d:'需密碼解鎖'},
   {h:'bxcc.html', n:'八星磁場查詢', d:'手機、車牌、門牌'},
   {h:'rz.html',   n:'看 日 子',     d:'宜忌、方位、吉時'}
@@ -142,8 +146,11 @@ function jump(key){
     target = document.getElementById('cal');
     if (target && target.parentNode) target = target.parentNode;
   } else if (key === 'qimen'){
-    target = findCard(['奇門']);
+    target = findCard(['奇門手機號']);
     if (!target) return hint('手機號論斷載入中，請稍候再試。');
+  } else if (key === 'jiugong'){
+    target = findCard(['奇門數字九宮']);
+    if (!target) return hint('數字九宮盤載入中，請稍候再試。');
   } else if (key === 'pro'){
     target = findCard(['專業版']);
     if (!target) return hint('請先在上方輸入生辰、按「排盤」，專業版才會出現。');
