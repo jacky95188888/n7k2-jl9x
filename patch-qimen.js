@@ -1,7 +1,9 @@
 /* ============================================================
    patch-qimen.js  ·  陰盤遁甲手機號論斷（外掛模組）
    依賴：data-qimen.js（須先載入）
-   掛載：PP.add('奇門手機號論斷', fn)
+   掛載：PP.addStatic('奇門手機號論斷', fn)
+         用 addStatic 而非 add，因為本模組只需要手機號碼，
+         與生辰資料無關，不需要先排盤就能使用。
    樣式：沿用網站既有 CSS 變數 --zhu / --gold / --line / --ser
    ============================================================ */
 (function(){
@@ -288,7 +290,10 @@ document.addEventListener('keydown',function(e){
 
 /* ---------- 掛載 ---------- */
 css();
-if(window.PP&&typeof PP.add==='function'){
+if(window.PP&&typeof PP.addStatic==='function'){
+  /* 用 addStatic：本模組只需手機號，與生辰無關，不必先排盤 */
+  PP.addStatic('奇門手機號論斷', function(){ return view(); });
+}else if(window.PP&&typeof PP.add==='function'){
   PP.add('奇門手機號論斷', function(){ return view(); });
 }else{
   console.warn('[qimen] 找不到 PP.add，模組待掛載');
