@@ -7,13 +7,21 @@
 
    解決四個問題：
      1. 首頁沒有功能選單，所有入口都要排盤後往下滑才找得到
-        → 最上面加一張「功 能 選 單」，五個入口一次看到
+        → 最上面加一張「功 能 選 單」，六個入口一次看到
      2. 外掛全部擠在「流年」後面 → 先講人，再講運
      3. 查字卡卡在排盤按鈕與結果中間 → 移出主動線
      4. 八星磁場查詢／看日子 兩個出入口散在頁尾 → 收成一張導覽卡
 
    作法：不搬動 DOM，改用 flex 的 order 排序。
    每次排盤後重新套用，外掛重繪也不會亂掉。
+
+   ── 2026/08/10 修改兩處（老師 8/10 指示）──────────────
+   ★ 修改 1：ORDER 補上「四柱八字」，排在「先天後天」前面
+      原本 ORDER 沒有這一項，rankOf 回傳 90，
+      導致四柱八字被排到整頁最後面，跟先天後天分居頭尾。
+   ★ 修改 2：新增 join()，把四柱八字卡的下緣與
+      先天後天卡的上緣接起來，中間不留框線與空隙。
+      只改樣式，不搬動也不刪除任何元素。
    ============================================================ */
 (function () {
 'use strict';
@@ -21,7 +29,8 @@
 /* ---------- 想要的閱讀順序（依卡片標題關鍵字比對）----------
    改順序只要調整這個陣列，不必動任何其他地方。          */
 var ORDER = [
-  ['先天','後天'],   /* 四柱八字＋數字盤，盤先出來 */
+  ['四柱八字'],      /* ★ 新增：四柱要緊接在數字盤上面 */
+  ['先天','後天'],   /* 數字盤 */
   ['六柱環'],
   ['五行能量'],
   ['陰陽斷'],
@@ -41,6 +50,9 @@ var ORDER = [
 /* ---------- 要藏起來的卡片（老師說不要的）---------- */
 var HIDE = ['五角漢字'];
 
+/* ---------- 要接在一起的兩張卡（上面那張, 下面那張）---------- */
+var JOIN = [['四柱八字'], ['先天','後天']];
+
 function css(){
   if (document.getElementById('ly-css')) return;
   var s = document.createElement('style');
@@ -52,6 +64,12 @@ function css(){
     '#out:not(.hide){display:flex;flex-direction:column}',
     '#out:not(.hide) > #plug,#out:not(.hide) > #plugs{display:contents}',
     '#out > .card{width:100%}',
+    /* ★ 接在一起的兩張卡 */
+    '#out .card.ly-join-top{margin-bottom:0!important;border-bottom:0!important;',
+      'padding-bottom:10px!important;box-shadow:none!important}',
+    '#out .card.ly-join-bot{margin-top:0!important;border-top:0!important;',
+      'padding-top:10px!important}',
+    '#out .card.ly-join-bot > h2{margin-top:4px}',
     /* 首頁功能選單 */
     '#ly-menu .ly-m{display:grid;grid-template-columns:1fr 1fr;gap:10px}',
     '#ly-menu .ly-m a{display:block;padding:15px 8px;text-align:center;text-decoration:none;',
@@ -79,13 +97,16 @@ function titleOf(card){
   return h ? (h.textContent || '').replace(/\s/g, '') : '';
 }
 
+function match(t, keys){
+  for (var k = 0; k < keys.length; k++){
+    if (t.indexOf(keys[k]) < 0) return false;
+  }
+  return true;
+}
+
 function rankOf(t){
   for (var i = 0; i < ORDER.length; i++){
-    var keys = ORDER[i], ok = true;
-    for (var k = 0; k < keys.length; k++){
-      if (t.indexOf(keys[k]) < 0) { ok = false; break; }
-    }
-    if (ok) return i + 1;
+    if (match(t, ORDER[i])) return i + 1;
   }
   return 90;                 /* 沒列到的排在後面、導覽卡之前 */
 }
@@ -133,9 +154,7 @@ function findCard(keys){
   var all = document.querySelectorAll('.card');
   for (var i = 0; i < all.length; i++){
     if (all[i].id === 'ly-menu') continue;
-    var t = titleOf(all[i]), ok = true;
-    for (var k = 0; k < keys.length; k++) if (t.indexOf(keys[k]) < 0) ok = false;
-    if (ok && all[i].offsetParent !== null) return all[i];
+    if (match(titleOf(all[i]), keys) && all[i].offsetParent !== null) return all[i];
   }
   return null;
 }
@@ -187,8 +206,36 @@ function nav(out){
   out.appendChild(card);
 
   /* 原本的裸連結收起來，不重複出現 */
-  for (i = 0; i < links.length; i++) links[i].style.display = 'none';
+  for (i = 0; i < links.length; i++){
+    /* 選單卡裡的連結不能碰 */
+    if (links[i].closest && links[i].closest('#ly-menu')) continue;
+    if (links[i].closest && links[i].closest('#ly-nav-card')) continue;
+    links[i].style.display = 'none';
+  }
   return card;
+}
+
+/* ---------- ★ 把兩張卡接成一塊 ---------- */
+function join(out){
+  var cards = out.querySelectorAll('.card'), i;
+  /* 先清掉上一輪的標記，避免重繪後殘留 */
+  for (i = 0; i < cards.length; i++){
+    cards[i].classList.remove('ly-join-top');
+    cards[i].classList.remove('ly-join-bot');
+  }
+
+  var top = null, bot = null;
+  for (i = 0; i < cards.length; i++){
+    var t = titleOf(cards[i]);
+    if (cards[i].style.display === 'none') continue;
+    if (!top && match(t, JOIN[0])) top = cards[i];
+    if (!bot && match(t, JOIN[1])) bot = cards[i];
+  }
+  /* 兩張都在、而且是不同的卡，才接起來 */
+  if (!top || !bot || top === bot) return;
+
+  top.classList.add('ly-join-top');
+  bot.classList.add('ly-join-bot');
 }
 
 function apply(){
@@ -214,6 +261,8 @@ function apply(){
 
   var n = nav(out);
   if (n) n.style.order = 99;
+
+  join(out);                 /* ★ 排序完再接卡 */
 
   /* 排盤區外面那些常駐卡（#plugs0）若含要藏的，一併處理 */
   var st = document.getElementById('plugs0');
