@@ -5,6 +5,17 @@
          用 addStatic 而非 add，因為本模組只需要手機號碼，
          與生辰資料無關，不需要先排盤就能使用。
    樣式：沿用網站既有 CSS 變數 --zhu / --gold / --line / --ser
+
+   ── 2026/08/11 修正 ──────────────────────────────
+   ★ 落宮格漏印「引干」。計算一直是對的（yin=t[1]），
+     只是畫格子那一行沒把它印出來，格內只有五項。
+   ★ 改成老師 App 的 2 欄 3 列：
+         八神    引干
+         天盤干  九星
+         地盤干  八門
+   ★ 驗證例 0972525680（末七碼 2525680）：
+         宮位2→坤二宮　引干5→戊　八神2→騰蛇　九星5→天禽
+         八門6→開門　天盤干8→辛　地盤干0→癸
    ============================================================ */
 (function(){
 'use strict';
@@ -45,11 +56,13 @@ function css(){
   '.qm-cell{background:#3a302b;min-height:70px;padding:6px 3px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a9998a}',
   '.qm-cell .gn{font-size:11px;letter-spacing:.08em}',
   '.qm-cell .nu{font-size:18px;color:#6d5f54;font-weight:600}',
-  '.qm-cell.on{background:#4a1a17;color:#f2e6d2;box-shadow:inset 0 0 0 1px var(--gold)}',
-  '.qm-cell.on .gn{color:var(--gold);margin-bottom:3px}',
-  '.qm-cell.on .st{font-size:12.5px;line-height:1.5;text-align:center;letter-spacing:.03em}',
-  '.qm-cell.on .st u{text-decoration:none;color:#f7e9cd;font-weight:600}',
-  '.qm-cell.on .st i{font-style:normal;color:#e0c98f}',
+  '.qm-cell.on{background:#4a1a17;color:#f2e6d2;box-shadow:inset 0 0 0 1px var(--gold);min-height:92px}',
+  '.qm-cell.on .gn{color:var(--gold);margin-bottom:4px}',
+  /* ★ 落宮格：2 欄 3 列，與老師 App 一致 */
+  '.qm-cell.on .st2{display:grid;grid-template-columns:auto auto;gap:3px 10px;',
+    'justify-content:center;text-align:center;font-size:12.5px;line-height:1.45;letter-spacing:.03em}',
+  '.qm-cell.on .st2 u{text-decoration:none;color:#f7e9cd;font-weight:600}',
+  '.qm-cell.on .st2 i{font-style:normal;color:#e0c98f}',
   '.qm-cap{font-size:11px;color:#9c8b74;text-align:center;margin:7px 0 0;letter-spacing:.1em}',
   '.qm-card{border:1px solid var(--line);background:#fff;border-radius:2px;padding:14px 15px;margin:11px 0 0}',
   '.qm-card h4{margin:0 0 3px;font-size:19px;color:var(--zhu);letter-spacing:.08em;font-weight:700}',
@@ -73,7 +86,6 @@ function css(){
   '.qm-ly .tt{font-size:15px;color:#241f1c;letter-spacing:.06em}',
   '.qm-ly .vl{color:var(--zhu);font-weight:600}',
   '.qm-ly .bd{padding:0 2px 14px;font-size:15px;color:#3b332c;line-height:1.8}',
-  '.qm-ly .rl{font-size:12px;color:#8a7a64;display:block;margin-bottom:4px}',
   '.qm-jie{background:#fff;border:1px dashed var(--gold);border-radius:2px;padding:14px 15px;font-size:15px;color:#3b332c;line-height:1.8}',
   '.qm-zg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 12px}',
   '.qm-zg button{padding:11px 2px;border:1px solid var(--line);border-radius:2px;background:#fff;color:#3b332c;font-family:var(--ser);font-size:13px;letter-spacing:.06em;cursor:pointer;line-height:1.4}',
@@ -150,9 +162,9 @@ function run(){
   el('qmErr').textContent='';
 
   var all=v.split('').map(Number);
-  var k=all.length-7;              /* 末七碼的起點：台灣 3、大陸 4 */
-  var t=all.slice(k);              /* 末七碼，落宮用 */
-  var n=all.slice(0,k);            /* 前面剩下的，作綱 */
+  var head=all.length-7;           /* 末七碼的起點：台灣 3、大陸 4 */
+  var t=all.slice(head);           /* 末七碼，落宮用 */
+  var n=all.slice(0,head);         /* 前面剩下的，作綱 */
   var gong=t[0],yin=t[1],shen=t[2],xing=t[3],men=t[4],tian=t[5],di=t[6];
   var G=D.gong[gong];
 
@@ -162,19 +174,28 @@ function run(){
   var cap=el('qmSgCap');
   if(cap) cap.textContent='前 '+n.length+' 碼為綱，主根源背景，僅取記號，不入盤。';
 
+  /* ★ 落宮格：2 欄 3 列
+       八神 ／ 引干
+       天盤干 ／ 九星
+       地盤干 ／ 八門                              */
   var p='';
-  for(var k=0;k<9;k++){
-    var c=LUOSHU[k];
+  for(var q=0;q<9;q++){
+    var c=LUOSHU[q];
     if(c===gong){
-      p+='<div class="qm-cell on"><span class="gn">'+GNAME[c]+'宮</span><span class="st">'+
-         '<i>'+D.shen[shen].n+'</i> <i>'+D.xing[xing].n+'</i><br>'+
-         '<u>'+D.men[men].n+'</u><br><u>'+GAN[tian]+'</u> / <u>'+GAN[di]+'</u></span></div>';
+      p+='<div class="qm-cell on"><span class="gn">'+GNAME[c]+'宮</span>'+
+         '<span class="st2">'+
+           '<i>'+D.shen[shen].n+'</i><u>'+GAN[yin]+'</u>'+
+           '<u>'+GAN[tian]+'</u><i>'+D.xing[xing].n+'</i>'+
+           '<u>'+GAN[di]+'</u><u>'+D.men[men].n+'</u>'+
+         '</span></div>';
     }else{
       p+='<div class="qm-cell"><span class="gn">'+GNAME[c]+'</span><span class="nu">'+c+'</span></div>';
     }
   }
   el('qmPlate').innerHTML=p;
-  el('qmCap').textContent = gong===0 ? '第五碼為 0，落空亡，九宮無實位可入。' : '洛書九宮 · 亮宮為所落之位';
+  el('qmCap').textContent = gong===0
+    ? '第五碼為 0，落空亡，九宮無實位可入。'
+    : '洛書九宮 · 亮宮為所落之位（左上八神、右上引干、左中天盤干、右中九星、左下地盤干、右下八門）';
 
   var fl=[],gt=GAN[tian],gd=GAN[di];
   if(gong===0) fl.push(['空亡宮','']);
