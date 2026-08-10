@@ -1,48 +1,51 @@
 /* ============================================================
    patch-menu.js　功能選單多一顆「八星磁場查詢」
    ------------------------------------------------------------
-   只做一件事：在「功能選單」卡裡，複製「專業版」那顆按鈕的
-   樣式，做出一顆「八星磁場查詢」，點了去 bxcc.html。
+   只做一件事：複製「專 業 版」那顆按鈕的樣式，
+   做出一顆「八星磁場查詢」，點了去 bxcc.html。
 
-   不藏任何東西、不搬任何東西、不刪任何東西。
-   找不到目標就什麼都不做。
+   ★ 重點：頁面標題寫成「專 業 版」（字中間有空格），
+     所以比對前一律先把空白去掉，否則永遠找不到。
 
-   若要還原：把這支的 <script> 那行刪掉即可。
+   不藏、不搬、不刪任何東西。找不到就什麼都不做。
    ============================================================ */
 (function(){
 'use strict';
 
 var DONE = false;
 
-/* 把元素底下第一個含指定文字的文字節點換掉 */
-function swapText(root, from, to){
+/* 去掉所有空白（含全形空格）再比對 */
+function norm(s){
+  return (s || '').replace(/[\s\u3000\u00a0]+/g, '');
+}
+function has(el, word){
+  return norm(el && el.textContent).indexOf(word) >= 0;
+}
+
+/* 找出按鈕裡的文字節點：內容（去空白後）含指定字的那一個 */
+function findTextNode(root, word){
   var stack = [root], n, i;
   while (stack.length){
     n = stack.pop();
     if (n.nodeType === 3){
-      if (n.nodeValue && n.nodeValue.indexOf(from) >= 0){
-        n.nodeValue = n.nodeValue.replace(from, to);
-        return true;
-      }
+      if (norm(n.nodeValue).indexOf(word) >= 0) return n;
     } else if (n.childNodes){
       for (i = n.childNodes.length - 1; i >= 0; i--) stack.push(n.childNodes[i]);
     }
   }
-  return false;
+  return null;
 }
 
-/* 找「專業版」那顆按鈕，拿來當樣式模板。
-   條件：含「專業版」，但不含其他按鈕的字，
-        也不含「功能選單」四個字（那是整張卡）。 */
+/* 找「專 業 版」那顆選單按鈕當樣式模板 */
 function findProButton(){
-  var all = document.getElementsByTagName('*'), i, t, hit = [];
+  var all = document.getElementsByTagName('*'), i, hit = [];
   for (i = 0; i < all.length; i++){
-    t = all[i].textContent || '';
-    if (t.indexOf('專業版') < 0) continue;
-    if (t.indexOf('功能選單') >= 0) continue;
-    if (t.indexOf('生辰排盤') >= 0) continue;
-    if (t.indexOf('手機號') >= 0) continue;
-    if (t.indexOf('九宮') >= 0) continue;
+    if (!has(all[i], '專業版')) continue;
+    if (has(all[i], '功能選單')) continue;   /* 整張卡 */
+    if (has(all[i], '生辰排盤')) continue;   /* 按鈕區塊 */
+    if (has(all[i], '手機號')) continue;
+    if (has(all[i], '九宮')) continue;
+    if (has(all[i], '輸入密碼')) continue;   /* 下方的解鎖區，不是選單按鈕 */
     hit.push(all[i]);
   }
   if (!hit.length) return null;
@@ -65,9 +68,14 @@ function addButton(){
   var btn = tpl.cloneNode(true);
   btn.id = 'zh-bx-btn';
 
-  /* 換字；換不到就放棄，不要放一顆假的「專業版」上去 */
-  if (!swapText(btn, '專業版', '八星磁場查詢')) return;
-  swapText(btn, '需密碼解鎖', '手機、車牌、門牌');
+  /* 換標題；換不到就放棄，不要放一顆假的「專業版」上去 */
+  var t1 = findTextNode(btn, '專業版');
+  if (!t1) return;
+  t1.nodeValue = '八星磁場查詢';
+
+  /* 換副標（有就換，沒有不強求） */
+  var t2 = findTextNode(btn, '需密碼解鎖');
+  if (t2) t2.nodeValue = '手機、車牌、門牌';
 
   /* 清掉複製過來的行為與重複 id */
   btn.removeAttribute('onclick');
@@ -88,7 +96,6 @@ function addButton(){
     });
   }
 
-  /* 插在「專業版」旁邊 */
   tpl.parentNode.insertBefore(btn, tpl.nextSibling);
   DONE = true;
 }
