@@ -1,0 +1,1289 @@
+/* =========================================================
+   筠玲易數 · PREMIUM UI V2
+   只改視覺，不改原本 JS / 排盤邏輯
+
+   放法：本檔上傳到與 index.html 同一層，
+        並在 index.html 的 </style> 【後面】加一行：
+          <link rel="stylesheet" href="ui.css">
+        一定要在 </style> 之後，否則會被原本的樣式蓋掉。
+
+   ── 2026/08/11 修正兩處 ─────────────────────────
+   ★ 修正 1：.pill[data-on="1"] .pbg 原本寫 fill:linear-gradient(...)
+      SVG 的 fill 不吃 CSS 漸層，會整個失效，
+      導致六柱環選中的那一柱變回白色、看不出選了哪一柱。
+      已改為單色 #8b2528。
+   ★ 修正 2：a[href="rz.html"] / a[href="bxcc.html"] 原本帶
+      display:flex !important，會把 patch-layout.js 藏起來的
+      頁尾裸連結強制顯示回來，頁尾出現兩顆重複按鈕。
+      已把選擇器限縮在 .ly-nav 之內（即「其他工具」卡）。
+========================================================= */
+
+:root{
+  --ink:#29231f;
+  --ink2:#4b4037;
+  --paper:#f7f3eb;
+  --paper2:#fbf9f4;
+  --paper3:#eee7d9;
+  --red:#781d22;
+  --red2:#9b3032;
+  --gold:#b38a43;
+  --gold2:#d0ad69;
+  --line:#d8cbb7;
+  --muted:#84786c;
+  --shadow:0 14px 38px rgba(64,48,31,.10);
+  --shadow2:0 5px 18px rgba(64,48,31,.08);
+}
+
+/* ---------- 全站背景 ---------- */
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(255,255,255,.95),
+      transparent 45%
+    ),
+    linear-gradient(
+      135deg,
+      #eee7da 0%,
+      #f7f3eb 48%,
+      #ebe2d2 100%
+    );
+  color:var(--ink);
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.22;
+  background-image:
+    radial-gradient(
+      rgba(80,60,40,.18) .55px,
+      transparent .55px
+    );
+  background-size:7px 7px;
+}
+
+/* ---------- 主容器 ---------- */
+
+.wrap{
+  max-width:620px;
+  padding:0 16px 50px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+header{
+  position:relative;
+  overflow:hidden;
+
+  margin:0 -16px 28px;
+
+  aspect-ratio:1024/753;
+
+  border:0;
+  border-radius:0 0 28px 28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(20,15,11,.03) 0%,
+      rgba(20,15,11,.05) 45%,
+      rgba(30,18,14,.72) 100%
+    ),
+    url('hero.jpeg') center top/cover no-repeat;
+
+  box-shadow:
+    0 12px 40px rgba(55,40,25,.16);
+
+  isolation:isolate;
+}
+
+/* Hero 上方金色細線 */
+
+header::before{
+  content:"";
+  position:absolute;
+  left:34px;
+  right:34px;
+  top:20px;
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(210,172,99,.85),
+      transparent
+    );
+
+  opacity:.9;
+}
+
+/* Hero 底部漸層 */
+
+header::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:62%;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(27,19,15,.82)
+    );
+
+  pointer-events:none;
+}
+
+/* 顯示 Hero 文字 */
+
+.seal{
+  display:flex;
+  top:32px;
+  right:28px;
+  z-index:5;
+}
+
+.seal-mark{
+  width:38px;
+  height:38px;
+
+  border:1px solid rgba(219,183,108,.9);
+
+  background:rgba(52,20,20,.48);
+
+  color:#f5dfae;
+
+  box-shadow:
+    0 4px 14px rgba(0,0,0,.15);
+
+  backdrop-filter:blur(6px);
+}
+
+.seal-txt{
+  color:rgba(255,245,220,.8);
+}
+
+/* 原本 hero 改為封面資訊 */
+
+.hero{
+  display:block;
+
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:42px;
+
+  z-index:4;
+
+  max-width:none;
+  padding:0 28px;
+
+  color:#fff;
+}
+
+/* 老師照片隱藏 */
+
+.teacher{
+  display:none;
+}
+
+.hero-main{
+  width:100%;
+}
+
+/* 主標 */
+
+h1{
+  color:#fff;
+
+  font-size:44px;
+  line-height:1.15;
+
+  letter-spacing:.24em;
+
+  text-shadow:
+    0 3px 18px rgba(0,0,0,.35);
+}
+
+h1 small{
+  color:#e2bd75;
+
+  font-size:17px;
+
+  vertical-align:8px;
+}
+
+/* 副標 */
+
+.sub{
+  margin-top:12px;
+
+  color:rgba(255,248,234,.88);
+
+  font-size:15px;
+
+  letter-spacing:.30em;
+}
+
+/* 金線 */
+
+.orn{
+  margin:17px auto;
+
+  width:150px;
+}
+
+.orn i{
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #d1a75e
+    );
+}
+
+.orn i:last-child{
+  background:
+    linear-gradient(
+      90deg,
+      #d1a75e,
+      transparent
+    );
+}
+
+.orn b{
+  display:block;
+
+  margin:0 10px;
+
+  color:#d3aa61;
+  font-size:10px;
+}
+
+/* Hero 主句 */
+
+.hero-text{
+  color:#f9edcf;
+
+  font-size:18px;
+
+  letter-spacing:.18em;
+
+  text-shadow:
+    0 2px 10px rgba(0,0,0,.3);
+}
+
+.hero-text::after{
+  color:rgba(255,248,235,.72);
+
+  font-size:12.5px;
+
+  line-height:1.9;
+}
+
+/* =========================================================
+   卡片系統
+========================================================= */
+
+.card{
+  position:relative;
+
+  margin:25px 0;
+
+  padding:24px 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,253,248,.96),
+      rgba(247,242,232,.94)
+    );
+
+  border:1px solid rgba(182,160,128,.55);
+
+  border-radius:18px;
+
+  box-shadow:var(--shadow2);
+
+  overflow:hidden;
+}
+
+/* 卡片左上裝飾 */
+
+.card::before{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  top:0;
+
+  width:5px;
+  height:52px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--red),
+      transparent
+    );
+
+  opacity:.85;
+}
+
+/* 卡片右上金色小角 */
+
+.card::after{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  right:0;
+
+  width:70px;
+  height:70px;
+
+  border-top:1px solid rgba(179,138,67,.38);
+  border-right:1px solid rgba(179,138,67,.38);
+
+  border-radius:0 18px 0 0;
+
+  pointer-events:none;
+}
+
+/* 標題 */
+
+h2{
+  margin-bottom:22px;
+
+  color:var(--ink);
+
+  font-size:18px;
+
+  letter-spacing:.34em;
+}
+
+h2::before{
+  content:"◈";
+
+  display:inline-block;
+
+  margin-right:10px;
+
+  color:var(--gold);
+
+  font-size:10px;
+
+  vertical-align:2px;
+}
+
+h2::after{
+  width:82px;
+
+  height:2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      transparent
+    );
+}
+
+/* =========================================================
+   排盤輸入區
+========================================================= */
+
+.lab{
+  margin-bottom:9px;
+
+  color:#80664e;
+
+  font-size:12px;
+
+  letter-spacing:.34em;
+}
+
+.seg{
+  margin-bottom:20px;
+
+  border:1px solid #a99375;
+
+  border-radius:10px;
+
+  overflow:hidden;
+
+  background:#f4eee3;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.7);
+}
+
+.seg button{
+  min-height:50px;
+
+  color:#625446;
+
+  font-size:13px;
+
+  letter-spacing:.12em;
+
+  transition:
+    background .2s ease,
+    color .2s ease,
+    transform .15s ease;
+}
+
+.seg button:last-child{
+  border-left:1px solid #c8b79d;
+}
+
+.seg button[aria-pressed="true"]{
+  background:
+    linear-gradient(
+      135deg,
+      #701b20,
+      #922d30
+    );
+
+  color:#fff8ea;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.15),
+    0 3px 10px rgba(100,20,20,.18);
+}
+
+/* 輸入格 */
+
+.grid{
+  gap:15px;
+}
+
+label{
+  margin-bottom:6px;
+
+  color:#786653;
+
+  font-size:12px;
+
+  letter-spacing:.16em;
+}
+
+select,
+input{
+  height:50px;
+
+  border:1px solid #c5b39a;
+
+  border-radius:9px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffefb,
+      #f8f3ea
+    );
+
+  color:#3d332b;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.8);
+
+  transition:
+    border-color .2s,
+    box-shadow .2s,
+    transform .15s;
+}
+
+select:focus,
+input:focus{
+  border-color:var(--red);
+
+  box-shadow:
+    0 0 0 3px rgba(120,29,34,.10),
+    0 4px 12px rgba(70,40,20,.06);
+}
+
+/* 排盤按鈕 */
+
+.go{
+  height:56px;
+
+  margin-top:25px;
+
+  border-radius:11px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #701a1f,
+      #922c30 55%,
+      #751b20
+    );
+
+  box-shadow:
+    0 7px 18px rgba(110,24,28,.23),
+    inset 0 1px rgba(255,255,255,.15);
+
+  font-size:18px;
+
+  letter-spacing:.48em;
+}
+
+.go:hover{
+  filter:brightness(1.05);
+}
+
+.go:active{
+  transform:translateY(1px);
+
+  box-shadow:
+    0 3px 10px rgba(110,24,28,.18);
+}
+
+/* 四個特色 */
+
+.feats{
+  margin-top:24px;
+
+  padding-top:19px;
+
+  border-top:1px solid #dfd4c3;
+}
+
+.feats div{
+  padding:0 4px;
+
+  border-right:1px solid #dfd4c3;
+}
+
+.feats b{
+  color:#594638;
+
+  font-size:12px;
+}
+
+.feats span{
+  color:#958878;
+
+  font-size:9.5px;
+}
+
+/* =========================================================
+   六柱環
+========================================================= */
+
+.ringbox{
+  position:relative;
+
+  padding:25px 10px;
+
+  border:1px solid #d7c8b0;
+
+  border-radius:15px;
+
+  background:
+    radial-gradient(
+      circle,
+      #fffdf8 0%,
+      #f6f0e5 70%,
+      #eee5d6 100%
+    );
+
+  box-shadow:
+    inset 0 0 40px rgba(130,100,50,.05);
+}
+
+/* 環形中心光暈 */
+
+.ringbox::before{
+  content:"";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:150px;
+  height:150px;
+
+  transform:translate(-50%,-50%);
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(179,138,67,.08),
+      transparent 70%
+    );
+
+  pointer-events:none;
+}
+
+/* SVG */
+
+svg{
+  max-width:380px;
+
+  filter:
+    drop-shadow(0 5px 10px rgba(60,40,20,.08));
+}
+
+/* 未選取 */
+
+.pbg{
+  fill:#fffdf8;
+
+  stroke:#c7b699;
+
+  transition:
+    fill .2s,
+    stroke .2s,
+    transform .2s;
+}
+
+/* 選取
+   ★ 修正：SVG 的 fill 不吃 CSS 漸層，原本寫 linear-gradient
+     整條會失效，選中的柱會變回白色。改用單色。 */
+
+.pill[data-on="1"] .pbg{
+  fill:#8b2528;
+
+  stroke:#a47735;
+
+  stroke-width:2.5;
+
+  filter:
+    drop-shadow(0 4px 8px rgba(100,20,20,.22));
+}
+
+.pill[data-on="1"] .pnum{
+  fill:#fff8e8;
+}
+
+.pill[data-on="1"] .plab{
+  fill:#f4dfae;
+}
+
+/* 相鄰卦體 */
+
+.pill[data-win="1"] .pbg{
+  fill:#f0e4c9;
+
+  stroke:#b89045;
+
+  stroke-width:2;
+}
+
+/* 讀數 */
+
+.read{
+  margin:24px 0 12px;
+
+  padding:15px;
+
+  border-top:1px solid #ddcfb9;
+  border-bottom:1px solid #ddcfb9;
+}
+
+.read .gt{
+  color:#493329;
+
+  font-size:36px;
+
+  letter-spacing:.18em;
+}
+
+.read .gn{
+  margin-top:9px;
+
+  color:var(--red);
+
+  font-size:16px;
+}
+
+.read .yy{
+  color:#85776b;
+
+  font-size:12px;
+}
+
+.hint{
+  margin-top:15px;
+
+  color:#998b79;
+
+  font-size:11px;
+
+  letter-spacing:.2em;
+}
+
+/* =========================================================
+   解盤區
+========================================================= */
+
+.jie{
+  margin-top:25px;
+
+  padding-top:22px;
+
+  border-top:1px solid #d8c9b3;
+}
+
+.jie h3{
+  color:var(--red);
+
+  font-size:15px;
+
+  letter-spacing:.34em;
+}
+
+.tabs{
+  background:#f0eadf;
+
+  border:1px solid #d7c9b4;
+
+  border-radius:9px;
+
+  overflow:hidden;
+}
+
+.tabs button{
+  min-height:46px;
+
+  color:#766858;
+}
+
+.tabs button[aria-pressed="true"]{
+  background:#fffaf0;
+
+  color:var(--red);
+
+  border-bottom-color:var(--red);
+}
+
+/* 四句詩 */
+
+.duan{
+  position:relative;
+
+  padding:24px 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #faf5e9,
+      #fffdf8
+    );
+
+  border:1px solid #dfd0b9;
+
+  border-left:4px solid var(--gold);
+
+  border-radius:0 12px 12px 0;
+
+  box-shadow:
+    0 5px 14px rgba(70,50,30,.05);
+
+  color:#403329;
+
+  font-size:17px;
+}
+
+/* 詳解 */
+
+.jdu{
+  padding:21px 18px;
+
+  background:#fffdfa;
+
+  border:1px solid #e1d7c7;
+
+  border-radius:12px;
+
+  color:#544a42;
+
+  font-size:14px;
+
+  line-height:2.2;
+}
+
+/* =========================================================
+   表格
+========================================================= */
+
+table{
+  border:1px solid #d8cbb8;
+
+  border-radius:10px;
+
+  overflow:hidden;
+}
+
+th{
+  padding:12px 7px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #eee6d7,
+      #f5efe5
+    );
+
+  color:#604f3f;
+
+  font-size:11px;
+}
+
+td{
+  padding:12px 6px;
+
+  background:rgba(255,254,250,.78);
+
+  border-bottom:1px solid #e9e0d2;
+
+  color:#655a51;
+
+  font-size:12.5px;
+}
+
+tr:last-child td{
+  border-bottom:0;
+}
+
+td.n{
+  color:#762a25;
+
+  font-size:17px;
+}
+
+/* =========================================================
+   大運
+========================================================= */
+
+.bar{
+  height:46px;
+
+  border:1px solid #c6b69e;
+
+  border-radius:9px;
+
+  background:#eee7db;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.8);
+}
+
+.bar div{
+  background:#f5f0e7 !important;
+
+  border-right:1px solid #c8b99f;
+
+  color:#5b4d40;
+}
+
+.bar div:nth-child(even){
+  background:#e7dece !important;
+}
+
+/* =========================================================
+   流年
+========================================================= */
+
+.scroll{
+  border:1px solid #d6c8b4;
+
+  border-radius:10px;
+
+  box-shadow:
+    inset 0 0 12px rgba(70,50,30,.04);
+}
+
+.scroll thead th{
+  background:#eee5d5;
+}
+
+/* =========================================================
+   尚未建置
+========================================================= */
+
+.todo{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(247,242,232,.65),
+      rgba(255,253,248,.45)
+    );
+
+  border:1px dashed #c4b49b;
+
+  opacity:.78;
+
+  box-shadow:none;
+}
+
+.todo::before{
+  background:#a69a88;
+}
+
+.todo h2{
+  color:#827667;
+}
+
+.tlist li{
+  padding:15px 0;
+}
+
+.tag{
+  border-radius:5px;
+
+  background:rgba(255,255,255,.35);
+}
+
+/* =========================================================
+   專業版
+========================================================= */
+
+.pro{
+  background:
+    linear-gradient(
+      145deg,
+      #f5f0e6,
+      #faf8f2
+    );
+
+  border:1px solid #8d806e;
+
+  border-top:4px solid #322a24;
+
+  border-radius:16px;
+
+  box-shadow:
+    0 10px 28px rgba(50,40,30,.12);
+}
+
+.pro::before{
+  background:
+    linear-gradient(
+      180deg,
+      #302821,
+      transparent
+    );
+}
+
+.pro h2{
+  color:#302821;
+}
+
+.lock input{
+  border-radius:9px;
+}
+
+.lock button{
+  min-width:96px;
+
+  border-radius:9px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #302821,
+      #4a3d32
+    );
+
+  box-shadow:
+    0 4px 10px rgba(40,30,20,.15);
+}
+
+/* =========================================================
+   看日子 / 八星磁場
+   ★ 修正：選擇器限縮在 .ly-nav（「其他工具」卡）之內。
+     原本沒有限縮，display:flex !important 會把
+     patch-layout.js 藏起來的頁尾裸連結強制顯示回來，
+     造成頁尾出現兩顆重複按鈕。
+========================================================= */
+
+.ly-nav a[href="rz.html"],
+.ly-nav a[href="bxcc.html"]{
+  position:relative;
+
+  display:flex !important;
+
+  align-items:center;
+  justify-content:center;
+
+  min-height:54px;
+
+  margin:16px auto !important;
+
+  border-radius:12px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #4b4037,
+      #302923
+    ) !important;
+
+  border:1px solid #b58c45 !important;
+
+  color:#f8ebcf !important;
+
+  font-family:var(--ser) !important;
+
+  font-size:15px;
+
+  letter-spacing:.22em !important;
+
+  box-shadow:
+    0 7px 18px rgba(50,35,20,.14);
+
+  transition:
+    transform .18s,
+    box-shadow .18s,
+    filter .18s;
+}
+
+.ly-nav a[href="bxcc.html"]{
+  background:
+    linear-gradient(
+      135deg,
+      #701a20,
+      #922c30
+    ) !important;
+}
+
+.ly-nav a[href="rz.html"]:active,
+.ly-nav a[href="bxcc.html"]:active{
+  transform:translateY(1px);
+
+  box-shadow:
+    0 3px 9px rgba(50,35,20,.12);
+}
+
+/* =========================================================
+   頁尾
+========================================================= */
+
+footer{
+  margin-top:42px;
+
+  padding:34px 0 18px;
+}
+
+footer::before{
+  left:20%;
+  right:20%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      transparent
+    );
+}
+
+.f-motto{
+  color:#4b392d;
+
+  font-size:17px;
+
+  letter-spacing:.38em;
+}
+
+.f-sub{
+  color:#988b7c;
+
+  font-size:10px;
+}
+
+/* =========================================================
+   手機版
+========================================================= */
+
+@media(max-width:520px){
+
+  .wrap{
+    padding-left:12px;
+    padding-right:12px;
+  }
+
+  header{
+    margin-left:-12px;
+    margin-right:-12px;
+
+    border-radius:0 0 22px 22px;
+  }
+
+  .hero{
+    bottom:32px;
+
+    padding:0 22px;
+  }
+
+  h1{
+    font-size:34px;
+
+    letter-spacing:.17em;
+  }
+
+  h1 small{
+    font-size:14px;
+  }
+
+  .sub{
+    font-size:13px;
+
+    letter-spacing:.22em;
+  }
+
+  .hero-text{
+    font-size:16px;
+
+    letter-spacing:.12em;
+  }
+
+  .hero-text::after{
+    font-size:11px;
+  }
+
+  .seal{
+    top:22px;
+    right:20px;
+  }
+
+  .card{
+    padding:21px 15px;
+
+    margin:20px 0;
+
+    border-radius:15px;
+  }
+
+  .grid{
+    gap:12px 10px;
+  }
+
+  select,
+  input{
+    height:48px;
+
+    padding-left:11px;
+    padding-right:11px;
+  }
+
+  .go{
+    height:54px;
+
+    font-size:17px;
+  }
+
+  .feats b{
+    font-size:10.5px;
+  }
+
+  .feats span{
+    font-size:8.5px;
+  }
+
+  .ringbox{
+    padding:18px 3px;
+  }
+
+  .read .gt{
+    font-size:30px;
+  }
+
+  .duan{
+    font-size:16px;
+
+    padding:21px 13px;
+  }
+
+  .jdu{
+    padding:18px 14px;
+
+    font-size:13.5px;
+  }
+
+  th{
+    font-size:10px;
+  }
+
+  td{
+    font-size:11.5px;
+  }
+
+  td.n{
+    font-size:15px;
+  }
+}
+
+/* =========================================================
+   小手機
+========================================================= */
+
+@media(max-width:370px){
+
+  h1{
+    font-size:29px;
+  }
+
+  .hero{
+    bottom:27px;
+  }
+
+  .hero-text::after{
+    display:none;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .feats{
+    grid-template-columns:repeat(2,1fr);
+
+    row-gap:15px;
+  }
+
+  .feats div:nth-child(2){
+    border-right:0;
+  }
+
+  .feats div:nth-child(3),
+  .feats div:nth-child(4){
+    padding-top:12px;
+
+    border-top:1px solid #ddd2c0;
+  }
+}
+
+/* =========================================================
+   減少動畫
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *{
+    scroll-behavior:auto !important;
+    transition:none !important;
+  }
+}
