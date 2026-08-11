@@ -54,9 +54,8 @@ var CSS = [
   '.jg-c .jg-p{font-family:var(--ser,serif);font-size:11px;letter-spacing:.06em;color:#85776c}',
   '.jg-c .jg-n{font-family:var(--ser,serif);font-size:27px;font-weight:700;',
     'line-height:1.2;color:#5d2c20;margin-top:2px}',
-  '.jg-c .jg-o{font-size:10px;color:#a2937f;margin-top:2px}',
   '.jg-c.jg-off{background:#f3ede2}',
-  '.jg-c.jg-off .jg-n{color:#c3b7a4;font-size:20px}',
+  '.jg-c.jg-off .jg-n{display:none}',
   '.jg-c.jg-mid{background:#f7efe2}',
   '.jg-note{margin-top:12px;font-size:12px;color:#85776c;line-height:1.8}'
 ].join('');
@@ -89,12 +88,10 @@ function cellHTML(key, r){
   var cls = 'jg-c';
   if (info.off) cls += ' jg-off';
   if (key === 'c') cls += ' jg-mid';
-  var num = hit ? hit.n : '—';
-  var ord = hit ? ('第 ' + hit.ord + ' 填') : '不用';
+  var body = hit ? ('<div class="jg-n">' + hit.n + '</div>') : '';
   return '<div class="' + cls + '">' +
            '<div class="jg-p">' + info.name + '</div>' +
-           '<div class="jg-n">' + num + '</div>' +
-           '<div class="jg-o">' + ord + '</div>' +
+           body +
          '</div>';
 }
 
