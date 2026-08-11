@@ -149,11 +149,11 @@ header::after{
 
 /* 顯示 Hero 文字 */
 
+/* ★ 2026/08/11：hero.jpeg 本身已印好落款與標題文字，
+   HTML 這層再顯示會疊成兩份，故隱藏。 */
+
 .seal{
-  display:flex;
-  top:32px;
-  right:28px;
-  z-index:5;
+  display:none;
 }
 
 .seal-mark{
@@ -179,19 +179,7 @@ header::after{
 /* 原本 hero 改為封面資訊 */
 
 .hero{
-  display:block;
-
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:42px;
-
-  z-index:4;
-
-  max-width:none;
-  padding:0 28px;
-
-  color:#fff;
+  display:none;
 }
 
 /* 老師照片隱藏 */
