@@ -93,13 +93,10 @@ header{
   border:0;
   border-radius:0 0 28px 28px;
 
+  /* ★ 2026/08/11：原本疊了一層暗色漸層，是為了襯白色標題文字。
+     文字已隱藏，蓋層只會讓圖變暗變濁，故移除，只留原圖。 */
+
   background:
-    linear-gradient(
-      180deg,
-      rgba(20,15,11,.03) 0%,
-      rgba(20,15,11,.05) 45%,
-      rgba(30,18,14,.72) 100%
-    ),
     url('hero.jpeg') center top/cover no-repeat;
 
   box-shadow:
@@ -131,20 +128,10 @@ header::before{
 
 /* Hero 底部漸層 */
 
+/* ★ 底部暗色漸層同理，一併移除 */
+
 header::after{
-  content:"";
-  position:absolute;
-  inset:auto 0 0;
-  height:62%;
-
-  background:
-    linear-gradient(
-      180deg,
-      transparent,
-      rgba(27,19,15,.82)
-    );
-
-  pointer-events:none;
+  display:none;
 }
 
 /* 顯示 Hero 文字 */
