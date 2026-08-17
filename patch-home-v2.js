@@ -2481,3 +2481,662 @@ body.jl-feature-mode
   });
 
 })();
+/* =========================================================
+   筠玲易數 V4｜母版比例＋紫曜色調修正
+   只調整視覺，不碰命理計算
+   ========================================================= */
+(function () {
+  'use strict';
+
+  function applyJLV4() {
+    if (document.getElementById('jl-v4-master-style')) return;
+
+    const style = document.createElement('style');
+    style.id = 'jl-v4-master-style';
+
+    style.textContent = `
+
+/* =========================================
+   0. 手機首頁總體密度
+   ========================================= */
+
+@media (max-width:600px){
+
+  body{
+    overflow-x:hidden !important;
+  }
+
+  #jl-home{
+    max-width:100% !important;
+  }
+
+
+  /* =======================================
+     1. 最上方品牌列
+     ======================================= */
+
+  .jl-header{
+    height:46px !important;
+    min-height:46px !important;
+    padding:0 10px !important;
+  }
+
+  .jl-logo-mark{
+    width:24px !important;
+    height:24px !important;
+    font-size:10px !important;
+  }
+
+  .jl-logo strong{
+    font-size:15px !important;
+    letter-spacing:.05em !important;
+  }
+
+  .jl-my{
+    padding:6px 10px !important;
+    font-size:8px !important;
+  }
+
+
+  /* =======================================
+     2. Hero
+     母版重點：
+     不再一張 Hero 佔半頁
+     ======================================= */
+
+  .jl-hero{
+    min-height:255px !important;
+    height:255px !important;
+
+    background:
+      radial-gradient(
+        circle at 15% 72%,
+        rgba(185,72,232,.26),
+        transparent 34%
+      ),
+      linear-gradient(
+        90deg,
+        #fff8ff 0%,
+        #f9eaff 43%,
+        #e6b9ff 72%,
+        #a84ee0 100%
+      ) !important;
+  }
+
+
+  .jl-hero-left{
+    width:54% !important;
+
+    padding:
+      22px
+      4px
+      15px
+      18px !important;
+  }
+
+
+  .jl-kicker{
+    font-size:7px !important;
+    letter-spacing:.12em !important;
+    white-space:nowrap !important;
+  }
+
+
+  .jl-hero h1{
+    margin:
+      8px
+      0
+      4px !important;
+
+    font-size:
+      29px !important;
+
+    line-height:
+      1.08 !important;
+  }
+
+
+  .jl-hero h2{
+    font-size:
+      10.5px !important;
+
+    line-height:
+      1.45 !important;
+
+    color:
+      #bf6a2d !important;
+  }
+
+
+  .jl-hero-left p{
+    margin-top:
+      8px !important;
+
+    font-size:
+      7.5px !important;
+
+    line-height:
+      1.55 !important;
+
+    max-width:
+      230px !important;
+  }
+
+
+  /* =======================================
+     3. 老師照片
+     用紫色光影統一色調
+     ======================================= */
+
+  .jl-hero-right{
+    top:0 !important;
+    bottom:auto !important;
+
+    right:0 !important;
+
+    width:58% !important;
+    height:255px !important;
+
+    opacity:.96 !important;
+
+    background-image:
+
+      linear-gradient(
+        90deg,
+        #f9eaff 0%,
+        rgba(246,219,255,.38) 16%,
+        rgba(189,89,231,.10) 46%,
+        rgba(94,15,125,.18) 100%
+      ),
+
+      url("hero.jpeg") !important;
+
+    background-size:
+      auto 100% !important;
+
+    background-position:
+      right center !important;
+
+    background-repeat:
+      no-repeat !important;
+
+    filter:
+      saturate(1.12)
+      contrast(.98)
+      brightness(1.05)
+      hue-rotate(4deg) !important;
+  }
+
+
+  /*
+    再蓋一層紫粉柔光，
+    讓米黃背景不要那麼突兀
+  */
+
+  .jl-hero::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    z-index:2;
+
+    pointer-events:none;
+
+    background:
+
+      radial-gradient(
+        circle at 76% 43%,
+        rgba(236,179,255,.08),
+        transparent 27%
+      ),
+
+      linear-gradient(
+        90deg,
+        transparent 48%,
+        rgba(191,76,226,.10) 72%,
+        rgba(91,12,123,.18) 100%
+      );
+  }
+
+
+  .jl-hero-left,
+  .jl-quote{
+    position:relative;
+    z-index:4 !important;
+  }
+
+
+  /* =======================================
+     4. 老師右側語錄
+     ======================================= */
+
+  .jl-quote{
+    position:absolute !important;
+
+    right:2.5% !important;
+    top:31% !important;
+
+    width:22% !important;
+
+    font-size:
+      7.5px !important;
+
+    line-height:
+      1.55 !important;
+
+    color:
+      #fff8ff !important;
+  }
+
+
+  .jl-quote b{
+    margin-top:
+      4px !important;
+
+    font-size:
+      9px !important;
+
+    color:
+      #f4cd71 !important;
+  }
+
+
+  /* =======================================
+     5. 探索命理橫幅
+     ======================================= */
+
+  .jl-main-title{
+    height:35px !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    padding:0 5px !important;
+
+    font-size:
+      11px !important;
+
+    letter-spacing:
+      .06em !important;
+  }
+
+
+  /* =======================================
+     6. 六大功能
+     強制 3 × 2
+     ======================================= */
+
+  .jl-tools{
+    padding:
+      7px
+      8px
+      8px !important;
+  }
+
+
+  .jl-grid{
+    display:grid !important;
+
+    grid-template-columns:
+      repeat(3,minmax(0,1fr)) !important;
+
+    gap:
+      6px !important;
+  }
+
+
+  .jl-tool{
+    min-width:0 !important;
+
+    min-height:
+      108px !important;
+
+    height:
+      108px !important;
+
+    padding:
+      7px
+      3px
+      5px !important;
+
+    border-radius:
+      10px !important;
+  }
+
+
+  .jl-icon{
+    width:
+      35px !important;
+
+    height:
+      35px !important;
+
+    margin:
+      0 auto 4px !important;
+
+    border-width:
+      1.5px !important;
+
+    font-size:
+      8px !important;
+
+    line-height:
+      1.05 !important;
+  }
+
+
+  .jl-nine{
+    font-size:
+      6px !important;
+
+    line-height:
+      1.1 !important;
+  }
+
+
+  .jl-tool h3{
+    margin:
+      0 0 2px !important;
+
+    font-size:
+      9.5px !important;
+
+    white-space:
+      nowrap !important;
+  }
+
+
+  .jl-tool p{
+    font-size:
+      6.5px !important;
+
+    line-height:
+      1.35 !important;
+
+    white-space:
+      nowrap !important;
+  }
+
+
+  .jl-tool small{
+    margin-top:
+      2px !important;
+
+    font-size:
+      5.5px !important;
+
+    line-height:
+      1.25 !important;
+  }
+
+
+  .jl-tool span{
+    margin-top:
+      4px !important;
+
+    padding:
+      3px
+      7px !important;
+
+    border-radius:
+      5px !important;
+
+    font-size:
+      6px !important;
+  }
+
+
+  /* =======================================
+     7. 擇吉看日
+     母版是短橫幅，不是大卡
+     ======================================= */
+
+  .jl-date{
+    min-height:
+      92px !important;
+
+    height:
+      92px !important;
+
+    margin:
+      0
+      8px
+      7px !important;
+
+    padding:
+      10px
+      11px
+      9px
+      16px !important;
+
+    border-radius:
+      11px !important;
+  }
+
+
+  .jl-date-copy{
+    max-width:
+      70% !important;
+  }
+
+
+  .jl-date h2{
+    font-size:
+      16px !important;
+  }
+
+
+  .jl-date p{
+    margin:
+      3px
+      0 !important;
+
+    font-size:
+      6px !important;
+
+    line-height:
+      1.35 !important;
+  }
+
+
+  .jl-date a{
+    margin-top:
+      3px !important;
+
+    padding:
+      4px
+      11px !important;
+
+    font-size:
+      6.5px !important;
+  }
+
+
+  .jl-date-art{
+    width:
+      62px !important;
+
+    height:
+      62px !important;
+  }
+
+
+  .jl-calendar{
+    width:
+      52px !important;
+
+    height:
+      52px !important;
+
+    border-radius:
+      8px !important;
+
+    font-size:
+      12px !important;
+  }
+
+
+  /* =======================================
+     8. 老師＋LINE
+     ======================================= */
+
+  .jl-contact{
+    margin:
+      0
+      8px
+      7px !important;
+
+    padding:
+      6px
+      7px !important;
+
+    border-radius:
+      10px !important;
+  }
+
+
+  .jl-teacher-mini{
+    margin-bottom:
+      5px !important;
+
+    gap:
+      6px !important;
+  }
+
+
+  .jl-mini-photo{
+    width:
+      38px !important;
+
+    height:
+      46px !important;
+
+    border-radius:
+      6px !important;
+
+    filter:
+      saturate(1.08)
+      brightness(1.04)
+      hue-rotate(3deg);
+  }
+
+
+  .jl-contact h3{
+    font-size:
+      9px !important;
+  }
+
+
+  .jl-contact p{
+    margin-top:
+      2px !important;
+
+    font-size:
+      6px !important;
+
+    line-height:
+      1.4 !important;
+  }
+
+
+  .jl-line-card{
+    padding:
+      5px
+      7px !important;
+
+    border-radius:
+      8px !important;
+  }
+
+
+  .jl-line-dot{
+    width:
+      20px !important;
+
+    height:
+      20px !important;
+
+    font-size:
+      4px !important;
+  }
+
+
+  .jl-line-card strong{
+    font-size:
+      7.5px !important;
+  }
+
+
+  .jl-line-card div div{
+    font-size:
+      6px !important;
+  }
+
+
+  .jl-line-card a{
+    width:
+      20px !important;
+
+    height:
+      20px !important;
+  }
+
+
+  /* =======================================
+     9. Footer
+     ======================================= */
+
+  .jl-footer{
+    min-height:
+      40px !important;
+
+    padding:
+      7px
+      8px
+      5px !important;
+
+    font-size:
+      5.5px !important;
+  }
+
+
+  .jl-footer div{
+    margin-top:
+      2px !important;
+
+    font-size:
+      5px !important;
+  }
+
+
+}
+
+
+/* =========================================
+   430 以下仍維持 3 欄
+   不要再變成兩欄
+   ========================================= */
+
+@media(max-width:430px){
+
+  .jl-grid{
+    grid-template-columns:
+      repeat(3,minmax(0,1fr)) !important;
+  }
+
+}
+
+`;
+
+    document.head.appendChild(style);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyJLV4);
+  } else {
+    applyJLV4();
+  }
+
+})();
