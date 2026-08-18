@@ -4,7 +4,7 @@
    - 圖片 / 字型 一律「先用快取、背景更新」→ 省流量、開得快。
    - 改版時只要把下面 VERSION 的數字 +1，舊快取會自動清掉。
 */
-const VERSION = 'jl-v1';
+const VERSION = 'jl-v2';
 const CORE = [
   './',
   './index.html',
