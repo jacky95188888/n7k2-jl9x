@@ -3122,8 +3122,52 @@ body.jl-feature-mode
 @media(max-width:430px){
 
   .jl-grid{
-    grid-template-columns:
-      repeat(3,minmax(0,1fr)) !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    gap:6px !important;
+    padding:0 6px !important;
+  }
+
+  .jl-tool{
+    min-width:0 !important;
+    min-height:108px !important;
+    height:108px !important;
+    padding:7px 3px 5px !important;
+    border-radius:10px !important;
+  }
+
+  .jl-icon{
+    width:35px !important;
+    height:35px !important;
+    margin:0 auto 4px !important;
+    font-size:8px !important;
+  }
+
+  .jl-nine{
+    font-size:6px !important;
+  }
+
+  .jl-tool h3{
+    font-size:9.5px !important;
+    margin:0 0 2px !important;
+    white-space:nowrap !important;
+  }
+
+  .jl-tool p{
+    font-size:6.5px !important;
+    line-height:1.35 !important;
+    margin:2px 0 !important;
+  }
+
+  .jl-tool small{
+    font-size:5.5px !important;
+    line-height:1.25 !important;
+    margin-top:2px !important;
+  }
+
+  .jl-tool span{
+    font-size:6px !important;
+    padding:3px 7px !important;
+    margin-top:4px !important;
   }
 
 }
