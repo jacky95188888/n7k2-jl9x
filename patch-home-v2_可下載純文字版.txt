@@ -1,0 +1,178 @@
+
+(function(){
+'use strict';
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+function ready(fn){document.readyState==='loading'?document.addEventListener('DOMContentLoaded',fn):fn();}
+ready(()=>{
+  if(document.documentElement.dataset.jlv3==='1') return;
+  document.documentElement.dataset.jlv3='1';
+
+  const wrap=$('.wrap');
+  if(!wrap) return;
+
+  const feature=document.createElement('div');
+  feature.id='jlv3-feature';
+  [...wrap.children].forEach(n=>feature.appendChild(n));
+  wrap.appendChild(feature);
+
+  const paipan=$('#paipan',feature)||$('.card',feature);
+  const out=$('#out',feature);
+  const go=$('#go',feature);
+
+  $$('.card',feature).forEach(card=>{
+    const t=(card.textContent||'').replace(/\s+/g,'');
+    if(t.includes('功能選單')) card.classList.add('jlv3-old-menu');
+  });
+
+  const home=document.createElement('main');
+  home.id='jlv3-home';
+  home.innerHTML=`
+<header class="jlv3-header">
+  <button class="jlv3-brand" id="jlv3-brand" type="button"><span>筠</span><b>筠玲易數</b></button>
+  <nav><a href="#jlv3-home">首頁</a><a href="#jlv3-tools">命理知識</a><a href="#jlv3-contact">聯絡我們</a></nav>
+  <button class="jlv3-my" data-route="四柱" type="button">☯ 我的命盤</button>
+</header>
+
+<section class="jlv3-hero">
+  <div class="jlv3-copy">
+    <div class="jlv3-kicker">✦ 以數觀象 · 以卦察勢 · 以理明心 ✦</div>
+    <h1>筠玲易數</h1>
+    <h2>解析命運的軌跡 · 掌握人生的方向</h2>
+    <p>結合傳統命理智慧與現代視角<br>協助您了解自己 · 趨吉避凶 · 創造更好的人生</p>
+  </div>
+  <div class="jlv3-hero-art"></div>
+  <div class="jlv3-quote">命，不是定局；<br>看懂自己的局，<br>才知道下一步怎麼走。<b>筠玲老師</b></div>
+</section>
+
+<div class="jlv3-title">✦ 探索命理智慧 · 開啟人生新局 ✦</div>
+
+<section class="jlv3-tools" id="jlv3-tools">
+  <div class="jlv3-grid">
+    ${card('四柱','四柱八字','生辰排盤 · 命運解析','先天 × 後天 × 五行<br>大運 × 流年 × 格局','bazi')}
+    ${card('九宮','紫微／九宮','命盤解析 · 宮位星曜','宮位 × 星曜 × 格局<br>吉凶 × 組合 × 解析','jiugong')}
+    ${card('奇門','奇門遁甲','問事決策 · 趨吉避凶','時間 × 方位 × 局勢<br>開門 × 落宮 × 值符','qimen')}
+    ${card('六親','六壬／六親','事情推演 · 事件解析','關係 × 事件 × 發展<br>占斷 × 判事 × 應驗','liuqin')}
+    ${card('八星','八星磁場','數字能量 · 磁場解析','手機 × 車牌 × 門牌<br>數字 × 能量 × 吉凶','baxing',true)}
+    ${card('流年','流年運勢','年度運勢 · 流月解析','年度 × 月運 × 日運<br>趨勢 × 提醒 × 建議','liunian')}
+  </div>
+</section>
+
+<section class="jlv3-date">
+  <div><h2>擇吉看日</h2><p>結婚 · 開業 · 搬家 · 簽約 · 出行 · 入宅 · 動土 · 祈福</p><p>選一個適合您的好日子，讓事情順利圓滿。</p><a href="rz.html">開始看日子 ›</a></div>
+  <div class="jlv3-date-art"><span>吉</span><strong>日</strong></div>
+</section>
+
+<section class="jlv3-contact" id="jlv3-contact">
+  <div class="jlv3-consult"><div class="jlv3-mini"></div><div><h3>需要進一步命理解讀？</h3><p>筠玲老師提供一對一專業諮詢服務，深入分析您的命盤。</p></div></div>
+  <a class="jlv3-line" href="https://line.me/ti/p/@804kmmmy"><span>LINE</span><div><b>加入筠玲老師 LINE</b><small>LINE ID：@804kmmmy</small></div><em>›</em></a>
+</section>
+
+<footer class="jlv3-footer"><span>✦ 專業可靠</span><span>☆ 經驗豐富</span><span>♡ 用心解盤</span><span>▣ 隱私保密</span><small>© 2026 筠玲易數 · All Rights Reserved.</small></footer>
+`;
+  wrap.insertBefore(home,feature);
+
+  function card(route,title,sub,small,kind,link=false){
+    const action=link?`<a href="bxcc.html">進入解析 ›</a>`:`<button type="button" data-route="${route}">進入解析 ›</button>`;
+    return `<article class="jlv3-card"><div class="jlv3-icon ${kind}">${icon(kind)}</div><h3>${title}</h3><p>${sub}</p><small>${small}</small>${action}</article>`;
+  }
+  function icon(kind){
+    if(kind==='bazi') return `<div class="grid4"><b>年</b><b>月</b><b>日</b><b>時</b></div>`;
+    if(kind==='jiugong') return `<div class="grid9">${[4,9,2,3,5,7,8,1,6].map(n=>`<b>${n}</b>`).join('')}</div>`;
+    if(kind==='qimen') return `<div class="bagua">☯</div>`;
+    if(kind==='liuqin') return `<div class="twoline"><b>六壬</b><b>六親</b></div>`;
+    if(kind==='baxing') return `<div class="stars">✦✧✦</div>`;
+    return `<div class="trend">↗</div>`;
+  }
+
+  const back=document.createElement('button');
+  back.id='jlv3-back';
+  back.textContent='← 回到功能首頁';
+  feature.insertBefore(back,feature.firstChild);
+
+  function showHome(){
+    document.body.classList.remove('jlv3-feature-mode');
+    document.body.classList.add('jlv3-home-mode');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function showFeature(target){
+    document.body.classList.remove('jlv3-home-mode');
+    document.body.classList.add('jlv3-feature-mode');
+    setTimeout(()=> (target||paipan||feature).scrollIntoView({behavior:'smooth',block:'start'}),60);
+  }
+  back.addEventListener('click',showHome);
+  $('#jlv3-brand',home)?.addEventListener('click',showHome);
+
+  const aliases={九宮:['九宮','九宮盤','數字九宮'],奇門:['奇門遁甲','奇門'],六親:['六親','六壬'],流年:['流年運勢','流年']};
+  function findPlugin(term){
+    const words=aliases[term]||[term];
+    const cards=$$('#plugs0 .card,#plugs .card,#plug .card,#out .card,.card.pro,section.card',feature);
+    let best=null,score=0;
+    for(const c of cards){
+      const text=(c.textContent||'').replace(/\s+/g,'');
+      let s=0; for(const w of words){ if(text.includes(w)) s+=20; }
+      if(s>score){score=s;best=c;}
+    }
+    return best;
+  }
+  function route(term){
+    sessionStorage.setItem('jlv3-pending',term);
+    if(term==='四柱'){showFeature(paipan);return;}
+    const target=findPlugin(term);
+    if(target){sessionStorage.removeItem('jlv3-pending');showFeature(target);return;}
+    showFeature(paipan);
+  }
+  $$('[data-route]',home).forEach(b=>b.addEventListener('click',()=>route(b.dataset.route)));
+
+  if(go){
+    go.addEventListener('click',()=>{
+      const pending=sessionStorage.getItem('jlv3-pending');
+      if(!pending) return;
+      let n=0;
+      const t=setInterval(()=>{
+        n++;
+        if(pending==='四柱'){
+          if(out && !out.classList.contains('hide')){clearInterval(t);sessionStorage.removeItem('jlv3-pending');showFeature(out);}
+        }else{
+          const target=findPlugin(pending);
+          if(target){clearInterval(t);sessionStorage.removeItem('jlv3-pending');showFeature(target);}
+        }
+        if(n>=50) clearInterval(t);
+      },200);
+    },true);
+  }
+
+  const style=document.createElement('style');
+  style.textContent=`
+  :root{--p:#6f0d91;--p2:#a929d1;--g:#d9ab43;--deep:#350442}
+  html,body{overflow-x:hidden!important} body{background:#f8eaff!important}
+  .wrap{max-width:760px!important;margin:0 auto!important;padding:0!important}
+  body.jlv3-home-mode #jlv3-home{display:block!important}
+  body.jlv3-home-mode #jlv3-feature{display:none!important}
+  body.jlv3-feature-mode #jlv3-home{display:none!important}
+  body.jlv3-feature-mode #jlv3-feature{display:block!important}
+  #jlv3-feature{display:none}.jlv3-old-menu{display:none!important}
+  .jlv3-header{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 11px;background:#fff;border-bottom:1px solid #e6c5f5}
+  .jlv3-brand{display:flex;align-items:center;gap:6px;border:0;background:none;color:#5b0f75;font-family:"Noto Serif TC",serif}.jlv3-brand span{width:25px;height:25px;border:1.5px solid var(--g);border-radius:50%;display:grid;place-items:center;color:var(--g);font-size:10px}.jlv3-brand b{font-size:16px}
+  .jlv3-header nav{display:flex;gap:9px}.jlv3-header nav a{font-size:7px;color:#513556;text-decoration:none;font-weight:800}
+  .jlv3-my{border:0;border-radius:999px;padding:6px 10px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;font-size:7px;font-weight:900}
+  .jlv3-hero{position:relative;height:255px;overflow:hidden;background:linear-gradient(105deg,#fffaff 0%,#efccff 52%,#70248a 100%)}
+  .jlv3-copy{position:relative;z-index:4;width:50%;padding:29px 0 0 22px}.jlv3-kicker{font-size:7px;color:#71188d;font-weight:900}.jlv3-copy h1{margin:8px 0 5px!important;color:#601078!important;font-family:"Noto Serif TC",serif!important;font-size:32px!important;line-height:1!important;text-indent:0!important}.jlv3-copy h2{margin:0!important;color:#b8662f!important;font-size:10px!important}.jlv3-copy p{margin-top:10px;color:#5f4b64;font-size:6.5px;line-height:1.55}
+  .jlv3-hero-art{position:absolute;right:0;top:0;width:60%;height:100%;background:url("hero-clean.webp") center right/cover no-repeat;z-index:2}.jlv3-hero-art:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#efccff 0%,rgba(239,204,255,.2) 28%,transparent 58%)}
+  .jlv3-quote{position:absolute;z-index:5;right:2.5%;top:34%;width:18%;color:#fff;font-size:6.5px;line-height:1.6;text-shadow:0 2px 5px #30033f}.jlv3-quote b{display:block;color:#f0d16c;font-size:8px;margin-top:4px}
+  .jlv3-title{height:34px;display:flex;align-items:center;justify-content:center;background:linear-gradient(90deg,#fff8ff,#edcbff,#fff8ff);color:#50135f;font-family:"Noto Serif TC",serif;font-size:11px;font-weight:900}
+  .jlv3-tools{padding:8px 9px 9px}.jlv3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .jlv3-card{height:122px;min-width:0;padding:7px 3px 6px;text-align:center;border:1px solid #d8a2ea;border-radius:13px;background:linear-gradient(180deg,#fff,#fff7ff);box-shadow:0 5px 14px rgba(100,18,126,.1)}
+  .jlv3-icon{width:44px;height:44px;margin:0 auto 5px;border:2px solid var(--g);border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 23%,#c64ff0,#650d88 72%);color:#f5d56f}.jlv3-card h3{margin:0 0 2px;color:#61117b;font-family:"Noto Serif TC",serif;font-size:10px}.jlv3-card p{margin:0;color:#58495d;font-size:6px}.jlv3-card small{display:block;margin-top:2px;color:#756576;font-size:5px;line-height:1.2}.jlv3-card button,.jlv3-card>a{display:inline-block;margin-top:4px;border:0;border-radius:6px;padding:4px 8px;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;text-decoration:none;font-size:5.7px;font-weight:900}
+  .grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;font-size:10px;line-height:1}.grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;font-size:8px;line-height:1}.bagua{font-size:29px}.twoline{display:flex;flex-direction:column;font-size:10px;line-height:1.05}.stars{font-size:15px}.trend{font-size:27px}
+  .jlv3-date{margin:0 9px 7px;height:94px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border:1px solid #d39ae7;border-radius:12px;background:linear-gradient(110deg,#f8ddff,#cd78e7)}.jlv3-date h2{margin:0;color:#5f1077;font-family:"Noto Serif TC",serif;font-size:17px}.jlv3-date p{margin:2px 0;color:#5d4961;font-size:5.8px}.jlv3-date a{display:inline-block;margin-top:3px;padding:4px 11px;border-radius:999px;background:var(--p);color:#fff;text-decoration:none;font-size:6px;font-weight:900}.jlv3-date-art{width:54px;height:54px;border:1px solid var(--g);border-radius:9px;background:#fff9e9;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#84188e}.jlv3-date-art strong{font-size:16px}
+  .jlv3-contact{margin:0 9px 7px;padding:6px;border:1px solid #d9a8ec;border-radius:11px;background:#fff}.jlv3-consult{display:flex;align-items:center;gap:7px;padding-bottom:5px}.jlv3-mini{width:38px;height:45px;border-radius:7px;background:url("hero-clean.webp") 75% center/260% auto no-repeat}.jlv3-consult h3{margin:0;color:#61117b;font-size:8px}.jlv3-consult p{margin:2px 0 0;color:#6d5c71;font-size:5.5px}
+  .jlv3-line{height:33px;display:flex;align-items:center;gap:7px;padding:5px 7px;border:1px solid #e1bfed;border-radius:8px;text-decoration:none;color:inherit}.jlv3-line>span{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:#26c844;color:#fff;font-size:4px}.jlv3-line b{display:block;color:#61117b;font-size:7px}.jlv3-line small{display:block;color:#746378;font-size:5.5px}.jlv3-line em{margin-left:auto;width:20px;height:20px;display:grid;place-items:center;border-radius:50%;background:#8617ad;color:#fff;font-style:normal}
+  .jlv3-footer{min-height:42px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:7px 8px 5px;background:linear-gradient(90deg,#33033f,#5f0f76,#33033f);color:#f1ddf8;text-align:center;font-size:5.5px}.jlv3-footer small{grid-column:1/-1;color:#c4a8cd;font-size:4.7px}
+  #jlv3-back{position:sticky;top:0;z-index:100;width:100%;border:0;padding:11px 14px;background:linear-gradient(90deg,#4c0861,#7d16a1);color:#fff;font-weight:900}
+  @media(max-width:430px){.jlv3-header nav{display:none}.jlv3-grid{grid-template-columns:repeat(3,1fr)}}
+  `;
+  document.head.appendChild(style);
+  showHome();
+});
+})();
