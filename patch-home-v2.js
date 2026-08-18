@@ -1,97 +1,108 @@
 /* =========================================================
-   筠玲易數｜真正 HTML 首頁｜重建正式版
-   MASTER 只當 Hero 藝術素材
-   六大卡片 / 按鈕 / LINE / 看日子 全部是真 HTML
+   筠玲易數｜真正 HTML 首頁｜正式重建版
+   ---------------------------------------------------------
+   核心原則：
+   1. MASTER 不再整張當首頁
+   2. 沒有 hotspot / 沒有透明熱區
+   3. 六張功能卡全部是真 HTML
+   4. 圖示全部是真 SVG
+   5. 按鈕全部是真 button / a
+   6. 原本排盤 / 九宮 / 奇門 / 六親 / 流年核心保留
+   7. MASTER 只裁 Hero 右側人物＋紫色背景藝術
    ========================================================= */
 
-(function () {
-  'use strict';
+(function(){
+'use strict';
 
-  function ready(fn) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fn);
-    } else {
-      fn();
-    }
+function onReady(fn){
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', fn);
+  }else{
+    fn();
+  }
+}
+
+onReady(function(){
+
+  if(document.documentElement.dataset.jlHtmlHome === '1'){
+    return;
   }
 
-  ready(function () {
+  document.documentElement.dataset.jlHtmlHome = '1';
 
-    if (document.documentElement.dataset.jlRealV1 === '1') return;
-    document.documentElement.dataset.jlRealV1 = '1';
+  const wrap = document.querySelector('.wrap');
 
-    const wrap = document.querySelector('.wrap');
+  if(!wrap){
+    console.warn('筠玲易數：找不到 .wrap');
+    return;
+  }
 
-    if (!wrap) {
-      console.warn('筠玲易數：找不到 .wrap');
-      return;
+
+  /* =====================================================
+     1. 保留原本網站全部功能
+     ===================================================== */
+
+  const featureShell = document.createElement('div');
+  featureShell.id = 'jl-feature-shell';
+
+  Array.from(wrap.children).forEach(function(node){
+    featureShell.appendChild(node);
+  });
+
+  wrap.appendChild(featureShell);
+
+
+  const paipan =
+    featureShell.querySelector('#paipan') ||
+    featureShell.querySelector('.card');
+
+  const out =
+    featureShell.querySelector('#out');
+
+  const go =
+    featureShell.querySelector('#go');
+
+
+  if(paipan){
+    paipan.id = paipan.id || 'paipan';
+  }
+
+
+  /* 舊功能選單隱藏，避免跟新首頁重複 */
+  Array.from(
+    featureShell.querySelectorAll('.card')
+  ).forEach(function(card){
+
+    const txt = String(card.textContent || '')
+      .replace(/\s+/g,'');
+
+    if(txt.includes('功能選單')){
+      card.classList.add('jl-old-menu-hidden');
     }
 
-
-    /* =====================================================
-       1. 保留原網站所有功能
-       ===================================================== */
-
-    const feature = document.createElement('div');
-    feature.id = 'jl-feature-shell';
-
-    Array.from(wrap.children).forEach(function (node) {
-      feature.appendChild(node);
-    });
-
-    wrap.appendChild(feature);
-
-
-    const paipan =
-      feature.querySelector('#paipan') ||
-      feature.querySelector('.card');
-
-    const out =
-      feature.querySelector('#out');
-
-    const go =
-      feature.querySelector('#go');
-
-
-    if (paipan) {
-      paipan.id = paipan.id || 'paipan';
-    }
-
-
-    /* 隱藏原本舊的總功能選單 */
-    Array.from(
-      feature.querySelectorAll('.card')
-    ).forEach(function (card) {
-
-      const text =
-        (card.textContent || '')
-          .replace(/\s+/g, '');
-
-      if (text.includes('功能選單')) {
-        card.classList.add('jl-hide-old-menu');
-      }
-
-    });
+  });
 
 
 
-    /* =====================================================
-       2. 真正 HTML 首頁
-       ===================================================== */
+  /* =====================================================
+     2. 真正 HTML 首頁
+     ===================================================== */
 
-    const home = document.createElement('main');
-    home.id = 'jl-home-real';
+  const home = document.createElement('main');
+  home.id = 'jl-html-home';
 
-    home.innerHTML = `
+  home.innerHTML = `
 
-<header class="jl-header">
+<header class="jlh-header">
 
   <button
     type="button"
-    class="jl-brand"
-    id="jl-brand-home">
+    class="jlh-brand"
+    id="jlh-brand">
 
-    <span class="jl-seal">筠</span>
+    <span class="jlh-seal">
+      筠
+    </span>
 
     <strong>
       筠玲易數
@@ -100,17 +111,17 @@
   </button>
 
 
-  <nav class="jl-nav">
+  <nav class="jlh-nav">
 
-    <a href="#jl-home-real">
+    <a href="#jl-html-home">
       首頁
     </a>
 
-    <a href="#jl-tools">
+    <a href="#jlh-tools">
       命理知識
     </a>
 
-    <a href="#jl-contact">
+    <a href="#jlh-contact">
       聯絡我們
     </a>
 
@@ -119,8 +130,8 @@
 
   <button
     type="button"
-    class="jl-my"
-    data-route="四柱">
+    class="jlh-my"
+    data-jlh-route="四柱">
 
     ☯ 我的命盤
 
@@ -130,11 +141,11 @@
 
 
 
-<section class="jl-hero">
+<section class="jlh-hero">
 
-  <div class="jl-hero-copy">
+  <div class="jlh-hero-copy">
 
-    <div class="jl-kicker">
+    <div class="jlh-kicker">
       ✦ 以數觀象 · 以卦察勢 · 以理明心 ✦
     </div>
 
@@ -155,13 +166,15 @@
   </div>
 
 
-  <div
-    class="jl-hero-art"
-    aria-hidden="true">
-  </div>
+  <!--
+    MASTER 只在這裡當「局部背景藝術」
+    不負責首頁卡片或按鈕
+  -->
+
+  <div class="jlh-hero-art"></div>
 
 
-  <div class="jl-quote">
+  <div class="jlh-quote">
 
     命，不是定局；
     <br>
@@ -179,36 +192,30 @@
 
 
 
-<div class="jl-title">
+<div class="jlh-section-title">
   ✦ 探索命理智慧 · 開啟人生新局 ✦
 </div>
 
 
 
 <section
-  class="jl-tools"
-  id="jl-tools">
+  class="jlh-tools"
+  id="jlh-tools">
 
-  <div class="jl-grid">
+  <div class="jlh-grid">
 
 
     <!-- 四柱八字 -->
 
-    <article class="jl-card">
+    <article class="jlh-card">
 
-      <div class="jl-icon">
+      <div class="jlh-icon">
 
-        <svg viewBox="0 0 100 100">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle
-            cx="50"
-            cy="50"
-            r="42">
-          </circle>
+          <circle cx="50" cy="50" r="42"></circle>
 
-          <path
-            d="M50 12v76 M12 50h76">
-          </path>
+          <path d="M50 12v76M12 50h76"></path>
 
           <text x="29" y="39">年</text>
           <text x="61" y="39">月</text>
@@ -220,13 +227,16 @@
 
       </div>
 
+
       <h3>
         四柱八字
       </h3>
 
+
       <p>
         生辰排盤 · 命運解析
       </p>
+
 
       <small>
         先天 × 後天 × 五行
@@ -234,9 +244,10 @@
         大運 × 流年 × 格局
       </small>
 
+
       <button
         type="button"
-        data-route="四柱">
+        data-jlh-route="四柱">
 
         進入解析 ›
 
@@ -246,13 +257,13 @@
 
 
 
-    <!-- 九宮 -->
+    <!-- 紫微 / 九宮 -->
 
-    <article class="jl-card">
+    <article class="jlh-card">
 
-      <div class="jl-icon">
+      <div class="jlh-icon">
 
-        <svg viewBox="0 0 100 100">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
 
           <rect
             x="20"
@@ -262,14 +273,13 @@
             rx="4">
           </rect>
 
-          <path
-            d="
-              M40 20v60
-              M60 20v60
-              M20 40h60
-              M20 60h60
-            ">
-          </path>
+          <path d="
+            M40 20v60
+            M60 20v60
+            M20 40h60
+            M20 60h60
+          "></path>
+
 
           <text x="28" y="35">4</text>
           <text x="48" y="35">9</text>
@@ -287,13 +297,16 @@
 
       </div>
 
+
       <h3>
         紫微／九宮
       </h3>
 
+
       <p>
         命盤解析 · 宮位星曜
       </p>
+
 
       <small>
         宮位 × 星曜 × 格局
@@ -301,9 +314,10 @@
         吉凶 × 組合 × 解析
       </small>
 
+
       <button
         type="button"
-        data-route="九宮">
+        data-jlh-route="九宮">
 
         進入解析 ›
 
@@ -313,71 +327,57 @@
 
 
 
-    <!-- 奇門 -->
+    <!-- 奇門遁甲 -->
 
-    <article class="jl-card">
+    <article class="jlh-card">
 
-      <div class="jl-icon">
+      <div class="jlh-icon">
 
-        <svg viewBox="0 0 100 100">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle
-            cx="50"
-            cy="50"
-            r="42">
-          </circle>
+          <circle cx="50" cy="50" r="42"></circle>
 
-          <circle
-            cx="50"
-            cy="50"
-            r="27">
-          </circle>
+          <circle cx="50" cy="50" r="27"></circle>
 
-          <path
-            d="
-              M50 23
-              a27 27 0 1 0 0 54
-              a13.5 13.5 0 1 1 0-27
-              a13.5 13.5 0 1 0 0-27
-            ">
-          </path>
+          <path d="
+            M50 23
+            a27 27 0 1 0 0 54
+            a13.5 13.5 0 1 1 0-27
+            a13.5 13.5 0 1 0 0-27
+          "></path>
 
-          <circle
-            cx="50"
-            cy="36"
-            r="3">
-          </circle>
 
-          <circle
-            cx="50"
-            cy="64"
-            r="3">
-          </circle>
+          <circle cx="50" cy="36" r="3"></circle>
+          <circle cx="50" cy="64" r="3"></circle>
 
-          <path
-            d="
-              M50 5v10
-              M50 85v10
-              M5 50h10
-              M85 50h10
-              M18 18l7 7
-              M75 75l7 7
-              M82 18l-7 7
-              M25 75l-7 7
-            ">
-          </path>
+
+          <path d="
+            M50 5v10
+            M50 85v10
+            M5 50h10
+            M85 50h10
+
+            M18 18l7 7
+            M75 75l7 7
+
+            M82 18l-7 7
+            M25 75l-7 7
+          "></path>
 
         </svg>
 
       </div>
 
+
       <h3>
         奇門遁甲
       </h3>
 
+
       <p>
         問事決策 · 趨吉避凶
       </p>
+
 
       <small>
         時間 × 方位 × 局勢
@@ -385,9 +385,10 @@
         開門 × 落宮 × 值符
       </small>
 
+
       <button
         type="button"
-        data-route="奇門">
+        data-jlh-route="奇門">
 
         進入解析 ›
 
@@ -397,11 +398,11 @@
 
 
 
-    <!-- 六親 -->
+    <!-- 六壬 / 六親 -->
 
-    <article class="jl-card">
+    <article class="jlh-card">
 
-      <div class="jl-icon jl-text-icon">
+      <div class="jlh-icon jlh-text-icon">
 
         <strong>
           六壬
@@ -413,13 +414,16 @@
 
       </div>
 
+
       <h3>
         六壬／六親
       </h3>
 
+
       <p>
         事情推演 · 事件解析
       </p>
+
 
       <small>
         關係 × 事件 × 發展
@@ -427,9 +431,10 @@
         占斷 × 判事 × 應驗
       </small>
 
+
       <button
         type="button"
-        data-route="六親">
+        data-jlh-route="六親">
 
         進入解析 ›
 
@@ -439,31 +444,25 @@
 
 
 
-    <!-- 八星 -->
+    <!-- 八星磁場 -->
 
-    <article class="jl-card">
+    <article class="jlh-card">
 
-      <div class="jl-icon">
+      <div class="jlh-icon">
 
-        <svg viewBox="0 0 100 100">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle
-            cx="50"
-            cy="50"
-            r="42">
-          </circle>
+          <circle cx="50" cy="50" r="42"></circle>
 
-          <path
-            d="
-              M20 64
-              L33 35
-              L48 52
-              L61 27
-              L78 65
-              L51 76
-              Z
-            ">
-          </path>
+          <path d="
+            M20 64
+            L33 35
+            L48 52
+            L61 27
+            L78 65
+            L51 76
+            Z
+          "></path>
 
           <circle cx="33" cy="35" r="3"></circle>
           <circle cx="48" cy="52" r="3"></circle>
@@ -475,19 +474,23 @@
 
       </div>
 
+
       <h3>
         八星磁場
       </h3>
 
+
       <p>
         數字能量 · 磁場解析
       </p>
+
 
       <small>
         手機 × 車牌 × 門牌
         <br>
         數字 × 能量 × 吉凶
       </small>
+
 
       <a href="bxcc.html">
         進入解析 ›
@@ -497,45 +500,40 @@
 
 
 
-    <!-- 流年 -->
+    <!-- 流年運勢 -->
 
-    <article class="jl-card">
+    <article class="jlh-card">
 
-      <div class="jl-icon">
+      <div class="jlh-icon">
 
-        <svg viewBox="0 0 100 100">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle
-            cx="50"
-            cy="50"
-            r="42">
-          </circle>
+          <circle cx="50" cy="50" r="42"></circle>
 
-          <path
-            d="
-              M22 73h10V58
-              h10v15
-              h10V45
-              h10v28
-              h10V31
-            ">
-          </path>
+          <path d="
+            M22 73h10V58
+            h10v15
+            h10V45
+            h10v28
+            h10V31
+          "></path>
 
-          <path
-            d="M63 31h9v9">
-          </path>
+          <path d="M63 31h9v9"></path>
 
         </svg>
 
       </div>
 
+
       <h3>
         流年運勢
       </h3>
 
+
       <p>
         年度運勢 · 流月解析
       </p>
+
 
       <small>
         年度 × 月運 × 日運
@@ -543,9 +541,10 @@
         趨勢 × 提醒 × 建議
       </small>
 
+
       <button
         type="button"
-        data-route="流年">
+        data-jlh-route="流年">
 
         進入解析 ›
 
@@ -560,9 +559,7 @@
 
 
 
-<!-- 擇吉看日 -->
-
-<section class="jl-date">
+<section class="jlh-date">
 
   <div>
 
@@ -570,13 +567,16 @@
       擇吉看日
     </h2>
 
+
     <p>
       結婚 · 開業 · 搬家 · 簽約 · 出行 · 入宅 · 動土 · 祈福
     </p>
 
+
     <p>
       選一個適合您的好日子，讓事情順利圓滿。
     </p>
+
 
     <a href="rz.html">
       開始看日子 ›
@@ -585,7 +585,7 @@
   </div>
 
 
-  <div class="jl-calendar">
+  <div class="jlh-calendar">
 
     <span>
       吉
@@ -601,22 +601,22 @@
 
 
 
-<!-- 老師 / LINE -->
-
 <section
-  class="jl-contact"
-  id="jl-contact">
+  class="jlh-contact"
+  id="jlh-contact">
 
-  <div class="jl-consult">
+  <div class="jlh-consult">
 
-    <div class="jl-teacher-mini">
+    <div class="jlh-mini-teacher">
     </div>
+
 
     <div>
 
       <h3>
         需要進一步命理解讀？
       </h3>
+
 
       <p>
         筠玲老師提供一對一專業諮詢服務，
@@ -629,12 +629,13 @@
 
 
   <a
-    class="jl-line"
+    class="jlh-line"
     href="https://line.me/ti/p/@804kmmmy">
 
-    <span class="jl-line-circle">
+    <span class="jlh-line-icon">
       LINE
     </span>
+
 
     <div>
 
@@ -642,11 +643,13 @@
         加入筠玲老師 LINE
       </b>
 
+
       <small>
         LINE ID：@804kmmmy
       </small>
 
     </div>
+
 
     <em>
       ›
@@ -658,7 +661,7 @@
 
 
 
-<footer class="jl-footer">
+<footer class="jlh-footer">
 
   <span>
     ✦ 專業可靠
@@ -676,6 +679,7 @@
     ▣ 隱私保密
   </span>
 
+
   <small>
     © 2026 筠玲易數 · All Rights Reserved.
   </small>
@@ -684,573 +688,527 @@
 
 `;
 
-    wrap.insertBefore(home, feature);
+  wrap.insertBefore(
+    home,
+    featureShell
+  );
 
 
 
-    /* =====================================================
-       3. 功能頁返回
-       ===================================================== */
+  /* =====================================================
+     3. 功能頁返回首頁
+     ===================================================== */
 
-    const back =
-      document.createElement('button');
+  const back = document.createElement('button');
 
-    back.id =
-      'jl-back';
+  back.id = 'jlh-back';
+  back.type = 'button';
+  back.textContent = '← 回到功能首頁';
 
-    back.type =
-      'button';
+  featureShell.insertBefore(
+    back,
+    featureShell.firstChild
+  );
 
-    back.textContent =
-      '← 回到功能首頁';
 
-    feature.insertBefore(
-      back,
-      feature.firstChild
+
+  function showHome(){
+
+    document.body.classList.remove(
+      'jlh-feature-mode'
     );
 
+    document.body.classList.add(
+      'jlh-home-mode'
+    );
 
-    function showHome() {
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
 
-      document.body.classList.remove(
-        'jl-feature-mode'
-      );
-
-      document.body.classList.add(
-        'jl-home-mode'
-      );
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-
-    }
+  }
 
 
-    function showFeature(target) {
 
-      document.body.classList.remove(
-        'jl-home-mode'
-      );
+  function showFeature(target){
 
-      document.body.classList.add(
-        'jl-feature-mode'
-      );
+    document.body.classList.remove(
+      'jlh-home-mode'
+    );
 
-      setTimeout(function () {
+    document.body.classList.add(
+      'jlh-feature-mode'
+    );
 
-        const el =
-          target ||
-          paipan ||
-          feature;
+    setTimeout(function(){
 
-        if (el) {
+      const el =
+        target ||
+        paipan ||
+        featureShell;
 
-          el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+      if(el){
 
-        }
+        el.scrollIntoView({
+          behavior:'smooth',
+          block:'start'
+        });
 
-      }, 80);
+      }
 
-    }
+    },80);
+
+  }
 
 
-    back.addEventListener(
+
+  back.addEventListener(
+    'click',
+    showHome
+  );
+
+
+  const brand =
+    home.querySelector('#jlh-brand');
+
+  if(brand){
+
+    brand.addEventListener(
       'click',
       showHome
     );
 
+  }
 
-    const brand =
-      home.querySelector(
-        '#jl-brand-home'
+
+
+  /* =====================================================
+     4. 外掛卡片定位
+     ===================================================== */
+
+  function cleanText(text){
+
+    return String(text || '')
+      .replace(/\s+/g,'')
+      .replace(/[／/｜|·・]/g,'');
+
+  }
+
+
+  const aliases = {
+
+    九宮:[
+      '九宮',
+      '九宮盤',
+      '數字九宮',
+      '奇門數字九宮盤'
+    ],
+
+    奇門:[
+      '奇門遁甲',
+      '奇門'
+    ],
+
+    六親:[
+      '六親',
+      '六親解析',
+      '六親對照',
+      '六壬'
+    ],
+
+    流年:[
+      '流年運勢',
+      '流年'
+    ]
+
+  };
+
+
+  function findPluginCard(term){
+
+    const words =
+      aliases[term] ||
+      [term];
+
+
+    const candidates =
+      Array.from(
+        featureShell.querySelectorAll(
+          '#plugs0 .card,' +
+          '#plugs .card,' +
+          '#plug .card,' +
+          '#out .card,' +
+          '.card.pro,' +
+          'section.card'
+        )
       );
 
-    if (brand) {
 
-      brand.addEventListener(
-        'click',
-        showHome
+    let best = null;
+    let bestScore = 0;
+
+
+    candidates.forEach(function(card){
+
+      const text =
+        cleanText(
+          card.textContent
+        );
+
+
+      let score = 0;
+
+
+      words.forEach(function(word){
+
+        const key =
+          cleanText(word);
+
+
+        if(text.startsWith(key)){
+
+          score += 100;
+
+        }else if(text.includes(key)){
+
+          score += 20;
+
+        }
+
+      });
+
+
+      if(score > bestScore){
+
+        bestScore = score;
+        best = card;
+
+      }
+
+    });
+
+
+    return best;
+
+  }
+
+
+
+  /* =====================================================
+     5. 提示訊息
+     ===================================================== */
+
+  let notice = null;
+
+
+  function showNotice(term){
+
+    if(!paipan) return;
+
+
+    if(!notice){
+
+      notice =
+        document.createElement('div');
+
+      notice.id =
+        'jlh-route-notice';
+
+      paipan.prepend(
+        notice
       );
 
     }
 
 
+    const names = {
 
-    /* =====================================================
-       4. 外掛定位
-       ===================================================== */
+      九宮:'紫微／九宮',
 
-    function clean(text) {
+      奇門:'奇門遁甲',
 
-      return String(text || '')
-        .replace(/\s+/g, '')
-        .replace(/[／/｜|·・]/g, '');
+      六親:'六壬／六親',
 
-    }
-
-
-    const featureWords = {
-
-      九宮: [
-        '九宮',
-        '九宮盤',
-        '數字九宮',
-        '奇門數字九宮盤'
-      ],
-
-      奇門: [
-        '奇門遁甲',
-        '奇門'
-      ],
-
-      六親: [
-        '六親',
-        '六親解析',
-        '六親對照',
-        '六壬'
-      ],
-
-      流年: [
-        '流年運勢',
-        '流年'
-      ]
+      流年:'流年運勢'
 
     };
 
 
-    function findFeature(term) {
-
-      const words =
-        featureWords[term] ||
-        [term];
-
-
-      const candidates =
-        Array.from(
-          feature.querySelectorAll(
-            '#plugs0 .card,' +
-            '#plugs .card,' +
-            '#plug .card,' +
-            '#out .card,' +
-            '.card.pro,' +
-            'section.card'
-          )
-        );
+    notice.textContent =
+      '請先完成生辰排盤，排盤完成後會自動進入「' +
+      (names[term] || term) +
+      '」。';
 
 
-      let best = null;
-      let scoreMax = 0;
+    notice.classList.add(
+      'show'
+    );
+
+  }
 
 
-      candidates.forEach(
-        function (card) {
+  function clearNotice(){
 
-          const text =
-            clean(card.textContent);
+    if(notice){
 
-
-          let score = 0;
-
-
-          words.forEach(
-            function (word) {
-
-              const key =
-                clean(word);
-
-
-              if (
-                text.startsWith(key)
-              ) {
-
-                score += 100;
-
-              } else if (
-                text.includes(key)
-              ) {
-
-                score += 20;
-
-              }
-
-            }
-          );
-
-
-          if (
-            score > scoreMax
-          ) {
-
-            scoreMax = score;
-            best = card;
-
-          }
-
-        }
-      );
-
-
-      return best;
-
-    }
-
-
-
-    /* =====================================================
-       5. 提示
-       ===================================================== */
-
-    let notice = null;
-
-
-    function showNotice(term) {
-
-      if (!paipan) return;
-
-
-      if (!notice) {
-
-        notice =
-          document.createElement(
-            'div'
-          );
-
-
-        notice.id =
-          'jl-route-notice';
-
-
-        paipan.prepend(
-          notice
-        );
-
-      }
-
-
-      const names = {
-
-        九宮:
-          '紫微／九宮',
-
-        奇門:
-          '奇門遁甲',
-
-        六親:
-          '六壬／六親',
-
-        流年:
-          '流年運勢'
-
-      };
-
-
-      notice.textContent =
-        '請先完成生辰排盤，排盤完成後會自動進入「' +
-        (names[term] || term) +
-        '」。';
-
-
-      notice.classList.add(
+      notice.classList.remove(
         'show'
       );
 
     }
 
-
-    function clearNotice() {
-
-      if (notice) {
-
-        notice.classList.remove(
-          'show'
-        );
-
-      }
-
-    }
+  }
 
 
 
-    /* =====================================================
-       6. 真正功能路由
-       ===================================================== */
+  /* =====================================================
+     6. 真正功能路由
+     ===================================================== */
 
-    function openFeature(term) {
+  function openFeature(term){
 
-      sessionStorage.setItem(
-        'jl-pending-feature',
-        term
-      );
-
-
-      /* 四柱 */
-
-      if (
-        term === '四柱'
-      ) {
-
-        showFeature(
-          paipan
-        );
-
-        return;
-
-      }
+    sessionStorage.setItem(
+      'jlh-pending-feature',
+      term
+    );
 
 
-      /*
-        如果已經排過盤，
-        外掛區已存在，
-        直接帶過去。
-      */
+    /* 四柱直接進排盤 */
 
-      const target =
-        findFeature(term);
-
-
-      if (target) {
-
-        clearNotice();
-
-
-        showFeature(
-          target
-        );
-
-
-        sessionStorage.removeItem(
-          'jl-pending-feature'
-        );
-
-
-        return;
-
-      }
-
-
-      /*
-        尚未排盤
-      */
-
-      showNotice(term);
-
+    if(term === '四柱'){
 
       showFeature(
         paipan
       );
 
+      return;
+
     }
 
 
+    /*
+      如果之前已排盤，
+      外掛卡片已經存在，
+      直接帶到該功能。
+    */
 
-    /* 真按鈕事件 */
+    const target =
+      findPluginCard(term);
 
-    home
-      .querySelectorAll(
-        '[data-route]'
-      )
-      .forEach(
-        function (button) {
 
-          button.addEventListener(
-            'click',
-            function () {
+    if(target){
 
-              openFeature(
-                button.dataset.route
-              );
+      clearNotice();
 
-            }
+      showFeature(
+        target
+      );
+
+
+      sessionStorage.removeItem(
+        'jlh-pending-feature'
+      );
+
+
+      return;
+
+    }
+
+
+    /*
+      尚未排盤
+    */
+
+    showNotice(term);
+
+    showFeature(
+      paipan
+    );
+
+  }
+
+
+
+  home
+    .querySelectorAll(
+      '[data-jlh-route]'
+    )
+    .forEach(function(button){
+
+      button.addEventListener(
+        'click',
+        function(){
+
+          openFeature(
+            button.dataset.jlhRoute
           );
 
         }
       );
 
+    });
 
 
-    /* =====================================================
-       7. 排盤後自動帶到指定功能
-       ===================================================== */
 
-    if (go) {
+  /* =====================================================
+     7. 排盤完成後自動跳到指定功能
+     ===================================================== */
 
-      go.addEventListener(
-        'click',
-        function () {
+  if(go){
 
-          const pending =
-            sessionStorage.getItem(
-              'jl-pending-feature'
-            );
+    go.addEventListener(
+      'click',
+      function(){
 
-
-          if (!pending) return;
+        const pending =
+          sessionStorage.getItem(
+            'jlh-pending-feature'
+          );
 
 
-          let count = 0;
+        if(!pending){
+          return;
+        }
 
 
-          const watcher =
-            setInterval(
-              function () {
-
-                count++;
+        let count = 0;
 
 
-                /* 四柱 */
+        const timer =
+          setInterval(function(){
 
-                if (
-                  pending === '四柱'
-                ) {
-
-                  if (
-                    out &&
-                    !out.classList.contains(
-                      'hide'
-                    )
-                  ) {
-
-                    clearInterval(
-                      watcher
-                    );
+            count++;
 
 
-                    clearNotice();
+            /*
+              四柱：
+              等 #out 顯示後直接帶到結果。
+            */
+
+            if(pending === '四柱'){
+
+              if(
+                out &&
+                !out.classList.contains('hide')
+              ){
+
+                clearInterval(timer);
+
+                clearNotice();
 
 
-                    sessionStorage.removeItem(
-                      'jl-pending-feature'
-                    );
+                sessionStorage.removeItem(
+                  'jlh-pending-feature'
+                );
 
 
-                    showFeature(
-                      out
-                    );
+                showFeature(
+                  out
+                );
 
-                  }
+              }
 
-                }
-
-
-                /* 其他外掛 */
-
-                else {
-
-                  const target =
-                    findFeature(
-                      pending
-                    );
+            }
 
 
-                  if (target) {
+            /*
+              九宮 / 奇門 / 六親 / 流年：
+              等 runPlugins() 產生卡片。
+            */
 
-                    clearInterval(
-                      watcher
-                    );
+            else{
 
-
-                    clearNotice();
-
-
-                    sessionStorage.removeItem(
-                      'jl-pending-feature'
-                    );
+              const target =
+                findPluginCard(
+                  pending
+                );
 
 
-                    showFeature(
-                      target
-                    );
+              if(target){
+
+                clearInterval(timer);
+
+                clearNotice();
 
 
-                    if (
-                      target.animate
-                    ) {
+                sessionStorage.removeItem(
+                  'jlh-pending-feature'
+                );
 
-                      target.animate(
-                        [
-                          {
-                            boxShadow:
-                              '0 0 0 0 rgba(143,36,201,0)'
-                          },
-                          {
-                            boxShadow:
-                              '0 0 0 5px rgba(143,36,201,.28)'
-                          },
-                          {
-                            boxShadow:
-                              '0 0 0 0 rgba(143,36,201,0)'
-                          }
-                        ],
-                        {
-                          duration: 900
-                        }
-                      );
 
+                showFeature(
+                  target
+                );
+
+
+                if(target.animate){
+
+                  target.animate(
+                    [
+                      {
+                        boxShadow:
+                          '0 0 0 0 rgba(145,38,194,0)'
+                      },
+                      {
+                        boxShadow:
+                          '0 0 0 5px rgba(145,38,194,.25)'
+                      },
+                      {
+                        boxShadow:
+                          '0 0 0 0 rgba(145,38,194,0)'
+                      }
+                    ],
+                    {
+                      duration:900
                     }
-
-                  }
-
-                }
-
-
-                if (
-                  count >= 50
-                ) {
-
-                  clearInterval(
-                    watcher
                   );
 
                 }
 
-              },
+              }
 
-              200
-            );
-
-        },
-
-        true
-      );
-
-    }
+            }
 
 
+            if(count >= 50){
 
-    /* =====================================================
-       8. 視覺 CSS
-       ===================================================== */
+              clearInterval(timer);
 
-    const style =
-      document.createElement(
-        'style'
-      );
+            }
+
+          },200);
+
+      },
+      true
+    );
+
+  }
 
 
-    style.id =
-      'jl-real-page-style';
+
+  /* =====================================================
+     8. CSS
+     ===================================================== */
+
+  const style =
+    document.createElement('style');
+
+  style.id =
+    'jlh-real-style';
 
 
-    style.textContent = `
+  style.textContent = `
 
 :root{
 
-  --jl-purple:#76119d;
+  --jlh-purple:#76129c;
 
-  --jl-purple2:#ba41e4;
+  --jlh-purple2:#b83fe2;
 
-  --jl-purple3:#edc5ff;
+  --jlh-gold:#e0b44b;
 
-  --jl-gold:#e3b74e;
-
-  --jl-deep:#3b064c;
-
-  --jl-ink:#5b176b;
+  --jlh-deep:#3d064d;
 
 }
 
@@ -1260,16 +1218,14 @@
 html,
 body{
 
-  overflow-x:
-    hidden !important;
+  overflow-x:hidden !important;
 
 }
 
 
 body{
 
-  background:
-    #f9eaff !important;
+  background:#f8eaff !important;
 
 }
 
@@ -1288,10 +1244,10 @@ body{
 }
 
 
-/* ===== 首頁 / 功能分離 ===== */
+/* ===== 首頁 / 功能頁分離 ===== */
 
-body.jl-home-mode
-#jl-home-real{
+body.jlh-home-mode
+#jl-html-home{
 
   display:
     block !important;
@@ -1299,7 +1255,7 @@ body.jl-home-mode
 }
 
 
-body.jl-home-mode
+body.jlh-home-mode
 #jl-feature-shell{
 
   display:
@@ -1308,8 +1264,8 @@ body.jl-home-mode
 }
 
 
-body.jl-feature-mode
-#jl-home-real{
+body.jlh-feature-mode
+#jl-html-home{
 
   display:
     none !important;
@@ -1317,7 +1273,7 @@ body.jl-feature-mode
 }
 
 
-body.jl-feature-mode
+body.jlh-feature-mode
 #jl-feature-shell{
 
   display:
@@ -1334,7 +1290,7 @@ body.jl-feature-mode
 
 
 #jl-feature-shell
-.jl-hide-old-menu{
+.jl-old-menu-hidden{
 
   display:
     none !important;
@@ -1344,7 +1300,7 @@ body.jl-feature-mode
 
 /* ===== Header ===== */
 
-.jl-header{
+.jlh-header{
 
   height:48px;
 
@@ -1359,15 +1315,15 @@ body.jl-feature-mode
     0 11px;
 
   background:
-    rgba(255,255,255,.97);
+    #fff;
 
   border-bottom:
-    1px solid #edcdf8;
+    1px solid #ebc7f7;
 
 }
 
 
-.jl-brand{
+.jlh-brand{
 
   border:0;
 
@@ -1381,23 +1337,24 @@ body.jl-feature-mode
 
   gap:6px;
 
-  color:#5c1479;
+  color:#5e117c;
 
   font-family:
     "Noto Serif TC",
+    "Songti TC",
     serif;
 
 }
 
 
-.jl-brand strong{
+.jlh-brand strong{
 
   font-size:16px;
 
 }
 
 
-.jl-seal{
+.jlh-seal{
 
   width:25px;
 
@@ -1409,19 +1366,19 @@ body.jl-feature-mode
 
   border:
     1.5px solid
-    var(--jl-gold);
+    var(--jlh-gold);
 
   border-radius:50%;
 
   color:
-    var(--jl-gold);
+    var(--jlh-gold);
 
   font-size:10px;
 
 }
 
 
-.jl-nav{
+.jlh-nav{
 
   display:flex;
 
@@ -1430,9 +1387,9 @@ body.jl-feature-mode
 }
 
 
-.jl-nav a{
+.jlh-nav a{
 
-  color:#57395d;
+  color:#583b5e;
 
   text-decoration:none;
 
@@ -1443,14 +1400,12 @@ body.jl-feature-mode
 }
 
 
-.jl-my{
+.jlh-my{
 
   border:
-    1px solid
-    #dc99ef;
+    1px solid #d98df0;
 
-  border-radius:
-    999px;
+  border-radius:999px;
 
   padding:
     6px 9px;
@@ -1459,8 +1414,8 @@ body.jl-feature-mode
 
     linear-gradient(
       135deg,
-      #77129c,
-      #bb40df
+      #75119b,
+      #b83fe1
     );
 
   color:#fff;
@@ -1474,7 +1429,7 @@ body.jl-feature-mode
 
 /* ===== Hero ===== */
 
-.jl-hero{
+.jlh-hero{
 
   position:relative;
 
@@ -1485,22 +1440,22 @@ body.jl-feature-mode
   background:
 
     radial-gradient(
-      circle at 14% 78%,
-      rgba(207,93,244,.40),
+      circle at 16% 78%,
+      rgba(205,91,245,.38),
       transparent 35%
     ),
 
     linear-gradient(
       105deg,
       #fffaff 0%,
-      #edc7ff 54%,
-      #762493 100%
+      #edc5ff 54%,
+      #762591 100%
     );
 
 }
 
 
-.jl-hero-copy{
+.jlh-hero-copy{
 
   position:relative;
 
@@ -1514,7 +1469,7 @@ body.jl-feature-mode
 }
 
 
-.jl-kicker{
+.jlh-kicker{
 
   color:#741b91;
 
@@ -1527,16 +1482,16 @@ body.jl-feature-mode
 }
 
 
-.jl-hero h1{
+.jlh-hero h1{
 
   margin:
     8px 0 5px !important;
 
-  color:
-    #64107e !important;
+  color:#63107f !important;
 
   font-family:
     "Noto Serif TC",
+    "Songti TC",
     serif !important;
 
   font-size:
@@ -1551,13 +1506,12 @@ body.jl-feature-mode
 }
 
 
-.jl-hero h2{
+.jlh-hero h2{
 
   margin:
     0 !important;
 
-  color:
-    #ba632c !important;
+  color:#ba632c !important;
 
   font-size:
     10px !important;
@@ -1568,11 +1522,11 @@ body.jl-feature-mode
 }
 
 
-.jl-hero p{
+.jlh-hero p{
 
   margin-top:9px;
 
-  color:#604b64;
+  color:#5f4b64;
 
   font-size:6.4px;
 
@@ -1582,11 +1536,11 @@ body.jl-feature-mode
 
 
 /*
-MASTER 只裁人物＋紫色背景。
-不是整張首頁。
+  MASTER 只拿來裁右側人物 / 紫色背景。
+  沒有整張圖片首頁。
 */
 
-.jl-hero-art{
+.jlh-hero-art{
 
   position:absolute;
 
@@ -1615,7 +1569,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-hero-art::before{
+.jlh-hero-art::before{
 
   content:"";
 
@@ -1627,15 +1581,15 @@ MASTER 只裁人物＋紫色背景。
 
     linear-gradient(
       90deg,
-      #ecc4ff 0%,
-      rgba(236,196,255,.25) 25%,
+      #ecc3ff 0%,
+      rgba(236,195,255,.23) 25%,
       transparent 55%
     );
 
 }
 
 
-.jl-quote{
+.jlh-quote{
 
   position:absolute;
 
@@ -1660,7 +1614,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-quote b{
+.jlh-quote b{
 
   display:block;
 
@@ -1675,7 +1629,7 @@ MASTER 只裁人物＋紫色背景。
 
 /* ===== 探索標題 ===== */
 
-.jl-title{
+.jlh-section-title{
 
   height:34px;
 
@@ -1707,9 +1661,9 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-/* ===== 六卡 ===== */
+/* ===== 六大功能 ===== */
 
-.jl-tools{
+.jlh-tools{
 
   padding:
     8px 9px 9px;
@@ -1725,7 +1679,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-grid{
+.jlh-grid{
 
   display:grid;
 
@@ -1737,7 +1691,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-card{
+.jlh-card{
 
   min-width:0;
 
@@ -1749,7 +1703,7 @@ MASTER 只裁人物＋紫色背景。
   text-align:center;
 
   border:
-    1px solid #dca6ee;
+    1px solid #dba6ee;
 
   border-radius:13px;
 
@@ -1763,12 +1717,12 @@ MASTER 只裁人物＋紫色背景。
 
   box-shadow:
     0 6px 14px
-    rgba(101,19,128,.10);
+    rgba(102,19,129,.1);
 
 }
 
 
-.jl-icon{
+.jlh-icon{
 
   width:43px;
 
@@ -1782,8 +1736,7 @@ MASTER 只裁人物＋紫色背景。
   place-items:center;
 
   border:
-    2px solid
-    var(--jl-gold);
+    2px solid var(--jlh-gold);
 
   border-radius:50%;
 
@@ -1791,8 +1744,8 @@ MASTER 只裁人物＋紫色背景。
 
     radial-gradient(
       circle at 35% 23%,
-      #cb53f3,
-      #650d89 73%
+      #ca53f2,
+      #660d8b 73%
     );
 
   box-shadow:
@@ -1802,7 +1755,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-icon svg{
+.jlh-icon svg{
 
   width:36px;
 
@@ -1810,16 +1763,16 @@ MASTER 只裁人物＋紫色背景。
 
   fill:none;
 
-  stroke:#f8d66e;
+  stroke:#f7d66e;
 
   stroke-width:2;
 
 }
 
 
-.jl-icon svg text{
+.jlh-icon svg text{
 
-  fill:#f7d873;
+  fill:#f6d873;
 
   stroke:none;
 
@@ -1834,7 +1787,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-text-icon{
+.jlh-text-icon{
 
   display:flex;
 
@@ -1855,7 +1808,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-card h3{
+.jlh-card h3{
 
   margin:
     0 0 2px;
@@ -1873,7 +1826,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-card p{
+.jlh-card p{
 
   margin:0;
 
@@ -1886,7 +1839,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-card small{
+.jlh-card small{
 
   display:block;
 
@@ -1901,8 +1854,8 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-card button,
-.jl-card > a{
+.jlh-card button,
+.jlh-card > a{
 
   display:inline-block;
 
@@ -1934,9 +1887,9 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-/* ===== 看日子 ===== */
+/* ===== 擇吉看日 ===== */
 
-.jl-date{
+.jlh-date{
 
   height:94px;
 
@@ -1975,7 +1928,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-date h2{
+.jlh-date h2{
 
   margin:0;
 
@@ -1990,7 +1943,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-date p{
+.jlh-date p{
 
   margin:
     2px 0;
@@ -2002,7 +1955,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-date a{
+.jlh-date a{
 
   display:inline-block;
 
@@ -2011,8 +1964,7 @@ MASTER 只裁人物＋紫色背景。
   padding:
     4px 11px;
 
-  border-radius:
-    999px;
+  border-radius:999px;
 
   background:#8110a5;
 
@@ -2027,7 +1979,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-calendar{
+.jlh-calendar{
 
   width:54px;
 
@@ -2042,8 +1994,7 @@ MASTER 只裁人物＋紫色背景。
   justify-content:center;
 
   border:
-    1px solid
-    var(--jl-gold);
+    1px solid var(--jlh-gold);
 
   border-radius:9px;
 
@@ -2054,14 +2005,14 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-calendar span{
+.jlh-calendar span{
 
   font-size:9px;
 
 }
 
 
-.jl-calendar strong{
+.jlh-calendar strong{
 
   font-size:16px;
 
@@ -2070,7 +2021,7 @@ MASTER 只裁人物＋紫色背景。
 
 /* ===== LINE ===== */
 
-.jl-contact{
+.jlh-contact{
 
   margin:
     0 9px 7px;
@@ -2087,7 +2038,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-consult{
+.jlh-consult{
 
   display:flex;
 
@@ -2100,7 +2051,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-teacher-mini{
+.jlh-mini-teacher{
 
   width:38px;
 
@@ -2125,7 +2076,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-consult h3{
+.jlh-consult h3{
 
   margin:0;
 
@@ -2136,7 +2087,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-consult p{
+.jlh-consult p{
 
   margin:
     2px 0 0;
@@ -2148,7 +2099,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-line{
+.jlh-line{
 
   height:33px;
 
@@ -2173,7 +2124,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-line-circle{
+.jlh-line-icon{
 
   width:22px;
 
@@ -2194,7 +2145,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-line b{
+.jlh-line b{
 
   display:block;
 
@@ -2205,7 +2156,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-line small{
+.jlh-line small{
 
   display:block;
 
@@ -2216,7 +2167,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-line em{
+.jlh-line em{
 
   margin-left:auto;
 
@@ -2241,7 +2192,7 @@ MASTER 只裁人物＋紫色背景。
 
 /* ===== Footer ===== */
 
-.jl-footer{
+.jlh-footer{
 
   min-height:42px;
 
@@ -2273,7 +2224,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-.jl-footer small{
+.jlh-footer small{
 
   grid-column:
     1 / -1;
@@ -2287,7 +2238,7 @@ MASTER 只裁人物＋紫色背景。
 
 /* ===== 功能頁 ===== */
 
-#jl-back{
+#jlh-back{
 
   position:sticky;
 
@@ -2317,7 +2268,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-#jl-route-notice{
+#jlh-route-notice{
 
   display:none;
 
@@ -2345,7 +2296,7 @@ MASTER 只裁人物＋紫色背景。
 }
 
 
-#jl-route-notice.show{
+#jlh-route-notice.show{
 
   display:block;
 
@@ -2354,18 +2305,13 @@ MASTER 只裁人物＋紫色背景。
 
 @media(max-width:430px){
 
-  .jl-nav{
-
+  .jlh-nav{
     display:none;
-
   }
 
-
-  .jl-grid{
-
+  .jlh-grid{
     grid-template-columns:
       repeat(3,1fr);
-
   }
 
 }
@@ -2373,13 +2319,13 @@ MASTER 只裁人物＋紫色背景。
 `;
 
 
-    document.head.appendChild(
-      style
-    );
+  document.head.appendChild(
+    style
+  );
 
 
-    showHome();
+  showHome();
 
-  });
+});
 
 })();
