@@ -1,157 +1,76 @@
 /* =========================================================
-   筠玲易數｜真正 HTML 首頁｜正式重建版
-   ---------------------------------------------------------
-   核心原則：
-   1. MASTER 不再整張當首頁
-   2. 沒有 hotspot / 沒有透明熱區
-   3. 六張功能卡全部是真 HTML
-   4. 圖示全部是真 SVG
-   5. 按鈕全部是真 button / a
-   6. 原本排盤 / 九宮 / 奇門 / 六親 / 流年核心保留
-   7. MASTER 只裁 Hero 右側人物＋紫色背景藝術
+   筠玲易數｜真 HTML 首頁｜自查正式版
+   禁止：整頁設計圖、透明座標按鈕
+   保留：原排盤與外掛功能核心
    ========================================================= */
-
 (function(){
 'use strict';
 
-function onReady(fn){
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', fn);
-  }else{
-    fn();
-  }
-}
+function boot(){
+  if(document.documentElement.dataset.jlFinalHome==='1') return;
+  document.documentElement.dataset.jlFinalHome='1';
 
-onReady(function(){
+  const wrap=document.querySelector('.wrap');
+  if(!wrap) return;
 
-  if(document.documentElement.dataset.jlHtmlHome === '1'){
-    return;
-  }
+  /* 原網站完整收進功能層 */
+  const feature=document.createElement('div');
+  feature.id='jl-feature-shell-final';
+  [...wrap.children].forEach(n=>feature.appendChild(n));
+  wrap.appendChild(feature);
 
-  document.documentElement.dataset.jlHtmlHome = '1';
+  const paipan=feature.querySelector('#paipan') || feature.querySelector('.card');
+  const out=feature.querySelector('#out');
+  const go=feature.querySelector('#go');
 
-  const wrap = document.querySelector('.wrap');
+  if(paipan) paipan.id=paipan.id || 'paipan';
 
-  if(!wrap){
-    console.warn('筠玲易數：找不到 .wrap');
-    return;
-  }
-
-
-  /* =====================================================
-     1. 保留原本網站全部功能
-     ===================================================== */
-
-  const featureShell = document.createElement('div');
-  featureShell.id = 'jl-feature-shell';
-
-  Array.from(wrap.children).forEach(function(node){
-    featureShell.appendChild(node);
+  /* 舊總入口不重複顯示 */
+  [...feature.querySelectorAll('.card')].forEach(card=>{
+    const t=(card.textContent||'').replace(/\s+/g,'');
+    if(t.includes('功能選單')) card.classList.add('jl-old-menu-final');
   });
 
-  wrap.appendChild(featureShell);
+  const home=document.createElement('main');
+  home.id='jl-home-final';
 
-
-  const paipan =
-    featureShell.querySelector('#paipan') ||
-    featureShell.querySelector('.card');
-
-  const out =
-    featureShell.querySelector('#out');
-
-  const go =
-    featureShell.querySelector('#go');
-
-
-  if(paipan){
-    paipan.id = paipan.id || 'paipan';
-  }
-
-
-  /* 舊功能選單隱藏，避免跟新首頁重複 */
-  Array.from(
-    featureShell.querySelectorAll('.card')
-  ).forEach(function(card){
-
-    const txt = String(card.textContent || '')
-      .replace(/\s+/g,'');
-
-    if(txt.includes('功能選單')){
-      card.classList.add('jl-old-menu-hidden');
-    }
-
-  });
-
-
-
-  /* =====================================================
-     2. 真正 HTML 首頁
-     ===================================================== */
-
-  const home = document.createElement('main');
-  home.id = 'jl-html-home';
-
-  home.innerHTML = `
-
-<header class="jlh-header">
-
-  <button
-    type="button"
-    class="jlh-brand"
-    id="jlh-brand">
-
-    <span class="jlh-seal">
-      筠
-    </span>
-
-    <strong>
-      筠玲易數
-    </strong>
-
+  home.innerHTML=`
+<header class="jlf-header">
+  <button class="jlf-brand" type="button" id="jlf-home">
+    <span class="jlf-seal">筠</span>
+    <strong>筠玲易數</strong>
   </button>
 
-
-  <nav class="jlh-nav">
-
-    <a href="#jl-html-home">
-      首頁
-    </a>
-
-    <a href="#jlh-tools">
-      命理知識
-    </a>
-
-    <a href="#jlh-contact">
-      聯絡我們
-    </a>
-
+  <nav class="jlf-nav">
+    <a href="#jl-home-final">首頁</a>
+    <a href="#jlf-tools">命理知識</a>
+    <a href="#jlf-contact">聯絡我們</a>
   </nav>
 
-
-  <button
-    type="button"
-    class="jlh-my"
-    data-jlh-route="四柱">
-
+  <button class="jlf-my" type="button" data-jlf-route="四柱">
     ☯ 我的命盤
-
   </button>
-
 </header>
 
 
+<section class="jlf-hero">
 
-<section class="jlh-hero">
+  <div class="jlf-hero-bg" aria-hidden="true">
+    <div class="jlf-moon"></div>
+    <div class="jlf-mountain m1"></div>
+    <div class="jlf-mountain m2"></div>
+    <div class="jlf-shelf"></div>
+    <div class="jlf-desk"></div>
+    <div class="jlf-orb"></div>
+  </div>
 
-  <div class="jlh-hero-copy">
+  <div class="jlf-hero-copy">
 
-    <div class="jlh-kicker">
+    <div class="jlf-kicker">
       ✦ 以數觀象 · 以卦察勢 · 以理明心 ✦
     </div>
 
-    <h1>
-      筠玲易數
-    </h1>
+    <h1>筠玲易數</h1>
 
     <h2>
       解析命運的軌跡 · 掌握人生的方向
@@ -166,16 +85,13 @@ onReady(function(){
   </div>
 
 
-  <!--
-    MASTER 只在這裡當「局部背景藝術」
-    不負責首頁卡片或按鈕
-  -->
-
-  <div class="jlh-hero-art"></div>
+  <div class="jlf-teacher-silhouette" aria-hidden="true">
+    <div class="jlf-head"></div>
+    <div class="jlf-body"></div>
+  </div>
 
 
-  <div class="jlh-quote">
-
+  <div class="jlf-quote">
     命，不是定局；
     <br>
     看懂自己的局，
@@ -185,58 +101,53 @@ onReady(function(){
     <b>
       筠玲老師
     </b>
-
   </div>
 
 </section>
 
 
-
-<div class="jlh-section-title">
+<div class="jlf-section-title">
   ✦ 探索命理智慧 · 開啟人生新局 ✦
 </div>
 
 
+<section class="jlf-tools" id="jlf-tools">
 
-<section
-  class="jlh-tools"
-  id="jlh-tools">
-
-  <div class="jlh-grid">
+  <div class="jlf-grid">
 
 
     <!-- 四柱八字 -->
 
-    <article class="jlh-card">
+    <article class="jlf-card">
 
-      <div class="jlh-icon">
+      <div class="jlf-badge">
 
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle cx="50" cy="50" r="42"></circle>
+          <circle
+            class="ring2"
+            cx="50"
+            cy="50"
+            r="35">
+          </circle>
 
-          <path d="M50 12v76M12 50h76"></path>
+          <path d="M50 20v60M20 50h60"></path>
 
-          <text x="29" y="39">年</text>
-          <text x="61" y="39">月</text>
+          <text x="30" y="41">年</text>
+          <text x="61" y="41">月</text>
 
-          <text x="29" y="70">日</text>
-          <text x="61" y="70">時</text>
+          <text x="30" y="72">日</text>
+          <text x="61" y="72">時</text>
 
         </svg>
 
       </div>
 
-
-      <h3>
-        四柱八字
-      </h3>
-
+      <h3>四柱八字</h3>
 
       <p>
         生辰排盤 · 命運解析
       </p>
-
 
       <small>
         先天 × 後天 × 五行
@@ -244,10 +155,9 @@ onReady(function(){
         大運 × 流年 × 格局
       </small>
 
-
       <button
         type="button"
-        data-jlh-route="四柱">
+        data-jlf-route="四柱">
 
         進入解析 ›
 
@@ -256,57 +166,53 @@ onReady(function(){
     </article>
 
 
-
     <!-- 紫微 / 九宮 -->
 
-    <article class="jlh-card">
+    <article class="jlf-card">
 
-      <div class="jlh-icon">
+      <div class="jlf-badge">
 
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
           <rect
-            x="20"
-            y="20"
-            width="60"
-            height="60"
+            class="ring2"
+            x="22"
+            y="22"
+            width="56"
+            height="56"
             rx="4">
           </rect>
 
-          <path d="
-            M40 20v60
-            M60 20v60
-            M20 40h60
-            M20 60h60
-          "></path>
+          <path
+            d="
+              M41 22v56
+              M59 22v56
+              M22 41h56
+              M22 59h56
+            ">
+          </path>
 
+          <text x="29" y="36">4</text>
+          <text x="48" y="36">9</text>
+          <text x="67" y="36">2</text>
 
-          <text x="28" y="35">4</text>
-          <text x="48" y="35">9</text>
-          <text x="68" y="35">2</text>
-
-          <text x="28" y="55">3</text>
+          <text x="29" y="55">3</text>
           <text x="48" y="55">5</text>
-          <text x="68" y="55">7</text>
+          <text x="67" y="55">7</text>
 
-          <text x="28" y="75">8</text>
-          <text x="48" y="75">1</text>
-          <text x="68" y="75">6</text>
+          <text x="29" y="74">8</text>
+          <text x="48" y="74">1</text>
+          <text x="67" y="74">6</text>
 
         </svg>
 
       </div>
 
-
-      <h3>
-        紫微／九宮
-      </h3>
-
+      <h3>紫微／九宮</h3>
 
       <p>
         命盤解析 · 宮位星曜
       </p>
-
 
       <small>
         宮位 × 星曜 × 格局
@@ -314,10 +220,9 @@ onReady(function(){
         吉凶 × 組合 × 解析
       </small>
 
-
       <button
         type="button"
-        data-jlh-route="九宮">
+        data-jlf-route="九宮">
 
         進入解析 ›
 
@@ -326,58 +231,46 @@ onReady(function(){
     </article>
 
 
-
     <!-- 奇門遁甲 -->
 
-    <article class="jlh-card">
+    <article class="jlf-card">
 
-      <div class="jlh-icon">
+      <div class="jlf-badge">
 
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle cx="50" cy="50" r="42"></circle>
+          <polygon
+            class="ring2"
+            points="50,15 76,24 85,50 76,76 50,85 24,76 15,50 24,24">
+          </polygon>
 
-          <circle cx="50" cy="50" r="27"></circle>
+          <circle
+            cx="50"
+            cy="50"
+            r="22">
+          </circle>
 
-          <path d="
-            M50 23
-            a27 27 0 1 0 0 54
-            a13.5 13.5 0 1 1 0-27
-            a13.5 13.5 0 1 0 0-27
-          "></path>
+          <path
+            d="
+              M50 28
+              a22 22 0 1 0 0 44
+              a11 11 0 1 1 0-22
+              a11 11 0 1 0 0-22
+            ">
+          </path>
 
-
-          <circle cx="50" cy="36" r="3"></circle>
-          <circle cx="50" cy="64" r="3"></circle>
-
-
-          <path d="
-            M50 5v10
-            M50 85v10
-            M5 50h10
-            M85 50h10
-
-            M18 18l7 7
-            M75 75l7 7
-
-            M82 18l-7 7
-            M25 75l-7 7
-          "></path>
+          <circle cx="50" cy="39" r="2.5"></circle>
+          <circle cx="50" cy="61" r="2.5"></circle>
 
         </svg>
 
       </div>
 
-
-      <h3>
-        奇門遁甲
-      </h3>
-
+      <h3>奇門遁甲</h3>
 
       <p>
         問事決策 · 趨吉避凶
       </p>
-
 
       <small>
         時間 × 方位 × 局勢
@@ -385,10 +278,9 @@ onReady(function(){
         開門 × 落宮 × 值符
       </small>
 
-
       <button
         type="button"
-        data-jlh-route="奇門">
+        data-jlf-route="奇門">
 
         進入解析 ›
 
@@ -397,33 +289,22 @@ onReady(function(){
     </article>
 
 
-
     <!-- 六壬 / 六親 -->
 
-    <article class="jlh-card">
+    <article class="jlf-card">
 
-      <div class="jlh-icon jlh-text-icon">
+      <div class="jlf-badge jlf-badge-text">
 
-        <strong>
-          六壬
-        </strong>
-
-        <strong>
-          六親
-        </strong>
+        <span>六壬</span>
+        <span>六親</span>
 
       </div>
 
-
-      <h3>
-        六壬／六親
-      </h3>
-
+      <h3>六壬／六親</h3>
 
       <p>
         事情推演 · 事件解析
       </p>
-
 
       <small>
         關係 × 事件 × 發展
@@ -431,10 +312,9 @@ onReady(function(){
         占斷 × 判事 × 應驗
       </small>
 
-
       <button
         type="button"
-        data-jlh-route="六親">
+        data-jlf-route="六親">
 
         進入解析 ›
 
@@ -443,54 +323,54 @@ onReady(function(){
     </article>
 
 
-
     <!-- 八星磁場 -->
 
-    <article class="jlh-card">
+    <article class="jlf-card">
 
-      <div class="jlh-icon">
+      <div class="jlf-badge">
 
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle cx="50" cy="50" r="42"></circle>
+          <circle
+            class="ring2"
+            cx="50"
+            cy="50"
+            r="35">
+          </circle>
 
-          <path d="
-            M20 64
-            L33 35
-            L48 52
-            L61 27
-            L78 65
-            L51 76
-            Z
-          "></path>
+          <path
+            d="
+              M25 64
+              L36 36
+              L49 53
+              L62 30
+              L76 65
+              L51 73
+              Z
+            ">
+          </path>
 
-          <circle cx="33" cy="35" r="3"></circle>
-          <circle cx="48" cy="52" r="3"></circle>
-          <circle cx="61" cy="27" r="3"></circle>
-          <circle cx="78" cy="65" r="3"></circle>
-          <circle cx="51" cy="76" r="3"></circle>
+          <circle cx="36" cy="36" r="3"></circle>
+          <circle cx="49" cy="53" r="3"></circle>
+          <circle cx="62" cy="30" r="3"></circle>
+          <circle cx="76" cy="65" r="3"></circle>
+          <circle cx="51" cy="73" r="3"></circle>
 
         </svg>
 
       </div>
 
-
-      <h3>
-        八星磁場
-      </h3>
-
+      <h3>八星磁場</h3>
 
       <p>
         數字能量 · 磁場解析
       </p>
-
 
       <small>
         手機 × 車牌 × 門牌
         <br>
         數字 × 能量 × 吉凶
       </small>
-
 
       <a href="bxcc.html">
         進入解析 ›
@@ -499,41 +379,42 @@ onReady(function(){
     </article>
 
 
-
     <!-- 流年運勢 -->
 
-    <article class="jlh-card">
+    <article class="jlf-card">
 
-      <div class="jlh-icon">
+      <div class="jlf-badge">
 
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle cx="50" cy="50" r="42"></circle>
+          <circle
+            class="ring2"
+            cx="50"
+            cy="50"
+            r="35">
+          </circle>
 
-          <path d="
-            M22 73h10V58
-            h10v15
-            h10V45
-            h10v28
-            h10V31
-          "></path>
+          <path
+            d="
+              M26 70h10V58
+              h10v12
+              h10V45
+              h10v25
+              h10V31
+            ">
+          </path>
 
-          <path d="M63 31h9v9"></path>
+          <path d="M67 31h9v9"></path>
 
         </svg>
 
       </div>
 
-
-      <h3>
-        流年運勢
-      </h3>
-
+      <h3>流年運勢</h3>
 
       <p>
         年度運勢 · 流月解析
       </p>
-
 
       <small>
         年度 × 月運 × 日運
@@ -541,10 +422,9 @@ onReady(function(){
         趨勢 × 提醒 × 建議
       </small>
 
-
       <button
         type="button"
-        data-jlh-route="流年">
+        data-jlf-route="流年">
 
         進入解析 ›
 
@@ -558,25 +438,21 @@ onReady(function(){
 </section>
 
 
+<section class="jlf-date">
 
-<section class="jlh-date">
-
-  <div>
+  <div class="jlf-date-copy">
 
     <h2>
       擇吉看日
     </h2>
 
-
     <p>
       結婚 · 開業 · 搬家 · 簽約 · 出行 · 入宅 · 動土 · 祈福
     </p>
 
-
     <p>
-      選一個適合您的好日子，讓事情順利圓滿。
+      選一個適合您的好日子，讓重要的事情更順利、更圓滿。
     </p>
-
 
     <a href="rz.html">
       開始看日子 ›
@@ -585,31 +461,33 @@ onReady(function(){
   </div>
 
 
-  <div class="jlh-calendar">
+  <div class="jlf-date-scene" aria-hidden="true">
 
-    <span>
-      吉
-    </span>
+    <div class="jlf-window"></div>
 
-    <strong>
-      日
-    </strong>
+    <div class="jlf-vase">
+      <i></i>
+      <i></i>
+      <i></i>
+    </div>
+
+    <div class="jlf-calendar">
+      <span>吉</span>
+      <b>日</b>
+    </div>
 
   </div>
 
 </section>
 
 
+<section class="jlf-contact" id="jlf-contact">
 
-<section
-  class="jlh-contact"
-  id="jlh-contact">
+  <div class="jlf-consult">
 
-  <div class="jlh-consult">
-
-    <div class="jlh-mini-teacher">
+    <div class="jlf-avatar">
+      筠
     </div>
-
 
     <div>
 
@@ -617,10 +495,8 @@ onReady(function(){
         需要進一步命理解讀？
       </h3>
 
-
       <p>
-        筠玲老師提供一對一專業諮詢服務，
-        深入分析您的命盤。
+        筠玲老師提供一對一專業諮詢服務，深入分析您的命盤。
       </p>
 
     </div>
@@ -629,13 +505,12 @@ onReady(function(){
 
 
   <a
-    class="jlh-line"
+    class="jlf-line"
     href="https://line.me/ti/p/@804kmmmy">
 
-    <span class="jlh-line-icon">
+    <span class="jlf-line-icon">
       LINE
     </span>
-
 
     <div>
 
@@ -643,13 +518,11 @@ onReady(function(){
         加入筠玲老師 LINE
       </b>
 
-
       <small>
         LINE ID：@804kmmmy
       </small>
 
     </div>
-
 
     <em>
       ›
@@ -660,66 +533,50 @@ onReady(function(){
 </section>
 
 
+<footer class="jlf-footer">
 
-<footer class="jlh-footer">
+  <span>✦ 專業可靠</span>
 
-  <span>
-    ✦ 專業可靠
-  </span>
+  <span>☆ 經驗豐富</span>
 
-  <span>
-    ☆ 經驗豐富
-  </span>
+  <span>♡ 用心解盤</span>
 
-  <span>
-    ♡ 用心解盤
-  </span>
-
-  <span>
-    ▣ 隱私保密
-  </span>
-
+  <span>▣ 隱私保密</span>
 
   <small>
     © 2026 筠玲易數 · All Rights Reserved.
   </small>
 
 </footer>
-
 `;
 
-  wrap.insertBefore(
-    home,
-    featureShell
-  );
+  wrap.insertBefore(home,feature);
 
 
+  /* 返回首頁 */
 
-  /* =====================================================
-     3. 功能頁返回首頁
-     ===================================================== */
+  const back=document.createElement('button');
 
-  const back = document.createElement('button');
+  back.id='jlf-back';
 
-  back.id = 'jlh-back';
-  back.type = 'button';
-  back.textContent = '← 回到功能首頁';
+  back.type='button';
 
-  featureShell.insertBefore(
+  back.textContent='← 回到功能首頁';
+
+  feature.insertBefore(
     back,
-    featureShell.firstChild
+    feature.firstChild
   );
-
 
 
   function showHome(){
 
     document.body.classList.remove(
-      'jlh-feature-mode'
+      'jlf-feature-mode'
     );
 
     document.body.classList.add(
-      'jlh-home-mode'
+      'jlf-home-mode'
     );
 
     window.scrollTo({
@@ -730,37 +587,30 @@ onReady(function(){
   }
 
 
-
   function showFeature(target){
 
     document.body.classList.remove(
-      'jlh-home-mode'
+      'jlf-home-mode'
     );
 
     document.body.classList.add(
-      'jlh-feature-mode'
+      'jlf-feature-mode'
     );
 
-    setTimeout(function(){
+    setTimeout(()=>{
 
-      const el =
+      (
         target ||
         paipan ||
-        featureShell;
+        feature
+      ).scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
 
-      if(el){
-
-        el.scrollIntoView({
-          behavior:'smooth',
-          block:'start'
-        });
-
-      }
-
-    },80);
+    },60);
 
   }
-
 
 
   back.addEventListener(
@@ -769,34 +619,27 @@ onReady(function(){
   );
 
 
-  const brand =
-    home.querySelector('#jlh-brand');
-
-  if(brand){
-
-    brand.addEventListener(
+  home
+    .querySelector('#jlf-home')
+    .addEventListener(
       'click',
       showHome
     );
 
-  }
 
 
+  /* 功能定位 */
 
-  /* =====================================================
-     4. 外掛卡片定位
-     ===================================================== */
+  function clean(s){
 
-  function cleanText(text){
-
-    return String(text || '')
+    return String(s || '')
       .replace(/\s+/g,'')
       .replace(/[／/｜|·・]/g,'');
 
   }
 
 
-  const aliases = {
+  const aliases={
 
     九宮:[
       '九宮',
@@ -825,64 +668,72 @@ onReady(function(){
   };
 
 
-  function findPluginCard(term){
+  function findPlugin(term){
 
-    const words =
+    const keys=
       aliases[term] ||
       [term];
 
 
-    const candidates =
-      Array.from(
-        featureShell.querySelectorAll(
-          '#plugs0 .card,' +
-          '#plugs .card,' +
-          '#plug .card,' +
-          '#out .card,' +
-          '.card.pro,' +
-          'section.card'
-        )
-      );
+    const selectors=
+      '#plugs0 .card,' +
+      '#plugs .card,' +
+      '#plug .card,' +
+      '#out .card,' +
+      '.card.pro,' +
+      'section.card';
 
 
-    let best = null;
-    let bestScore = 0;
+    const list=[
+      ...feature.querySelectorAll(
+        selectors
+      )
+    ];
 
 
-    candidates.forEach(function(card){
-
-      const text =
-        cleanText(
-          card.textContent
-        );
+    let best=null;
+    let bestScore=0;
 
 
-      let score = 0;
+    list.forEach(card=>{
+
+      const text=
+        clean(card.textContent);
 
 
-      words.forEach(function(word){
-
-        const key =
-          cleanText(word);
+      let score=0;
 
 
-        if(text.startsWith(key)){
+      keys.forEach(k=>{
 
-          score += 100;
+        k=clean(k);
 
-        }else if(text.includes(key)){
 
-          score += 20;
+        if(
+          text.startsWith(k)
+        ){
+
+          score+=100;
+
+        }
+
+        else if(
+          text.includes(k)
+        ){
+
+          score+=20;
 
         }
 
       });
 
 
-      if(score > bestScore){
+      if(
+        score>bestScore
+      ){
 
-        bestScore = score;
-        best = card;
+        bestScore=score;
+        best=card;
 
       }
 
@@ -895,11 +746,9 @@ onReady(function(){
 
 
 
-  /* =====================================================
-     5. 提示訊息
-     ===================================================== */
+  /* 提示 */
 
-  let notice = null;
+  let notice=null;
 
 
   function showNotice(term){
@@ -909,11 +758,11 @@ onReady(function(){
 
     if(!notice){
 
-      notice =
+      notice=
         document.createElement('div');
 
-      notice.id =
-        'jlh-route-notice';
+      notice.id=
+        'jlf-route-notice';
 
       paipan.prepend(
         notice
@@ -922,7 +771,7 @@ onReady(function(){
     }
 
 
-    const names = {
+    const names={
 
       九宮:'紫微／九宮',
 
@@ -935,8 +784,8 @@ onReady(function(){
     };
 
 
-    notice.textContent =
-      '請先完成生辰排盤，排盤完成後會自動進入「' +
+    notice.textContent=
+      '請先完成生辰排盤，完成後會自動進入「' +
       (names[term] || term) +
       '」。';
 
@@ -962,21 +811,19 @@ onReady(function(){
 
 
 
-  /* =====================================================
-     6. 真正功能路由
-     ===================================================== */
+  /* 真功能路由 */
 
   function openFeature(term){
 
     sessionStorage.setItem(
-      'jlh-pending-feature',
+      'jlf-pending',
       term
     );
 
 
-    /* 四柱直接進排盤 */
-
-    if(term === '四柱'){
+    if(
+      term==='四柱'
+    ){
 
       showFeature(
         paipan
@@ -987,40 +834,31 @@ onReady(function(){
     }
 
 
-    /*
-      如果之前已排盤，
-      外掛卡片已經存在，
-      直接帶到該功能。
-    */
-
-    const target =
-      findPluginCard(term);
+    const target=
+      findPlugin(term);
 
 
     if(target){
 
       clearNotice();
 
+      sessionStorage.removeItem(
+        'jlf-pending'
+      );
+
       showFeature(
         target
       );
-
-
-      sessionStorage.removeItem(
-        'jlh-pending-feature'
-      );
-
 
       return;
 
     }
 
 
-    /*
-      尚未排盤
-    */
+    showNotice(
+      term
+    );
 
-    showNotice(term);
 
     showFeature(
       paipan
@@ -1029,31 +867,24 @@ onReady(function(){
   }
 
 
-
   home
     .querySelectorAll(
-      '[data-jlh-route]'
+      '[data-jlf-route]'
     )
-    .forEach(function(button){
+    .forEach(btn=>{
 
-      button.addEventListener(
+      btn.addEventListener(
         'click',
-        function(){
-
-          openFeature(
-            button.dataset.jlhRoute
-          );
-
-        }
+        ()=>openFeature(
+          btn.dataset.jlfRoute
+        )
       );
 
     });
 
 
 
-  /* =====================================================
-     7. 排盤完成後自動跳到指定功能
-     ===================================================== */
+  /* 排盤完成後導向 */
 
   if(go){
 
@@ -1061,125 +892,100 @@ onReady(function(){
       'click',
       function(){
 
-        const pending =
+        const pending=
           sessionStorage.getItem(
-            'jlh-pending-feature'
+            'jlf-pending'
           );
 
 
-        if(!pending){
-          return;
-        }
+        if(!pending) return;
 
 
-        let count = 0;
+        let tries=0;
 
 
-        const timer =
-          setInterval(function(){
+        const timer=
+          setInterval(
+            function(){
 
-            count++;
+              tries++;
 
-
-            /*
-              四柱：
-              等 #out 顯示後直接帶到結果。
-            */
-
-            if(pending === '四柱'){
 
               if(
-                out &&
-                !out.classList.contains('hide')
+                pending==='四柱'
               ){
 
-                clearInterval(timer);
+                if(
+                  out &&
+                  !out.classList.contains(
+                    'hide'
+                  )
+                ){
 
-                clearNotice();
+                  clearInterval(
+                    timer
+                  );
 
+                  clearNotice();
 
-                sessionStorage.removeItem(
-                  'jlh-pending-feature'
-                );
+                  sessionStorage.removeItem(
+                    'jlf-pending'
+                  );
 
-
-                showFeature(
-                  out
-                );
-
-              }
-
-            }
-
-
-            /*
-              九宮 / 奇門 / 六親 / 流年：
-              等 runPlugins() 產生卡片。
-            */
-
-            else{
-
-              const target =
-                findPluginCard(
-                  pending
-                );
-
-
-              if(target){
-
-                clearInterval(timer);
-
-                clearNotice();
-
-
-                sessionStorage.removeItem(
-                  'jlh-pending-feature'
-                );
-
-
-                showFeature(
-                  target
-                );
-
-
-                if(target.animate){
-
-                  target.animate(
-                    [
-                      {
-                        boxShadow:
-                          '0 0 0 0 rgba(145,38,194,0)'
-                      },
-                      {
-                        boxShadow:
-                          '0 0 0 5px rgba(145,38,194,.25)'
-                      },
-                      {
-                        boxShadow:
-                          '0 0 0 0 rgba(145,38,194,0)'
-                      }
-                    ],
-                    {
-                      duration:900
-                    }
+                  showFeature(
+                    out
                   );
 
                 }
 
               }
 
-            }
+              else{
+
+                const target=
+                  findPlugin(
+                    pending
+                  );
 
 
-            if(count >= 50){
+                if(target){
 
-              clearInterval(timer);
+                  clearInterval(
+                    timer
+                  );
 
-            }
+                  clearNotice();
 
-          },200);
+                  sessionStorage.removeItem(
+                    'jlf-pending'
+                  );
+
+                  showFeature(
+                    target
+                  );
+
+                }
+
+              }
+
+
+              if(
+                tries>=50
+              ){
+
+                clearInterval(
+                  timer
+                );
+
+              }
+
+            },
+
+            200
+          );
 
       },
+
       true
     );
 
@@ -1187,235 +993,197 @@ onReady(function(){
 
 
 
-  /* =====================================================
-     8. CSS
-     ===================================================== */
+  /* CSS */
 
-  const style =
-    document.createElement('style');
-
-  style.id =
-    'jlh-real-style';
+  const style=
+    document.createElement(
+      'style'
+    );
 
 
-  style.textContent = `
+  style.id=
+    'jlf-style';
+
+
+  style.textContent=`
 
 :root{
-
-  --jlh-purple:#76129c;
-
-  --jlh-purple2:#b83fe2;
-
-  --jlh-gold:#e0b44b;
-
-  --jlh-deep:#3d064d;
-
+  --p:#76129c;
+  --p2:#b83fe2;
+  --p3:#f0d4ff;
+  --gold:#e1b84f;
+  --gold2:#f6da7e;
+  --deep:#330340;
+  --ink:#5a146b;
+  --muted:#77677b;
 }
 
-
-/* ===== 基礎 ===== */
 
 html,
 body{
-
   overflow-x:hidden !important;
-
 }
 
 
 body{
-
-  background:#f8eaff !important;
-
+  background:#f7e8ff !important;
 }
 
 
 .wrap{
-
-  max-width:
-    760px !important;
-
-  margin:
-    0 auto !important;
-
-  padding:
-    0 !important;
-
+  max-width:760px !important;
+  margin:0 auto !important;
+  padding:0 !important;
 }
 
 
-/* ===== 首頁 / 功能頁分離 ===== */
 
-body.jlh-home-mode
-#jl-html-home{
+/* 首頁 / 功能頁分離 */
 
-  display:
-    block !important;
-
+body.jlf-home-mode
+#jl-home-final{
+  display:block !important;
 }
 
 
-body.jlh-home-mode
-#jl-feature-shell{
-
-  display:
-    none !important;
-
+body.jlf-home-mode
+#jl-feature-shell-final{
+  display:none !important;
 }
 
 
-body.jlh-feature-mode
-#jl-html-home{
-
-  display:
-    none !important;
-
+body.jlf-feature-mode
+#jl-home-final{
+  display:none !important;
 }
 
 
-body.jlh-feature-mode
-#jl-feature-shell{
-
-  display:
-    block !important;
-
+body.jlf-feature-mode
+#jl-feature-shell-final{
+  display:block !important;
 }
 
 
-#jl-feature-shell{
-
+#jl-feature-shell-final{
   display:none;
-
 }
 
 
-#jl-feature-shell
-.jl-old-menu-hidden{
-
-  display:
-    none !important;
-
+#jl-feature-shell-final
+.jl-old-menu-final{
+  display:none !important;
 }
 
 
-/* ===== Header ===== */
+#jl-home-final{
+  background:
+    linear-gradient(
+      180deg,
+      #fff 0,
+      #fbf2ff 55%,
+      #f3dcff 100%
+    );
+}
 
-.jlh-header{
 
+
+/* Header */
+
+.jlf-header{
   height:48px;
 
   display:flex;
-
   align-items:center;
+  justify-content:space-between;
 
-  justify-content:
-    space-between;
-
-  padding:
-    0 11px;
+  padding:0 11px;
 
   background:
-    #fff;
+    rgba(255,255,255,.97);
 
   border-bottom:
-    1px solid #ebc7f7;
-
+    1px solid #e7c4f4;
 }
 
 
-.jlh-brand{
-
+.jlf-brand{
   border:0;
-
   background:none;
-
   padding:0;
 
   display:flex;
-
   align-items:center;
-
   gap:6px;
 
-  color:#5e117c;
+  color:#5e1278;
 
   font-family:
     "Noto Serif TC",
-    "Songti TC",
     serif;
-
 }
 
 
-.jlh-brand strong{
-
+.jlf-brand strong{
   font-size:16px;
-
 }
 
 
-.jlh-seal{
-
+.jlf-seal{
   width:25px;
-
   height:25px;
 
   display:grid;
-
   place-items:center;
 
   border:
     1.5px solid
-    var(--jlh-gold);
+    var(--gold);
 
   border-radius:50%;
 
   color:
-    var(--jlh-gold);
+    var(--gold);
 
   font-size:10px;
 
+  box-shadow:
+    0 0 10px
+    rgba(225,184,79,.16);
 }
 
 
-.jlh-nav{
-
+.jlf-nav{
   display:flex;
-
   gap:10px;
-
 }
 
 
-.jlh-nav a{
+.jlf-nav a{
+  font-size:7px;
 
-  color:#583b5e;
+  color:#523557;
 
   text-decoration:none;
 
-  font-size:7px;
-
   font-weight:800;
-
 }
 
 
-.jlh-my{
-
+.jlf-my{
   border:
-    1px solid #d98df0;
+    1px solid #d88bee;
 
-  border-radius:999px;
+  border-radius:
+    999px;
 
   padding:
-    6px 9px;
+    6px 10px;
 
   background:
-
     linear-gradient(
       135deg,
-      #75119b,
-      #b83fe1
+      #6f0d92,
+      #b32ed9
     );
 
   color:#fff;
@@ -1424,231 +1192,384 @@ body.jlh-feature-mode
 
   font-weight:900;
 
+  box-shadow:
+    0 4px 10px
+    rgba(82,8,105,.18);
 }
 
 
-/* ===== Hero ===== */
 
-.jlh-hero{
+/* Hero */
 
+.jlf-hero{
   position:relative;
 
-  height:260px;
+  height:255px;
 
   overflow:hidden;
 
   background:
-
-    radial-gradient(
-      circle at 16% 78%,
-      rgba(205,91,245,.38),
-      transparent 35%
-    ),
-
     linear-gradient(
-      105deg,
+      110deg,
       #fffaff 0%,
-      #edc5ff 54%,
-      #762591 100%
+      #eec8ff 53%,
+      #6c2187 100%
     );
-
 }
 
 
-.jlh-hero-copy{
+.jlf-hero-bg{
+  position:absolute;
+  inset:0;
+  overflow:hidden;
+}
 
+
+.jlf-moon{
+  position:absolute;
+
+  right:28%;
+  top:13%;
+
+  width:48px;
+  height:48px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      #fff8d8 0 35%,
+      #dcaef2 65%,
+      transparent 70%
+    );
+
+  filter:blur(.2px);
+
+  opacity:.9;
+}
+
+
+.jlf-mountain{
+  position:absolute;
+
+  bottom:21%;
+
+  width:62%;
+  height:38%;
+
+  background:
+    linear-gradient(
+      160deg,
+      transparent 0 35%,
+      rgba(112,45,141,.22)
+      36% 65%,
+      transparent 66%
+    );
+
+  transform:
+    skewX(-13deg);
+}
+
+
+.jlf-mountain.m1{
+  left:-10%;
+}
+
+
+.jlf-mountain.m2{
+  left:22%;
+  bottom:15%;
+  opacity:.58;
+
+  transform:
+    scale(.8)
+    skewX(-10deg);
+}
+
+
+.jlf-shelf{
+  position:absolute;
+
+  right:0;
+  top:0;
+
+  width:28%;
+  height:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(49,5,67,.72)
+    ),
+
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,220,120,.10)
+      0 3px,
+      transparent
+      3px 33px
+    );
+
+  border-left:
+    1px solid
+    rgba(255,220,140,.2);
+}
+
+
+.jlf-desk{
+  position:absolute;
+
+  right:0;
+  bottom:0;
+
+  width:55%;
+  height:22%;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(76,18,91,.25),
+      rgba(41,5,53,.72)
+    );
+}
+
+
+.jlf-orb{
+  position:absolute;
+
+  right:12%;
+  bottom:13%;
+
+  width:29px;
+  height:29px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle at 35% 30%,
+      #fff,
+      #ca7bf1 30%,
+      #682289 64%,
+      #31043e
+    );
+
+  box-shadow:
+    0 0 18px
+    rgba(222,154,255,.58);
+}
+
+
+.jlf-hero::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 70% 42%,
+      rgba(240,199,255,.3),
+      transparent 31%
+    ),
+
+    linear-gradient(
+      90deg,
+      transparent 45%,
+      rgba(114,24,146,.08)
+    );
+}
+
+
+.jlf-hero-copy{
   position:relative;
 
   z-index:5;
 
-  width:52%;
+  width:53%;
 
   padding:
-    27px 0 0 22px;
-
+    28px 0 0 22px;
 }
 
 
-.jlh-kicker{
-
-  color:#741b91;
-
+.jlf-kicker{
   font-size:7px;
+
+  color:#70178d;
 
   font-weight:900;
 
   letter-spacing:.08em;
-
 }
 
 
-.jlh-hero h1{
-
+.jlf-hero h1{
   margin:
     8px 0 5px !important;
 
-  color:#63107f !important;
+  color:
+    #601078 !important;
 
   font-family:
     "Noto Serif TC",
-    "Songti TC",
     serif !important;
 
   font-size:
-    31px !important;
+    32px !important;
 
   line-height:
     1 !important;
 
   text-indent:
     0 !important;
-
 }
 
 
-.jlh-hero h2{
-
+.jlf-hero h2{
   margin:
     0 !important;
 
-  color:#ba632c !important;
+  color:
+    #bc662f !important;
 
   font-size:
     10px !important;
 
   line-height:
-    1.4 !important;
-
+    1.42 !important;
 }
 
 
-.jlh-hero p{
+.jlf-hero p{
+  margin-top:10px;
 
-  margin-top:9px;
+  color:#5f4a64;
 
-  color:#5f4b64;
-
-  font-size:6.4px;
+  font-size:6.5px;
 
   line-height:1.55;
-
 }
 
 
-/*
-  MASTER 只拿來裁右側人物 / 紫色背景。
-  沒有整張圖片首頁。
-*/
-
-.jlh-hero-art{
-
+.jlf-teacher-silhouette{
   position:absolute;
 
-  right:0;
+  z-index:4;
 
-  top:0;
+  right:20%;
+  bottom:0;
 
-  width:60%;
-
-  height:100%;
-
-  z-index:2;
-
-  background-image:
-    url("home-master-v2.webp");
-
-  background-repeat:
-    no-repeat;
-
-  background-size:
-    184% auto;
-
-  background-position:
-    82% 0%;
-
+  width:26%;
+  height:86%;
 }
 
 
-.jlh-hero-art::before{
-
-  content:"";
-
+.jlf-head{
   position:absolute;
 
-  inset:0;
+  left:30%;
+  top:5%;
+
+  width:38%;
+
+  aspect-ratio:1;
+
+  border-radius:
+    48% 48% 44% 44%;
 
   background:
-
     linear-gradient(
-      90deg,
-      #ecc3ff 0%,
-      rgba(236,195,255,.23) 25%,
-      transparent 55%
+      145deg,
+      #f7d0bc,
+      #d8a48e
     );
 
+  box-shadow:
+    0 -11px 0 2px
+    #21121f;
 }
 
 
-.jlh-quote{
-
+.jlf-body{
   position:absolute;
 
-  right:2.5%;
+  left:8%;
+  bottom:-3%;
 
-  top:34%;
+  width:84%;
+  height:67%;
 
-  width:18%;
+  border-radius:
+    40% 40% 8% 8%;
+
+  background:
+    linear-gradient(
+      150deg,
+      #fff7e9 0 46%,
+      #dcc0aa 47% 100%
+    );
+
+  box-shadow:
+    0 12px 20px
+    rgba(41,4,54,.2);
+}
+
+
+.jlf-quote{
+  position:absolute;
 
   z-index:6;
+
+  right:2.5%;
+  top:34%;
+
+  width:17.5%;
 
   color:#fff;
 
   font-size:6.5px;
 
-  line-height:1.6;
+  line-height:1.62;
 
   text-shadow:
     0 2px 5px
-    rgba(45,4,58,.65);
-
+    rgba(38,3,50,.72);
 }
 
 
-.jlh-quote b{
-
+.jlf-quote b{
   display:block;
 
   margin-top:4px;
 
-  color:#f1d169;
+  color:#f1d16b;
 
   font-size:8px;
-
 }
 
 
-/* ===== 探索標題 ===== */
 
-.jlh-section-title{
+/* 標題 */
 
+.jlf-section-title{
   height:34px;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
-  color:#561567;
-
   background:
-
     linear-gradient(
       90deg,
       #fff8ff,
-      #ebcbff,
+      #edccff,
       #fff8ff
     );
+
+  color:#50135f;
 
   font-family:
     "Noto Serif TC",
@@ -1657,45 +1578,33 @@ body.jlh-feature-mode
   font-size:11px;
 
   font-weight:900;
-
 }
 
 
-/* ===== 六大功能 ===== */
 
-.jlh-tools{
+/* 六大卡片 */
 
+.jlf-tools{
   padding:
     8px 9px 9px;
-
-  background:
-
-    radial-gradient(
-      circle at 50% 0,
-      #fff,
-      #f3dcff
-    );
-
 }
 
 
-.jlh-grid{
-
+.jlf-grid{
   display:grid;
 
   grid-template-columns:
-    repeat(3,1fr);
+    repeat(
+      3,
+      minmax(0,1fr)
+    );
 
   gap:7px;
-
 }
 
 
-.jlh-card{
-
-  min-width:0;
-
-  height:121px;
+.jlf-card{
+  height:124px;
 
   padding:
     7px 3px 6px;
@@ -1703,76 +1612,104 @@ body.jlh-feature-mode
   text-align:center;
 
   border:
-    1px solid #dba6ee;
+    1px solid #d8a1ea;
 
   border-radius:13px;
 
   background:
-
     linear-gradient(
       180deg,
-      rgba(255,255,255,.98),
-      rgba(255,244,255,.96)
+      #fff 0%,
+      #fff8ff 100%
     );
 
   box-shadow:
-    0 6px 14px
-    rgba(102,19,129,.1);
-
+    0 6px 15px
+    rgba(96,16,125,.10);
 }
 
 
-.jlh-icon{
+.jlf-badge{
+  position:relative;
 
-  width:43px;
-
-  height:43px;
+  width:46px;
+  height:46px;
 
   margin:
     0 auto 5px;
 
   display:grid;
-
   place-items:center;
-
-  border:
-    2px solid var(--jlh-gold);
 
   border-radius:50%;
 
-  background:
+  border:
+    2px solid
+    var(--gold);
 
+  background:
     radial-gradient(
-      circle at 35% 23%,
-      #ca53f2,
-      #660d8b 73%
+      circle at 34% 25%,
+      #d06af2 0,
+      #8d25ba 37%,
+      #4b075f 78%
     );
 
   box-shadow:
-    0 3px 8px
-    rgba(86,10,108,.30);
+    inset
+    0 0 0 2px
+    rgba(255,235,163,.18),
 
+    inset
+    0 0 13px
+    rgba(255,203,104,.18),
+
+    0 4px 10px
+    rgba(72,6,92,.30),
+
+    0 0 0 1px
+    rgba(120,42,144,.18);
 }
 
 
-.jlh-icon svg{
+.jlf-badge::after{
+  content:"";
 
-  width:36px;
+  position:absolute;
+  inset:3px;
 
-  height:36px;
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(255,226,126,.46);
+
+  pointer-events:none;
+}
+
+
+.jlf-badge svg{
+  width:38px;
+  height:38px;
 
   fill:none;
 
-  stroke:#f7d66e;
+  stroke:
+    var(--gold2);
 
-  stroke-width:2;
+  stroke-width:1.8;
 
+  filter:
+    drop-shadow(
+      0 1px 1px
+      rgba(42,2,51,.5)
+    );
 }
 
 
-.jlh-icon svg text{
-
-  fill:#f6d873;
+.jlf-badge svg text{
+  fill:
+    var(--gold2);
 
   stroke:none;
 
@@ -1783,19 +1720,24 @@ body.jlh-feature-mode
   font-size:13px;
 
   font-weight:900;
-
 }
 
 
-.jlh-text-icon{
+.jlf-badge .ring2{
+  stroke:
+    rgba(246,218,126,.9);
+}
 
+
+.jlf-badge-text{
   display:flex;
 
   flex-direction:column;
 
   justify-content:center;
 
-  color:#f6d36b;
+  color:
+    var(--gold2);
 
   font-family:
     "Noto Serif TC",
@@ -1803,17 +1745,19 @@ body.jlh-feature-mode
 
   font-size:10px;
 
-  line-height:1.1;
+  line-height:1.08;
 
+  text-shadow:
+    0 1px 2px
+    #3b0646;
 }
 
 
-.jlh-card h3{
-
+.jlf-card h3{
   margin:
     0 0 2px;
 
-  color:#65117f;
+  color:#61117a;
 
   font-family:
     "Noto Serif TC",
@@ -1822,41 +1766,35 @@ body.jlh-feature-mode
   font-size:10px;
 
   white-space:nowrap;
-
 }
 
 
-.jlh-card p{
-
+.jlf-card p{
   margin:0;
 
-  color:#5a4b5e;
+  color:#57485c;
 
   font-size:6px;
 
   white-space:nowrap;
-
 }
 
 
-.jlh-card small{
-
+.jlf-card small{
   display:block;
 
   margin-top:2px;
 
-  color:#79697c;
+  color:#78677b;
 
   font-size:5px;
 
   line-height:1.2;
-
 }
 
 
-.jlh-card button,
-.jlh-card > a{
-
+.jlf-card button,
+.jlf-card > a{
   display:inline-block;
 
   margin-top:4px;
@@ -1869,11 +1807,10 @@ body.jlh-feature-mode
     4px 8px;
 
   background:
-
     linear-gradient(
       135deg,
-      #711095,
-      #a92bd2
+      #6e0c90,
+      #a92bd1
     );
 
   color:#fff;
@@ -1884,79 +1821,80 @@ body.jlh-feature-mode
 
   font-weight:900;
 
+  box-shadow:
+    0 3px 7px
+    rgba(82,9,105,.18);
 }
 
 
-/* ===== 擇吉看日 ===== */
 
-.jlh-date{
+/* 擇吉看日 */
 
-  height:94px;
+.jlf-date{
+  height:98px;
 
   margin:
     0 9px 7px;
 
-  padding:
-    10px 15px;
-
   display:flex;
 
-  align-items:center;
-
-  justify-content:
-    space-between;
+  overflow:hidden;
 
   border:
-    1px solid #d49be8;
+    1px solid #d19ae5;
 
   border-radius:12px;
 
   background:
-
-    radial-gradient(
-      circle at 82% 42%,
-      rgba(255,255,255,.45),
-      transparent 28%
-    ),
-
     linear-gradient(
       110deg,
-      #f9e0ff,
-      #c876e6
+      #f9e1ff 0%,
+      #d688ee 58%,
+      #a941c8 100%
     );
 
+  box-shadow:
+    0 6px 15px
+    rgba(100,17,128,.10);
 }
 
 
-.jlh-date h2{
+.jlf-date-copy{
+  position:relative;
 
+  z-index:3;
+
+  width:67%;
+
+  padding:
+    10px 0 9px 15px;
+}
+
+
+.jlf-date h2{
   margin:0;
 
-  color:#63107b;
+  color:#601078;
 
   font-family:
     "Noto Serif TC",
     serif;
 
   font-size:17px;
-
 }
 
 
-.jlh-date p{
-
+.jlf-date p{
   margin:
     2px 0;
 
-  color:#5f4c64;
+  color:#5c4960;
 
   font-size:5.8px;
-
 }
 
 
-.jlh-date a{
-
+.jlf-date a{
   display:inline-block;
 
   margin-top:3px;
@@ -1964,9 +1902,10 @@ body.jlh-feature-mode
   padding:
     4px 11px;
 
-  border-radius:999px;
+  border-radius:
+    999px;
 
-  background:#8110a5;
+  background:#78109b;
 
   color:#fff;
 
@@ -1975,15 +1914,128 @@ body.jlh-feature-mode
   font-size:6px;
 
   font-weight:900;
-
 }
 
 
-.jlh-calendar{
+.jlf-date-scene{
+  position:relative;
 
-  width:54px;
+  width:33%;
 
-  height:54px;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      150deg,
+      rgba(255,255,255,.25),
+      rgba(90,22,113,.16)
+    );
+}
+
+
+.jlf-window{
+  position:absolute;
+
+  right:0;
+  top:0;
+
+  width:100%;
+  height:70%;
+
+  background:
+    radial-gradient(
+      circle at 75% 28%,
+      rgba(255,248,210,.7),
+      transparent 13%
+    ),
+
+    linear-gradient(
+      165deg,
+      transparent 0 42%,
+      rgba(86,33,116,.28)
+      43% 50%,
+      transparent 51% 58%,
+      rgba(72,24,99,.18)
+      59% 66%,
+      transparent 67%
+    );
+}
+
+
+.jlf-vase{
+  position:absolute;
+
+  right:11%;
+  bottom:12%;
+
+  width:20px;
+  height:28px;
+
+  border-radius:
+    7px 7px 10px 10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff8ef,
+      #e4c5ee
+    );
+
+  box-shadow:
+    0 4px 7px
+    rgba(65,7,83,.16);
+}
+
+
+.jlf-vase i{
+  position:absolute;
+
+  bottom:22px;
+  left:9px;
+
+  width:1px;
+  height:27px;
+
+  background:#6e3f61;
+
+  transform-origin:bottom;
+}
+
+
+.jlf-vase i:nth-child(1){
+  transform:
+    rotate(-24deg);
+}
+
+
+.jlf-vase i:nth-child(2){
+  transform:
+    rotate(4deg);
+}
+
+
+.jlf-vase i:nth-child(3){
+  transform:
+    rotate(28deg);
+}
+
+
+.jlf-calendar{
+  position:absolute;
+
+  left:8%;
+  bottom:11%;
+
+  width:46px;
+  height:49px;
+
+  border:
+    1px solid
+    var(--gold);
+
+  border-radius:7px;
+
+  background:#fff9e8;
 
   display:flex;
 
@@ -1993,53 +2045,43 @@ body.jlh-feature-mode
 
   justify-content:center;
 
-  border:
-    1px solid var(--jlh-gold);
+  color:#82178f;
 
-  border-radius:9px;
-
-  background:#fff9e9;
-
-  color:#8b1b96;
-
+  box-shadow:
+    0 4px 9px
+    rgba(61,8,76,.16);
 }
 
 
-.jlh-calendar span{
-
-  font-size:9px;
-
+.jlf-calendar span{
+  font-size:8px;
 }
 
 
-.jlh-calendar strong{
-
-  font-size:16px;
-
+.jlf-calendar b{
+  font-size:15px;
 }
 
 
-/* ===== LINE ===== */
 
-.jlh-contact{
+/* 諮詢 / LINE */
 
+.jlf-contact{
   margin:
     0 9px 7px;
 
   padding:6px;
 
   border:
-    1px solid #dbacef;
+    1px solid #d9aaeb;
 
   border-radius:11px;
 
   background:#fff;
-
 }
 
 
-.jlh-consult{
-
+.jlf-consult{
   display:flex;
 
   align-items:center;
@@ -2047,60 +2089,61 @@ body.jlh-feature-mode
   gap:7px;
 
   padding-bottom:5px;
-
 }
 
 
-.jlh-mini-teacher{
-
+.jlf-avatar{
   width:38px;
+  height:42px;
 
-  height:45px;
+  display:grid;
+
+  place-items:center;
 
   flex:0 0 auto;
 
-  border-radius:7px;
+  border-radius:9px;
 
-  background-image:
-    url("home-master-v2.webp");
+  background:
+    linear-gradient(
+      145deg,
+      #f5d6ff,
+      #9e41c2
+    );
 
-  background-repeat:
-    no-repeat;
+  border:
+    1px solid #d8a552;
 
-  background-size:
-    430% auto;
+  color:#6c167a;
 
-  background-position:
-    68% 1%;
+  font-family:
+    "Noto Serif TC",
+    serif;
 
+  font-weight:900;
 }
 
 
-.jlh-consult h3{
-
+.jlf-consult h3{
   margin:0;
 
-  color:#65117d;
+  color:#61117a;
 
   font-size:8px;
-
 }
 
 
-.jlh-consult p{
-
+.jlf-consult p{
   margin:
     2px 0 0;
 
-  color:#6f6072;
+  color:#6d5d70;
 
   font-size:5.5px;
-
 }
 
 
-.jlh-line{
-
+.jlf-line{
   height:33px;
 
   display:flex;
@@ -2113,21 +2156,18 @@ body.jlh-feature-mode
     5px 7px;
 
   border:
-    1px solid #e3c2ef;
+    1px solid #dfbdec;
 
   border-radius:8px;
 
   color:inherit;
 
   text-decoration:none;
-
 }
 
 
-.jlh-line-icon{
-
+.jlf-line-icon{
   width:22px;
-
   height:22px;
 
   display:grid;
@@ -2136,43 +2176,36 @@ body.jlh-feature-mode
 
   border-radius:50%;
 
-  background:#28ca45;
+  background:#29c747;
 
   color:#fff;
 
   font-size:4px;
-
 }
 
 
-.jlh-line b{
-
+.jlf-line b{
   display:block;
 
-  color:#65117d;
+  color:#61117a;
 
   font-size:7px;
-
 }
 
 
-.jlh-line small{
-
+.jlf-line small{
   display:block;
 
-  color:#756479;
+  color:#746278;
 
   font-size:5.5px;
-
 }
 
 
-.jlh-line em{
-
+.jlf-line em{
   margin-left:auto;
 
   width:20px;
-
   height:20px;
 
   display:grid;
@@ -2181,19 +2214,18 @@ body.jlh-feature-mode
 
   border-radius:50%;
 
-  background:#8b19b3;
+  background:#8517aa;
 
   color:#fff;
 
   font-style:normal;
-
 }
 
 
-/* ===== Footer ===== */
 
-.jlh-footer{
+/* Footer */
 
+.jlf-footer{
   min-height:42px;
 
   display:grid;
@@ -2207,39 +2239,35 @@ body.jlh-feature-mode
     7px 8px 5px;
 
   background:
-
     linear-gradient(
       90deg,
-      #350442,
-      #62107a,
-      #350442
+      #32033e,
+      #600f76,
+      #32033e
     );
 
-  color:#f2ddf9;
+  color:#f1ddf8;
 
   text-align:center;
 
   font-size:5.5px;
-
 }
 
 
-.jlh-footer small{
-
+.jlf-footer small{
   grid-column:
-    1 / -1;
+    1/-1;
 
-  color:#c5a9ce;
+  color:#c3a8cc;
 
   font-size:4.7px;
-
 }
 
 
-/* ===== 功能頁 ===== */
 
-#jlh-back{
+/* 功能頁 */
 
+#jlf-back{
   position:sticky;
 
   top:0;
@@ -2254,22 +2282,19 @@ body.jlh-feature-mode
     11px 14px;
 
   background:
-
     linear-gradient(
       90deg,
-      #4e0965,
-      #8118a7
+      #4b085f,
+      #7c169f
     );
 
   color:#fff;
 
   font-weight:900;
-
 }
 
 
-#jlh-route-notice{
-
+#jlf-route-notice{
   display:none;
 
   margin:
@@ -2279,39 +2304,42 @@ body.jlh-feature-mode
     10px 12px;
 
   border:
-    1px solid #d9a5ec;
+    1px solid #d5a1e8;
 
   border-radius:9px;
 
   background:#f8eaff;
 
-  color:#64117e;
+  color:#611179;
 
   font-size:11px;
 
   font-weight:700;
 
   line-height:1.6;
-
 }
 
 
-#jlh-route-notice.show{
-
+#jlf-route-notice.show{
   display:block;
-
 }
 
+
+
+/* 手機維持 3 欄 */
 
 @media(max-width:430px){
 
-  .jlh-nav{
+  .jlf-nav{
     display:none;
   }
 
-  .jlh-grid{
+  .jlf-grid{
     grid-template-columns:
-      repeat(3,1fr);
+      repeat(
+        3,
+        minmax(0,1fr)
+      );
   }
 
 }
@@ -2326,6 +2354,22 @@ body.jlh-feature-mode
 
   showHome();
 
-});
+}
+
+
+if(
+  document.readyState==='loading'
+){
+
+  document.addEventListener(
+    'DOMContentLoaded',
+    boot
+  );
+
+}else{
+
+  boot();
+
+}
 
 })();
