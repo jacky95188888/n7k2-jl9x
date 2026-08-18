@@ -517,90 +517,106 @@
 
     function route(term) {
 
-      sessionStorage.setItem(
-        'jl-master-route',
-        term
+  sessionStorage.setItem(
+    'jl-master-route',
+    term
+  );
+
+  clearNote();
+
+  /* 四柱八字 */
+  if (term === '四柱') {
+
+    showFeature(paipan);
+
+    return;
+  }
+
+  /* 紫微 / 九宮 */
+  if (term === '九宮') {
+
+    const target = findTarget('九宮');
+
+    if (target) {
+
+      showFeature(target);
+
+    } else {
+
+      setNote(
+        '請先完成生辰排盤，再查看九宮分析。'
       );
 
-
-      /* 四柱 */
-
-      if (
-        term === '四柱'
-      ) {
-
-        setNote(
-          '請先輸入出生資料並排盤；完成後會顯示四柱、先天、後天與完整命盤。'
-        );
-
-
-        showFeature(
-          paipan
-        );
-
-
-        return;
-
-      }
-
-
-
-      /* 其他功能尚未排盤 */
-
-      if (
-        !hasChart()
-      ) {
-
-        const messages = {
-
-          九宮:
-            '九宮分析需要先建立命盤，請先完成生辰排盤。',
-
-          奇門:
-            '奇門遁甲需要先建立命盤，請先完成生辰排盤。',
-
-          六親:
-            '六親分析需要先建立命盤，請先完成生辰排盤。',
-
-          流年:
-            '流年運勢需要先建立命盤，請先完成生辰排盤。'
-
-        };
-
-
-        setNote(
-          messages[term] ||
-          '請先完成生辰排盤。'
-        );
-
-
-        showFeature(
-          paipan
-        );
-
-
-        return;
-
-      }
-
-
-
-      /* 已排盤 */
-
-      clearNote();
-
-
-      const target =
-        findTarget(term);
-
-
-      showFeature(
-        target ||
-        out ||
-        paipan
-      );
-
+      showFeature(paipan);
     }
+
+    return;
+  }
+
+  /* 奇門遁甲 */
+  if (term === '奇門') {
+
+    const target = findTarget('奇門');
+
+    if (target) {
+
+      showFeature(target);
+
+    } else {
+
+      setNote(
+        '請先完成生辰排盤，再查看奇門遁甲。'
+      );
+
+      showFeature(paipan);
+    }
+
+    return;
+  }
+
+  /* 六壬 / 六親 */
+  if (term === '六親') {
+
+    const target = findTarget('六親');
+
+    if (target) {
+
+      showFeature(target);
+
+    } else {
+
+      setNote(
+        '請先完成生辰排盤，再查看六親分析。'
+      );
+
+      showFeature(paipan);
+    }
+
+    return;
+  }
+
+  /* 流年運勢 */
+  if (term === '流年') {
+
+    const target = findTarget('流年');
+
+    if (target) {
+
+      showFeature(target);
+
+    } else {
+
+      setNote(
+        '請先完成生辰排盤，再查看流年運勢。'
+      );
+
+      showFeature(paipan);
+    }
+
+    return;
+  }
+
+}
 
 
 
