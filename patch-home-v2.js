@@ -1,3186 +1,948 @@
-/* 筠玲易數｜首頁規格鎖定版
-   正式母版：
-   亮紫金色＋老師右側主視覺＋六大功能＋擇吉看日＋LINE
-   首頁與舊功能完全分離，避免新舊頁面重疊
-*/
+(function(){
+'use strict';
 
-(function () {
-  'use strict';
+function boot(){
+  if(document.documentElement.dataset.jlHomeClean==='1') return;
+  document.documentElement.dataset.jlHomeClean='1';
 
-  function ready(fn) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fn);
-    } else {
-      fn();
+  const wrap=document.querySelector('.wrap');
+  if(!wrap) return;
+
+  /* ===== 舊網站完整收進功能殼 ===== */
+  const feature=document.createElement('div');
+  feature.id='jl-feature-shell';
+  [...wrap.children].forEach(n=>feature.appendChild(n));
+  wrap.appendChild(feature);
+
+  const paipan=[...feature.children].find(n=>n.classList&&n.classList.contains('card')) || feature.querySelector('.card');
+  const out=feature.querySelector('#out');
+  const go=feature.querySelector('#go');
+
+  if(paipan){
+    paipan.id=paipan.id||'paipan';
+    paipan.classList.add('jl-paipan');
+  }
+
+  [...feature.querySelectorAll('.card')].forEach(card=>{
+    const t=(card.textContent||'').replace(/\s+/g,'');
+    if(t.includes('功能選單')) card.classList.add('jl-old-menu');
+  });
+
+  /* ===== 六個紫金 SVG 圖示 ===== */
+  const iconBazi=`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="29"/><path d="M32 7v50M7 32h50"/><text x="19" y="23">年</text><text x="39" y="23">月</text><text x="19" y="45">日</text><text x="39" y="45">時</text></svg>`;
+  const iconNine=`<svg viewBox="0 0 64 64"><rect x="9" y="9" width="46" height="46" rx="3"/><path d="M24 9v46M40 9v46M9 24h46M9 40h46"/><text x="15" y="20">4</text><text x="30" y="20">9</text><text x="46" y="20">2</text><text x="15" y="36">3</text><text x="30" y="36">5</text><text x="46" y="36">7</text><text x="15" y="52">8</text><text x="30" y="52">1</text><text x="46" y="52">6</text></svg>`;
+  const iconQimen=`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28"/><circle cx="32" cy="32" r="18"/><path d="M32 14a18 18 0 1 0 0 36 9 9 0 1 1 0-18 9 9 0 1 0 0-18z"/><circle cx="32" cy="23" r="2.5"/><circle cx="32" cy="41" r="2.5"/><path d="M32 4v7M32 53v7M4 32h7M53 32h7M12 12l5 5M47 47l5 5M52 12l-5 5M17 47l-5 5"/></svg>`;
+  const iconLiuqin=`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28"/><text x="32" y="27" text-anchor="middle" class="big">六壬</text><text x="32" y="44" text-anchor="middle" class="big">六親</text></svg>`;
+  const iconStar=`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28"/><path d="M15 39l8-15 10 8 8-13 9 20-17 8z"/><circle cx="23" cy="24" r="2"/><circle cx="33" cy="32" r="2"/><circle cx="41" cy="19" r="2"/><circle cx="50" cy="39" r="2"/><circle cx="33" cy="47" r="2"/><circle cx="15" cy="39" r="2"/></svg>`;
+  const iconYear=`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28"/><path d="M15 46h7V35h7v11h7V26h7v20h7V17"/><path d="M43 17h7v7"/></svg>`;
+
+  /* ===== 新首頁 ===== */
+  const home=document.createElement('section');
+  home.id='jl-home';
+  home.innerHTML=`
+    <header class="jl-top">
+      <button class="jl-brand" type="button" id="jl-home-btn">
+        <span class="jl-seal">筠</span><b>筠玲易數</b>
+      </button>
+      <nav class="jl-nav">
+        <a href="#jl-home">首頁</a>
+        <a href="#jl-tools">命理知識</a>
+        <a href="#jl-contact">聯絡我們</a>
+      </nav>
+      <button class="jl-mine" type="button" data-route="四柱">☯ 我的命盤</button>
+    </header>
+
+    <section class="jl-hero">
+      <div class="jl-hero-copy">
+        <div class="jl-kicker">✦ 以數觀象 · 以卦察勢 · 以理明心 ✦</div>
+        <h1>筠玲易數</h1>
+        <h2>解析命運的軌跡 · 掌握人生的方向</h2>
+        <p>結合傳統命理智慧與現代視角<br>協助您了解自己 · 趨吉避凶 · 創造更好的人生</p>
+      </div>
+      <div class="jl-aura"></div>
+      <img class="jl-teacher" src="IMG_0821.png" alt="筠玲老師"
+           onerror="this.style.display='none'">
+      <div class="jl-hero-quote">
+        命，不是定局；<br>
+        看懂自己的局，<br>
+        才知道下一步怎麼走。
+        <b>筠玲老師</b>
+      </div>
+    </section>
+
+    <div class="jl-section-title">✦ 探索命理智慧 · 開啟人生新局 ✦</div>
+
+    <section class="jl-tools" id="jl-tools">
+      <div class="jl-grid">
+
+        <button class="jl-tool" type="button" data-route="四柱">
+          <div class="jl-icon">${iconBazi}</div>
+          <h3>四柱八字</h3>
+          <p>生辰排盤 · 命運解析</p>
+          <small>先天 × 後天 × 五行<br>大運 × 流年 × 格局</small>
+          <span>進入解析 ›</span>
+        </button>
+
+        <button class="jl-tool" type="button" data-route="九宮">
+          <div class="jl-icon">${iconNine}</div>
+          <h3>紫微／九宮</h3>
+          <p>命盤解析 · 宮位星曜</p>
+          <small>宮位 × 星曜 × 格局<br>吉凶 × 組合 × 解析</small>
+          <span>進入解析 ›</span>
+        </button>
+
+        <button class="jl-tool" type="button" data-route="奇門">
+          <div class="jl-icon">${iconQimen}</div>
+          <h3>奇門遁甲</h3>
+          <p>問事決策 · 趨吉避凶</p>
+          <small>時間 × 方位 × 局勢<br>開門 × 落宮 × 值符</small>
+          <span>進入解析 ›</span>
+        </button>
+
+        <button class="jl-tool" type="button" data-route="六親">
+          <div class="jl-icon">${iconLiuqin}</div>
+          <h3>六壬／六親</h3>
+          <p>事情推演 · 事件解析</p>
+          <small>關係 × 事件 × 發展<br>占斷 × 判事 × 應驗</small>
+          <span>進入解析 ›</span>
+        </button>
+
+        <a class="jl-tool" href="bxcc.html">
+          <div class="jl-icon">${iconStar}</div>
+          <h3>八星磁場</h3>
+          <p>數字能量 · 磁場解析</p>
+          <small>手機 × 車牌 × 門牌<br>數字 × 能量 × 吉凶</small>
+          <span>進入解析 ›</span>
+        </a>
+
+        <button class="jl-tool" type="button" data-route="流年">
+          <div class="jl-icon">${iconYear}</div>
+          <h3>流年運勢</h3>
+          <p>年度運勢 · 流月解析</p>
+          <small>年度 × 月運 × 日運<br>趨勢 × 提醒 × 建議</small>
+          <span>進入解析 ›</span>
+        </button>
+
+      </div>
+    </section>
+
+    <section class="jl-date">
+      <div>
+        <h2>擇吉看日</h2>
+        <p>結婚 · 開業 · 搬家 · 簽約 · 出行 · 入宅 · 動土 · 祈福</p>
+        <p>選一個適合您的好日子，讓事情順利圓滿。</p>
+        <a href="rz.html">開始看日子 ›</a>
+      </div>
+      <div class="jl-calendar"><span>吉</span><b>日</b></div>
+    </section>
+
+    <section class="jl-contact" id="jl-contact">
+      <div class="jl-consult">
+        <img src="IMG_0821.png" alt="" onerror="this.style.display='none'">
+        <div>
+          <h3>需要進一步命理解讀？</h3>
+          <p>筠玲老師提供一對一專業諮詢服務，深入分析您的命盤。</p>
+        </div>
+      </div>
+
+      <a class="jl-line" href="https://line.me/ti/p/@804kmmmy">
+        <i>LINE</i>
+        <div>
+          <b>加入筠玲老師 LINE</b>
+          <span>LINE ID：@804kmmmy</span>
+        </div>
+        <em>›</em>
+      </a>
+    </section>
+
+    <footer class="jl-footer">
+      <span>✦ 專業可靠</span>
+      <span>☆ 經驗豐富</span>
+      <span>♡ 用心解盤</span>
+      <span>▣ 隱私保密</span>
+      <small>© 2026 筠玲易數 · All Rights Reserved.</small>
+    </footer>
+  `;
+
+  wrap.insertBefore(home,feature);
+
+  /* ===== 功能頁返回首頁 ===== */
+  const back=document.createElement('button');
+  back.id='jl-back';
+  back.type='button';
+  back.textContent='← 回到功能首頁';
+  feature.insertBefore(back,feature.firstChild);
+
+  function showHome(){
+    document.body.classList.remove('jl-feature-mode');
+    document.body.classList.add('jl-home-mode');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  function showFeature(target){
+    document.body.classList.remove('jl-home-mode');
+    document.body.classList.add('jl-feature-mode');
+    setTimeout(()=>{
+      (target||paipan||feature).scrollIntoView({
+        behavior:'smooth',
+        block:'start'
+      });
+    },60);
+  }
+
+  back.addEventListener('click',showHome);
+  home.querySelector('#jl-home-btn').addEventListener('click',showHome);
+
+  function norm(s){
+    return String(s||'').replace(/\s+/g,'');
+  }
+
+  function findTarget(term){
+    const map={
+      九宮:['奇門數字九宮盤','數字九宮盤','九宮盤','九宮'],
+      奇門:['奇門遁甲','奇門'],
+      六親:['六親對照','六親解析','六親'],
+      流年:['流年運勢','流年']
+    };
+
+    const words=map[term]||[term];
+
+    const nodes=[
+      ...feature.querySelectorAll(
+        'h2,h3,h4,summary,#plugs0>.card,#plug>.card,#plugs>.card,#out>.card,.card.pro'
+      )
+    ];
+
+    for(const node of nodes){
+      const txt=norm(node.textContent);
+      if(words.some(w=>txt.includes(norm(w)))) return node;
+    }
+
+    return null;
+  }
+
+  function hasChart(){
+    return !!(
+      out &&
+      !out.classList.contains('hide')
+    );
+  }
+
+  let note=null;
+
+  if(paipan){
+    note=document.createElement('div');
+    note.className='jl-note';
+    paipan.appendChild(note);
+  }
+
+  function setNote(t){
+    if(note){
+      note.textContent=t;
+      note.classList.add('show');
     }
   }
 
-  ready(function () {
+  function clearNote(){
+    if(note) note.classList.remove('show');
+  }
 
-    /* 防止重複執行 */
-    if (document.body.dataset.jlExactHome === '1') return;
-    document.body.dataset.jlExactHome = '1';
+  function route(term){
+    sessionStorage.setItem('jl-route',term);
 
-    const wrap = document.querySelector('.wrap');
-
-    if (!wrap) {
-      console.warn('筠玲首頁：找不到 .wrap');
+    if(term==='四柱'){
+      setNote('請先輸入出生資料並排盤；完成後會顯示四柱、先天、後天與完整命盤。');
+      showFeature(paipan);
       return;
     }
 
-
-    /* ======================================================
-       01. 把原本網站完整收進「功能頁」
-       ====================================================== */
-
-    const feature = document.createElement('div');
-
-    feature.id = 'jl-feature-shell';
-
-    const oldChildren = Array.from(wrap.children);
-
-    oldChildren.forEach(function (el) {
-      feature.appendChild(el);
-    });
-
-    wrap.appendChild(feature);
-
-
-    /* ======================================================
-       02. 找出原本排盤主要區塊
-       ====================================================== */
-
-    const cards = Array.from(
-      feature.querySelectorAll(':scope > .card')
-    );
-
-    const paipan =
-      cards[0] ||
-      feature.querySelector('.card');
-
-    const out =
-      feature.querySelector('#out');
-
-    const go =
-      feature.querySelector('#go');
-
-
-    if (paipan) {
-      paipan.id = paipan.id || 'paipan';
-      paipan.classList.add('jl-paipan');
-    }
-
-
-    /* ======================================================
-       03. 隱藏舊功能選單
-       ====================================================== */
-
-    Array.from(
-      feature.querySelectorAll('.card')
-    ).forEach(function (card) {
-
-      const txt = (card.textContent || '')
-        .replace(/\s+/g, '');
-
-      if (txt.includes('功能選單')) {
-        card.classList.add('jl-hide-old-menu');
-      }
-
-    });
-
-
-    /* ======================================================
-       04. 建立正式新版首頁
-       ====================================================== */
-
-    const home = document.createElement('section');
-
-    home.id = 'jl-home';
-
-    home.innerHTML = `
-
-<header class="jl-header">
-
-  <div class="jl-logo">
-
-    <span class="jl-logo-mark">
-      筠
-    </span>
-
-    <strong>
-      筠玲易數
-    </strong>
-
-  </div>
-
-
-  <nav class="jl-nav">
-
-    <a href="#jl-home">
-      首頁
-    </a>
-
-    <a href="#jl-about">
-      關於老師
-    </a>
-
-    <a href="#jl-tools">
-      命理知識
-    </a>
-
-    <a href="#jl-faq">
-      常見問題
-    </a>
-
-    <a href="#jl-contact">
-      聯絡我們
-    </a>
-
-  </nav>
-
-
-  <button
-    class="jl-my"
-    type="button"
-    data-route="四柱">
-
-    ☯ 我的命盤
-
-  </button>
-
-</header>
-
-
-
-<section class="jl-hero">
-
-
-  <div class="jl-hero-left">
-
-    <div class="jl-kicker">
-
-      ✦ 以數觀象 · 以卦察勢 · 以理明心 ✦
-
-    </div>
-
-
-    <h1>
-      筠玲易數
-    </h1>
-
-
-    <h2>
-      解析命運的軌跡 · 掌握人生的方向
-    </h2>
-
-
-    <p>
-
-      結合傳統命理智慧與現代視角
-
-      <br>
-
-      協助您了解自己 · 趨吉避凶 · 創造更好的人生
-
-    </p>
-
-  </div>
-
-
-
-  <div
-    class="jl-hero-right"
-    aria-hidden="true">
-  </div>
-
-
-
-  <div class="jl-quote">
-
-    命，不是定局；
-
-    <br>
-
-    看懂自己的局，
-
-    <br>
-
-    才知道下一步
-
-    <br>
-
-    怎麼走。
-
-    <br>
-
-    <b>
-      筠玲老師
-    </b>
-
-  </div>
-
-
-</section>
-
-
-
-<div class="jl-main-title">
-
-  ✦ 探索命理智慧 · 開啟人生新局 ✦
-
-</div>
-
-
-
-<section
-  class="jl-tools"
-  id="jl-tools">
-
-
-  <div class="jl-grid">
-
-
-    <!-- 四柱八字 -->
-
-    <button
-      class="jl-tool"
-      type="button"
-      data-route="四柱">
-
-
-      <div class="jl-icon">
-
-        年 月
-
-        <br>
-
-        日 時
-
-      </div>
-
-
-      <h3>
-        四柱八字
-      </h3>
-
-
-      <p>
-        生辰排盤 · 命運解析
-      </p>
-
-
-      <small>
-
-        先天 × 後天 × 五行
-
-        <br>
-
-        大運 × 流年 × 格局
-
-      </small>
-
-
-      <span>
-        進入解析 ›
-      </span>
-
-
-    </button>
-
-
-
-    <!-- 九宮 -->
-
-    <button
-      class="jl-tool"
-      type="button"
-      data-route="九宮">
-
-
-      <div class="jl-icon jl-nine">
-
-        4　9　2
-
-        <br>
-
-        3　5　7
-
-        <br>
-
-        8　1　6
-
-      </div>
-
-
-      <h3>
-        紫微／九宮
-      </h3>
-
-
-      <p>
-        命盤解析 · 宮位星曜
-      </p>
-
-
-      <small>
-
-        宮位 × 星曜 × 格局
-
-        <br>
-
-        吉凶 × 組合 × 解析
-
-      </small>
-
-
-      <span>
-        進入解析 ›
-      </span>
-
-
-    </button>
-
-
-
-    <!-- 奇門 -->
-
-    <button
-      class="jl-tool"
-      type="button"
-      data-route="奇門">
-
-
-      <div class="jl-icon">
-        ☯
-      </div>
-
-
-      <h3>
-        奇門遁甲
-      </h3>
-
-
-      <p>
-        問事決策 · 趨吉避凶
-      </p>
-
-
-      <small>
-
-        時間 × 方位 × 局勢
-
-        <br>
-
-        開門 × 落宮 × 值符
-
-      </small>
-
-
-      <span>
-        進入解析 ›
-      </span>
-
-
-    </button>
-
-
-
-    <!-- 六壬六親 -->
-
-    <button
-      class="jl-tool"
-      type="button"
-      data-route="六親">
-
-
-      <div class="jl-icon">
-
-        六壬
-
-        <br>
-
-        六親
-
-      </div>
-
-
-      <h3>
-        六壬／六親
-      </h3>
-
-
-      <p>
-        事情推演 · 事件解析
-      </p>
-
-
-      <small>
-
-        關係 × 事件 × 發展
-
-        <br>
-
-        占斷 × 判事 × 應驗
-
-      </small>
-
-
-      <span>
-        進入解析 ›
-      </span>
-
-
-    </button>
-
-
-
-    <!-- 八星磁場 -->
-
-    <a
-      class="jl-tool"
-      href="bxcc.html">
-
-
-      <div class="jl-icon">
-
-        ✦
-
-        <br>
-
-        ✦ ✦
-
-      </div>
-
-
-      <h3>
-        八星磁場
-      </h3>
-
-
-      <p>
-        數字能量 · 磁場解析
-      </p>
-
-
-      <small>
-
-        手機 × 車牌 × 門牌
-
-        <br>
-
-        數字 × 能量 × 吉凶
-
-      </small>
-
-
-      <span>
-        進入解析 ›
-      </span>
-
-
-    </a>
-
-
-
-    <!-- 流年 -->
-
-    <button
-      class="jl-tool"
-      type="button"
-      data-route="流年">
-
-
-      <div class="jl-icon">
-        ↗
-      </div>
-
-
-      <h3>
-        流年運勢
-      </h3>
-
-
-      <p>
-        年度運勢 · 流月解析
-      </p>
-
-
-      <small>
-
-        年度 × 月運 × 日運
-
-        <br>
-
-        趨勢 × 提醒 × 建議
-
-      </small>
-
-
-      <span>
-        進入解析 ›
-      </span>
-
-
-    </button>
-
-
-  </div>
-
-</section>
-
-
-
-<!-- 擇吉看日 -->
-
-<section class="jl-date">
-
-
-  <div class="jl-date-copy">
-
-
-    <h2>
-      擇吉看日
-    </h2>
-
-
-    <p>
-
-      結婚 · 開業 · 搬家 · 簽約 · 出行 · 入宅 · 動土 · 祈福
-
-    </p>
-
-
-    <p>
-
-      選一個適合您的好日子，讓事情順利圓滿。
-
-    </p>
-
-
-    <a href="rz.html">
-
-      開始看日子 ›
-
-    </a>
-
-
-  </div>
-
-
-
-  <div class="jl-date-art">
-
-
-    <div class="jl-calendar">
-
-      吉
-
-      <br>
-
-      日
-
-    </div>
-
-
-  </div>
-
-
-</section>
-
-
-
-<!-- 老師與 LINE -->
-
-<section
-  class="jl-contact"
-  id="jl-contact">
-
-
-  <div class="jl-teacher-mini">
-
-
-    <div class="jl-mini-photo">
-    </div>
-
-
-    <div>
-
-
-      <h3>
-        需要進一步命理解讀？
-      </h3>
-
-
-      <p>
-
-        筠玲老師提供一對一專業諮詢服務
-
-        <br>
-
-        深入分析您的命盤，為您解答人生困惑
-
-      </p>
-
-
-    </div>
-
-
-  </div>
-
-
-
-  <div class="jl-line-card">
-
-
-    <div class="jl-line-dot">
-
-      LINE
-
-    </div>
-
-
-    <div>
-
-
-      <strong>
-
-        加入筠玲老師 LINE
-
-      </strong>
-
-
-      <div>
-
-        LINE ID：@804kmmmy
-
-      </div>
-
-
-    </div>
-
-
-    <a
-      href="https://line.me/ti/p/@804kmmmy">
-
-      ›
-
-    </a>
-
-
-  </div>
-
-
-</section>
-
-
-
-<footer class="jl-footer">
-
-
-  <span>
-    ✦ 專業可靠
-  </span>
-
-
-  <span>
-    ☆ 經驗豐富
-  </span>
-
-
-  <span>
-    ♡ 用心解盤
-  </span>
-
-
-  <span>
-    ▣ 隱私保密
-  </span>
-
-
-  <div>
-
-    © 2026 筠玲易數 · All Rights Reserved.
-
-  </div>
-
-
-</footer>
-
-`;
-
-
-    wrap.insertBefore(home, feature);
-
-
-
-    /* ======================================================
-       05. 功能頁返回首頁
-       ====================================================== */
-
-    const back = document.createElement('button');
-
-    back.id = 'jl-back';
-
-    back.type = 'button';
-
-    back.textContent = '← 回到功能首頁';
-
-    feature.insertBefore(
-      back,
-      feature.firstChild
-    );
-
-
-
-    /* ======================================================
-       06. 首頁 / 功能頁切換
-       ====================================================== */
-
-    function showHome() {
-
-      document.body.classList.remove(
-        'jl-feature-mode'
-      );
-
-      document.body.classList.add(
-        'jl-home-mode'
-      );
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-
-    }
-
-
-
-    function showFeature(target) {
-
-      document.body.classList.remove(
-        'jl-home-mode'
-      );
-
-      document.body.classList.add(
-        'jl-feature-mode'
-      );
-
-
-      setTimeout(function () {
-
-        const el =
-          target ||
-          paipan ||
-          feature;
-
-        if (el) {
-
-          el.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-
-        }
-
-      }, 80);
-
-    }
-
-
-    back.addEventListener(
-      'click',
-      showHome
-    );
-
-
-
-    /* ======================================================
-       07. 找功能位置
-       ====================================================== */
-
-    function norm(s) {
-
-      return String(s || '')
-        .replace(/\s+/g, '');
-
-    }
-
-
-
-    function findTarget(term) {
-
-      const map = {
-
-        九宮: [
-          '奇門數字九宮盤',
-          '數字九宮盤',
-          '九宮盤',
-          '九宮'
-        ],
-
-        奇門: [
-          '奇門遁甲',
-          '奇門'
-        ],
-
-        六親: [
-          '六親對照',
-          '六親解析',
-          '六親'
-        ],
-
-        流年: [
-          '流年運勢',
-          '流年'
-        ]
-
+    if(!hasChart()){
+      const msg={
+        九宮:'九宮分析需要先建立命盤，請先完成生辰排盤。',
+        奇門:'奇門遁甲需要先建立命盤，請先完成生辰排盤。',
+        六親:'六親分析需要先建立命盤，請先完成生辰排盤。',
+        流年:'流年運勢需要先建立命盤，請先完成生辰排盤。'
       };
 
+      setNote(msg[term]||'請先完成生辰排盤。');
+      showFeature(paipan);
+      return;
+    }
 
-      const words =
-        map[term] || [term];
+    clearNote();
+    showFeature(
+      findTarget(term) ||
+      out ||
+      paipan
+    );
+  }
 
+  home.querySelectorAll('[data-route]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      route(btn.dataset.route);
+    });
+  });
 
-      const nodes =
-        Array.from(
-          feature.querySelectorAll(
-            'h2,h3,h4,summary,.card'
-          )
-        );
+  if(go){
+    go.addEventListener('click',function(){
 
+      const term=sessionStorage.getItem('jl-route');
+      if(!term) return;
 
-      for (const node of nodes) {
+      let tries=0;
 
-        const txt =
-          norm(node.textContent);
+      const timer=setInterval(function(){
 
+        tries++;
 
-        for (const w of words) {
+        if(hasChart()){
 
-          if (
-            txt.includes(norm(w))
-          ) {
+          clearInterval(timer);
+          clearNote();
 
-            return node;
+          showFeature(
+            term==='四柱'
+              ? (out||paipan)
+              : (findTarget(term)||out||paipan)
+          );
 
-          }
+          sessionStorage.removeItem('jl-route');
+
+        }else if(tries>=32){
+
+          clearInterval(timer);
 
         }
 
-      }
+      },250);
 
+    },true);
+  }
 
-      return null;
+  /* ===== 唯一一套首頁 CSS ===== */
+  const style=document.createElement('style');
 
-    }
+  style.id='jl-home-clean-style';
 
-
-
-    /* ======================================================
-       08. 判斷是否已經完成排盤
-       ====================================================== */
-
-    function hasChart() {
-
-      if (!out) return false;
-
-      return !out.classList.contains(
-        'hide'
-      );
-
-    }
-
-
-
-    /* ======================================================
-       09. 排盤提示
-       ====================================================== */
-
-    let note = null;
-
-
-    if (paipan) {
-
-      note =
-        document.createElement('div');
-
-      note.className =
-        'jl-note';
-
-      paipan.appendChild(note);
-
-    }
-
-
-
-    function setNote(text) {
-
-      if (!note) return;
-
-      note.textContent = text;
-
-      note.classList.add('show');
-
-    }
-
-
-
-    function clearNote() {
-
-      if (!note) return;
-
-      note.classList.remove('show');
-
-    }
-
-
-
-    /* ======================================================
-       10. 六大功能路由
-       ====================================================== */
-
-    function route(term) {
-
-      sessionStorage.setItem(
-        'jl-route',
-        term
-      );
-
-
-      /* 四柱直接進排盤 */
-
-      if (term === '四柱') {
-
-        setNote(
-          '請先輸入出生資料並排盤；完成後會顯示四柱、先天、後天與完整命盤。'
-        );
-
-        showFeature(paipan);
-
-        return;
-
-      }
-
-
-
-      /* 其他功能需要先建立命盤 */
-
-      if (!hasChart()) {
-
-
-        const messages = {
-
-          九宮:
-            '九宮分析需要先建立命盤，請先完成生辰排盤。',
-
-          奇門:
-            '奇門遁甲需要先建立命盤，請先完成生辰排盤。',
-
-          六親:
-            '六親分析需要先建立命盤，請先完成生辰排盤。',
-
-          流年:
-            '流年運勢需要先建立命盤，請先完成生辰排盤。'
-
-        };
-
-
-        setNote(
-          messages[term] ||
-          '請先完成生辰排盤。'
-        );
-
-
-        showFeature(paipan);
-
-        return;
-
-      }
-
-
-
-      clearNote();
-
-
-      showFeature(
-        findTarget(term) ||
-        out ||
-        paipan
-      );
-
-    }
-
-
-
-    home
-      .querySelectorAll('[data-route]')
-      .forEach(function (btn) {
-
-        btn.addEventListener(
-          'click',
-          function () {
-
-            route(
-              btn.dataset.route
-            );
-
-          }
-        );
-
-      });
-
-
-
-    /* ======================================================
-       11. 排盤完成後自動前往指定功能
-       ====================================================== */
-
-    if (go) {
-
-      go.addEventListener(
-        'click',
-        function () {
-
-
-          const term =
-            sessionStorage.getItem(
-              'jl-route'
-            );
-
-
-          if (!term) return;
-
-
-          let tries = 0;
-
-
-          const timer =
-            setInterval(function () {
-
-
-              tries++;
-
-
-              if (hasChart()) {
-
-
-                clearInterval(timer);
-
-
-                clearNote();
-
-
-                if (term === '四柱') {
-
-                  showFeature(
-                    out ||
-                    paipan
-                  );
-
-                } else {
-
-                  showFeature(
-                    findTarget(term) ||
-                    out ||
-                    paipan
-                  );
-
-                }
-
-
-                sessionStorage.removeItem(
-                  'jl-route'
-                );
-
-
-                return;
-
-              }
-
-
-              if (tries >= 30) {
-
-                clearInterval(timer);
-
-              }
-
-
-            }, 250);
-
-
-        },
-        true
-      );
-
-    }
-
-
-
-    /* ======================================================
-       12. 正式紫曜首頁 CSS
-       ====================================================== */
-
-    const style =
-      document.createElement('style');
-
-
-    style.textContent = `
+  style.textContent=`
 
 :root{
-
-  --jl-purple:#901fcf;
-
-  --jl-purple2:#b943ea;
-
-  --jl-deep:#4e0a71;
-
-  --jl-gold:#d7a43c;
-
-  --jl-ink:#44244f;
-
-  --jl-muted:#76697e;
-
+  --p:#8f24c9;
+  --p2:#bd5ae8;
+  --deep:#4d0e70;
+  --gold:#d7aa49;
+  --ink:#4b2857;
+  --muted:#806d87;
+  --line:#e7c9f4;
 }
 
-
+html,
+body{
+  overflow-x:hidden;
+}
 
 body{
-
   background:
-
     linear-gradient(
       180deg,
-      #ffffff,
-      #fbf4ff 48%,
-      #f1e0ff
+      #fff 0,
+      #fff8ff 45%,
+      #f3e3ff 100%
     ) !important;
-
 }
-
-
 
 .wrap{
-
   max-width:760px !important;
-
-  padding:
-
-    0 16px 38px !important;
-
+  padding:0 14px 34px !important;
 }
 
-
-
-/* 最重要：
-   首頁時舊功能完全消失 */
-
-body.jl-home-mode
-#jl-home{
-
+/* 首頁 / 功能頁完全分離 */
+body.jl-home-mode #jl-home{
   display:block !important;
-
 }
 
-
-
-body.jl-home-mode
-#jl-feature-shell{
-
+body.jl-home-mode #jl-feature-shell{
   display:none !important;
-
 }
 
-
-
-/* 功能模式反過來 */
-
-body.jl-feature-mode
-#jl-home{
-
+body.jl-feature-mode #jl-home{
   display:none !important;
-
 }
 
-
-
-body.jl-feature-mode
-#jl-feature-shell{
-
+body.jl-feature-mode #jl-feature-shell{
   display:block !important;
-
 }
 
-
-
 #jl-feature-shell{
-
   display:none;
-
 }
 
-
-
-#jl-feature-shell
-.jl-hide-old-menu{
-
+#jl-feature-shell > header,
+#jl-feature-shell > .jl-old-menu{
   display:none !important;
-
 }
-
-
-
-/* =============================
-   首頁
-   ============================= */
 
 #jl-home{
-
-  margin:0 -16px;
-
-  background:#ffffff;
-
+  margin:0 -14px;
+  background:#fff;
   overflow:hidden;
-
 }
 
-
-
-/* =============================
-   HEADER
-   ============================= */
-
-.jl-header{
-
-  height:66px;
-
+/* 頂部 */
+.jl-top{
+  height:48px;
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
-
-  gap:10px;
-
-  padding:0 16px;
-
-  background:#ffffff;
-
-  border-bottom:
-    1px solid #edd9f8;
-
+  justify-content:space-between;
+  padding:0 12px;
+  background:#fff;
+  border-bottom:1px solid #efd9f8;
+  position:relative;
+  z-index:20;
 }
 
-
-
-.jl-logo{
-
+.jl-brand{
+  border:0;
+  background:none;
   display:flex;
-
   align-items:center;
-
-  gap:8px;
-
-  color:#5d1685;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
+  gap:7px;
+  color:#5f1686;
+  font-family:"Noto Serif TC","Songti TC",serif;
+  font-size:16px;
+  font-weight:900;
+  padding:0;
 }
 
-
-
-.jl-logo strong{
-
-  font-size:20px;
-
-  letter-spacing:.08em;
-
-}
-
-
-
-.jl-logo-mark{
-
-  width:31px;
-
-  height:31px;
-
-  border:
-    1.5px solid
-    var(--jl-gold);
-
+.jl-seal{
+  width:26px;
+  height:26px;
+  border:1.5px solid var(--gold);
   border-radius:50%;
-
   display:grid;
-
   place-items:center;
-
-  color:
-    var(--jl-gold);
-
-  font-size:13px;
-
+  color:var(--gold);
+  font-size:11px;
 }
-
-
 
 .jl-nav{
-
   display:flex;
-
-  gap:13px;
-
-  font-size:9px;
-
+  gap:12px;
+  font-size:8px;
   font-weight:800;
-
-  color:#583b61;
-
 }
-
-
 
 .jl-nav a{
-
-  color:inherit;
-
+  color:#62476a;
   text-decoration:none;
-
 }
-
-
 
 .jl-nav a:first-child{
-
-  color:
-    var(--jl-purple);
-
+  color:var(--p);
 }
 
-
-
-.jl-my{
-
-  border:0;
-
-  padding:8px 12px;
-
+.jl-mine{
+  border:1px solid #e3a8f8;
   border-radius:999px;
-
-  color:#ffffff;
-
   background:
-
     linear-gradient(
       135deg,
-      var(--jl-purple),
-      var(--jl-purple2)
+      #851bb8,
+      #b63ce4
     );
-
+  color:#fff;
+  font-size:8px;
   font-weight:900;
-
-  font-size:9px;
-
+  padding:6px 9px;
 }
 
-
-
-/* =============================
-   HERO
-   ============================= */
-
+/* Hero */
 .jl-hero{
-
-  min-height:390px;
-
+  height:258px;
   position:relative;
-
   overflow:hidden;
-
   background:
-
     radial-gradient(
-      circle at 16% 80%,
-      rgba(178,70,224,.16),
-      transparent 28%
+      circle at 15% 78%,
+      rgba(181,74,226,.22),
+      transparent 32%
     ),
-
     linear-gradient(
-      90deg,
-      #ffffff 0 45%,
-      #f8e8ff 62%,
-      #d89df4 100%
+      100deg,
+      #fff 0 42%,
+      #f7e5ff 63%,
+      #bb69e3 100%
     );
-
 }
 
-
-
-.jl-hero-left{
-
+.jl-hero-copy{
   position:relative;
-
-  z-index:3;
-
-  width:56%;
-
-  padding:
-    40px 18px
-    30px 36px;
-
+  z-index:4;
+  width:55%;
+  padding:28px 4px 14px 24px;
 }
-
-
 
 .jl-kicker{
-
-  color:#6f1c99;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:9px;
-
+  color:#6f1d99;
+  font-size:7px;
   font-weight:900;
-
-  letter-spacing:.18em;
-
+  letter-spacing:.12em;
+  white-space:nowrap;
 }
-
-
 
 .jl-hero h1{
-
-  margin:
-    10px 0 6px !important;
-
-  color:
-    #641095 !important;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif !important;
-
-  font-size:
-    45px !important;
-
-  line-height:
-    1.1 !important;
-
-  letter-spacing:
-    .06em !important;
-
-  text-indent:
-    0 !important;
-
+  margin:8px 0 4px !important;
+  color:#641095 !important;
+  font-family:"Noto Serif TC","Songti TC",serif !important;
+  font-size:30px !important;
+  line-height:1.08 !important;
+  letter-spacing:.06em !important;
+  text-indent:0 !important;
 }
-
-
 
 .jl-hero h2{
-
   margin:0 !important;
-
-  color:
-    #bd6a2a !important;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif !important;
-
-  font-size:
-    16px !important;
-
+  color:#c06b2f !important;
+  font-family:"Noto Serif TC","Songti TC",serif !important;
+  font-size:10px !important;
+  line-height:1.35 !important;
 }
 
-
-
-.jl-hero-left p{
-
-  margin-top:16px;
-
-  color:#5d4c63;
-
-  font-size:10px;
-
-  line-height:1.8;
-
+.jl-hero p{
+  margin:8px 0 0;
+  color:#5f4e65;
+  font-size:7px;
+  line-height:1.55;
 }
 
-
-
-/*
-  老師照片：
-
-  只使用 hero.jpeg 右側，
-  不把舊圖片左側文字
-  再顯示一次。
-*/
-
-.jl-hero-right{
-
+.jl-aura{
   position:absolute;
-
-  right:0;
-
-  top:0;
-
-  width:58%;
-
-  height:100%;
-
-  overflow:hidden;
-
-  background-image:
-
-    linear-gradient(
-      90deg,
-      #f8e8ff 0%,
-      rgba(248,232,255,.20)
-      18%,
-      transparent 36%
-    ),
-
-    url("hero.jpeg");
-
-  background-size:
-    auto 100%;
-
-  background-position:
-    right center;
-
-  background-repeat:
-    no-repeat;
-
-}
-
-
-
-.jl-quote{
-
-  position:absolute;
-
-  z-index:4;
-
-  right:3%;
-
-  top:24%;
-
-  width:24%;
-
-  color:#ffffff;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:11px;
-
-  line-height:1.9;
-
-  text-shadow:
-
-    0 2px 6px
-    rgba(56,7,75,.55);
-
-}
-
-
-
-.jl-quote b{
-
-  display:block;
-
-  margin-top:8px;
-
-  color:#f2c967;
-
-  font-size:13px;
-
-}
-
-
-
-/* =============================
-   探索標題
-   ============================= */
-
-.jl-main-title{
-
-  padding:12px;
-
-  text-align:center;
-
-  color:#511c69;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:15px;
-
-  font-weight:900;
-
-  letter-spacing:.09em;
-
+  right:2%;
+  top:6%;
+  width:52%;
+  height:88%;
+  border-radius:50%;
   background:
-
-    linear-gradient(
-      90deg,
-      #fff5ff,
-      #edd4ff,
-      #fff5ff
+    radial-gradient(
+      circle,
+      rgba(240,205,255,.85) 0,
+      rgba(179,80,220,.28) 43%,
+      transparent 70%
     );
-
 }
 
+.jl-teacher{
+  position:absolute;
+  z-index:3;
+  right:3%;
+  bottom:-2%;
+  height:94%;
+  width:auto;
+  object-fit:contain;
+  object-position:bottom right;
+  filter:
+    saturate(1.03)
+    brightness(1.03)
+    drop-shadow(
+      0 10px 18px
+      rgba(72,16,96,.18)
+    );
+}
 
+.jl-hero-quote{
+  position:absolute;
+  z-index:5;
+  right:2.5%;
+  top:31%;
+  width:19%;
+  color:#fff;
+  font-family:"Noto Serif TC","Songti TC",serif;
+  font-size:7px;
+  line-height:1.55;
+  text-shadow:
+    0 2px 6px
+    rgba(49,4,66,.55);
+}
 
-/* =============================
-   六大功能
-   ============================= */
+.jl-hero-quote b{
+  display:block;
+  margin-top:5px;
+  color:#f2cc72;
+  font-size:8px;
+}
 
-.jl-tools{
-
-  padding:
-    10px 12px 12px;
-
+/* 探索標題 */
+.jl-section-title{
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   background:
+    linear-gradient(
+      90deg,
+      #fff6ff,
+      #efd7ff,
+      #fff6ff
+    );
+  color:#531c6b;
+  font-family:"Noto Serif TC","Songti TC",serif;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.06em;
+}
 
+/* 六宮格 */
+.jl-tools{
+  padding:7px 8px 8px;
+  background:
     linear-gradient(
       180deg,
       #fdf8ff,
-      #f6e9ff
+      #f6eaff
     );
-
 }
-
-
 
 .jl-grid{
-
   display:grid;
-
   grid-template-columns:
-    repeat(3,1fr);
-
-  gap:8px;
-
+    repeat(3,minmax(0,1fr));
+  gap:6px;
 }
-
-
 
 .jl-tool{
-
-  min-height:160px;
-
-  padding:12px 7px;
-
-  border:
-    1px solid #e0bef1;
-
-  border-radius:14px;
-
-  background:#ffffff;
-
+  min-width:0;
+  height:108px;
+  padding:7px 3px 5px;
+  border:1px solid #dfbbee;
+  border-radius:10px;
+  background:
+    linear-gradient(
+      180deg,
+      #fff,
+      #fffafd
+    );
   box-shadow:
-
-    0 7px 16px
-    rgba(84,15,116,.07);
-
+    0 5px 13px
+    rgba(86,16,119,.07);
   text-align:center;
-
-  color:
-    var(--jl-ink);
-
+  color:var(--ink);
   text-decoration:none;
-
   font:inherit;
-
-  cursor:pointer;
-
+  overflow:hidden;
 }
-
-
 
 .jl-icon{
-
-  width:57px;
-
-  height:57px;
-
-  margin:
-    0 auto 8px;
-
+  width:36px;
+  height:36px;
+  margin:0 auto 4px;
   border-radius:50%;
-
-  display:grid;
-
-  place-items:center;
-
-  border:
-    2px solid
-    var(--jl-gold);
-
   background:
-
     radial-gradient(
       circle at 35% 25%,
-      #b24ae8,
-      #661493
+      #b948e7,
+      #651492
     );
-
-  color:#f5dc88;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:13px;
-
-  font-weight:900;
-
-  line-height:1.1;
-
+  border:1.5px solid var(--gold);
+  display:grid;
+  place-items:center;
 }
 
-
-
-.jl-nine{
-
-  font-size:10px;
-
-  line-height:1.25;
-
+.jl-icon svg{
+  width:31px;
+  height:31px;
+  fill:none;
+  stroke:#f2d277;
+  stroke-width:1.7;
 }
 
+.jl-icon svg text{
+  fill:#f5de91;
+  stroke:none;
+  font-size:8px;
+  font-family:"Noto Serif TC",serif;
+  font-weight:800;
+}
 
+.jl-icon svg .big{
+  font-size:9px;
+}
 
 .jl-tool h3{
-
-  margin:0 0 4px;
-
-  color:#68149a;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:14px;
-
+  margin:0 0 2px;
+  color:#67149a;
+  font-family:"Noto Serif TC","Songti TC",serif;
+  font-size:9.5px;
+  white-space:nowrap;
 }
-
-
 
 .jl-tool p{
-
   margin:0;
-
   color:#66566d;
-
-  font-size:8.8px;
-
+  font-size:6.3px;
+  line-height:1.25;
+  white-space:nowrap;
 }
-
-
 
 .jl-tool small{
-
   display:block;
-
-  margin-top:5px;
-
-  color:#88778e;
-
-  font-size:7.8px;
-
-  line-height:1.45;
-
+  margin-top:2px;
+  color:#89778f;
+  font-size:5.2px;
+  line-height:1.18;
 }
 
-
-
 .jl-tool span{
-
   display:inline-block;
-
-  margin-top:7px;
-
-  padding:5px 10px;
-
-  border-radius:7px;
-
+  margin-top:4px;
+  padding:3px 7px;
+  border-radius:5px;
   background:
-
     linear-gradient(
       135deg,
       #7e1bb2,
-      #a72fda
+      #a92fdc
     );
-
-  color:#ffffff;
-
-  font-size:8px;
-
+  color:#fff;
+  font-size:5.8px;
   font-weight:900;
-
 }
 
-
-
-/* =============================
-   擇吉看日
-   ============================= */
-
+/* 看日子 */
 .jl-date{
-
-  margin:
-    0 12px 12px;
-
-  min-height:165px;
-
-  padding:
-    22px 18px
-    20px 24px;
-
+  height:92px;
+  margin:0 8px 7px;
+  padding:9px 12px 8px 15px;
   display:flex;
-
   align-items:center;
-
-  justify-content:
-    space-between;
-
-  gap:10px;
-
-  border:
-    1px solid #d8acf0;
-
-  border-radius:16px;
-
+  justify-content:space-between;
+  gap:9px;
+  border:1px solid #d8acf0;
+  border-radius:11px;
   background:
-
     radial-gradient(
-      circle at 82% 40%,
-      rgba(255,255,255,.65),
-      transparent 25%
+      circle at 80% 40%,
+      rgba(255,255,255,.68),
+      transparent 23%
     ),
-
     linear-gradient(
       115deg,
-      #fcecff,
-      #edd1ff 58%,
-      #c27ae9
+      #fdeeff,
+      #edd2ff 58%,
+      #c77bea
     );
-
 }
-
-
-
-.jl-date-copy{
-
-  max-width:70%;
-
-}
-
-
 
 .jl-date h2{
-
   margin:0;
-
   color:#661099;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:25px;
-
+  font-family:"Noto Serif TC","Songti TC",serif;
+  font-size:16px;
 }
-
-
 
 .jl-date p{
-
-  margin:6px 0;
-
+  margin:2px 0;
   color:#66516e;
-
-  font-size:9px;
-
-  line-height:1.6;
-
+  font-size:5.8px;
 }
 
-
-
 .jl-date a{
-
   display:inline-block;
-
-  margin-top:7px;
-
-  padding:
-    7px 18px;
-
+  margin-top:3px;
+  padding:4px 10px;
   border-radius:999px;
-
   background:
-
     linear-gradient(
       135deg,
       #851db9,
       #ad35df
     );
-
-  color:#ffffff;
-
+  color:#fff;
   text-decoration:none;
-
-  font-size:9px;
-
+  font-size:6px;
   font-weight:900;
-
 }
-
-
-
-.jl-date-art{
-
-  width:100px;
-
-  height:100px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-}
-
-
 
 .jl-calendar{
-
-  width:80px;
-
-  height:80px;
-
-  border:
-    1px solid
-    var(--jl-gold);
-
-  border-radius:12px;
-
-  display:grid;
-
-  place-items:center;
-
+  width:52px;
+  height:52px;
+  border:1px solid var(--gold);
+  border-radius:8px;
   background:#fff9ee;
-
-  color:#7a1d9b;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:18px;
-
-  font-weight:900;
-
-  line-height:1.1;
-
+  display:grid;
+  place-items:center;
+  color:#8a209d;
 }
 
+.jl-calendar span{
+  font-size:10px;
+}
 
+.jl-calendar b{
+  font-size:16px;
+}
 
-/* =============================
-   LINE
-   ============================= */
-
+/* LINE */
 .jl-contact{
-
-  margin:
-    0 12px 12px;
-
-  padding:10px;
-
-  border:
-    1px solid #deb8f3;
-
-  border-radius:15px;
-
-  background:#ffffff;
-
-}
-
-
-
-.jl-teacher-mini{
-
-  display:flex;
-
-  gap:10px;
-
-  align-items:center;
-
-  margin-bottom:9px;
-
-}
-
-
-
-.jl-mini-photo{
-
-  width:62px;
-
-  height:76px;
-
+  margin:0 8px 7px;
+  padding:6px;
+  border:1px solid #deb8f3;
   border-radius:10px;
-
-  flex:0 0 auto;
-
-  background-image:
-    url("hero.jpeg");
-
-  background-size:
-    auto 220%;
-
-  background-position:
-    78% 35%;
-
-  background-repeat:
-    no-repeat;
-
+  background:#fff;
 }
 
-
-
-.jl-contact h3{
-
-  margin:0;
-
-  color:#611091;
-
-  font-family:
-    "Noto Serif TC",
-    "Songti TC",
-    serif;
-
-  font-size:13px;
-
-}
-
-
-
-.jl-contact p{
-
-  margin:
-    4px 0 0;
-
-  color:#75637c;
-
-  font-size:8.8px;
-
-  line-height:1.55;
-
-}
-
-
-
-.jl-line-card{
-
+.jl-consult{
   display:flex;
-
   align-items:center;
-
-  gap:9px;
-
-  padding:
-    10px 12px;
-
-  border:
-    1px solid #e4caf4;
-
-  border-radius:12px;
-
-  background:#ffffff;
-
+  gap:6px;
+  padding:1px 2px 5px;
 }
 
-
-
-.jl-line-dot{
-
-  width:30px;
-
-  height:30px;
-
-  border-radius:50%;
-
-  display:grid;
-
-  place-items:center;
-
-  background:#2bcf49;
-
-  color:#ffffff;
-
-  font-size:7px;
-
-  font-weight:900;
-
+.jl-consult img{
+  width:38px;
+  height:44px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:6px;
 }
 
-
-
-.jl-line-card strong{
-
-  display:block;
-
+.jl-consult h3{
+  margin:0;
   color:#611091;
-
-  font-size:11px;
-
+  font-size:8px;
 }
 
-
-
-.jl-line-card div div{
-
-  font-size:9px;
-
-  color:#745f7b;
-
-  margin-top:2px;
-
+.jl-consult p{
+  margin:2px 0 0;
+  color:#75637c;
+  font-size:5.5px;
 }
 
+.jl-line{
+  height:34px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  padding:5px 7px;
+  border:1px solid #e5caf4;
+  border-radius:8px;
+  color:inherit;
+  text-decoration:none;
+}
 
-
-.jl-line-card a{
-
-  margin-left:auto;
-
-  width:28px;
-
-  height:28px;
-
+.jl-line i{
+  width:21px;
+  height:21px;
   border-radius:50%;
-
   display:grid;
-
   place-items:center;
+  background:#2dcc4a;
+  color:#fff;
+  font-size:4px;
+  font-style:normal;
+}
 
+.jl-line b{
+  color:#611091;
+  font-size:7px;
+}
+
+.jl-line span{
+  color:#75637c;
+  font-size:5.5px;
+}
+
+.jl-line em{
+  margin-left:auto;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
   background:
-
     linear-gradient(
       135deg,
       #821bb6,
       #a62ed9
     );
-
-  color:#ffffff;
-
-  text-decoration:none;
-
+  color:#fff;
+  font-style:normal;
 }
 
-
-
-/* =============================
-   Footer
-   ============================= */
-
+/* Footer */
 .jl-footer{
-
+  min-height:40px;
+  padding:7px 8px 5px;
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:5px;
-
-  padding:12px;
-
+  grid-template-columns:repeat(4,1fr);
+  gap:4px;
   background:
-
     linear-gradient(
       90deg,
       #3c0c57,
       #5a117c,
       #3c0c57
     );
-
   color:#f4e5ff;
-
   text-align:center;
-
-  font-size:8px;
-
+  font-size:5.4px;
 }
 
-
-
-.jl-footer div{
-
-  grid-column:
-    1 / -1;
-
-  color:#ccb6d8;
-
-  font-size:7px;
-
-  margin-top:4px;
-
+.jl-footer small{
+  grid-column:1/-1;
+  color:#cdb7d8;
+  font-size:4.8px;
 }
 
-
-
-/* =============================
-   功能頁返回
-   ============================= */
-
+/* 功能頁 */
 #jl-back{
-
   position:sticky;
-
   top:0;
-
-  z-index:80;
-
+  z-index:100;
   width:100%;
-
   border:0;
-
-  padding:
-    12px 15px;
-
+  padding:11px 14px;
   background:
-
     linear-gradient(
       90deg,
       #4d0b70,
       #7d1bb3
     );
-
-  color:#ffffff;
-
+  color:#fff;
   font-weight:900;
-
-  letter-spacing:.08em;
-
 }
-
-
 
 .jl-note{
-
   display:none;
-
-  margin:
-    12px 0 0;
-
-  padding:
-    10px 12px;
-
-  border:
-    1px solid #ddbcf0;
-
-  border-radius:10px;
-
+  margin:10px 0 0;
+  padding:9px 11px;
+  border:1px solid #ddbcf0;
+  border-radius:9px;
   background:#f4e4ff;
-
   color:#683080;
-
-  font-size:10.5px;
-
-  line-height:1.65;
-
+  font-size:10px;
 }
-
-
 
 .jl-note.show{
-
   display:block;
-
 }
-
-
-
-/* =============================
-   手機版
-   ============================= */
 
 @media(max-width:600px){
-
-
   .jl-nav{
-
     display:none;
-
   }
-
-
-  .jl-header{
-
-    height:64px;
-
-  }
-
-
-  .jl-logo strong{
-
-    font-size:19px;
-
-  }
-
-
-  .jl-hero{
-
-    min-height:500px;
-
-  }
-
-
-  .jl-hero-left{
-
-    width:100%;
-
-    padding:
-      28px 18px 280px;
-
-  }
-
-
-  .jl-hero h1{
-
-    font-size:
-      38px !important;
-
-  }
-
-
-  .jl-hero h2{
-
-    font-size:
-      15px !important;
-
-  }
-
-
-  /*
-    手機版：
-    老師固定在下半部，
-    不再跟左側文字重疊
-  */
-
-  .jl-hero-right{
-
-    top:auto;
-
-    bottom:0;
-
-    width:100%;
-
-    height:58%;
-
-    background-size:
-      auto 100%;
-
-    background-position:
-      right bottom;
-
-    background-image:
-
-      linear-gradient(
-        180deg,
-        #f8e8ff 0%,
-        rgba(248,232,255,.08)
-        18%,
-        transparent 38%
-      ),
-
-      url("hero.jpeg");
-
-  }
-
-
-  .jl-quote{
-
-    right:4%;
-
-    top:auto;
-
-    bottom:20%;
-
-    width:26%;
-
-    font-size:9.5px;
-
-  }
-
-
-  /*
-    參考圖在寬螢幕是 3×2。
-    一般手機仍盡量維持 3 欄。
-  */
-
-  .jl-grid{
-
-    grid-template-columns:
-      repeat(3,1fr);
-
-  }
-
-
-}
-
-
-
-/* 很窄的手機才改 2 欄 */
-
-@media(max-width:430px){
-
-  .jl-grid{
-
-    grid-template-columns:
-      repeat(2,1fr);
-
-  }
-
 }
 
 `;
 
+  document.head.appendChild(style);
 
-    document.head.appendChild(
-      style
-    );
-
-
-    /* 預設只顯示新首頁 */
-    showHome();
-
-
-  });
-
-})();
-/* =========================================================
-   筠玲易數 V4｜母版比例＋紫曜色調修正
-   只調整視覺，不碰命理計算
-   ========================================================= */
-(function () {
-  'use strict';
-
-  function applyJLV4() {
-    if (document.getElementById('jl-v4-master-style')) return;
-
-    const style = document.createElement('style');
-    style.id = 'jl-v4-master-style';
-
-    style.textContent = `
-
-/* =========================================
-   0. 手機首頁總體密度
-   ========================================= */
-
-@media (max-width:600px){
-
-  body{
-    overflow-x:hidden !important;
-  }
-
-  #jl-home{
-    max-width:100% !important;
-  }
-
-
-  /* =======================================
-     1. 最上方品牌列
-     ======================================= */
-
-  .jl-header{
-    height:46px !important;
-    min-height:46px !important;
-    padding:0 10px !important;
-  }
-
-  .jl-logo-mark{
-    width:24px !important;
-    height:24px !important;
-    font-size:10px !important;
-  }
-
-  .jl-logo strong{
-    font-size:15px !important;
-    letter-spacing:.05em !important;
-  }
-
-  .jl-my{
-    padding:6px 10px !important;
-    font-size:8px !important;
-  }
-
-
-  /* =======================================
-     2. Hero
-     母版重點：
-     不再一張 Hero 佔半頁
-     ======================================= */
-
-  .jl-hero{
-    min-height:255px !important;
-    height:255px !important;
-
-    background:
-      radial-gradient(
-        circle at 15% 72%,
-        rgba(185,72,232,.26),
-        transparent 34%
-      ),
-      linear-gradient(
-        90deg,
-        #fff8ff 0%,
-        #f9eaff 43%,
-        #e6b9ff 72%,
-        #a84ee0 100%
-      ) !important;
-  }
-
-
-  .jl-hero-left{
-    width:54% !important;
-
-    padding:
-      22px
-      4px
-      15px
-      18px !important;
-  }
-
-
-  .jl-kicker{
-    font-size:7px !important;
-    letter-spacing:.12em !important;
-    white-space:nowrap !important;
-  }
-
-
-  .jl-hero h1{
-    margin:
-      8px
-      0
-      4px !important;
-
-    font-size:
-      29px !important;
-
-    line-height:
-      1.08 !important;
-  }
-
-
-  .jl-hero h2{
-    font-size:
-      10.5px !important;
-
-    line-height:
-      1.45 !important;
-
-    color:
-      #bf6a2d !important;
-  }
-
-
-  .jl-hero-left p{
-    margin-top:
-      8px !important;
-
-    font-size:
-      7.5px !important;
-
-    line-height:
-      1.55 !important;
-
-    max-width:
-      230px !important;
-  }
-
-
-  /* =======================================
-     3. 老師照片
-     用紫色光影統一色調
-     ======================================= */
-
-  .jl-hero-right{
-    top:0 !important;
-    bottom:auto !important;
-
-    right:0 !important;
-
-    width:58% !important;
-    height:255px !important;
-
-    opacity:.96 !important;
-
-    background-image:
-
-      linear-gradient(
-        90deg,
-        #f9eaff 0%,
-        rgba(246,219,255,.38) 16%,
-        rgba(189,89,231,.10) 46%,
-        rgba(94,15,125,.18) 100%
-      ),
-
-      url("hero.jpeg") !important;
-
-    background-size:
-      auto 100% !important;
-
-    background-position:
-      right center !important;
-
-    background-repeat:
-      no-repeat !important;
-
-    filter:
-      saturate(1.12)
-      contrast(.98)
-      brightness(1.05)
-      hue-rotate(4deg) !important;
-  }
-
-
-  /*
-    再蓋一層紫粉柔光，
-    讓米黃背景不要那麼突兀
-  */
-
-  .jl-hero::after{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    z-index:2;
-
-    pointer-events:none;
-
-    background:
-
-      radial-gradient(
-        circle at 76% 43%,
-        rgba(236,179,255,.08),
-        transparent 27%
-      ),
-
-      linear-gradient(
-        90deg,
-        transparent 48%,
-        rgba(191,76,226,.10) 72%,
-        rgba(91,12,123,.18) 100%
-      );
-  }
-
-
-  .jl-hero-left,
-  .jl-quote{
-    position:relative;
-    z-index:4 !important;
-  }
-
-
-  /* =======================================
-     4. 老師右側語錄
-     ======================================= */
-
-  .jl-quote{
-    position:absolute !important;
-
-    right:2.5% !important;
-    top:31% !important;
-
-    width:22% !important;
-
-    font-size:
-      7.5px !important;
-
-    line-height:
-      1.55 !important;
-
-    color:
-      #fff8ff !important;
-  }
-
-
-  .jl-quote b{
-    margin-top:
-      4px !important;
-
-    font-size:
-      9px !important;
-
-    color:
-      #f4cd71 !important;
-  }
-
-
-  /* =======================================
-     5. 探索命理橫幅
-     ======================================= */
-
-  .jl-main-title{
-    height:35px !important;
-
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-
-    padding:0 5px !important;
-
-    font-size:
-      11px !important;
-
-    letter-spacing:
-      .06em !important;
-  }
-
-
-  /* =======================================
-     6. 六大功能
-     強制 3 × 2
-     ======================================= */
-
-  .jl-tools{
-    padding:
-      7px
-      8px
-      8px !important;
-  }
-
-
-  .jl-grid{
-    display:grid !important;
-
-    grid-template-columns:
-      repeat(3,minmax(0,1fr)) !important;
-
-    gap:
-      6px !important;
-  }
-
-
-  .jl-tool{
-    min-width:0 !important;
-
-    min-height:
-      108px !important;
-
-    height:
-      108px !important;
-
-    padding:
-      7px
-      3px
-      5px !important;
-
-    border-radius:
-      10px !important;
-  }
-
-
-  .jl-icon{
-    width:
-      35px !important;
-
-    height:
-      35px !important;
-
-    margin:
-      0 auto 4px !important;
-
-    border-width:
-      1.5px !important;
-
-    font-size:
-      8px !important;
-
-    line-height:
-      1.05 !important;
-  }
-
-
-  .jl-nine{
-    font-size:
-      6px !important;
-
-    line-height:
-      1.1 !important;
-  }
-
-
-  .jl-tool h3{
-    margin:
-      0 0 2px !important;
-
-    font-size:
-      9.5px !important;
-
-    white-space:
-      nowrap !important;
-  }
-
-
-  .jl-tool p{
-    font-size:
-      6.5px !important;
-
-    line-height:
-      1.35 !important;
-
-    white-space:
-      nowrap !important;
-  }
-
-
-  .jl-tool small{
-    margin-top:
-      2px !important;
-
-    font-size:
-      5.5px !important;
-
-    line-height:
-      1.25 !important;
-  }
-
-
-  .jl-tool span{
-    margin-top:
-      4px !important;
-
-    padding:
-      3px
-      7px !important;
-
-    border-radius:
-      5px !important;
-
-    font-size:
-      6px !important;
-  }
-
-
-  /* =======================================
-     7. 擇吉看日
-     母版是短橫幅，不是大卡
-     ======================================= */
-
-  .jl-date{
-    min-height:
-      92px !important;
-
-    height:
-      92px !important;
-
-    margin:
-      0
-      8px
-      7px !important;
-
-    padding:
-      10px
-      11px
-      9px
-      16px !important;
-
-    border-radius:
-      11px !important;
-  }
-
-
-  .jl-date-copy{
-    max-width:
-      70% !important;
-  }
-
-
-  .jl-date h2{
-    font-size:
-      16px !important;
-  }
-
-
-  .jl-date p{
-    margin:
-      3px
-      0 !important;
-
-    font-size:
-      6px !important;
-
-    line-height:
-      1.35 !important;
-  }
-
-
-  .jl-date a{
-    margin-top:
-      3px !important;
-
-    padding:
-      4px
-      11px !important;
-
-    font-size:
-      6.5px !important;
-  }
-
-
-  .jl-date-art{
-    width:
-      62px !important;
-
-    height:
-      62px !important;
-  }
-
-
-  .jl-calendar{
-    width:
-      52px !important;
-
-    height:
-      52px !important;
-
-    border-radius:
-      8px !important;
-
-    font-size:
-      12px !important;
-  }
-
-
-  /* =======================================
-     8. 老師＋LINE
-     ======================================= */
-
-  .jl-contact{
-    margin:
-      0
-      8px
-      7px !important;
-
-    padding:
-      6px
-      7px !important;
-
-    border-radius:
-      10px !important;
-  }
-
-
-  .jl-teacher-mini{
-    margin-bottom:
-      5px !important;
-
-    gap:
-      6px !important;
-  }
-
-
-  .jl-mini-photo{
-    width:
-      38px !important;
-
-    height:
-      46px !important;
-
-    border-radius:
-      6px !important;
-
-    filter:
-      saturate(1.08)
-      brightness(1.04)
-      hue-rotate(3deg);
-  }
-
-
-  .jl-contact h3{
-    font-size:
-      9px !important;
-  }
-
-
-  .jl-contact p{
-    margin-top:
-      2px !important;
-
-    font-size:
-      6px !important;
-
-    line-height:
-      1.4 !important;
-  }
-
-
-  .jl-line-card{
-    padding:
-      5px
-      7px !important;
-
-    border-radius:
-      8px !important;
-  }
-
-
-  .jl-line-dot{
-    width:
-      20px !important;
-
-    height:
-      20px !important;
-
-    font-size:
-      4px !important;
-  }
-
-
-  .jl-line-card strong{
-    font-size:
-      7.5px !important;
-  }
-
-
-  .jl-line-card div div{
-    font-size:
-      6px !important;
-  }
-
-
-  .jl-line-card a{
-    width:
-      20px !important;
-
-    height:
-      20px !important;
-  }
-
-
-  /* =======================================
-     9. Footer
-     ======================================= */
-
-  .jl-footer{
-    min-height:
-      40px !important;
-
-    padding:
-      7px
-      8px
-      5px !important;
-
-    font-size:
-      5.5px !important;
-  }
-
-
-  .jl-footer div{
-    margin-top:
-      2px !important;
-
-    font-size:
-      5px !important;
-  }
-
-
+  showHome();
 }
 
-
-/* =========================================
-   430 以下仍維持 3 欄
-   不要再變成兩欄
-   ========================================= */
-
-@media(max-width:430px){
-
-  .jl-grid{
-    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
-    gap:6px !important;
-    padding:0 6px !important;
-  }
-
-  .jl-tool{
-    min-width:0 !important;
-    min-height:108px !important;
-    height:108px !important;
-    padding:7px 3px 5px !important;
-    border-radius:10px !important;
-  }
-
-  .jl-icon{
-    width:35px !important;
-    height:35px !important;
-    margin:0 auto 4px !important;
-    font-size:8px !important;
-  }
-
-  .jl-nine{
-    font-size:6px !important;
-  }
-
-  .jl-tool h3{
-    font-size:9.5px !important;
-    margin:0 0 2px !important;
-    white-space:nowrap !important;
-  }
-
-  .jl-tool p{
-    font-size:6.5px !important;
-    line-height:1.35 !important;
-    margin:2px 0 !important;
-  }
-
-  .jl-tool small{
-    font-size:5.5px !important;
-    line-height:1.25 !important;
-    margin-top:2px !important;
-  }
-
-  .jl-tool span{
-    font-size:6px !important;
-    padding:3px 7px !important;
-    margin-top:4px !important;
-  }
-
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',boot);
+}else{
+  boot();
 }
-
-`;
-
-    document.head.appendChild(style);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', applyJLV4);
-  } else {
-    applyJLV4();
-  }
 
 })();
