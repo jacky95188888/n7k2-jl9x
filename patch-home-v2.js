@@ -1160,8 +1160,10 @@ body.jlf-feature-mode
   z-index:2;
   background-image:url("home-master-v2.webp");
   background-repeat:no-repeat;
+  /* MASTER is a full-page reference. Crop into its portrait/desk area so
+     the baked-in navigation and feature-card edges never appear in Hero. */
   background-size:184% auto;
-  background-position:82% 0%;
+  background-position:82% 22%;
 }
 
 .jlf-hero-art::before{
@@ -2091,4 +2093,3 @@ if(
 }
 
 })();
-
