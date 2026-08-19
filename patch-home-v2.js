@@ -1142,29 +1142,16 @@ body.jlf-feature-mode
   overflow:hidden;
 
   background:
-    radial-gradient(
-      circle at 72% 23%,
-      rgba(255,246,205,.92) 0 7%,
-      rgba(226,181,255,.42) 15%,
-      transparent 31%
-    ),
-    linear-gradient(
-      110deg,
-      #fffaff 0%,
-      #efd2ff 51%,
-      #662080 100%
-    );
+    linear-gradient(90deg,rgba(255,248,255,.24),transparent 55%),
+    url("hero-bg-v3.webp") center/cover no-repeat;
 }
 
 .jlf-hero::before{
   content:"";
   position:absolute;
-  inset:auto 0 0;
-  height:48%;
-  background:
-    linear-gradient(150deg,transparent 0 37%,rgba(102,42,126,.18) 38% 52%,transparent 53%) -40px 0/62% 100% no-repeat,
-    linear-gradient(160deg,transparent 0 42%,rgba(74,20,96,.25) 43% 58%,transparent 59%) 100% 0/68% 100% no-repeat,
-    linear-gradient(180deg,transparent,rgba(49,4,65,.22));
+  inset:0;
+  height:auto;
+  background:linear-gradient(90deg,rgba(255,247,255,.60) 0 38%,rgba(255,247,255,.10) 58%,transparent 72%);
   pointer-events:none;
 }
 
@@ -1173,7 +1160,7 @@ body.jlf-feature-mode
   position:absolute;
   right:0;
   top:0;
-  width:25%;
+  width:22%;
   height:100%;
   background:
     repeating-linear-gradient(0deg,rgba(244,211,132,.14) 0 2px,transparent 2px 31px),
@@ -1184,18 +1171,7 @@ body.jlf-feature-mode
 
 
 .jlf-hero-art{
-  position:absolute;
-  right:19%;
-  top:10px;
-  width:31%;
-  height:260px;
-  z-index:4;
-  background-image:url("IMG_0821.png");
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center 16%;
-  border-radius:48% 48% 8% 8%;
-  box-shadow:0 14px 28px rgba(48,4,62,.24);
+  display:none;
 }
 
 .jlf-hero-art::before{
@@ -1857,10 +1833,10 @@ body.jlf-feature-mode
   height:45px;
   flex:0 0 auto;
   border-radius:7px;
-  background-image:url("IMG_0821.png");
+  background-image:url("hero-bg-v3.webp");
   background-repeat:no-repeat;
-  background-size:cover;
-  background-position:center 16%;
+  background-size:auto 185%;
+  background-position:70% 38%;
 }
 
 
