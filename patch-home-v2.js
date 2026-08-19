@@ -542,7 +542,7 @@ function boot(){
   }
 
 
-  function findPlugin(term){
+  function findPlugins(term){
     const names=routeTitles[term] || [term];
     const selectors=
       '#plugs0 .card,' +
@@ -556,7 +556,7 @@ function boot(){
       ...feature.querySelectorAll(selectors)
     ];
 
-    return list.find(card=>{
+    return list.filter(card=>{
       if(
         out &&
         out.classList.contains('hide') &&
@@ -573,7 +573,51 @@ function boot(){
       return names.some(name=>
         text.includes(clean(name))
       );
-    }) || null;
+    });
+  }
+
+  function findPlugin(term){
+    return findPlugins(term)[0] || null;
+  }
+
+  function isNamedPlugin(card){
+    const heading=card.querySelector('h2,h3');
+    const text=clean(heading ? heading.textContent : '');
+    return Object.keys(routeTitles).some(function(key){
+      return routeTitles[key].some(function(name){ return text.includes(clean(name)); });
+    });
+  }
+
+  function hideEmptyCards(){
+    feature.querySelectorAll('.card').forEach(function(card){
+      const hasUseful=card.querySelector('input,select,button,table,svg,canvas,img,[id^="qm"],[id^="jg"]');
+      const hasText=clean(card.textContent).length>0;
+      card.classList.toggle('jli-empty-card',!hasUseful&&!hasText);
+    });
+  }
+
+  function applyRouteView(term){
+    hideEmptyCards();
+    const cards=[...feature.querySelectorAll('.card')];
+    cards.forEach(function(card){ card.classList.add('jli-route-hidden'); });
+
+    if(term==='四柱'){
+      if(paipan) paipan.classList.remove('jli-route-hidden');
+      if(out && !out.classList.contains('hide')){
+        cards.forEach(function(card){
+          if(out.contains(card) && !isNamedPlugin(card) &&
+             !card.classList.contains('todo') && !card.classList.contains('pro') &&
+             !card.classList.contains('jl-old-menu-final')){
+            card.classList.remove('jli-route-hidden');
+          }
+        });
+      }
+      return;
+    }
+
+    const matches=findPlugins(term);
+    matches.forEach(function(card){ card.classList.remove('jli-route-hidden'); });
+    if(!matches.length && paipan) paipan.classList.remove('jli-route-hidden');
   }
 
 
@@ -648,6 +692,8 @@ function boot(){
 
     setInnerMeta(term);
 
+    applyRouteView(term);
+
     sessionStorage.setItem(
       'jlf-pending',
       term
@@ -667,8 +713,7 @@ function boot(){
     }
 
 
-    const target=
-      findPlugin(term);
+    const target=findPlugin(term);
 
 
     if(target){
@@ -702,6 +747,9 @@ function boot(){
   innerHead.querySelectorAll('[data-jli-route]').forEach(function(btn){
     btn.addEventListener('click',function(){ openFeature(btn.dataset.jliRoute); });
   });
+
+  setTimeout(hideEmptyCards,300);
+  setTimeout(hideEmptyCards,1200);
 
 
   home
@@ -769,6 +817,8 @@ function boot(){
                     'jlf-pending'
                   );
 
+                  applyRouteView('四柱');
+
                   showFeature(
                     out
                   );
@@ -796,6 +846,8 @@ function boot(){
                   sessionStorage.removeItem(
                     'jlf-pending'
                   );
+
+                  applyRouteView(pending);
 
                   showFeature(
                     target

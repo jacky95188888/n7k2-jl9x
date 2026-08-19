@@ -18,3 +18,30 @@ body.jlf-feature-mode .seg button[aria-pressed="true"],body.jlf-feature-mode .ta
 body.jl-page-bxcc .back,body.jl-page-rz .back{display:inline-flex;align-items:center;min-height:37px;padding:0 14px;border:1px solid #e9c968;border-radius:999px;color:#fff!important;background:linear-gradient(135deg,#520665,#a323c4);box-shadow:0 6px 14px #6310783b;text-decoration:none;font-weight:900}
 body.jl-page-bxcc .wrap,body.jl-page-rz .wrap{max-width:560px!important;padding:15px 16px 35px!important}body.jl-page-bxcc header,body.jl-page-rz header{padding:24px 8px 12px!important;background:linear-gradient(135deg,#fff9ff,#edd1f7)!important;border-radius:16px!important;margin:12px 0!important}body.jl-page-bxcc header:after,body.jl-page-rz header:after{content:"";display:block;width:72px;height:72px;margin:12px auto 0;background:url("badge-baxing-v1.webp") center/contain no-repeat;filter:drop-shadow(0 6px 8px #5e0b7040)}body.jl-page-rz header:after{background-image:url("date-banner-v3.webp");width:100%;height:90px;border-radius:12px;background-size:cover}
 @media(min-width:640px){.jli-hero{padding:32px 36px;grid-template-columns:1fr 125px}.jli-hero img{width:115px}.jli-hero h1{font-size:35px!important}}
+
+/* 每個入口只顯示自己的條件與結果，並清除舊版空容器 */
+#jl-feature-shell-final .jli-route-hidden,
+#jl-feature-shell-final .jli-empty-card{display:none!important}
+body.jlf-feature-mode #jl-feature-shell-final .card{min-height:0!important;height:auto!important}
+body.jlf-feature-mode #jl-feature-shell-final #plugs0:empty,
+body.jlf-feature-mode #jl-feature-shell-final #plug:empty,
+body.jlf-feature-mode #jl-feature-shell-final #plugs:empty{display:none!important}
+
+/* 舊深色結果區改回同一套紫金紙張風格 */
+body.jlf-feature-mode .qm-card,
+body.jlf-feature-mode .qm-gj,
+body.jlf-feature-mode .qm-zi,
+body.jlf-feature-mode .qm-ly,
+body.jlf-feature-mode .jg-grid,
+body.jlf-feature-mode .jie,
+body.jlf-feature-mode .duan,
+body.jlf-feature-mode .jdu{color:#4b2853!important;border-color:#d7b1e1!important;background:linear-gradient(145deg,#fff,#fff6ff)!important}
+body.jlf-feature-mode .qm-cell{color:#5a3262!important;border-color:#d5addf!important;background:#fffaff!important}
+body.jlf-feature-mode .qm-cell.on{color:#fff!important;border-color:#e8c65f!important;background:linear-gradient(145deg,#5a086c,#a625c6)!important}
+body.jlf-feature-mode .qm-card h4,
+body.jlf-feature-mode .qm-gj .nm,
+body.jlf-feature-mode .qm-zi h5{color:#651078!important}
+
+body.jlf-feature-mode footer{margin-top:18px!important;padding:21px 12px!important;color:#f3dda0!important;background:linear-gradient(135deg,#350440,#651078)!important;border-radius:17px 17px 0 0!important;text-align:center!important}
+body.jlf-feature-mode footer .f-motto{color:#f5dc8b!important}
+body.jlf-feature-mode footer .f-sub{color:#ead9ed!important}
