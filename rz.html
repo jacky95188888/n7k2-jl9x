@@ -111,7 +111,7 @@ footer{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);
   text-align:center;font-size:11.5px;line-height:2;color:var(--dim)}
 </style>
 <link rel="stylesheet" href="theme-v3.css?v=1">
-<link rel="stylesheet" href="inner-theme-v4.css?v=route-fix-3">
+<link rel="stylesheet" href="inner-theme-v4.css?v=date-polish-v10">
 </head>
 <body class="jl-page jl-page-rz">
 <div class="wrap">
@@ -233,7 +233,7 @@ function render(date){
   var h='';
 
   /* 日期主體 */
-  h+='<div class="card"><div class="date-main">'
+  h+='<div class="card rz-date-card"><div class="date-main">'
    + '<div class="date-sol">'+solar.getYear()+' 年 '+solar.getMonth()+' 月 '
    + solar.getDay()+' 日　星期'+week+'</div>'
    + '<div class="date-lun">'+esc(lunStr)+'</div>'
@@ -244,7 +244,7 @@ function render(date){
   /* 宜忌 */
   var yi=safe(function(){return lunar.getDayYi();},[]);
   var ji=safe(function(){return lunar.getDayJi();},[]);
-  h+='<div class="card"><h2>今 日 宜 忌</h2><div class="yj">'
+  h+='<div class="card rz-result-card rz-yj-card"><h2><span class="rz-title-icon">曆</span>今 日 宜 忌</h2><div class="yj">'
    + '<div class="y"><h3>宜</h3><p>'+(yi.length?esc(yi.join('　')):'—')+'</p></div>'
    + '<div class="j"><h3>忌</h3><p>'+(ji.length?esc(ji.join('　')):'—')+'</p></div>'
    + '</div></div>';
@@ -257,7 +257,7 @@ function render(date){
     ['貴神位', safe(function(){return lunar.getDayPositionYangGuiDesc();},'')]
   ].filter(function(p){return p[1];});
   if(pos.length){
-    h+='<div class="card"><h2>今 日 方 位</h2><div class="pos">';
+    h+='<div class="card rz-result-card rz-pos-card"><h2><span class="rz-title-icon">方</span>今 日 方 位</h2><div class="pos">';
     pos.forEach(function(p){
       h+='<div><b>'+p[0]+'</b><span>'+esc(p[1])+'</span></div>';
     });
@@ -269,7 +269,7 @@ function render(date){
   if(g){
     /* lunar 套件回傳簡體，改用日支自行推沖，不讓簡體字漏進頁面 */
     var chongSX=SX[chong(idx(dz))]||'';
-    h+='<div class="card"><h2>今 日 生 肖</h2><div class="sx">'
+    h+='<div class="card rz-result-card rz-sx-card"><h2><span class="rz-title-icon">肖</span>今 日 生 肖</h2><div class="sx">'
      + '<div class="t1"><b>特吉</b><span>'+(g.good.join('　')||'—')+'</span></div>'
      + '<div class="t2"><b>次吉</b><span>'+(g.mid.join('　')||'—')+'</span></div>'
      + '<div class="t3"><b>帶衰</b><span>'+(g.bad.join('　')||'—')+'</span></div>'
@@ -300,7 +300,7 @@ function render(date){
              + '<span>'+HR[k][1]+'\u2013'+HR[k][2]+'</span>'
              + '<em>'+(isJi?'吉\u3000'+SHEN[off]:'&nbsp;')+'</em></div>';
       }
-      h+='<div class="card"><h2>今 日 時 辰</h2><div class="hrs">'+cells+'</div>'
+      h+='<div class="card rz-result-card rz-hours-card"><h2><span class="rz-title-icon">時</span>今 日 時 辰</h2><div class="hrs">'+cells+'</div>'
        + '<div class="note">綠字為黃道吉時，共 '+good.length+' 個：'+good.join('、')+'時。<br>'
        + '以日支 '+esc(dz)+' 起青龍於 '+HR[start][0]+'時，順取青龍、明堂、金匱、寶光、玉堂、司命六黃道神。</div></div>';
     }

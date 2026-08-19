@@ -16,7 +16,7 @@ body.jlf-feature-mode .seg,body.jlf-feature-mode .tabs,body.jl-page-bxcc .modes{
 body.jlf-feature-mode .seg button,body.jlf-feature-mode .tabs button,body.jlf-feature-mode .qm-zg button,body.jl-page-bxcc .modes button,body.jl-page-rz .quick button{border:1px solid #d3a7de!important;border-radius:10px!important;background:#fff9ff!important;color:#72437c!important;box-shadow:0 4px 10px #62107812!important;font-family:inherit!important;font-weight:900!important}
 body.jlf-feature-mode .seg button[aria-pressed="true"],body.jlf-feature-mode .tabs button[aria-pressed="true"],body.jlf-feature-mode .qm-zg button.on,body.jl-page-bxcc .modes button[aria-pressed="true"],body.jl-page-rz .quick button:active{color:#fff!important;border-color:#e8c866!important;background:linear-gradient(135deg,#5a086c,#a625c6)!important;box-shadow:inset 0 1px #ffffff55,0 5px 12px #62107835!important}
 body.jl-page-bxcc .back,body.jl-page-rz .back{display:inline-flex;align-items:center;min-height:37px;padding:0 14px;border:1px solid #e9c968;border-radius:999px;color:#fff!important;background:linear-gradient(135deg,#520665,#a323c4);box-shadow:0 6px 14px #6310783b;text-decoration:none;font-weight:900}
-body.jl-page-bxcc .wrap,body.jl-page-rz .wrap{max-width:560px!important;padding:15px 16px 35px!important}body.jl-page-bxcc header,body.jl-page-rz header{padding:24px 8px 12px!important;background:linear-gradient(135deg,#fff9ff,#edd1f7)!important;border-radius:16px!important;margin:12px 0!important}body.jl-page-bxcc header:after,body.jl-page-rz header:after{content:"";display:block;width:72px;height:72px;margin:12px auto 0;background:url("badge-baxing-v1.webp") center/contain no-repeat;filter:drop-shadow(0 6px 8px #5e0b7040)}body.jl-page-rz header:after{background-image:url("date-banner-v3.webp");width:100%;height:90px;border-radius:12px;background-size:cover}
+body.jl-page-bxcc .wrap,body.jl-page-rz .wrap{max-width:560px!important;padding:15px 16px 35px!important}body.jl-page-bxcc header,body.jl-page-rz header{padding:24px 8px 12px!important;background:linear-gradient(135deg,#fff9ff,#edd1f7)!important;border-radius:16px!important;margin:12px 0!important}body.jl-page-bxcc header:after,body.jl-page-rz header:after{content:"";display:block;width:72px;height:72px;margin:12px auto 0;background:url("badge-baxing-v1.webp") center/contain no-repeat;filter:drop-shadow(0 6px 8px #5e0b7040)}body.jl-page-rz header:after{background-image:url("date-banner-v3.webp");width:100%;height:auto;aspect-ratio:2/1;border:1px solid #e7c869;border-radius:14px;background-size:cover;background-position:center;background-repeat:no-repeat;box-shadow:0 10px 22px #4d075b35,inset 0 0 0 1px #ffffff80}
 @media(min-width:640px){.jli-hero{padding:32px 36px;grid-template-columns:1fr 125px}.jli-hero img{width:115px}.jli-hero h1{font-size:35px!important}}
 
 /* 每個入口只顯示自己的條件與結果，並清除舊版空容器 */
@@ -43,6 +43,41 @@ body.jlf-feature-mode .qm-cell.on{color:#fff!important;border-color:#e8c65f!impo
 body.jlf-feature-mode .qm-card h4,
 body.jlf-feature-mode .qm-gj .nm,
 body.jlf-feature-mode .qm-zi h5{color:#651078!important}
+
+/* 看日子：專屬紫金結果視覺 */
+body.jl-page-rz header{overflow:hidden!important}
+body.jl-page-rz header .orn{margin-bottom:4px}
+body.jl-page-rz #out{display:grid;gap:18px}
+body.jl-page-rz #out>.card{margin:0!important;padding:24px 22px!important}
+body.jl-page-rz .rz-date-card{background:radial-gradient(circle at 50% 12%,#fff 0,#fff8fd 46%,#f3d9f8 100%)!important;text-align:center}
+body.jl-page-rz .rz-date-card:after{content:"吉日良辰";display:inline-flex;margin-top:17px;padding:5px 16px;border:1px solid #e1bd55;border-radius:999px;color:#7b4e12;background:#fff8dc;font:700 10px var(--ser);letter-spacing:.18em}
+body.jl-page-rz .rz-result-card h2{display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:20px!important;padding-bottom:15px!important;font-size:17px!important}
+body.jl-page-rz .rz-title-icon{width:31px;height:31px;display:inline-grid;place-items:center;border:1px solid #e3be55;border-radius:50%;color:#f6da82;background:linear-gradient(145deg,#481057,#9421ac);box-shadow:inset 0 0 0 3px #ffffff1f,0 5px 12px #65107835;font-size:11px;letter-spacing:0;text-indent:0}
+body.jl-page-rz .yj{gap:12px}
+body.jl-page-rz .yj>div{position:relative;padding:20px 14px 18px;border-radius:14px;border:1px solid #dcb8e4;background:linear-gradient(145deg,#fff,#fff7ff);box-shadow:0 6px 15px #57106c12}
+body.jl-page-rz .yj>div:before{content:"";position:absolute;inset:6px;border:1px solid #dfc9e333;border-radius:10px;pointer-events:none}
+body.jl-page-rz .yj h3{width:42px;height:42px;margin:0 auto 12px;display:grid;place-items:center;border-radius:50%;font-size:18px;background:#f5e5f8}
+body.jl-page-rz .yj .y h3{color:#206c52;background:#e7f6ef}
+body.jl-page-rz .yj .j h3{color:#9a2938;background:#fbe8ec}
+body.jl-page-rz .pos{gap:10px;border:0;background:transparent}
+body.jl-page-rz .pos div{position:relative;padding:18px 8px 16px;border:1px solid #ddbee4;border-radius:14px;background:linear-gradient(155deg,#fff,#f9edfc);box-shadow:0 5px 13px #65107814}
+body.jl-page-rz .pos div:before{content:"✦";display:block;margin-bottom:5px;color:#c99d31;font-size:12px}
+body.jl-page-rz .pos b{color:#795681;font-size:11px}
+body.jl-page-rz .pos span{color:#5b176c;font-size:21px}
+body.jl-page-rz .sx{display:grid;gap:10px}
+body.jl-page-rz .sx div{padding:13px 14px;border:1px solid #dfc2e5!important;border-radius:13px;background:linear-gradient(90deg,#fff,#fff5ff)}
+body.jl-page-rz .sx b{min-width:61px;border-radius:999px!important;color:#fff!important;background:linear-gradient(135deg,#5b0b6c,#a325c3);border-color:#e3bd5c!important;box-shadow:0 4px 10px #59106c2a}
+body.jl-page-rz .sx .t1 b{background:linear-gradient(135deg,#24644c,#4c9a79)}
+body.jl-page-rz .sx .t2 b{background:linear-gradient(135deg,#97651c,#d5a83e)}
+body.jl-page-rz .sx .t3 b{background:linear-gradient(135deg,#8b2533,#c85b67)}
+body.jl-page-rz .hrs{gap:8px;border:0;background:transparent}
+body.jl-page-rz .hrs div{min-height:105px;padding:14px 7px;border:1px solid #dcbce3;border-radius:13px;background:linear-gradient(150deg,#fff,#f8ebfb);box-shadow:0 4px 11px #5d0b7012}
+body.jl-page-rz .hrs div.bad{border-color:#e6dde8;background:#f8f4f8;opacity:.62}
+body.jl-page-rz .hrs b{color:#641476;font-size:17px}
+body.jl-page-rz .hrs em{display:inline-block;margin-top:7px;padding:2px 9px;border-radius:999px;color:#277053;background:#e6f5ed;font-weight:700}
+body.jl-page-rz .note{margin-top:17px;padding:12px 14px;border-left:3px solid #d2a536;border-radius:0 10px 10px 0;color:#715b76;background:#fbf1fc}
+body.jl-page-rz footer{margin-top:24px;padding:22px 12px;border:1px solid #d7ad49;border-radius:16px;color:#ead8ed;background:linear-gradient(135deg,#350440,#721187);box-shadow:0 10px 22px #59106c28}
+@media(max-width:400px){body.jl-page-rz #out>.card{padding:21px 15px!important}body.jl-page-rz .yj{grid-template-columns:1fr 1fr}body.jl-page-rz .yj p{font-size:12px}body.jl-page-rz .hrs div{min-height:100px}}
 
 body.jlf-feature-mode footer{margin-top:18px!important;padding:21px 12px!important;color:#f3dda0!important;background:linear-gradient(135deg,#350440,#651078)!important;border-radius:17px 17px 0 0!important;text-align:center!important}
 body.jlf-feature-mode footer .f-motto{color:#f5dc8b!important}
