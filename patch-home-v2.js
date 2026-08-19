@@ -19,9 +19,9 @@ function boot(){
   [...wrap.children].forEach(n=>feature.appendChild(n));
   wrap.appendChild(feature);
 
-  const paipan=feature.querySelector('#paipan') || feature.querySelector('.card');
   const out=feature.querySelector('#out');
   const go=feature.querySelector('#go');
+  const paipan=(go && go.closest('.card')) || feature.querySelector('#paipan') || feature.querySelector('.card');
 
   if(paipan) paipan.id=paipan.id || 'paipan';
 
@@ -543,6 +543,18 @@ function boot(){
 
 
   function findPlugins(term){
+    const direct={
+      九宮:'#jg-ph',
+      奇門:'#qmNum'
+    };
+    if(direct[term]){
+      const field=feature.querySelector(direct[term]);
+      const exact=field && field.closest('.card');
+      if(exact && !(out && out.classList.contains('hide') && out.contains(exact))){
+        return [exact];
+      }
+    }
+
     const names=routeTitles[term] || [term];
     const selectors=
       '#plugs0 .card,' +

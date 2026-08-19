@@ -22,6 +22,8 @@ body.jl-page-bxcc .wrap,body.jl-page-rz .wrap{max-width:560px!important;padding:
 /* 每個入口只顯示自己的條件與結果，並清除舊版空容器 */
 #jl-feature-shell-final .jli-route-hidden,
 #jl-feature-shell-final .jli-empty-card{display:none!important}
+body.jlf-feature-mode #jl-feature-shell-final .card.jli-route-hidden,
+body.jlf-feature-mode #jl-feature-shell-final .card.jli-empty-card{display:none!important;min-height:0!important;height:0!important;margin:0!important;padding:0!important;border:0!important}
 body.jlf-feature-mode #jl-feature-shell-final .card{min-height:0!important;height:auto!important}
 body.jlf-feature-mode #jl-feature-shell-final #plugs0:empty,
 body.jlf-feature-mode #jl-feature-shell-final #plug:empty,
