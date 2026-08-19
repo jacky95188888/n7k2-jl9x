@@ -111,20 +111,12 @@ function boot(){
 
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle
-            class="ring2"
-            cx="50"
-            cy="50"
-            r="35">
-          </circle>
-
-          <path d="M50 20v60M20 50h60"></path>
-
-          <text x="30" y="41">年</text>
-          <text x="61" y="41">月</text>
-
-          <text x="30" y="72">日</text>
-          <text x="61" y="72">時</text>
+          <circle class="ring2" cx="50" cy="50" r="35"></circle>
+          <circle cx="50" cy="50" r="19"></circle>
+          <path d="M50 31a19 19 0 1 0 0 38a9.5 9.5 0 1 1 0-19a9.5 9.5 0 1 0 0-19"></path>
+          <circle cx="50" cy="40.5" r="2.4"></circle>
+          <circle cx="50" cy="59.5" r="2.4"></circle>
+          <path d="M31 23h14m10 0h14M31 77h14m10 0h14M23 31v14m0 10v14M77 31v14m0 10v14"></path>
 
         </svg>
 
@@ -280,11 +272,17 @@ function boot(){
 
     <article class="jlf-card">
 
-      <div class="jlf-badge jlf-badge-text">
-
-        <span>六壬</span>
-        <span>六親</span>
-
+      <div class="jlf-badge">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="ring2" cx="50" cy="50" r="35"></circle>
+          <path d="M29 62L40 37L53 52L68 31L75 66L54 73Z"></path>
+          <circle cx="29" cy="62" r="3.4"></circle>
+          <circle cx="40" cy="37" r="3.4"></circle>
+          <circle cx="53" cy="52" r="3.4"></circle>
+          <circle cx="68" cy="31" r="3.4"></circle>
+          <circle cx="75" cy="66" r="3.4"></circle>
+          <circle cx="54" cy="73" r="3.4"></circle>
+        </svg>
       </div>
 
       <h3>六壬／六親</h3>
@@ -318,30 +316,9 @@ function boot(){
 
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
-          <circle
-            class="ring2"
-            cx="50"
-            cy="50"
-            r="35">
-          </circle>
-
-          <path
-            d="
-              M25 64
-              L36 36
-              L49 53
-              L62 30
-              L76 65
-              L51 73
-              Z
-            ">
-          </path>
-
-          <circle cx="36" cy="36" r="3"></circle>
-          <circle cx="49" cy="53" r="3"></circle>
-          <circle cx="62" cy="30" r="3"></circle>
-          <circle cx="76" cy="65" r="3"></circle>
-          <circle cx="51" cy="73" r="3"></circle>
+          <circle class="ring2" cx="50" cy="50" r="35"></circle>
+          <path d="M50 24l3.6 10.4L64 38l-10.4 3.6L50 52l-3.6-10.4L36 38l10.4-3.6ZM31 49l2.6 7.4L41 59l-7.4 2.6L31 69l-2.6-7.4L21 59l7.4-2.6ZM68 51l3 8.5L80 62.5l-9 3L68 74l-3-8.5L56 62.5l9-3Z"></path>
+          <circle cx="49" cy="67" r="3.5"></circle>
 
         </svg>
 
@@ -1407,6 +1384,16 @@ body.jlf-feature-mode
     rgba(120,42,144,.18);
 }
 
+.jlf-badge::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(245,211,104,.26),transparent 64%);
+  filter:blur(3px);
+  z-index:-1;
+}
+
 
 .jlf-badge::after{
   content:"";
@@ -1531,16 +1518,20 @@ body.jlf-feature-mode
 
 .jlf-card button,
 .jlf-card > a{
-  display:inline-block;
+  width:76px;
+  height:20px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
   margin-top:4px;
 
-  border:0;
+  border:1px solid rgba(241,203,102,.62);
 
-  border-radius:6px;
+  border-radius:999px;
 
-  padding:
-    4px 8px;
+  padding:0 8px;
 
   background:
     linear-gradient(
@@ -1558,8 +1549,8 @@ body.jlf-feature-mode
   font-weight:900;
 
   box-shadow:
-    0 3px 7px
-    rgba(82,9,105,.18);
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 4px 9px rgba(82,9,105,.22);
 }
 
 
@@ -1567,7 +1558,7 @@ body.jlf-feature-mode
 /* 擇吉看日 */
 
 .jlf-date{
-  height:98px;
+  min-height:126px;
 
   margin:
     0 9px 7px;
@@ -1582,12 +1573,8 @@ body.jlf-feature-mode
   border-radius:12px;
 
   background:
-    linear-gradient(
-      110deg,
-      #f9e1ff 0%,
-      #d688ee 58%,
-      #a941c8 100%
-    );
+    linear-gradient(90deg,rgba(255,244,255,.92) 0 43%,rgba(255,244,255,.28) 62%,transparent 78%),
+    url("date-banner-v3.webp") center/cover no-repeat;
 
   box-shadow:
     0 6px 15px
@@ -1600,10 +1587,10 @@ body.jlf-feature-mode
 
   z-index:3;
 
-  width:67%;
+  width:56%;
 
   padding:
-    10px 0 9px 15px;
+    15px 0 13px 17px;
 }
 
 
@@ -1616,7 +1603,7 @@ body.jlf-feature-mode
     "Noto Serif TC",
     serif;
 
-  font-size:17px;
+  font-size:20px;
 }
 
 
@@ -1626,46 +1613,46 @@ body.jlf-feature-mode
 
   color:#5c4960;
 
-  font-size:5.8px;
+  font-size:6.4px;
+  line-height:1.45;
 }
 
 
 .jlf-date a{
-  display:inline-block;
+  width:98px;
+  height:26px;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
   margin-top:3px;
 
-  padding:
-    4px 11px;
+  padding:0 14px;
 
   border-radius:
     999px;
 
-  background:#78109b;
+  border:1px solid rgba(244,214,124,.74);
+
+  background:linear-gradient(135deg,#6e0c90,#a92bd1);
 
   color:#fff;
 
   text-decoration:none;
 
-  font-size:6px;
+  font-size:7px;
 
   font-weight:900;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.24),
+    0 5px 12px rgba(82,9,105,.22);
 }
 
 
 .jlf-date-scene{
-  position:relative;
-
-  width:33%;
-
-  overflow:hidden;
-
-  background:
-    linear-gradient(
-      150deg,
-      rgba(255,255,255,.25),
-      rgba(90,22,113,.16)
-    );
+  display:none;
 }
 
 
