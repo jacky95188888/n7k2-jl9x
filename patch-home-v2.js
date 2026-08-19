@@ -112,11 +112,12 @@ function boot(){
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
           <circle class="ring2" cx="50" cy="50" r="35"></circle>
-          <circle cx="50" cy="50" r="19"></circle>
-          <path d="M50 31a19 19 0 1 0 0 38a9.5 9.5 0 1 1 0-19a9.5 9.5 0 1 0 0-19"></path>
-          <circle cx="50" cy="40.5" r="2.4"></circle>
-          <circle cx="50" cy="59.5" r="2.4"></circle>
-          <path d="M31 23h14m10 0h14M31 77h14m10 0h14M23 31v14m0 10v14M77 31v14m0 10v14"></path>
+          <path d="M50 18v64M18 50h64"></path>
+          <circle cx="50" cy="50" r="6"></circle>
+          <text class="badge-char" x="34" y="42">年</text>
+          <text class="badge-char" x="58" y="42">月</text>
+          <text class="badge-char" x="34" y="68">日</text>
+          <text class="badge-char" x="58" y="68">時</text>
 
         </svg>
 
@@ -241,6 +242,15 @@ function boot(){
           <circle cx="50" cy="39" r="2.5"></circle>
           <circle cx="50" cy="61" r="2.5"></circle>
 
+          <text class="trigram" x="46" y="20">☰</text>
+          <text class="trigram" x="70" y="30">☱</text>
+          <text class="trigram" x="78" y="54">☲</text>
+          <text class="trigram" x="68" y="78">☳</text>
+          <text class="trigram" x="46" y="88">☴</text>
+          <text class="trigram" x="20" y="78">☵</text>
+          <text class="trigram" x="11" y="54">☶</text>
+          <text class="trigram" x="21" y="30">☷</text>
+
         </svg>
 
       </div>
@@ -275,13 +285,10 @@ function boot(){
       <div class="jlf-badge">
         <svg viewBox="0 0 100 100" aria-hidden="true">
           <circle class="ring2" cx="50" cy="50" r="35"></circle>
-          <path d="M29 62L40 37L53 52L68 31L75 66L54 73Z"></path>
-          <circle cx="29" cy="62" r="3.4"></circle>
-          <circle cx="40" cy="37" r="3.4"></circle>
-          <circle cx="53" cy="52" r="3.4"></circle>
-          <circle cx="68" cy="31" r="3.4"></circle>
-          <circle cx="75" cy="66" r="3.4"></circle>
-          <circle cx="54" cy="73" r="3.4"></circle>
+          <circle cx="50" cy="50" r="27"></circle>
+          <path d="M24 50h52M50 24v52"></path>
+          <text class="badge-word" x="50" y="45">六壬</text>
+          <text class="badge-word" x="50" y="64">六親</text>
         </svg>
       </div>
 
@@ -317,8 +324,16 @@ function boot(){
         <svg viewBox="0 0 100 100" aria-hidden="true">
 
           <circle class="ring2" cx="50" cy="50" r="35"></circle>
-          <path d="M50 24l3.6 10.4L64 38l-10.4 3.6L50 52l-3.6-10.4L36 38l10.4-3.6ZM31 49l2.6 7.4L41 59l-7.4 2.6L31 69l-2.6-7.4L21 59l7.4-2.6ZM68 51l3 8.5L80 62.5l-9 3L68 74l-3-8.5L56 62.5l9-3Z"></path>
-          <circle cx="49" cy="67" r="3.5"></circle>
+          <path d="M27 58L36 35L49 43L61 26L73 42L67 68L46 73L27 58Z"></path>
+          <path d="M36 35L46 73M49 43L67 68M27 58L73 42M49 43L61 26"></path>
+          <circle cx="27" cy="58" r="3.2"></circle>
+          <circle cx="36" cy="35" r="3.2"></circle>
+          <circle cx="49" cy="43" r="3.2"></circle>
+          <circle cx="61" cy="26" r="3.2"></circle>
+          <circle cx="73" cy="42" r="3.2"></circle>
+          <circle cx="67" cy="68" r="3.2"></circle>
+          <circle cx="46" cy="73" r="3.2"></circle>
+          <circle cx="50" cy="55" r="3.2"></circle>
 
         </svg>
 
@@ -1443,6 +1458,24 @@ body.jlf-feature-mode
   font-size:13px;
 
   font-weight:900;
+}
+
+.jlf-badge svg .badge-char{
+  font-size:15px;
+  text-anchor:middle;
+  dominant-baseline:middle;
+}
+
+.jlf-badge svg .badge-word{
+  font-size:15px;
+  letter-spacing:2px;
+  text-anchor:middle;
+}
+
+.jlf-badge svg .trigram{
+  font-family:serif;
+  font-size:10px;
+  text-anchor:middle;
 }
 
 
