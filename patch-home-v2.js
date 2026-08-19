@@ -108,19 +108,7 @@ function boot(){
     <article class="jlf-card">
 
       <div class="jlf-badge">
-
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-
-          <circle class="ring2" cx="50" cy="50" r="35"></circle>
-          <path d="M50 18v64M18 50h64"></path>
-          <circle cx="50" cy="50" r="6"></circle>
-          <text class="badge-char" x="34" y="42">年</text>
-          <text class="badge-char" x="58" y="42">月</text>
-          <text class="badge-char" x="34" y="68">日</text>
-          <text class="badge-char" x="58" y="68">時</text>
-
-        </svg>
-
+        <img src="badge-bazi-v1.webp" alt="四柱八字 年月日時徽章">
       </div>
 
       <h3>四柱八字</h3>
@@ -151,41 +139,7 @@ function boot(){
     <article class="jlf-card">
 
       <div class="jlf-badge">
-
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-
-          <rect
-            class="ring2"
-            x="22"
-            y="22"
-            width="56"
-            height="56"
-            rx="4">
-          </rect>
-
-          <path
-            d="
-              M41 22v56
-              M59 22v56
-              M22 41h56
-              M22 59h56
-            ">
-          </path>
-
-          <text x="29" y="36">4</text>
-          <text x="48" y="36">9</text>
-          <text x="67" y="36">2</text>
-
-          <text x="29" y="55">3</text>
-          <text x="48" y="55">5</text>
-          <text x="67" y="55">7</text>
-
-          <text x="29" y="74">8</text>
-          <text x="48" y="74">1</text>
-          <text x="67" y="74">6</text>
-
-        </svg>
-
+        <img src="badge-jiugong-v1.webp" alt="紫微九宮 洛書九宮徽章">
       </div>
 
       <h3>紫微／九宮</h3>
@@ -216,43 +170,7 @@ function boot(){
     <article class="jlf-card">
 
       <div class="jlf-badge">
-
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-
-          <polygon
-            class="ring2"
-            points="50,15 76,24 85,50 76,76 50,85 24,76 15,50 24,24">
-          </polygon>
-
-          <circle
-            cx="50"
-            cy="50"
-            r="22">
-          </circle>
-
-          <path
-            d="
-              M50 28
-              a22 22 0 1 0 0 44
-              a11 11 0 1 1 0-22
-              a11 11 0 1 0 0-22
-            ">
-          </path>
-
-          <circle cx="50" cy="39" r="2.5"></circle>
-          <circle cx="50" cy="61" r="2.5"></circle>
-
-          <text class="trigram" x="46" y="20">☰</text>
-          <text class="trigram" x="70" y="30">☱</text>
-          <text class="trigram" x="78" y="54">☲</text>
-          <text class="trigram" x="68" y="78">☳</text>
-          <text class="trigram" x="46" y="88">☴</text>
-          <text class="trigram" x="20" y="78">☵</text>
-          <text class="trigram" x="11" y="54">☶</text>
-          <text class="trigram" x="21" y="30">☷</text>
-
-        </svg>
-
+        <img src="badge-qimen-v1.webp" alt="奇門遁甲 太極八卦徽章">
       </div>
 
       <h3>奇門遁甲</h3>
@@ -283,13 +201,7 @@ function boot(){
     <article class="jlf-card">
 
       <div class="jlf-badge">
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-          <circle class="ring2" cx="50" cy="50" r="35"></circle>
-          <circle cx="50" cy="50" r="27"></circle>
-          <path d="M24 50h52M50 24v52"></path>
-          <text class="badge-word" x="50" y="45">六壬</text>
-          <text class="badge-word" x="50" y="64">六親</text>
-        </svg>
+        <img src="badge-liuren-v1.webp" alt="六壬六親文字徽章">
       </div>
 
       <h3>六壬／六親</h3>
@@ -320,23 +232,7 @@ function boot(){
     <article class="jlf-card">
 
       <div class="jlf-badge">
-
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-
-          <circle class="ring2" cx="50" cy="50" r="35"></circle>
-          <path d="M27 58L36 35L49 43L61 26L73 42L67 68L46 73L27 58Z"></path>
-          <path d="M36 35L46 73M49 43L67 68M27 58L73 42M49 43L61 26"></path>
-          <circle cx="27" cy="58" r="3.2"></circle>
-          <circle cx="36" cy="35" r="3.2"></circle>
-          <circle cx="49" cy="43" r="3.2"></circle>
-          <circle cx="61" cy="26" r="3.2"></circle>
-          <circle cx="73" cy="42" r="3.2"></circle>
-          <circle cx="67" cy="68" r="3.2"></circle>
-          <circle cx="46" cy="73" r="3.2"></circle>
-          <circle cx="50" cy="55" r="3.2"></circle>
-
-        </svg>
-
+        <img src="badge-baxing-v1.webp" alt="八星磁場 星象連線徽章">
       </div>
 
       <h3>八星磁場</h3>
@@ -363,30 +259,7 @@ function boot(){
     <article class="jlf-card">
 
       <div class="jlf-badge">
-
-        <svg viewBox="0 0 100 100" aria-hidden="true">
-
-          <circle
-            class="ring2"
-            cx="50"
-            cy="50"
-            r="35">
-          </circle>
-
-          <path
-            d="
-              M26 70h10V58
-              h10v12
-              h10V45
-              h10v25
-              h10V31
-            ">
-          </path>
-
-          <path d="M67 31h9v9"></path>
-
-        </svg>
-
+        <img src="badge-liunian-v1.webp" alt="流年運勢 上升趨勢徽章">
       </div>
 
       <h3>流年運勢</h3>
@@ -1360,8 +1233,8 @@ body.jlf-feature-mode
 .jlf-badge{
   position:relative;
 
-  width:46px;
-  height:46px;
+  width:50px;
+  height:50px;
 
   margin:
     0 auto 5px;
@@ -1369,34 +1242,8 @@ body.jlf-feature-mode
   display:grid;
   place-items:center;
 
-  border-radius:50%;
-
-  border:
-    2px solid
-    var(--gold);
-
-  background:
-    radial-gradient(
-      circle at 34% 25%,
-      #d06af2 0,
-      #8d25ba 37%,
-      #4b075f 78%
-    );
-
-  box-shadow:
-    inset
-    0 0 0 2px
-    rgba(255,235,163,.18),
-
-    inset
-    0 0 13px
-    rgba(255,203,104,.18),
-
-    0 4px 10px
-    rgba(72,6,92,.30),
-
-    0 0 0 1px
-    rgba(120,42,144,.18);
+  border:0;
+  background:transparent;
 }
 
 .jlf-badge::before{
@@ -1411,18 +1258,15 @@ body.jlf-feature-mode
 
 
 .jlf-badge::after{
-  content:"";
+  content:none;
+}
 
-  position:absolute;
-  inset:3px;
-
-  border-radius:50%;
-
-  border:
-    1px solid
-    rgba(255,226,126,.46);
-
-  pointer-events:none;
+.jlf-badge img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 5px 6px rgba(70,7,89,.34));
 }
 
 
