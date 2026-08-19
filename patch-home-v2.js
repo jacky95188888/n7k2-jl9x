@@ -55,14 +55,7 @@ function boot(){
 
 <section class="jlf-hero">
 
-  <div class="jlf-hero-bg" aria-hidden="true">
-    <div class="jlf-moon"></div>
-    <div class="jlf-mountain m1"></div>
-    <div class="jlf-mountain m2"></div>
-    <div class="jlf-shelf"></div>
-    <div class="jlf-desk"></div>
-    <div class="jlf-orb"></div>
-  </div>
+  <div class="jlf-hero-art" role="img" aria-label="筠玲老師"></div>
 
   <div class="jlf-hero-copy">
 
@@ -82,12 +75,6 @@ function boot(){
       協助您了解自己 · 趨吉避凶 · 創造更好的人生
     </p>
 
-  </div>
-
-
-  <div class="jlf-teacher-silhouette" aria-hidden="true">
-    <div class="jlf-head"></div>
-    <div class="jlf-body"></div>
   </div>
 
 
@@ -485,9 +472,7 @@ function boot(){
 
   <div class="jlf-consult">
 
-    <div class="jlf-avatar">
-      筠
-    </div>
+    <div class="jlf-mini-teacher" role="img" aria-label="筠玲老師"></div>
 
     <div>
 
@@ -571,6 +556,9 @@ function boot(){
 
   function showHome(){
 
+    sessionStorage.removeItem('jlf-pending');
+
+
     document.body.classList.remove(
       'jlf-feature-mode'
     );
@@ -639,42 +627,16 @@ function boot(){
   }
 
 
-  const aliases={
-
-    九宮:[
-      '九宮',
-      '九宮盤',
-      '數字九宮',
-      '奇門數字九宮盤'
-    ],
-
-    奇門:[
-      '奇門遁甲',
-      '奇門'
-    ],
-
-    六親:[
-      '六親',
-      '六親解析',
-      '六親對照',
-      '六壬'
-    ],
-
-    流年:[
-      '流年運勢',
-      '流年'
-    ]
-
+  const routeTitles={
+    九宮:['奇門數字九宮盤'],
+    奇門:['奇門手機號論斷'],
+    六親:['六親對照','六親全覽'],
+    流年:['流年一至九九']
   };
 
 
   function findPlugin(term){
-
-    const keys=
-      aliases[term] ||
-      [term];
-
-
+    const names=routeTitles[term] || [term];
     const selectors=
       '#plugs0 .card,' +
       '#plugs .card,' +
@@ -683,67 +645,29 @@ function boot(){
       '.card.pro,' +
       'section.card';
 
-
     const list=[
-      ...feature.querySelectorAll(
-        selectors
-      )
+      ...feature.querySelectorAll(selectors)
     ];
 
-
-    let best=null;
-    let bestScore=0;
-
-
-    list.forEach(card=>{
-
-      const text=
-        clean(card.textContent);
-
-
-      let score=0;
-
-
-      keys.forEach(k=>{
-
-        k=clean(k);
-
-
-        if(
-          text.startsWith(k)
-        ){
-
-          score+=100;
-
-        }
-
-        else if(
-          text.includes(k)
-        ){
-
-          score+=20;
-
-        }
-
-      });
-
-
+    return list.find(card=>{
       if(
-        score>bestScore
+        out &&
+        out.classList.contains('hide') &&
+        out.contains(card)
       ){
-
-        bestScore=score;
-        best=card;
-
+        return false;
       }
 
-    });
+      const heading=card.querySelector('h2,h3');
+      const text=clean(
+        heading ? heading.textContent : card.textContent
+      );
 
-
-    return best;
-
+      return names.some(name=>
+        text.includes(clean(name))
+      );
+    }) || null;
   }
-
 
 
   /* 提示 */
@@ -1030,10 +954,16 @@ body{
 }
 
 
-.wrap{
+body.jlf-home-mode .wrap{
   max-width:760px !important;
   margin:0 auto !important;
   padding:0 !important;
+}
+
+body.jlf-feature-mode .wrap{
+  max-width:560px !important;
+  margin:0 auto !important;
+  padding:0 18px !important;
 }
 
 
@@ -1090,7 +1020,10 @@ body.jlf-feature-mode
 /* Header */
 
 .jlf-header{
+  width:100%;
   height:48px;
+  aspect-ratio:auto;
+  margin:0;
 
   display:flex;
   align-items:center;
@@ -1218,168 +1151,29 @@ body.jlf-feature-mode
 }
 
 
-.jlf-hero-bg{
+.jlf-hero-art{
   position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-
-
-.jlf-moon{
-  position:absolute;
-
-  right:28%;
-  top:13%;
-
-  width:48px;
-  height:48px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      #fff8d8 0 35%,
-      #dcaef2 65%,
-      transparent 70%
-    );
-
-  filter:blur(.2px);
-
-  opacity:.9;
-}
-
-
-.jlf-mountain{
-  position:absolute;
-
-  bottom:21%;
-
-  width:62%;
-  height:38%;
-
-  background:
-    linear-gradient(
-      160deg,
-      transparent 0 35%,
-      rgba(112,45,141,.22)
-      36% 65%,
-      transparent 66%
-    );
-
-  transform:
-    skewX(-13deg);
-}
-
-
-.jlf-mountain.m1{
-  left:-10%;
-}
-
-
-.jlf-mountain.m2{
-  left:22%;
-  bottom:15%;
-  opacity:.58;
-
-  transform:
-    scale(.8)
-    skewX(-10deg);
-}
-
-
-.jlf-shelf{
-  position:absolute;
-
   right:0;
   top:0;
-
-  width:28%;
+  width:60%;
   height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(49,5,67,.72)
-    ),
-
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,220,120,.10)
-      0 3px,
-      transparent
-      3px 33px
-    );
-
-  border-left:
-    1px solid
-    rgba(255,220,140,.2);
+  z-index:2;
+  background-image:url("home-master-v2.webp");
+  background-repeat:no-repeat;
+  background-size:184% auto;
+  background-position:82% 0%;
 }
 
-
-.jlf-desk{
-  position:absolute;
-
-  right:0;
-  bottom:0;
-
-  width:55%;
-  height:22%;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(76,18,91,.25),
-      rgba(41,5,53,.72)
-    );
-}
-
-
-.jlf-orb{
-  position:absolute;
-
-  right:12%;
-  bottom:13%;
-
-  width:29px;
-  height:29px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      #fff,
-      #ca7bf1 30%,
-      #682289 64%,
-      #31043e
-    );
-
-  box-shadow:
-    0 0 18px
-    rgba(222,154,255,.58);
-}
-
-
-.jlf-hero::after{
+.jlf-hero-art::before{
   content:"";
-
   position:absolute;
   inset:0;
-
-  background:
-    radial-gradient(
-      circle at 70% 42%,
-      rgba(240,199,255,.3),
-      transparent 31%
-    ),
-
-    linear-gradient(
-      90deg,
-      transparent 45%,
-      rgba(114,24,146,.08)
-    );
+  background:linear-gradient(
+    90deg,
+    #eec8ff 0%,
+    rgba(238,200,255,.23) 25%,
+    transparent 55%
+  );
 }
 
 
@@ -1451,70 +1245,6 @@ body.jlf-feature-mode
   font-size:6.5px;
 
   line-height:1.55;
-}
-
-
-.jlf-teacher-silhouette{
-  position:absolute;
-
-  z-index:4;
-
-  right:20%;
-  bottom:0;
-
-  width:26%;
-  height:86%;
-}
-
-
-.jlf-head{
-  position:absolute;
-
-  left:30%;
-  top:5%;
-
-  width:38%;
-
-  aspect-ratio:1;
-
-  border-radius:
-    48% 48% 44% 44%;
-
-  background:
-    linear-gradient(
-      145deg,
-      #f7d0bc,
-      #d8a48e
-    );
-
-  box-shadow:
-    0 -11px 0 2px
-    #21121f;
-}
-
-
-.jlf-body{
-  position:absolute;
-
-  left:8%;
-  bottom:-3%;
-
-  width:84%;
-  height:67%;
-
-  border-radius:
-    40% 40% 8% 8%;
-
-  background:
-    linear-gradient(
-      150deg,
-      #fff7e9 0 46%,
-      #dcc0aa 47% 100%
-    );
-
-  box-shadow:
-    0 12px 20px
-    rgba(41,4,54,.2);
 }
 
 
@@ -2092,35 +1822,15 @@ body.jlf-feature-mode
 }
 
 
-.jlf-avatar{
+.jlf-mini-teacher{
   width:38px;
-  height:42px;
-
-  display:grid;
-
-  place-items:center;
-
+  height:45px;
   flex:0 0 auto;
-
-  border-radius:9px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #f5d6ff,
-      #9e41c2
-    );
-
-  border:
-    1px solid #d8a552;
-
-  color:#6c167a;
-
-  font-family:
-    "Noto Serif TC",
-    serif;
-
-  font-weight:900;
+  border-radius:7px;
+  background-image:url("home-master-v2.webp");
+  background-repeat:no-repeat;
+  background-size:430% auto;
+  background-position:68% 1%;
 }
 
 
@@ -2226,7 +1936,10 @@ body.jlf-feature-mode
 /* Footer */
 
 .jlf-footer{
+  position:relative;
   min-height:42px;
+  margin:0;
+  aspect-ratio:auto;
 
   display:grid;
 
@@ -2251,6 +1964,11 @@ body.jlf-feature-mode
   text-align:center;
 
   font-size:5.5px;
+}
+
+
+.jlf-footer::before{
+  content:none;
 }
 
 
@@ -2373,3 +2091,4 @@ if(
 }
 
 })();
+
