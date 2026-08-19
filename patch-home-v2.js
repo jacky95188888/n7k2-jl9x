@@ -1137,45 +1137,73 @@ body.jlf-feature-mode
 .jlf-hero{
   position:relative;
 
-  height:255px;
+  height:270px;
 
   overflow:hidden;
 
   background:
+    radial-gradient(
+      circle at 72% 23%,
+      rgba(255,246,205,.92) 0 7%,
+      rgba(226,181,255,.42) 15%,
+      transparent 31%
+    ),
     linear-gradient(
       110deg,
       #fffaff 0%,
-      #eec8ff 53%,
-      #6c2187 100%
+      #efd2ff 51%,
+      #662080 100%
     );
+}
+
+.jlf-hero::before{
+  content:"";
+  position:absolute;
+  inset:auto 0 0;
+  height:48%;
+  background:
+    linear-gradient(150deg,transparent 0 37%,rgba(102,42,126,.18) 38% 52%,transparent 53%) -40px 0/62% 100% no-repeat,
+    linear-gradient(160deg,transparent 0 42%,rgba(74,20,96,.25) 43% 58%,transparent 59%) 100% 0/68% 100% no-repeat,
+    linear-gradient(180deg,transparent,rgba(49,4,65,.22));
+  pointer-events:none;
+}
+
+.jlf-hero::after{
+  content:"";
+  position:absolute;
+  right:0;
+  top:0;
+  width:25%;
+  height:100%;
+  background:
+    repeating-linear-gradient(0deg,rgba(244,211,132,.14) 0 2px,transparent 2px 31px),
+    linear-gradient(90deg,transparent,rgba(39,3,52,.62));
+  border-left:1px solid rgba(246,218,126,.18);
+  pointer-events:none;
 }
 
 
 .jlf-hero-art{
   position:absolute;
-  right:0;
-  top:0;
-  width:60%;
-  height:100%;
-  z-index:2;
-  background-image:url("home-master-v2.webp");
+  right:19%;
+  top:10px;
+  width:31%;
+  height:260px;
+  z-index:4;
+  background-image:url("IMG_0821.png");
   background-repeat:no-repeat;
-  /* MASTER is a full-page reference. Crop into its portrait/desk area so
-     the baked-in navigation and feature-card edges never appear in Hero. */
-  background-size:184% auto;
-  background-position:82% 22%;
+  background-size:cover;
+  background-position:center 16%;
+  border-radius:48% 48% 8% 8%;
+  box-shadow:0 14px 28px rgba(48,4,62,.24);
 }
 
 .jlf-hero-art::before{
   content:"";
   position:absolute;
   inset:0;
-  background:linear-gradient(
-    90deg,
-    #eec8ff 0%,
-    rgba(238,200,255,.23) 25%,
-    transparent 55%
-  );
+  background:linear-gradient(90deg,rgba(239,210,255,.55),transparent 32%);
+  border-radius:inherit;
 }
 
 
@@ -1829,10 +1857,10 @@ body.jlf-feature-mode
   height:45px;
   flex:0 0 auto;
   border-radius:7px;
-  background-image:url("home-master-v2.webp");
+  background-image:url("IMG_0821.png");
   background-repeat:no-repeat;
-  background-size:430% auto;
-  background-position:68% 1%;
+  background-size:cover;
+  background-position:center 16%;
 }
 
 
