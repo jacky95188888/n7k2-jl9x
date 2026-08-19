@@ -516,11 +516,16 @@ function boot(){
   }
 
 
+  /*
+   * 每個入口只顯示自己的專業內容。
+   * 這份清單刻意採白名單，避免新插件或「其他工具」被誤塞進八字頁。
+   */
   const routeTitles={
+    四柱:['四柱八字','六柱環','先天後天'],
     九宮:['奇門數字九宮盤'],
     奇門:['奇門手機號論斷'],
-    六親:['六親對照','六親全覽'],
-    流年:['流年一至九九']
+    六親:['五行能量','陰陽屬性','陰陽斷','六親對照','六親全覽'],
+    流年:['大運分段','流年一至九九']
   };
 
   const innerMeta={
@@ -592,11 +597,16 @@ function boot(){
     return findPlugins(term)[0] || null;
   }
 
-  function isNamedPlugin(card){
-    const heading=card.querySelector('h2,h3');
-    const text=clean(heading ? heading.textContent : '');
-    return Object.keys(routeTitles).some(function(key){
-      return routeTitles[key].some(function(name){ return text.includes(clean(name)); });
+  function cardTitle(card){
+    if(!card) return '';
+    const heading=card.querySelector(':scope > h2,:scope > h3') || card.querySelector('h2,h3');
+    return clean(heading ? heading.textContent : '');
+  }
+
+  function cardMatchesRoute(card,term){
+    const title=cardTitle(card);
+    return (routeTitles[term] || []).some(function(name){
+      return title.includes(clean(name));
     });
   }
 
@@ -613,13 +623,16 @@ function boot(){
     const cards=[...feature.querySelectorAll('.card')];
     cards.forEach(function(card){ card.classList.add('jli-route-hidden'); });
 
+    /* 入口頁永遠不混入待辦、專業版密碼區或其他工具選單。 */
+    feature.querySelectorAll('.todo,.card.pro,#ly-menu,#ly-nav-card,.jl-old-menu-final').forEach(function(node){
+      node.classList.add('jli-route-hidden');
+    });
+
     if(term==='四柱'){
       if(paipan) paipan.classList.remove('jli-route-hidden');
       if(out && !out.classList.contains('hide')){
         cards.forEach(function(card){
-          if(out.contains(card) && !isNamedPlugin(card) &&
-             !card.classList.contains('todo') && !card.classList.contains('pro') &&
-             !card.classList.contains('jl-old-menu-final')){
+          if(out.contains(card) && cardMatchesRoute(card,'四柱')){
             card.classList.remove('jli-route-hidden');
           }
         });
@@ -627,7 +640,12 @@ function boot(){
       return;
     }
 
-    const matches=findPlugins(term);
+    const matches=(term==='九宮' || term==='奇門')
+      ? findPlugins(term)
+      : cards.filter(function(card){
+          return (!out || !out.classList.contains('hide') || !out.contains(card)) &&
+            cardMatchesRoute(card,term);
+        });
     matches.forEach(function(card){ card.classList.remove('jli-route-hidden'); });
     if(!matches.length && paipan) paipan.classList.remove('jli-route-hidden');
   }
