@@ -418,6 +418,27 @@ function boot(){
     feature.firstChild
   );
 
+  const innerHead=document.createElement('header');
+  innerHead.id='jli-head';
+  innerHead.innerHTML=`
+    <div class="jli-top">
+      <button class="jli-brand" type="button"><span>筠</span><b>筠玲易數<small>命理智慧・人生方向</small></b></button>
+      <button class="jli-home" type="button">返回首頁</button>
+    </div>
+    <div class="jli-hero">
+      <div><em>命理排盤・專業解析</em><h1 id="jli-title">四柱八字</h1><p id="jli-desc">以出生年月日時建立命盤，理解五行配置與人生節奏。</p></div>
+      <img id="jli-icon" src="badge-bazi-v1.webp" alt="">
+    </div>
+    <nav class="jli-steps" aria-label="內頁功能導覽">
+      <button type="button" data-jli-route="四柱">四柱八字</button>
+      <button type="button" data-jli-route="九宮">紫微九宮</button>
+      <button type="button" data-jli-route="奇門">奇門遁甲</button>
+      <button type="button" data-jli-route="六親">六壬六親</button>
+      <a href="bxcc.html">八星磁場</a>
+      <button type="button" data-jli-route="流年">流年運勢</button>
+    </nav>`;
+  feature.insertBefore(innerHead,back);
+
 
   function showHome(){
 
@@ -471,6 +492,9 @@ function boot(){
     showHome
   );
 
+  innerHead.querySelector('.jli-home').addEventListener('click',showHome);
+  innerHead.querySelector('.jli-brand').addEventListener('click',showHome);
+
 
   home
     .querySelector('#jlf-home')
@@ -498,6 +522,24 @@ function boot(){
     六親:['六親對照','六親全覽'],
     流年:['流年一至九九']
   };
+
+  const innerMeta={
+    四柱:{title:'四柱八字',desc:'以出生年月日時建立命盤，理解五行配置與人生節奏。',icon:'badge-bazi-v1.webp'},
+    九宮:{title:'紫微／九宮',desc:'以數字落宮觀察宮位能量、格局與人生方向。',icon:'badge-jiugong-v1.webp'},
+    奇門:{title:'奇門遁甲',desc:'由時間、方位與數字落宮，分析處境與決策方向。',icon:'badge-qimen-v1.webp'},
+    六親:{title:'六壬／六親',desc:'從命盤關係理解六親互動、事件發展與人生課題。',icon:'badge-liuren-v1.webp'},
+    流年:{title:'流年運勢',desc:'查看年度與流月節奏，掌握不同階段的重要趨勢。',icon:'badge-liunian-v1.webp'}
+  };
+
+  function setInnerMeta(term){
+    const m=innerMeta[term] || innerMeta.四柱;
+    innerHead.querySelector('#jli-title').textContent=m.title;
+    innerHead.querySelector('#jli-desc').textContent=m.desc;
+    innerHead.querySelector('#jli-icon').src=m.icon;
+    innerHead.querySelectorAll('[data-jli-route]').forEach(function(btn){
+      btn.classList.toggle('on',btn.dataset.jliRoute===term);
+    });
+  }
 
 
   function findPlugin(term){
@@ -604,6 +646,8 @@ function boot(){
 
   function openFeature(term){
 
+    setInnerMeta(term);
+
     sessionStorage.setItem(
       'jlf-pending',
       term
@@ -654,6 +698,10 @@ function boot(){
     );
 
   }
+
+  innerHead.querySelectorAll('[data-jli-route]').forEach(function(btn){
+    btn.addEventListener('click',function(){ openFeature(btn.dataset.jliRoute); });
+  });
 
 
   home
