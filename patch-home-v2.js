@@ -24,6 +24,12 @@ function boot(){
   const paipan=(go && go.closest('.card')) || feature.querySelector('#paipan') || feature.querySelector('.card');
 
   if(paipan) paipan.id=paipan.id || 'paipan';
+  if(paipan && !paipan.querySelector('.jli-paipan-tag')){
+    const tag=document.createElement('span');
+    tag.className='jli-paipan-tag';
+    tag.textContent='生辰定盤';
+    paipan.prepend(tag);
+  }
 
   /* 舊總入口不重複顯示 */
   [...feature.querySelectorAll('.card')].forEach(card=>{
@@ -439,6 +445,21 @@ function boot(){
     </nav>`;
   feature.insertBefore(innerHead,back);
 
+  const routeGuide=document.createElement('section');
+  routeGuide.id='jli-guide';
+  routeGuide.innerHTML=`
+    <div class="jli-guide-head">
+      <span id="jli-guide-mark">命</span>
+      <div><small id="jli-guide-kicker">專業命理解析</small><h2 id="jli-guide-title">從出生時間看見命盤結構</h2></div>
+    </div>
+    <p id="jli-guide-desc"></p>
+    <div class="jli-guide-tags" id="jli-guide-tags"></div>
+    <div class="jli-guide-foot">
+      <div><b>操作方式</b><span id="jli-guide-how"></span></div>
+      <div><b>隱私安心</b><span id="jli-guide-safe"></span></div>
+    </div>`;
+  back.insertAdjacentElement('afterend',routeGuide);
+
 
   function showHome(){
 
@@ -529,11 +550,11 @@ function boot(){
   };
 
   const innerMeta={
-    四柱:{title:'四柱八字',desc:'以出生年月日時建立命盤，理解五行配置與人生節奏。',icon:'badge-bazi-v1.webp'},
-    九宮:{title:'紫微／九宮',desc:'以數字落宮觀察宮位能量、格局與人生方向。',icon:'badge-jiugong-v1.webp'},
-    奇門:{title:'奇門遁甲',desc:'由時間、方位與數字落宮，分析處境與決策方向。',icon:'badge-qimen-v1.webp'},
-    六親:{title:'六壬／六親',desc:'從命盤關係理解六親互動、事件發展與人生課題。',icon:'badge-liuren-v1.webp'},
-    流年:{title:'流年運勢',desc:'查看年度與流月節奏，掌握不同階段的重要趨勢。',icon:'badge-liunian-v1.webp'}
+    四柱:{title:'四柱八字',desc:'以出生年月日時建立命盤，理解五行配置與人生節奏。',icon:'badge-bazi-v1.webp',mark:'柱',kicker:'生辰命盤・四柱根基',guide:'從出生時間看見命盤結構',detail:'四柱八字是整體命盤的根基，從年、月、日、時四柱整理干支、五行與先後天配置，建立後續解讀的共同基準。',tags:['四柱干支','五行配置','先天後天'],how:'選擇曆別與出生年月日時，再設定性別及關注重點後按「排盤」。',safe:'出生資料僅用於本頁換算，不會主動上傳或公開。'},
+    九宮:{title:'紫微／九宮',desc:'以數字落宮觀察宮位能量、格局與人生方向。',icon:'badge-jiugong-v1.webp',mark:'宮',kicker:'數字落宮・格局觀察',guide:'用九宮位置整理數字能量',detail:'將手機號碼後七碼倒序落入九宮，觀察數字所在宮位、組合關係與能量分布，適合用來理解格局重點。',tags:['後七碼','九宮落位','格局組合'],how:'輸入可使用的手機號碼後按「起盤」，系統會自動取碼並排列九宮。',safe:'號碼只在目前裝置換算，不上傳、不留存。'},
+    奇門:{title:'奇門遁甲',desc:'由時間、方位與數字落宮，分析處境與決策方向。',icon:'badge-qimen-v1.webp',mark:'奇',kicker:'問事決策・趨吉避凶',guide:'從手機數字觀察處境與門路',detail:'取手機號碼末七碼落宮，配合奇門的宮位與門路關係，整理當下環境、念頭及可行方向，作為問事決策參考。',tags:['末七碼','門路判讀','決策參考'],how:'輸入台灣或大陸手機號碼，確認號碼後按「起盤」查看專屬論斷。',safe:'號碼僅在本機計算，不上傳、不留存。'},
+    六親:{title:'六壬／六親',desc:'從命盤關係理解六親互動、事件發展與人生課題。',icon:'badge-liuren-v1.webp',mark:'親',kicker:'關係結構・事件推演',guide:'看懂命盤中的關係與互動',detail:'透過五行陰陽與六親對照，整理家人、伴侶、工作及事件互動的位置，協助辨認關係中的支持、牽制與課題。',tags:['五行陰陽','六親對照','關係課題'],how:'先完成生辰排盤，系統會接續顯示五行、陰陽及六親專屬分析。',safe:'生辰資料只用於本次命盤換算，不會主動上傳。'},
+    流年:{title:'流年運勢',desc:'查看年度與流月節奏，掌握不同階段的重要趨勢。',icon:'badge-liunian-v1.webp',mark:'運',kicker:'大運流年・階段節奏',guide:'掌握不同年份的運勢起伏',detail:'依生辰命盤延伸大運分段與逐年節奏，整理不同人生階段的重心及變化，作為年度規劃與重要決策參考。',tags:['大運分段','年度節奏','趨勢提醒'],how:'先完成生辰排盤，再查看大運區間與各年份的專屬趨勢。',safe:'命盤資料僅供頁面即時計算與閱讀，不會主動公開。'}
   };
 
   function setInnerMeta(term){
@@ -541,6 +562,13 @@ function boot(){
     innerHead.querySelector('#jli-title').textContent=m.title;
     innerHead.querySelector('#jli-desc').textContent=m.desc;
     innerHead.querySelector('#jli-icon').src=m.icon;
+    routeGuide.querySelector('#jli-guide-mark').textContent=m.mark;
+    routeGuide.querySelector('#jli-guide-kicker').textContent=m.kicker;
+    routeGuide.querySelector('#jli-guide-title').textContent=m.guide;
+    routeGuide.querySelector('#jli-guide-desc').textContent=m.detail;
+    routeGuide.querySelector('#jli-guide-how').textContent=m.how;
+    routeGuide.querySelector('#jli-guide-safe').textContent=m.safe;
+    routeGuide.querySelector('#jli-guide-tags').innerHTML=m.tags.map(function(tag){return '<span>'+tag+'</span>';}).join('');
     innerHead.querySelectorAll('[data-jli-route]').forEach(function(btn){
       btn.classList.toggle('on',btn.dataset.jliRoute===term);
     });
