@@ -1,5 +1,5 @@
 /* 筠玲易數 · 個資告知外掛
-   首次進站跳一次告知視窗，同意後記在本機不再跳。
+   第一次按下排盤時告知，同意後記在本機不再跳。
    頁尾會留一個「隱私與個資說明」連結，隨時可以再打開。
    全程不用 alert / confirm / prompt，iframe 內也能正常運作。
 */
@@ -21,25 +21,25 @@
     'display:flex;align-items:center;justify-content:center;padding:20px;',
     '-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);}',
     '.jlp-card{width:100%;max-width:420px;max-height:86vh;overflow:auto;',
-    'background:#F5EEDF;color:#2A241E;border:1px solid #D8C9A8;border-radius:6px;',
-    'box-shadow:0 18px 50px rgba(0,0,0,.45);padding:26px 22px 20px;',
+    'background:radial-gradient(circle at 100% 0,#f4d67655,transparent 28%),linear-gradient(145deg,#fff,#fff4ff);color:#43204c;border:1px solid #dfbd59;border-radius:18px;',
+    'box-shadow:0 22px 55px rgba(54,4,65,.45),inset 0 1px #fff;padding:26px 22px 20px;',
     'font-family:"Noto Serif TC","Songti TC",serif;line-height:1.85;',
     'animation:jlp-in .28s ease-out;}',
     '@keyframes jlp-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}',
     '@media (prefers-reduced-motion:reduce){.jlp-card{animation:none}}',
-    '.jlp-eyebrow{font-size:11px;letter-spacing:.32em;color:#8C2F26;margin:0 0 6px;}',
-    '.jlp-title{font-size:19px;font-weight:700;margin:0 0 14px;letter-spacing:.05em;}',
+    '.jlp-eyebrow{font-size:11px;letter-spacing:.32em;color:#a07925;margin:0 0 6px;}',
+    '.jlp-title{font-size:19px;font-weight:700;color:#611174;margin:0 0 14px;letter-spacing:.05em;}',
     '.jlp-rule{height:1px;border:0;margin:0 0 16px;',
     'background:linear-gradient(90deg,#C9A227,rgba(201,162,39,0));}',
     '.jlp-card p{font-size:14px;margin:0 0 12px;}',
     '.jlp-card ul{font-size:14px;margin:0 0 14px;padding-left:1.15em;}',
     '.jlp-card li{margin:0 0 7px;}',
-    '.jlp-card b{color:#8C2F26;}',
+    '.jlp-card b{color:#6b147d;}',
     '.jlp-note{font-size:12px;color:#6B6259;margin:0 0 18px;}',
-    '.jlp-btn{display:block;width:100%;padding:13px;border:0;border-radius:4px;',
-    'background:#8C2F26;color:#F5EEDF;font-size:15px;letter-spacing:.12em;cursor:pointer;',
+    '.jlp-btn{display:block;width:100%;padding:13px;border:1px solid #e4c35f;border-radius:999px;',
+    'background:linear-gradient(135deg,#510665,#8e18ae 55%,#bd31d8);color:#fff;font-size:15px;letter-spacing:.12em;cursor:pointer;',
     'font-family:inherit;}',
-    '.jlp-btn:hover{background:#75261E;}',
+    '.jlp-btn:hover{background:linear-gradient(135deg,#430451,#7c1398 55%,#a728c1);}',
     '.jlp-btn:focus-visible,.jlp-link:focus-visible{outline:2px solid #C9A227;outline-offset:2px;}',
     '.jlp-foot{text-align:center;padding:26px 16px 34px;}',
     '.jlp-link{font-size:12px;color:#6B6259;text-decoration:none;border-bottom:1px solid #C9A227;',
@@ -72,7 +72,7 @@
     document.head.appendChild(s);
   }
 
-  function open(remember) {
+  function open(remember, afterClose) {
     if (document.querySelector('.jlp-mask')) return;
     ensureStyle();
     var mask = document.createElement('div');
@@ -87,6 +87,7 @@
       document.body.style.overflow = prevOverflow;
       if (mask.parentNode) mask.parentNode.removeChild(mask);
       document.removeEventListener('keydown', onKey);
+      if (typeof afterClose === 'function') afterClose();
     }
     function onKey(e) { if (e.key === 'Escape' && !remember) close(); }
 
@@ -112,7 +113,18 @@
   function boot() {
     ensureStyle();
     addFooterLink();
-    if (!readAck()) open(true);
+    document.addEventListener('click', function (e) {
+      var go = e.target && e.target.closest ? e.target.closest('#go') : null;
+      if (!go || readAck() || go.dataset.jlpReplay === '1') return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+      open(true, function () {
+        go.dataset.jlpReplay = '1';
+        go.click();
+        delete go.dataset.jlpReplay;
+      });
+    }, true);
   }
 
   if (document.readyState === 'loading') {

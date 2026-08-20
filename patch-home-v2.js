@@ -1429,7 +1429,7 @@ body.jlf-feature-mode
 
 
 .jlf-card{
-  height:132px;
+  height:146px;
 
   padding:
     7px 3px 6px;
@@ -1542,7 +1542,7 @@ body.jlf-feature-mode
 
 .jlf-badge svg .trigram{
   font-family:serif;
-  font-size:10px;
+  font-size:11px;
   text-anchor:middle;
 }
 
@@ -1598,7 +1598,7 @@ body.jlf-feature-mode
 
   color:#57485c;
 
-  font-size:6px;
+  font-size:7.5px;
 
   white-space:nowrap;
 }
@@ -1611,7 +1611,7 @@ body.jlf-feature-mode
 
   color:#78677b;
 
-  font-size:5px;
+  font-size:6.5px;
 
   line-height:1.2;
 }
@@ -1621,7 +1621,7 @@ body.jlf-feature-mode
 .jlf-card > a{
   width:90px;
   max-width:94%;
-  height:26px;
+  height:38px;
 
   display:inline-flex;
   align-items:center;
@@ -1646,7 +1646,7 @@ body.jlf-feature-mode
 
   text-decoration:none;
 
-  font-size:7.4px;
+  font-size:9px;
   letter-spacing:.06em;
 
   font-weight:900;
