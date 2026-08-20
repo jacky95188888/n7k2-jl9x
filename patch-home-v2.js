@@ -1363,7 +1363,7 @@ body.jlf-feature-mode
 
 
 .jlf-card{
-  height:124px;
+  height:132px;
 
   padding:
     7px 3px 6px;
@@ -1553,20 +1553,21 @@ body.jlf-feature-mode
 
 .jlf-card button,
 .jlf-card > a{
-  width:76px;
-  height:20px;
+  width:90px;
+  max-width:94%;
+  height:26px;
 
   display:inline-flex;
   align-items:center;
   justify-content:center;
 
-  margin-top:4px;
+  margin-top:5px;
 
   border:1px solid rgba(241,203,102,.62);
 
   border-radius:999px;
 
-  padding:0 8px;
+  padding:0 10px;
 
   background:
     linear-gradient(
@@ -1579,13 +1580,14 @@ body.jlf-feature-mode
 
   text-decoration:none;
 
-  font-size:5.7px;
+  font-size:7.4px;
+  letter-spacing:.06em;
 
   font-weight:900;
 
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.22),
-    0 4px 9px rgba(82,9,105,.22);
+    0 5px 11px rgba(82,9,105,.26);
 }
 
 
