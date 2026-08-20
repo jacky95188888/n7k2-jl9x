@@ -6,7 +6,7 @@ body.jlf-feature-mode,body.jl-page-bxcc,body.jl-page-rz{color:var(--jl-ink);back
 #jlf-back{display:block!important;margin:0 0 13px!important;width:100%!important}
 .jli-hero{min-height:145px;padding:25px 20px;display:grid;grid-template-columns:1fr 92px;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,#fff9ffef 0 52%,#f3d1f0a8),url("hero-bg-v3.webp") center/cover}.jli-hero:after{content:"";position:absolute;width:190px;height:190px;right:-55px;bottom:-100px;border:1px solid #ba78cf66;border-radius:50%;box-shadow:0 0 0 18px #a64fc51a,0 0 0 40px #a64fc512}.jli-hero em{font-style:normal;font-size:9px;letter-spacing:2.5px;color:#9a7128;font-weight:900}.jli-hero h1{margin:5px 0!important;color:#57106a!important;font-size:27px!important;line-height:1.2!important;text-align:left!important;letter-spacing:.04em!important}.jli-hero p{margin:0;max-width:340px;color:#684d6d;font-size:10px;line-height:1.7}.jli-hero img{width:86px;z-index:2;filter:drop-shadow(0 8px 10px #5c096e55)}
 .jli-steps{display:grid;grid-template-columns:repeat(6,minmax(82px,1fr));gap:6px;padding:9px 12px;overflow-x:auto;background:linear-gradient(135deg,#390447,#651078)}.jli-steps button,.jli-steps a{height:31px;padding:0 10px;display:flex;align-items:center;justify-content:center;white-space:nowrap;border:1px solid #e0bd6280;border-radius:999px;background:#ffffff0d;color:#efdcaa;text-decoration:none;font:900 8px inherit}.jli-steps .on{color:#fff;border-color:#f0d271;background:linear-gradient(135deg,#8420a4,#bd34d8);box-shadow:inset 0 1px #ffffff55,0 4px 10px #22012955}
-#jl-feature-shell-final>.seal,#jl-feature-shell-final>.hero{display:none!important}
+#jl-feature-shell-final>.seal,#jl-feature-shell-final>.hero,#jl-feature-shell-final>header:not(#jli-head){display:none!important;height:0!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;padding:0!important;border:0!important;background:none!important}
 body.jlf-feature-mode #jl-feature-shell-final>.card,body.jlf-feature-mode #jl-feature-shell-final #out>.card,body.jlf-feature-mode #jl-feature-shell-final #plug>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card,body.jl-page-bxcc .card,body.jl-page-rz .card{position:relative;border:1px solid #d4a3e1!important;border-radius:17px!important;background:linear-gradient(155deg,#fff,#fff5ff)!important;box-shadow:0 10px 25px #60107718,inset 0 1px #fff!important;overflow:hidden}
 body.jlf-feature-mode #jl-feature-shell-final>.card:before,body.jlf-feature-mode #jl-feature-shell-final #out>.card:before,body.jlf-feature-mode #jl-feature-shell-final #plug>.card:before,body.jlf-feature-mode #jl-feature-shell-final #plugs>.card:before,body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card:before,body.jl-page-bxcc .card:before,body.jl-page-rz .card:before{content:"";position:absolute;left:14px;right:14px;top:0;height:2px;background:linear-gradient(90deg,transparent,#e7c86d,transparent)}
 body.jlf-feature-mode .card h2,body.jlf-feature-mode .card h3,body.jl-page-bxcc h1,body.jl-page-bxcc h2,body.jl-page-rz h1,body.jl-page-rz h2{color:#59106c!important}
@@ -43,6 +43,44 @@ body.jlf-feature-mode .qm-cell.on{color:#fff!important;border-color:#e8c65f!impo
 body.jlf-feature-mode .qm-card h4,
 body.jlf-feature-mode .qm-gj .nm,
 body.jlf-feature-mode .qm-zi h5{color:#651078!important}
+
+/* 五個共用排盤入口：統一手機版精品視覺 */
+body.jlf-feature-mode #jl-feature-shell-final{padding-bottom:20px}
+body.jlf-feature-mode #jli-head{overflow:hidden;border:1px solid #d8afe2;border-radius:0 0 19px 19px}
+body.jlf-feature-mode #jlf-back{margin:13px 0 15px!important;position:relative!important;top:auto!important}
+body.jlf-feature-mode #jl-feature-shell-final>.card,
+body.jlf-feature-mode #jl-feature-shell-final #out>.card,
+body.jlf-feature-mode #jl-feature-shell-final #plug>.card,
+body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,
+body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{margin:16px 0!important;padding:22px 18px!important}
+body.jlf-feature-mode #paipan{background:radial-gradient(circle at 100% 0,#f2d8fa 0,transparent 34%),linear-gradient(155deg,#fff,#fff8ff)!important}
+body.jlf-feature-mode #paipan:after{content:"生辰定盤";position:absolute;right:16px;top:13px;padding:3px 8px;border:1px solid #d8b54e;border-radius:999px;color:#98701c;background:#fff9de;font:700 8px var(--ser);letter-spacing:.12em}
+body.jlf-feature-mode .card>h2{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px!important;padding-bottom:14px!important;font-size:17px!important;letter-spacing:.18em!important;text-indent:0!important}
+body.jlf-feature-mode .card>h2:before{content:"◇";color:#c99e32;font-size:13px}
+body.jlf-feature-mode .card>h2:after{width:82px!important;background:linear-gradient(90deg,transparent,#d6a936,transparent)!important}
+body.jlf-feature-mode .lab{margin-bottom:11px;color:#72457a;font-family:var(--ser);font-weight:700;letter-spacing:.18em}
+body.jlf-feature-mode .seg{padding:5px;border:1px solid #dec1e5!important;border-radius:13px!important;background:#fbf1fd!important}
+body.jlf-feature-mode .seg button{min-height:42px;border-radius:10px!important}
+body.jlf-feature-mode .grid{gap:16px 12px!important}
+body.jlf-feature-mode label{display:block;margin-bottom:6px;color:#806786;font-size:12px;letter-spacing:.1em}
+body.jlf-feature-mode input,body.jlf-feature-mode select{height:48px!important;padding:0 13px!important;font-size:15px!important}
+body.jlf-feature-mode button.go{height:50px!important;margin-top:20px!important;font-size:17px!important}
+body.jlf-feature-mode .feats{margin-top:20px;padding-top:16px;border-top:1px solid #dfc9e5;gap:0!important}
+body.jlf-feature-mode .feats>div{padding:4px 7px;border-right:1px solid #e1c9e6}
+body.jlf-feature-mode .feats>div:last-child{border-right:0}
+body.jlf-feature-mode .feats b{color:#651078!important}
+body.jlf-feature-mode .feats span{color:#8a758e!important}
+body.jlf-feature-mode table{border-collapse:separate!important;border-spacing:0!important;overflow:hidden;border:1px solid #dbc0e2!important;border-radius:12px!important;background:#fffaff!important}
+body.jlf-feature-mode th{color:#f3dc94!important;background:linear-gradient(135deg,#440552,#701187)!important;border-color:#8e42a0!important}
+body.jlf-feature-mode td{border-color:#eadbed!important;background:#fffaff!important}
+body.jlf-feature-mode tr:nth-child(even) td{background:#fbf1fd!important}
+body.jlf-feature-mode .ringbox{margin:5px auto 14px;padding:12px;border:1px solid #dec2e4;border-radius:50%;background:radial-gradient(circle,#fff 0,#faeefd 70%,#eed6f5 100%);box-shadow:inset 0 0 25px #68107b12,0 8px 20px #5d0d7119}
+body.jlf-feature-mode .scroll{border:1px solid #dcc0e3!important;border-radius:13px!important;background:#fffaff!important}
+body.jlf-feature-mode .jie,body.jlf-feature-mode .duan,body.jlf-feature-mode .jdu{border-radius:12px!important;box-shadow:inset 0 1px #fff}
+body.jlf-feature-mode #jlf-route-notice{margin:0 0 18px;padding:13px 14px 13px 43px;border-color:#ddb952;background:linear-gradient(90deg,#fff8dc,#fff5ff);color:#641476;box-shadow:0 5px 13px #5d0c7015;position:relative}
+body.jlf-feature-mode #jlf-route-notice:before{content:"✦";position:absolute;left:14px;top:50%;transform:translateY(-50%);width:21px;height:21px;display:grid;place-items:center;border-radius:50%;color:#f2d575;background:#671078;font-size:10px}
+body.jlf-feature-mode .hint,body.jlf-feature-mode .note{color:#806d84!important}
+@media(max-width:430px){body.jlf-feature-mode .jli-hero{min-height:132px;padding:20px 16px;grid-template-columns:1fr 78px}body.jlf-feature-mode .jli-hero img{width:74px}body.jlf-feature-mode .jli-hero h1{font-size:25px!important}body.jlf-feature-mode #jl-feature-shell-final>.card,body.jlf-feature-mode #jl-feature-shell-final #out>.card,body.jlf-feature-mode #jl-feature-shell-final #plug>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{padding:20px 15px!important}body.jlf-feature-mode .feats span{font-size:8px!important}}
 
 /* 看日子：專屬紫金結果視覺 */
 body.jl-page-rz header{overflow:hidden!important}
