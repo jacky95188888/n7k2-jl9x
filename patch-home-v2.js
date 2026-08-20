@@ -460,6 +460,28 @@ function boot(){
     </div>`;
   back.insertAdjacentElement('afterend',routeGuide);
 
+  /* 專業盤與一般客戶解讀分層：不碰原計算，只整理閱讀入口。 */
+  const readingPanel=document.createElement('section');
+  readingPanel.id='jli-reading';
+  readingPanel.innerHTML=`
+    <div class="jli-reading-tabs" role="tablist" aria-label="命盤閱讀方式">
+      <button type="button" class="on" data-jli-reading="chart" aria-selected="true"><i>盤</i><span>專業盤<small>完整盤表資料</small></span></button>
+      <button type="button" data-jli-reading="plain" aria-selected="false"><i>解</i><span>白話解讀<small>一般人也能理解</small></span></button>
+    </div>
+    <div class="jli-reading-body" hidden>
+      <div class="jli-reading-title"><span id="jli-reading-mark">解</span><div><small>一般客戶閱讀模式</small><h2 id="jli-reading-title">先看重點，再理解命盤</h2></div></div>
+      <p id="jli-reading-lead"></p>
+      <div class="jli-reading-points" id="jli-reading-points"></div>
+      <div class="jli-pro-preview">
+        <div class="jli-pro-lock">鎖</div>
+        <div><small>PROFESSIONAL REPORT</small><h3>完整專業版解讀</h3><p id="jli-pro-desc"></p></div>
+        <div class="jli-pro-tags" id="jli-pro-tags"></div>
+        <button type="button" disabled>專業版・即將開放</button>
+      </div>
+      <p class="jli-reading-note">命理內容適合自我理解與人生規劃參考，重要醫療、法律及投資決策仍應諮詢相關專業人士。</p>
+    </div>`;
+  routeGuide.insertAdjacentElement('afterend',readingPanel);
+
 
   function showHome(){
 
@@ -557,6 +579,42 @@ function boot(){
     流年:{title:'流年運勢',desc:'查看年度與流月節奏，掌握不同階段的重要趨勢。',icon:'badge-liunian-v1.webp',mark:'運',kicker:'大運流年・階段節奏',guide:'掌握不同年份的運勢起伏',detail:'依生辰命盤延伸大運分段與逐年節奏，整理不同人生階段的重心及變化，作為年度規劃與重要決策參考。',tags:['大運分段','年度節奏','趨勢提醒'],how:'先完成生辰排盤，再查看大運區間與各年份的專屬趨勢。',safe:'命盤資料僅供頁面即時計算與閱讀，不會主動公開。'}
   };
 
+  const readingMeta={
+    四柱:{title:'把四柱八字轉成看得懂的人生線索',lead:'專業盤保留干支、五行與六柱資料；白話模式則依序說明「命盤核心、能量分布、人生節奏」，讓第一次接觸命理的人也知道從哪裡開始看。',points:[['日主核心','先辨認命盤的核心性質與主要行事傾向。'],['五行分布','查看哪些能量偏強、偏弱，以及彼此如何支持或牽制。'],['人生節奏','結合大運與流年，理解不同階段的重心與轉折。']],pro:'付費版將整合老師判讀，提供不只盤面名稱，而是有原因、有重點、有行動方向的完整報告。',tags:['命格核心','喜用忌神','十神六親','大運流年','事業財運','感情家庭']},
+    九宮:{title:'從數字落宮看懂格局重點',lead:'九宮盤不只呈現數字位置，白話模式會整理主要宮位、能量集中處及組合關係，協助客戶理解這些排列與自身課題的關聯。',points:[['主要宮位','先看能量集中在哪些宮位，以及代表的生活面向。'],['組合關係','再看數字之間形成支持、重複或牽制的格局。'],['應用方向','把盤面轉成工作、人際與日常選擇的觀察重點。']],pro:'專業版將提供宮位逐項解釋、重要組合及老師的格局判讀。',tags:['宮位能量','數字組合','格局吉凶','人生課題','改善方向']},
+    奇門:{title:'把奇門盤勢整理成可行的決策方向',lead:'專業盤顯示落宮與門路；白話模式則分成「目前處境、可利用條件、需要避開的風險」，避免客戶只看到一張盤卻不知道如何使用。',points:[['目前處境','整理當下環境與問題所處的位置。'],['有利條件','辨認可運用的人、時間、方向或行動方式。'],['風險提醒','指出容易受阻或不宜躁進的環節。']],pro:'專業版將加入老師對事情發展、時機方位與行動策略的完整判讀。',tags:['問事判斷','時間方位','門路分析','風險提醒','行動策略']},
+    六親:{title:'從五行與六親看懂關係互動',lead:'白話模式會把專業六親名稱轉成家庭、伴侶、合作與人際互動，讓客戶知道盤中的支持、壓力及需要調整的相處方式。',points:[['關係位置','辨認家人、伴侶與工作關係在命盤中的位置。'],['互動力量','觀察彼此是支持、消耗、牽制或互補。'],['相處建議','將關係結構轉成可以實際採取的溝通方向。']],pro:'專業版將提供六親逐項解析、關係課題與老師的相處建議。',tags:['家庭關係','伴侶互動','工作合作','支持牽制','溝通建議']},
+    流年:{title:'把大運流年整理成清楚的時間軸',lead:'專業表格保留太歲、歲運、旬運與旬空；白話模式會先標示運勢階段從何時開始，再說明重要年份、轉折與可採取的準備。',points:[['起運時間','清楚標示大運從哪一年開始，以及目前走到哪個階段。'],['年度重點','整理每一年的主要課題，而不是只列出專業數字。'],['提前規劃','分辨適合推進、整理、觀察或保守的時間。']],pro:'專業版將提供大運總覽、逐年重點、十二個月節奏與老師的規劃建議。',tags:['起運年份','大運階段','年度趨勢','流月提醒','重要時機']}
+  };
+
+  function setReadingMeta(term){
+    const m=readingMeta[term] || readingMeta.四柱;
+    readingPanel.querySelector('#jli-reading-mark').textContent=(innerMeta[term]||innerMeta.四柱).mark;
+    readingPanel.querySelector('#jli-reading-title').textContent=m.title;
+    readingPanel.querySelector('#jli-reading-lead').textContent=m.lead;
+    readingPanel.querySelector('#jli-reading-points').innerHTML=m.points.map(function(point,index){return '<article><b><em>0'+(index+1)+'</em>'+point[0]+'</b><p>'+point[1]+'</p></article>';}).join('');
+    readingPanel.querySelector('#jli-pro-desc').textContent=m.pro;
+    readingPanel.querySelector('#jli-pro-tags').innerHTML=m.tags.map(function(tag){return '<span>'+tag+'</span>';}).join('');
+  }
+
+  readingPanel.querySelectorAll('[data-jli-reading]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      const plain=btn.dataset.jliReading==='plain';
+      readingPanel.querySelectorAll('[data-jli-reading]').forEach(function(item){
+        const active=item===btn;
+        item.classList.toggle('on',active);
+        item.setAttribute('aria-selected',active?'true':'false');
+      });
+      readingPanel.querySelector('.jli-reading-body').hidden=!plain;
+      if(plain){ readingPanel.scrollIntoView({behavior:'smooth',block:'start'}); }
+      else{
+        const term=sessionStorage.getItem('jlf-active-route') || '四柱';
+        const target=term==='四柱' ? paipan : findPlugin(term);
+        (target || paipan || feature).scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  });
+
   function setInnerMeta(term){
     const m=innerMeta[term] || innerMeta.四柱;
     innerHead.querySelector('#jli-title').textContent=m.title;
@@ -571,6 +629,14 @@ function boot(){
     routeGuide.querySelector('#jli-guide-tags').innerHTML=m.tags.map(function(tag){return '<span>'+tag+'</span>';}).join('');
     innerHead.querySelectorAll('[data-jli-route]').forEach(function(btn){
       btn.classList.toggle('on',btn.dataset.jliRoute===term);
+    });
+    sessionStorage.setItem('jlf-active-route',term);
+    setReadingMeta(term);
+    readingPanel.querySelector('.jli-reading-body').hidden=true;
+    readingPanel.querySelectorAll('[data-jli-reading]').forEach(function(btn){
+      const active=btn.dataset.jliReading==='chart';
+      btn.classList.toggle('on',active);
+      btn.setAttribute('aria-selected',active?'true':'false');
     });
   }
 

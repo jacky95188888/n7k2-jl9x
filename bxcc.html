@@ -102,7 +102,7 @@ dd{margin:0;font-size:12.5px;color:var(--ink2)}
 footer{text-align:center;font-size:11.5px;color:var(--ink2);padding:26px 18px 0;line-height:1.9}
 </style>
 <link rel="stylesheet" href="theme-v3.css?v=1">
-<link rel="stylesheet" href="inner-theme-v4.css?v=route-guide-v12">
+<link rel="stylesheet" href="inner-theme-v4.css?v=reading-layer-v16">
 </head>
 <body class="jl-page jl-page-bxcc">
 <div class="wrap">
@@ -121,6 +121,28 @@ footer{text-align:center;font-size:11.5px;color:var(--ink2);padding:26px 18px 0;
   <p>八星磁場將相接的數字轉換成生氣、天醫、延年、伏位、絕命、五鬼、六煞與禍害，協助辨認數字組合的優勢與需要留意之處。</p>
   <div class="bx-guide-tags"><span>手機號碼</span><span>車牌門牌</span><span>命盤數字</span></div>
   <div class="bx-guide-foot"><div><b>操作方式</b>輸入連續號碼或以空格分隔命盤數，選擇規則後開始查詢。</div><div><b>閱讀原則</b>吉凶代表能量方向，需配合排列、重複次數與實際情境綜合判斷。</div></div>
+</section>
+
+<section id="jli-reading" aria-label="八星磁場閱讀方式">
+  <div class="jli-reading-tabs" role="tablist">
+    <button type="button" class="on" data-jli-reading="chart" aria-selected="true"><i>盤</i><span>專業盤<small>完整磁場資料</small></span></button>
+    <button type="button" data-jli-reading="plain" aria-selected="false"><i>解</i><span>白話解讀<small>一般人也能理解</small></span></button>
+  </div>
+  <div class="jli-reading-body" hidden>
+    <div class="jli-reading-title"><span>星</span><div><small>一般客戶閱讀模式</small><h2>把八星磁場轉成生活中的能量提醒</h2></div></div>
+    <p id="jli-reading-lead">專業盤保留兩數成場與八星名稱；白話模式則說明這組數字常見的優勢、可能過度使用的地方，以及在工作、人際與選號上的應用方向。</p>
+    <div class="jli-reading-points">
+      <article><b><em>01</em>主要磁場</b><p>先看反覆出現的八星，辨認號碼最明顯的能量。</p></article>
+      <article><b><em>02</em>組合影響</b><p>再看相鄰排列與重複次數，避免只憑單一吉凶判斷。</p></article>
+      <article><b><em>03</em>生活應用</b><p>轉成工作、人際、財務及情緒管理可以理解的提醒。</p></article>
+    </div>
+    <div class="jli-pro-preview">
+      <div class="jli-pro-lock">鎖</div><div><small>PROFESSIONAL REPORT</small><h3>完整專業版解讀</h3><p>專業版將提供主要磁場比例、連續組合、優勢風險及老師的號碼使用建議。</p></div>
+      <div class="jli-pro-tags"><span>磁場比例</span><span>連續組合</span><span>財運事業</span><span>人際感情</span><span>選號建議</span></div>
+      <button type="button" disabled>專業版・即將開放</button>
+    </div>
+    <p class="jli-reading-note">數字磁場內容適合自我理解與生活規劃參考，不應作為醫療、法律及投資決策的唯一依據。</p>
+  </div>
 </section>
 
 <section class="card">
@@ -461,6 +483,23 @@ document.getElementById('num').addEventListener('keydown', function(e){
 
 drawGrid();
 
+})();
+</script>
+<script>
+(function(){
+  var panel=document.getElementById('jli-reading');
+  if(!panel) return;
+  var body=panel.querySelector('.jli-reading-body');
+  panel.querySelectorAll('[data-jli-reading]').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var plain=btn.getAttribute('data-jli-reading')==='plain';
+      panel.querySelectorAll('[data-jli-reading]').forEach(function(item){
+        var active=item===btn; item.classList.toggle('on',active); item.setAttribute('aria-selected',active?'true':'false');
+      });
+      body.hidden=!plain;
+      (plain ? panel : document.querySelector('section.card')).scrollIntoView({behavior:'smooth',block:'start'});
+    });
+  });
 })();
 </script>
 </body>
