@@ -82,16 +82,16 @@ body.jlf-feature-mode .grid{gap:16px 12px!important}
 body.jlf-feature-mode label{display:block;margin-bottom:6px;color:#806786;font-size:12px;letter-spacing:.1em}
 body.jlf-feature-mode input,body.jlf-feature-mode select{height:48px!important;padding:0 13px!important;font-size:15px!important}
 body.jlf-feature-mode button.go{height:50px!important;margin-top:20px!important;font-size:17px!important}
-body.jlf-feature-mode .feats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin-top:20px!important;padding-top:18px!important;border-top:1px solid #dfc9e5!important}
-body.jlf-feature-mode .feats>div{position:relative;overflow:hidden;min-height:86px;padding:14px 10px 12px 54px!important;border:1px solid #dfbce6!important;border-radius:14px!important;background:radial-gradient(circle at 100% 0,#efd3f840 0,transparent 42%),linear-gradient(145deg,#fff,#fbf0fd)!important;box-shadow:0 6px 15px #5e0e7113,inset 0 1px #fff;text-align:left!important}
-body.jlf-feature-mode .feats>div:before{position:absolute;left:11px;top:14px;width:34px;height:34px;display:grid;place-items:center;border:1px solid #e1bb50;border-radius:50%;color:#f5da85;background:radial-gradient(circle at 35% 28%,#ba46d1,#681078 64%,#3b0448);box-shadow:inset 0 0 0 3px #ffffff20,0 5px 11px #5b0b6d32;font:900 13px var(--ser)}
+body.jlf-feature-mode .feats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important;margin-top:20px!important;padding-top:18px!important;border-top:1px solid #dfc9e5!important}
+body.jlf-feature-mode .feats>div{position:relative;overflow:hidden;min-width:0;min-height:108px;padding:49px 3px 9px!important;border:1px solid #dfbce6!important;border-radius:12px!important;background:radial-gradient(circle at 100% 0,#efd3f840 0,transparent 42%),linear-gradient(145deg,#fff,#fbf0fd)!important;box-shadow:0 5px 12px #5e0e7113,inset 0 1px #fff;text-align:center!important}
+body.jlf-feature-mode .feats>div:before{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:31px;height:31px;display:grid;place-items:center;border:1px solid #e1bb50;border-radius:50%;color:#f5da85;background:radial-gradient(circle at 35% 28%,#ba46d1,#681078 64%,#3b0448);box-shadow:inset 0 0 0 3px #ffffff20,0 5px 11px #5b0b6d32;font:900 12px var(--ser)}
 body.jlf-feature-mode .feats>div:nth-child(1):before{content:"盤"}
 body.jlf-feature-mode .feats>div:nth-child(2):before{content:"柱"}
 body.jlf-feature-mode .feats>div:nth-child(3):before{content:"解"}
 body.jlf-feature-mode .feats>div:nth-child(4):before{content:"引"}
 body.jlf-feature-mode .feats>div:after{content:"";position:absolute;right:-17px;bottom:-21px;width:52px;height:52px;border:1px solid #d7b24e44;border-radius:50%;box-shadow:0 0 0 8px #d7b24e0c}
-body.jlf-feature-mode .feats b{display:block;margin:1px 0 5px;color:#651078!important;font-family:var(--ser);font-size:12px!important;letter-spacing:.06em}
-body.jlf-feature-mode .feats span{display:block;color:#89758d!important;font-size:9px!important;line-height:1.55}
+body.jlf-feature-mode .feats b{display:block;margin:0 0 4px;color:#651078!important;font-family:var(--ser);font-size:10px!important;letter-spacing:0;white-space:nowrap}
+body.jlf-feature-mode .feats span{display:block;color:#89758d!important;font-size:7px!important;line-height:1.45;white-space:nowrap}
 body.jlf-feature-mode table{border-collapse:separate!important;border-spacing:0!important;overflow:hidden;border:1px solid #dbc0e2!important;border-radius:12px!important;background:#fffaff!important}
 body.jlf-feature-mode th{color:#f3dc94!important;background:linear-gradient(135deg,#440552,#701187)!important;border-color:#8e42a0!important}
 body.jlf-feature-mode td{border-color:#eadbed!important;background:#fffaff!important}
@@ -148,4 +148,4 @@ body.jlf-feature-mode footer .f-sub{position:relative;color:#e9d8ed!important;fo
 body.jlf-feature-mode footer .f-sub:after{content:"JUN LING NUMEROLOGY · PROFESSIONAL ANALYSIS";display:block;margin-top:5px;color:#c8abcdf0;font:600 6px/1.4 sans-serif;letter-spacing:.13em}
 body.jlf-feature-mode #jlp-foot{padding:16px 16px 22px!important;background:transparent!important}
 body.jlf-feature-mode #jlp-foot .jlp-link{padding:8px 16px!important;border:1px solid #d5ad48!important;border-radius:999px!important;color:#6c3275!important;background:#fffaff!important;box-shadow:0 5px 13px #5b0b6d12!important;font-weight:700!important}
-@media(max-width:390px){body.jlf-feature-mode footer{padding:25px 61px 23px 17px!important}body.jlf-feature-mode footer:after{right:16px;width:38px;height:38px;font-size:15px}body.jlf-feature-mode footer .f-motto{font-size:16px!important;letter-spacing:.18em!important}.feats>div{padding-left:50px!important}}
+@media(max-width:390px){body.jlf-feature-mode footer{padding:25px 61px 23px 17px!important}body.jlf-feature-mode footer:after{right:16px;width:38px;height:38px;font-size:15px}body.jlf-feature-mode footer .f-motto{font-size:16px!important;letter-spacing:.18em!important}body.jlf-feature-mode .feats{gap:3px!important}body.jlf-feature-mode .feats>div{padding:47px 2px 8px!important}body.jlf-feature-mode .feats b{font-size:9px!important}body.jlf-feature-mode .feats span{font-size:6px!important}}
