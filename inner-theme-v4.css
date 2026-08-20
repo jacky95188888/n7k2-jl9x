@@ -82,11 +82,16 @@ body.jlf-feature-mode .grid{gap:16px 12px!important}
 body.jlf-feature-mode label{display:block;margin-bottom:6px;color:#806786;font-size:12px;letter-spacing:.1em}
 body.jlf-feature-mode input,body.jlf-feature-mode select{height:48px!important;padding:0 13px!important;font-size:15px!important}
 body.jlf-feature-mode button.go{height:50px!important;margin-top:20px!important;font-size:17px!important}
-body.jlf-feature-mode .feats{margin-top:20px;padding-top:16px;border-top:1px solid #dfc9e5;gap:0!important}
-body.jlf-feature-mode .feats>div{padding:4px 7px;border-right:1px solid #e1c9e6}
-body.jlf-feature-mode .feats>div:last-child{border-right:0}
-body.jlf-feature-mode .feats b{color:#651078!important}
-body.jlf-feature-mode .feats span{color:#8a758e!important}
+body.jlf-feature-mode .feats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin-top:20px!important;padding-top:18px!important;border-top:1px solid #dfc9e5!important}
+body.jlf-feature-mode .feats>div{position:relative;overflow:hidden;min-height:86px;padding:14px 10px 12px 54px!important;border:1px solid #dfbce6!important;border-radius:14px!important;background:radial-gradient(circle at 100% 0,#efd3f840 0,transparent 42%),linear-gradient(145deg,#fff,#fbf0fd)!important;box-shadow:0 6px 15px #5e0e7113,inset 0 1px #fff;text-align:left!important}
+body.jlf-feature-mode .feats>div:before{position:absolute;left:11px;top:14px;width:34px;height:34px;display:grid;place-items:center;border:1px solid #e1bb50;border-radius:50%;color:#f5da85;background:radial-gradient(circle at 35% 28%,#ba46d1,#681078 64%,#3b0448);box-shadow:inset 0 0 0 3px #ffffff20,0 5px 11px #5b0b6d32;font:900 13px var(--ser)}
+body.jlf-feature-mode .feats>div:nth-child(1):before{content:"盤"}
+body.jlf-feature-mode .feats>div:nth-child(2):before{content:"柱"}
+body.jlf-feature-mode .feats>div:nth-child(3):before{content:"解"}
+body.jlf-feature-mode .feats>div:nth-child(4):before{content:"引"}
+body.jlf-feature-mode .feats>div:after{content:"";position:absolute;right:-17px;bottom:-21px;width:52px;height:52px;border:1px solid #d7b24e44;border-radius:50%;box-shadow:0 0 0 8px #d7b24e0c}
+body.jlf-feature-mode .feats b{display:block;margin:1px 0 5px;color:#651078!important;font-family:var(--ser);font-size:12px!important;letter-spacing:.06em}
+body.jlf-feature-mode .feats span{display:block;color:#89758d!important;font-size:9px!important;line-height:1.55}
 body.jlf-feature-mode table{border-collapse:separate!important;border-spacing:0!important;overflow:hidden;border:1px solid #dbc0e2!important;border-radius:12px!important;background:#fffaff!important}
 body.jlf-feature-mode th{color:#f3dc94!important;background:linear-gradient(135deg,#440552,#701187)!important;border-color:#8e42a0!important}
 body.jlf-feature-mode td{border-color:#eadbed!important;background:#fffaff!important}
@@ -134,6 +139,13 @@ body.jl-page-rz .note{margin-top:17px;padding:12px 14px;border-left:3px solid #d
 body.jl-page-rz footer{margin-top:24px;padding:22px 12px;border:1px solid #d7ad49;border-radius:16px;color:#ead8ed;background:linear-gradient(135deg,#350440,#721187);box-shadow:0 10px 22px #59106c28}
 @media(max-width:400px){body.jl-page-rz #out>.card{padding:21px 15px!important}body.jl-page-rz .yj{grid-template-columns:1fr 1fr}body.jl-page-rz .yj p{font-size:12px}body.jl-page-rz .hrs div{min-height:100px}}
 
-body.jlf-feature-mode footer{margin-top:18px!important;padding:21px 12px!important;color:#f3dda0!important;background:linear-gradient(135deg,#350440,#651078)!important;border-radius:17px 17px 0 0!important;text-align:center!important}
-body.jlf-feature-mode footer .f-motto{color:#f5dc8b!important}
-body.jlf-feature-mode footer .f-sub{color:#ead9ed!important}
+body.jlf-feature-mode footer{position:relative;overflow:hidden;margin:22px 0 0!important;padding:28px 76px 25px 22px!important;border:1px solid #d8ae3f!important;border-radius:20px!important;color:#f3dda0!important;background:radial-gradient(circle at 90% 30%,#b33dcc55 0,transparent 30%),radial-gradient(circle at 10% 120%,#8e2ea94f 0,transparent 42%),linear-gradient(135deg,#2d0338,#5e0a70 54%,#3a0447)!important;box-shadow:0 12px 28px #4e075d32,inset 0 1px #ffffff2b!important;text-align:left!important}
+body.jlf-feature-mode footer:before{content:""!important;position:absolute!important;inset:8px!important;border:1px solid #e4c5624f!important;border-radius:14px!important;background:none!important;pointer-events:none}
+body.jlf-feature-mode footer:after{content:"筠";position:absolute;right:21px;top:50%;transform:translateY(-50%);width:46px;height:46px;display:grid;place-items:center;border:1px solid #f1d375;border-radius:50%;color:#f4d980;background:#ffffff0d;box-shadow:inset 0 0 0 4px #ffffff12,0 0 18px #e3bd5950;font:900 18px var(--ser)}
+body.jlf-feature-mode footer .f-motto{position:relative;margin:0 0 10px;color:#f7dc80!important;font-family:var(--ser);font-size:20px!important;font-weight:900;letter-spacing:.25em!important;text-indent:0!important;text-shadow:0 2px 10px #1e012c;white-space:nowrap}
+body.jlf-feature-mode footer .f-motto:before{content:"◇";margin-right:10px;color:#f2cb62;font-size:11px;vertical-align:3px}
+body.jlf-feature-mode footer .f-sub{position:relative;color:#e9d8ed!important;font-size:10px!important;letter-spacing:.08em}
+body.jlf-feature-mode footer .f-sub:after{content:"JUN LING NUMEROLOGY · PROFESSIONAL ANALYSIS";display:block;margin-top:5px;color:#c8abcdf0;font:600 6px/1.4 sans-serif;letter-spacing:.13em}
+body.jlf-feature-mode #jlp-foot{padding:16px 16px 22px!important;background:transparent!important}
+body.jlf-feature-mode #jlp-foot .jlp-link{padding:8px 16px!important;border:1px solid #d5ad48!important;border-radius:999px!important;color:#6c3275!important;background:#fffaff!important;box-shadow:0 5px 13px #5b0b6d12!important;font-weight:700!important}
+@media(max-width:390px){body.jlf-feature-mode footer{padding:25px 61px 23px 17px!important}body.jlf-feature-mode footer:after{right:16px;width:38px;height:38px;font-size:15px}body.jlf-feature-mode footer .f-motto{font-size:16px!important;letter-spacing:.18em!important}.feats>div{padding-left:50px!important}}
