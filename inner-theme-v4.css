@@ -85,7 +85,7 @@ body.jlf-feature-mode #jl-feature-shell-final #out>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plug>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{margin:16px 0!important;padding:22px 18px!important}
-body.jlf-feature-mode #paipan{background:radial-gradient(circle at 100% 0,#f2d8fa88 0,transparent 34%),linear-gradient(105deg,#fffffff9 0 61%,#fff8fff0 82%,#f0d5f3d9),url("hero-bg-v3.webp") 88% 100%/330px auto no-repeat!important}
+body.jlf-feature-mode #jl-feature-shell-final #paipan{background:radial-gradient(circle at 100% 0,#f2d8fa88 0,transparent 34%),linear-gradient(105deg,#fffffff9 0 58%,#fff8ffeb 78%,#efd1f2cf),url("hero-bg-v3.webp") 88% 100%/330px auto no-repeat!important}
 body.jlf-feature-mode .jli-paipan-tag{position:absolute;right:15px;top:13px;z-index:3;padding:4px 10px;border:1px solid #d8b54e;border-radius:999px;color:#98701c;background:#fff9de;font:700 9px var(--ser);letter-spacing:.12em;box-shadow:0 3px 8px #7a57151f}
 body.jlf-feature-mode .card>h2{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px!important;padding-bottom:14px!important;font-size:17px!important;letter-spacing:.18em!important;text-indent:0!important}
 body.jlf-feature-mode .card>h2:before{content:"◇";color:#c99e32;font-size:13px}
