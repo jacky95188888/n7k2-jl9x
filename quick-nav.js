@@ -11,7 +11,8 @@
     { key:'六親', label:'數字八字卦', mark:'卦', route:'六親' },
     { key:'八星', label:'八星磁場', mark:'星', href:'bxcc.html' },
     { key:'流年', label:'流年運勢', mark:'運', route:'流年' },
-    { key:'日子', label:'擇吉看日', mark:'日', href:'rz.html' }
+    { key:'日子', label:'擇吉看日', mark:'日', href:'rz.html' },
+    { key:'桃花', label:'桃花神數', mark:'桃', href:'taohua.html' }
   ];
 
   var style=document.createElement('style');
@@ -70,6 +71,7 @@
   }
   if(document.body.classList.contains('jl-page-bxcc')) setActive('八星');
   else if(document.body.classList.contains('jl-page-rz')) setActive('日子');
+  else if(document.body.classList.contains('jl-page-taohua')) setActive('桃花');
   else setActive(document.body.classList.contains('jlf-feature-mode')?'':'home');
   document.addEventListener('jl:route-change',function(event){
     setActive(event.detail&&event.detail.route?event.detail.route:'home');

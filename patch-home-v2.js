@@ -296,6 +296,21 @@ function boot(){
 </section>
 
 
+<a class="jlf-taohua" href="taohua.html" aria-label="進入桃花神數">
+
+  <img src="badge-taohua-v1.svg" alt="桃花神數紫金徽章">
+
+  <div>
+    <small>NEW · 四枚玉錢 × 256 組教材</small>
+    <h2>桃花神數</h2>
+    <p>一事一問 · 四次取數 · 教材原判與白話提醒</p>
+  </div>
+
+  <b>開始起數 ›</b>
+
+</a>
+
+
 <section class="jlf-date">
 
   <div class="jlf-date-copy">
@@ -1674,6 +1689,36 @@ body.jlf-feature-mode
     inset 0 1px 0 rgba(255,255,255,.22),
     0 5px 11px rgba(82,9,105,.26);
 }
+
+
+/* 桃花神數新功能 */
+
+.jlf-taohua{
+  position:relative;
+  overflow:hidden;
+  min-height:90px;
+  margin:0 9px 8px;
+  padding:12px 13px;
+  display:grid;
+  grid-template-columns:68px 1fr auto;
+  align-items:center;
+  gap:10px;
+  border:1px solid #d9ad3d;
+  border-radius:17px;
+  color:#f1dcef;
+  background:radial-gradient(circle at 88% 22%,#d651e65e 0,transparent 27%),linear-gradient(108deg,#2b0234,#641075 62%,#390342);
+  box-shadow:0 8px 19px #4c075d2d,inset 0 1px #ffffff2b;
+  text-decoration:none;
+}
+
+.jlf-taohua:before{content:"";position:absolute;inset:6px;border:1px solid #e6c55a45;border-radius:12px;pointer-events:none}
+.jlf-taohua img{position:relative;z-index:1;width:66px;height:66px;filter:drop-shadow(0 7px 10px #19011f99)}
+.jlf-taohua div{position:relative;z-index:1;min-width:0}
+.jlf-taohua small{display:block;color:#cfadd5;font-size:6px;font-weight:800;letter-spacing:.13em}
+.jlf-taohua h2{margin:3px 0 2px;color:#f7dc80;font-family:"Noto Serif TC",serif;font-size:17px;letter-spacing:.14em}
+.jlf-taohua p{margin:0;color:#e6d2e9;font-size:7px;line-height:1.55}
+.jlf-taohua b{position:relative;z-index:1;padding:8px 11px;border:1px solid #e4c45d;border-radius:999px;color:#f7df87;background:#ffffff0d;font-size:8px;white-space:nowrap}
+.jlf-taohua:hover b,.jlf-taohua:focus-visible b{color:#561067;background:#f7df87}.jlf-taohua:focus-visible{outline:3px solid #e3c65e;outline-offset:2px}
 
 
 
