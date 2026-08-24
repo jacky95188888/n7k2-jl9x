@@ -1705,8 +1705,8 @@ body.jlf-feature-mode
   gap:10px;
   border:1px solid #d9ad3d;
   border-radius:17px;
-  color:#f1dcef;
-  background:radial-gradient(circle at 88% 22%,#d651e65e 0,transparent 27%),linear-gradient(108deg,#2b0234,#641075 62%,#390342);
+  color:#fff4ff;
+  background:radial-gradient(circle at 88% 22%,#df62ec75 0,transparent 29%),linear-gradient(108deg,#25022e,#68117a 58%,#3b0446);
   box-shadow:0 8px 19px #4c075d2d,inset 0 1px #ffffff2b;
   text-decoration:none;
 }
@@ -1714,10 +1714,10 @@ body.jlf-feature-mode
 .jlf-taohua:before{content:"";position:absolute;inset:6px;border:1px solid #e6c55a45;border-radius:12px;pointer-events:none}
 .jlf-taohua img{position:relative;z-index:1;width:66px;height:66px;filter:drop-shadow(0 7px 10px #19011f99)}
 .jlf-taohua div{position:relative;z-index:1;min-width:0}
-.jlf-taohua small{display:block;color:#cfadd5;font-size:6px;font-weight:800;letter-spacing:.13em}
-.jlf-taohua h2{margin:3px 0 2px;color:#f7dc80;font-family:"Noto Serif TC",serif;font-size:17px;letter-spacing:.14em}
-.jlf-taohua p{margin:0;color:#e6d2e9;font-size:7px;line-height:1.55}
-.jlf-taohua b{position:relative;z-index:1;padding:8px 11px;border:1px solid #e4c45d;border-radius:999px;color:#f7df87;background:#ffffff0d;font-size:8px;white-space:nowrap}
+.jlf-taohua small{display:block;color:#f1d2f6;font-size:7px;font-weight:900;letter-spacing:.13em;text-shadow:0 1px 3px #210026}
+.jlf-taohua h2{margin:3px 0 2px;color:#ffe48b;font-family:"Noto Serif TC",serif;font-size:18px;font-weight:900;letter-spacing:.14em;text-shadow:0 2px 5px #210026}
+.jlf-taohua p{margin:0;color:#fff4ff;font-size:8px;font-weight:700;line-height:1.55;text-shadow:0 1px 3px #210026}
+.jlf-taohua b{position:relative;z-index:1;padding:9px 12px;border:1px solid #f2d36e;border-radius:999px;color:#ffe691;background:#5a0c69;font-size:9px;font-weight:900;white-space:nowrap;box-shadow:inset 0 1px #ffffff35,0 4px 12px #21002655}
 .jlf-taohua:hover b,.jlf-taohua:focus-visible b{color:#561067;background:#f7df87}.jlf-taohua:focus-visible{outline:3px solid #e3c65e;outline-offset:2px}
 
 

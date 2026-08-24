@@ -24,7 +24,8 @@
     '#jl-quick-nav button:hover,#jl-quick-nav a:hover,#jl-quick-nav button:focus-visible,#jl-quick-nav a:focus-visible,#jl-quick-nav .is-active{transform:translateX(3px);color:#fff;background:linear-gradient(135deg,#8a1ca6,#ca3cdd);border-color:#f1d375;outline:0;box-shadow:0 5px 13px #22012d88,inset 0 1px #ffffff50}',
     '#jl-quick-nav span{position:absolute;left:49px;top:50%;transform:translateY(-50%) translateX(-5px);width:max-content;max-width:150px;padding:7px 10px;border:1px solid #e2c362;border-radius:999px;color:#f5dfa0;background:#3c0448f2;box-shadow:0 5px 15px #25012f55;font:800 11px/1 sans-serif;letter-spacing:.06em;opacity:0;visibility:hidden;pointer-events:none;transition:.18s ease}',
     '#jl-quick-nav button:hover span,#jl-quick-nav a:hover span,#jl-quick-nav button:focus-visible span,#jl-quick-nav a:focus-visible span{opacity:1;visibility:visible;transform:translateY(-50%) translateX(0)}',
-    '@media(max-width:760px){#jl-quick-nav{left:max(4px,env(safe-area-inset-left));gap:4px;padding:6px 4px}#jl-quick-nav:before{display:none}#jl-quick-nav button,#jl-quick-nav a{width:35px;height:35px;font-size:12px}#jl-quick-nav span{left:42px}}',
+    '#jl-quick-toggle{display:none!important}',
+    '@media(max-width:760px){#jl-quick-nav{left:max(4px,env(safe-area-inset-left));gap:4px;padding:7px 5px;transition:transform .24s ease}#jl-quick-nav:before{display:none}#jl-quick-nav button,#jl-quick-nav a{width:36px;height:36px;font-size:12px}#jl-quick-nav span{left:43px}#jl-quick-toggle{position:absolute!important;right:-39px;top:50%;display:grid!important;width:34px!important;height:58px!important;transform:translateY(-50%)!important;border:1px solid #dfbe61!important;border-left:0!important;border-radius:0 999px 999px 0!important;color:#f6dda0!important;background:linear-gradient(180deg,#4b0758f2,#7f168ff2)!important;box-shadow:5px 5px 15px #2b023a38!important;font:900 18px/1 sans-serif!important}#jl-quick-nav.jl-collapsed{transform:translate(calc(-100% - 5px),-50%)}#jl-quick-nav.jl-collapsed #jl-quick-toggle{color:#fff!important}#jl-quick-nav:not(.jl-collapsed) #jl-quick-toggle{font-size:0!important}#jl-quick-nav:not(.jl-collapsed) #jl-quick-toggle:after{content:"‹";font-size:25px}}',
     '@media(max-height:610px){#jl-quick-nav{gap:2px;padding:4px 3px}#jl-quick-nav button,#jl-quick-nav a{width:31px;height:31px;font-size:11px}}',
     '@media(prefers-reduced-motion:reduce){#jl-quick-nav button,#jl-quick-nav a,#jl-quick-nav span{transition:none}}'
   ].join('');
@@ -33,6 +34,22 @@
   var nav=document.createElement('nav');
   nav.id='jl-quick-nav';
   nav.setAttribute('aria-label','工作快捷鍵');
+
+  var toggle=document.createElement('button');
+  toggle.id='jl-quick-toggle';
+  toggle.type='button';
+  toggle.textContent='›';
+  toggle.setAttribute('aria-label','展開快捷鍵');
+  toggle.setAttribute('aria-expanded','false');
+  nav.appendChild(toggle);
+
+  if(window.matchMedia('(max-width:760px)').matches) nav.classList.add('jl-collapsed');
+  toggle.addEventListener('click',function(event){
+    event.stopPropagation();
+    var collapsed=nav.classList.toggle('jl-collapsed');
+    toggle.setAttribute('aria-expanded',collapsed?'false':'true');
+    toggle.setAttribute('aria-label',collapsed?'展開快捷鍵':'收合快捷鍵');
+  });
 
   function routeUrl(route){ return 'index.html?route='+encodeURIComponent(route); }
 
@@ -43,6 +60,7 @@
       node.type='button';
       node.dataset.jlQuickRoute=item.route;
       node.addEventListener('click',function(){
+        nav.classList.add('jl-collapsed');
         if(typeof window.jlOpenFeature==='function') window.jlOpenFeature(item.route);
         else{
           try{ sessionStorage.setItem('jlf-shortcut-route',item.route); }catch(e){}
