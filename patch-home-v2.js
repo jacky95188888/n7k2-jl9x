@@ -302,7 +302,7 @@ function boot(){
 
   <div>
     <small>NEW · 四枚玉錢 × 256 組教材</small>
-    <h2>桃花神數</h2>
+    <strong class="jlf-taohua-title">桃花神數</strong>
     <p>一事一問 · 四次取數 · 教材原判與白話提醒</p>
   </div>
 
@@ -1715,7 +1715,7 @@ body.jlf-feature-mode
 .jlf-taohua img{position:relative;z-index:1;width:66px;height:66px;filter:drop-shadow(0 7px 10px #19011f99)}
 .jlf-taohua div{position:relative;z-index:1;min-width:0}
 .jlf-taohua small{display:block;color:#f1d2f6;font-size:7px;font-weight:900;letter-spacing:.13em;text-shadow:0 1px 3px #210026}
-.jlf-taohua h2{margin:3px 0 2px;color:#ffe48b;font-family:"Noto Serif TC",serif;font-size:18px;font-weight:900;letter-spacing:.14em;text-shadow:0 2px 5px #210026}
+.jlf-taohua-title{display:block;margin:3px 0 2px;color:#ffe48b;font-family:"Noto Serif TC",serif;font-size:18px;font-weight:900;line-height:1.25;letter-spacing:.14em;text-shadow:0 2px 5px #210026}
 .jlf-taohua p{margin:0;color:#fff4ff;font-size:8px;font-weight:700;line-height:1.55;text-shadow:0 1px 3px #210026}
 .jlf-taohua b{position:relative;z-index:1;padding:9px 12px;border:1px solid #f2d36e;border-radius:999px;color:#ffe691;background:#5a0c69;font-size:9px;font-weight:900;white-space:nowrap;box-shadow:inset 0 1px #ffffff35,0 4px 12px #21002655}
 .jlf-taohua:hover b,.jlf-taohua:focus-visible b{color:#561067;background:#f7df87}.jlf-taohua:focus-visible{outline:3px solid #e3c65e;outline-offset:2px}
