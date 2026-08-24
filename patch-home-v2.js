@@ -202,24 +202,24 @@ function boot(){
     </article>
 
 
-    <!-- 六壬 / 六親 -->
+    <!-- 數字八字卦 -->
 
     <article class="jlf-card">
 
       <div class="jlf-badge">
-        <img src="badge-liuren-v1.webp" alt="六壬六親文字徽章">
+        <img src="badge-shuzibagua-v1.svg" alt="數字八字卦紫金徽章">
       </div>
 
-      <h3>六壬／六親</h3>
+      <h3>數字八字卦</h3>
 
       <p>
-        事情推演 · 事件解析
+        生辰數卦 · 格局解析
       </p>
 
       <small>
-        關係 × 事件 × 發展
+        數字 × 八卦 × 五行
         <br>
-        占斷 × 判事 × 應驗
+        本命 × 格局 × 解讀
       </small>
 
       <button
@@ -439,7 +439,7 @@ function boot(){
       <button type="button" data-jli-route="四柱">四柱八字</button>
       <button type="button" data-jli-route="九宮">紫微九宮</button>
       <button type="button" data-jli-route="奇門">奇門遁甲</button>
-      <button type="button" data-jli-route="六親">六壬六親</button>
+      <button type="button" data-jli-route="六親">數字八字卦</button>
       <a href="bxcc.html">八星磁場</a>
       <button type="button" data-jli-route="流年">流年運勢</button>
     </nav>`;
@@ -494,6 +494,10 @@ function boot(){
 
     document.body.classList.add(
       'jlf-home-mode'
+    );
+
+    document.dispatchEvent(
+      new CustomEvent('jl:route-change',{detail:{route:'home'}})
     );
 
     window.scrollTo({
@@ -575,7 +579,7 @@ function boot(){
     四柱:{title:'四柱八字',desc:'以出生年月日時建立命盤，理解五行配置與人生節奏。',icon:'badge-bazi-v1.webp',mark:'柱',kicker:'生辰命盤・四柱根基',guide:'從出生時間看見命盤結構',detail:'四柱八字是整體命盤的根基，從年、月、日、時四柱整理干支、五行與先後天配置，建立後續解讀的共同基準。',tags:['四柱干支','五行配置','先天後天'],how:'選擇曆別與出生年月日時，再設定性別及關注重點後按「排盤」。',safe:'出生資料僅用於本頁換算，不會主動上傳或公開。'},
     九宮:{title:'紫微／九宮',desc:'以數字落宮觀察宮位能量、格局與人生方向。',icon:'badge-jiugong-v1.webp',mark:'宮',kicker:'數字落宮・格局觀察',guide:'用九宮位置整理數字能量',detail:'將手機號碼後七碼倒序落入九宮，觀察數字所在宮位、組合關係與能量分布，適合用來理解格局重點。',tags:['後七碼','九宮落位','格局組合'],how:'輸入可使用的手機號碼後按「起盤」，系統會自動取碼並排列九宮。',safe:'號碼只在目前裝置換算，不上傳、不留存。'},
     奇門:{title:'奇門遁甲',desc:'由時間、方位與數字落宮，分析處境與決策方向。',icon:'badge-qimen-v1.webp',mark:'奇',kicker:'問事決策・趨吉避凶',guide:'從手機數字觀察處境與門路',detail:'取手機號碼末七碼落宮，配合奇門的宮位與門路關係，整理當下環境、念頭及可行方向，作為問事決策參考。',tags:['末七碼','門路判讀','決策參考'],how:'輸入台灣或大陸手機號碼，確認號碼後按「起盤」查看專屬論斷。',safe:'號碼僅在本機計算，不上傳、不留存。'},
-    六親:{title:'六壬／六親',desc:'從命盤關係理解六親互動、事件發展與人生課題。',icon:'badge-liuren-v1.webp',mark:'親',kicker:'關係結構・事件推演',guide:'看懂命盤中的關係與互動',detail:'透過五行陰陽與六親對照，整理家人、伴侶、工作及事件互動的位置，協助辨認關係中的支持、牽制與課題。',tags:['五行陰陽','六親對照','關係課題'],how:'先完成生辰排盤，系統會接續顯示五行、陰陽及六親專屬分析。',safe:'生辰資料只用於本次命盤換算，不會主動上傳。'},
+    六親:{title:'數字八字卦',desc:'由生辰數字對照八卦、五行與本命格局，整理個人特質與人生課題。',icon:'badge-shuzibagua-v1.svg',mark:'卦',kicker:'生辰數卦・格局解析',guide:'從數字與八卦看見本命結構',detail:'依生辰排盤延伸數字、八卦、五行與陰陽配置，集中呈現本命格局、能量互動及重要課題，不混入其他入口的內容。',tags:['生辰數字','八卦五行','本命格局'],how:'先完成生辰排盤，系統會接續顯示數字八字卦專屬分析。',safe:'生辰資料只用於本次命盤換算，不會主動上傳。'},
     流年:{title:'流年運勢',desc:'查看年度與流月節奏，掌握不同階段的重要趨勢。',icon:'badge-liunian-v1.webp',mark:'運',kicker:'大運流年・階段節奏',guide:'掌握不同年份的運勢起伏',detail:'依生辰命盤延伸大運分段與逐年節奏，整理不同人生階段的重心及變化，作為年度規劃與重要決策參考。',tags:['大運分段','年度節奏','趨勢提醒'],how:'先完成生辰排盤，再查看大運區間與各年份的專屬趨勢。',safe:'命盤資料僅供頁面即時計算與閱讀，不會主動公開。'}
   };
 
@@ -583,7 +587,7 @@ function boot(){
     四柱:{title:'把四柱八字轉成看得懂的人生線索',lead:'專業盤保留干支、五行與六柱資料；白話模式則依序說明「命盤核心、能量分布、人生節奏」，讓第一次接觸命理的人也知道從哪裡開始看。',points:[['日主核心','先辨認命盤的核心性質與主要行事傾向。'],['五行分布','查看哪些能量偏強、偏弱，以及彼此如何支持或牽制。'],['人生節奏','結合大運與流年，理解不同階段的重心與轉折。']],pro:'付費版將整合老師判讀，提供不只盤面名稱，而是有原因、有重點、有行動方向的完整報告。',tags:['命格核心','喜用忌神','十神六親','大運流年','事業財運','感情家庭']},
     九宮:{title:'從數字落宮看懂格局重點',lead:'九宮盤不只呈現數字位置，白話模式會整理主要宮位、能量集中處及組合關係，協助客戶理解這些排列與自身課題的關聯。',points:[['主要宮位','先看能量集中在哪些宮位，以及代表的生活面向。'],['組合關係','再看數字之間形成支持、重複或牽制的格局。'],['應用方向','把盤面轉成工作、人際與日常選擇的觀察重點。']],pro:'專業版將提供宮位逐項解釋、重要組合及老師的格局判讀。',tags:['宮位能量','數字組合','格局吉凶','人生課題','改善方向']},
     奇門:{title:'把奇門盤勢整理成可行的決策方向',lead:'專業盤顯示落宮與門路；白話模式則分成「目前處境、可利用條件、需要避開的風險」，避免客戶只看到一張盤卻不知道如何使用。',points:[['目前處境','整理當下環境與問題所處的位置。'],['有利條件','辨認可運用的人、時間、方向或行動方式。'],['風險提醒','指出容易受阻或不宜躁進的環節。']],pro:'專業版將加入老師對事情發展、時機方位與行動策略的完整判讀。',tags:['問事判斷','時間方位','門路分析','風險提醒','行動策略']},
-    六親:{title:'從五行與六親看懂關係互動',lead:'白話模式會把專業六親名稱轉成家庭、伴侶、合作與人際互動，讓客戶知道盤中的支持、壓力及需要調整的相處方式。',points:[['關係位置','辨認家人、伴侶與工作關係在命盤中的位置。'],['互動力量','觀察彼此是支持、消耗、牽制或互補。'],['相處建議','將關係結構轉成可以實際採取的溝通方向。']],pro:'專業版將提供六親逐項解析、關係課題與老師的相處建議。',tags:['家庭關係','伴侶互動','工作合作','支持牽制','溝通建議']},
+    六親:{title:'把數字八字卦整理成清楚的本命線索',lead:'專業盤保留數字、八卦、五行與格局資料；白話模式依序整理本命結構、能量互動及可實際理解的人生課題。',points:[['本命結構','先確認生辰數字所對應的八卦與主要格局。'],['能量互動','觀察五行、陰陽及數字之間的支持與牽制。'],['課題解讀','把專業盤面轉成個人特質與生活方向的重點。']],pro:'專業版將提供卦象逐項解析、本命格局與老師的完整判讀。',tags:['生辰數字','八卦配置','五行陰陽','本命格局','人生課題']},
     流年:{title:'把大運流年整理成清楚的時間軸',lead:'專業表格保留太歲、歲運、旬運與旬空；白話模式會先標示運勢階段從何時開始，再說明重要年份、轉折與可採取的準備。',points:[['起運時間','清楚標示大運從哪一年開始，以及目前走到哪個階段。'],['年度重點','整理每一年的主要課題，而不是只列出專業數字。'],['提前規劃','分辨適合推進、整理、觀察或保守的時間。']],pro:'專業版將提供大運總覽、逐年重點、十二個月節奏與老師的規劃建議。',tags:['起運年份','大運階段','年度趨勢','流月提醒','重要時機']}
   };
 
@@ -776,7 +780,7 @@ function boot(){
 
       奇門:'奇門遁甲',
 
-      六親:'六壬／六親',
+      六親:'數字八字卦',
 
       流年:'流年運勢'
 
@@ -813,6 +817,10 @@ function boot(){
   /* 真功能路由 */
 
   function openFeature(term){
+
+    document.dispatchEvent(
+      new CustomEvent('jl:route-change',{detail:{route:term}})
+    );
 
     setInnerMeta(term);
 
@@ -871,6 +879,17 @@ function boot(){
   innerHead.querySelectorAll('[data-jli-route]').forEach(function(btn){
     btn.addEventListener('click',function(){ openFeature(btn.dataset.jliRoute); });
   });
+
+  window.jlOpenFeature=openFeature;
+
+  var shortcutRoute='';
+  try{
+    shortcutRoute=new URLSearchParams(location.search).get('route') || sessionStorage.getItem('jlf-shortcut-route') || '';
+    sessionStorage.removeItem('jlf-shortcut-route');
+  }catch(e){}
+  if(shortcutRoute && innerMeta[shortcutRoute]){
+    setTimeout(function(){ openFeature(shortcutRoute); },120);
+  }
 
   setTimeout(hideEmptyCards,300);
   setTimeout(hideEmptyCards,1200);
