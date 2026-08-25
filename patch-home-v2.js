@@ -488,14 +488,53 @@ function boot(){
       <p id="jli-reading-lead"></p>
       <div class="jli-reading-points" id="jli-reading-points"></div>
       <div class="jli-pro-preview">
-        <div class="jli-pro-lock">鎖</div>
+        <div class="jli-pro-lock">專</div>
         <div><small>PROFESSIONAL REPORT</small><h3>完整專業版解讀</h3><p id="jli-pro-desc"></p></div>
         <div class="jli-pro-tags" id="jli-pro-tags"></div>
-        <button type="button" disabled>專業版・即將開放</button>
+        <button type="button" id="jli-open-pro">查看專業分析模組</button>
       </div>
       <p class="jli-reading-note">命理內容適合自我理解與人生規劃參考，重要醫療、法律及投資決策仍應諮詢相關專業人士。</p>
     </div>`;
   routeGuide.insertAdjacentElement('afterend',readingPanel);
+
+  /* 數字八字卦與奇門各自使用專屬工作台，避免一進入口就誤以為是四柱排盤。 */
+  const moduleHub=document.createElement('section');
+  moduleHub.id='jli-module-hub';
+  moduleHub.hidden=true;
+  readingPanel.insertAdjacentElement('afterend',moduleHub);
+
+  const moduleMeta={
+    六親:{
+      eyebrow:'DIGITAL BAGUA · PROFESSIONAL WORKSPACE',
+      title:'數字八字卦專業分析',
+      desc:'生辰表單只負責換算六柱數字；完成後依序閱讀本命數卦、五行陰陽、六親斷、萬物類象與 169 卦義。這裡不混入四柱八字解讀。',
+      items:[
+        ['生辰取數','先建立六柱數字','birth','取'],
+        ['六親斷','父母、手足、伴侶與子女關係','六親全覽','親'],
+        ['169 卦義','0～12 兩數組合的卦義詳解','卦義詳解','169'],
+        ['萬物類象','五行、人物、職業與事物象意','萬物類象','象']
+      ]
+    },
+    奇門:{
+      eyebrow:'QIMEN · DECISION WORKSPACE',
+      title:'奇門遁甲專業分析',
+      desc:'奇門入口分為手機數字落宮與 81 象意兩套工具；可直接選擇需要的分析，不再顯示四柱生辰排盤。',
+      items:[
+        ['奇門手機排盤','末七碼落宮、門路與逐碼詳解','奇門手機號論斷','奇'],
+        ['81 象意查詢','1～81 數理吉凶與完整象意','數理象意','81']
+      ]
+    }
+  };
+
+  function setModuleHub(term){
+    const meta=moduleMeta[term];
+    moduleHub.hidden=!meta;
+    if(!meta){ moduleHub.innerHTML=''; return; }
+    moduleHub.innerHTML='<div class="jli-module-intro"><small>'+meta.eyebrow+'</small><h2>'+meta.title+'</h2><p>'+meta.desc+'</p></div>'+
+      '<div class="jli-module-grid">'+meta.items.map(function(item){
+        return '<button type="button" data-jli-module="'+item[2]+'"><i>'+item[3]+'</i><span><b>'+item[0]+'</b><small>'+item[1]+'</small></span><em>進入 ›</em></button>';
+      }).join('')+'</div>';
+  }
 
 
   function showHome(){
@@ -585,8 +624,8 @@ function boot(){
   const routeTitles={
     四柱:['四柱八字','六柱環','先天後天'],
     九宮:['奇門數字九宮盤'],
-    奇門:['奇門手機號論斷'],
-    六親:['五行能量','陰陽屬性','陰陽斷','六親對照','六親全覽'],
+    奇門:['奇門手機號論斷','數理象意','81數理象意'],
+    六親:['五行能量','陰陽屬性','陰陽斷','六親對照','六親全覽','萬物類象','卦義詳解','169卦義','卦體一覽'],
     流年:['大運分段','流年一至九九']
   };
 
@@ -601,8 +640,8 @@ function boot(){
   const readingMeta={
     四柱:{title:'把四柱八字轉成看得懂的人生線索',lead:'專業盤保留干支、五行與六柱資料；白話模式則依序說明「命盤核心、能量分布、人生節奏」，讓第一次接觸命理的人也知道從哪裡開始看。',points:[['日主核心','先辨認命盤的核心性質與主要行事傾向。'],['五行分布','查看哪些能量偏強、偏弱，以及彼此如何支持或牽制。'],['人生節奏','結合大運與流年，理解不同階段的重心與轉折。']],pro:'付費版將整合老師判讀，提供不只盤面名稱，而是有原因、有重點、有行動方向的完整報告。',tags:['命格核心','喜用忌神','十神六親','大運流年','事業財運','感情家庭']},
     九宮:{title:'從數字落宮看懂格局重點',lead:'九宮盤不只呈現數字位置，白話模式會整理主要宮位、能量集中處及組合關係，協助客戶理解這些排列與自身課題的關聯。',points:[['主要宮位','先看能量集中在哪些宮位，以及代表的生活面向。'],['組合關係','再看數字之間形成支持、重複或牽制的格局。'],['應用方向','把盤面轉成工作、人際與日常選擇的觀察重點。']],pro:'專業版將提供宮位逐項解釋、重要組合及老師的格局判讀。',tags:['宮位能量','數字組合','格局吉凶','人生課題','改善方向']},
-    奇門:{title:'把奇門盤勢整理成可行的決策方向',lead:'專業盤顯示落宮與門路；白話模式則分成「目前處境、可利用條件、需要避開的風險」，避免客戶只看到一張盤卻不知道如何使用。',points:[['目前處境','整理當下環境與問題所處的位置。'],['有利條件','辨認可運用的人、時間、方向或行動方式。'],['風險提醒','指出容易受阻或不宜躁進的環節。']],pro:'專業版將加入老師對事情發展、時機方位與行動策略的完整判讀。',tags:['問事判斷','時間方位','門路分析','風險提醒','行動策略']},
-    六親:{title:'把數字八字卦整理成清楚的本命線索',lead:'專業盤保留數字、八卦、五行與格局資料；白話模式依序整理本命結構、能量互動及可實際理解的人生課題。',points:[['本命結構','先確認生辰數字所對應的八卦與主要格局。'],['能量互動','觀察五行、陰陽及數字之間的支持與牽制。'],['課題解讀','把專業盤面轉成個人特質與生活方向的重點。']],pro:'專業版將提供卦象逐項解析、本命格局與老師的完整判讀。',tags:['生辰數字','八卦配置','五行陰陽','本命格局','人生課題']},
+    奇門:{title:'把奇門盤勢整理成可行的決策方向',lead:'專業盤顯示落宮與門路；白話模式則分成「目前處境、可利用條件、需要避開的風險」，避免客戶只看到一張盤卻不知道如何使用。',points:[['目前處境','整理當下環境與問題所處的位置。'],['81 象意','可依 1～81 數理查詢吉凶、名稱與完整象意。'],['風險提醒','結合門路與象意，指出容易受阻或不宜躁進的環節。']],pro:'已整合奇門手機排盤、落宮門路、逐碼詳解及 1～81 數理象意查詢，可直接切換使用。',tags:['奇門排盤','81象意','時間方位','門路分析','行動策略']},
+    六親:{title:'把數字八字卦整理成清楚的本命線索',lead:'專業盤保留數字、八卦、五行與格局資料；白話模式依序整理本命結構、能量互動及可實際理解的人生課題。',points:[['本命結構','先確認生辰數字所對應的八卦與主要格局。'],['六親與類象','分開查看六親關係、五行陰陽及萬物類象，不與四柱內容混用。'],['169 卦義','依 0～12 的兩數組合查閱完整卦義與專業判讀。']],pro:'已整合本命數卦、五行陰陽、六親斷、萬物類象與 169 卦義，完成生辰取數後即可逐項閱讀。',tags:['生辰數字','六親斷','169卦義','萬物類象','五行陰陽']},
     流年:{title:'把大運流年整理成清楚的時間軸',lead:'專業表格保留太歲、歲運、旬運與旬空；白話模式會先標示運勢階段從何時開始，再說明重要年份、轉折與可採取的準備。',points:[['起運時間','清楚標示大運從哪一年開始，以及目前走到哪個階段。'],['年度重點','整理每一年的主要課題，而不是只列出專業數字。'],['提前規劃','分辨適合推進、整理、觀察或保守的時間。']],pro:'專業版將提供大運總覽、逐年重點、十二個月節奏與老師的規劃建議。',tags:['起運年份','大運階段','年度趨勢','流月提醒','重要時機']}
   };
 
@@ -628,10 +667,16 @@ function boot(){
       if(plain){ readingPanel.scrollIntoView({behavior:'smooth',block:'start'}); }
       else{
         const term=sessionStorage.getItem('jlf-active-route') || '四柱';
-        const target=term==='四柱' ? paipan : findPlugin(term);
+        const target=moduleMeta[term] ? moduleHub : (term==='四柱' ? paipan : findPlugin(term));
         (target || paipan || feature).scrollIntoView({behavior:'smooth',block:'start'});
       }
     });
+  });
+
+  readingPanel.querySelector('#jli-open-pro').addEventListener('click',function(){
+    const term=sessionStorage.getItem('jlf-active-route') || '四柱';
+    const target=moduleMeta[term] ? moduleHub : (term==='四柱' ? paipan : findPlugin(term));
+    (target || paipan || feature).scrollIntoView({behavior:'smooth',block:'start'});
   });
 
   function setInnerMeta(term){
@@ -651,6 +696,7 @@ function boot(){
     });
     sessionStorage.setItem('jlf-active-route',term);
     setReadingMeta(term);
+    setModuleHub(term);
     readingPanel.querySelector('.jli-reading-body').hidden=true;
     readingPanel.querySelectorAll('[data-jli-reading]').forEach(function(btn){
       const active=btn.dataset.jliReading==='chart';
@@ -709,6 +755,39 @@ function boot(){
   function findPlugin(term){
     return findPlugins(term)[0] || null;
   }
+
+  function findPluginByTitle(title){
+    const wanted=clean(title);
+    const selectors='#plugs0 .card,#plugs .card,#plug .card,#out .card,.card.pro,section.card';
+    return [...feature.querySelectorAll(selectors)].find(function(card){
+      const heading=card.querySelector('h2,h3');
+      return clean(heading ? heading.textContent : card.textContent).includes(wanted);
+    }) || null;
+  }
+
+  moduleHub.addEventListener('click',function(event){
+    const btn=event.target.closest('[data-jli-module]');
+    if(!btn) return;
+    const module=btn.dataset.jliModule;
+    const term=sessionStorage.getItem('jlf-active-route') || '四柱';
+    if(module==='birth'){
+      if(paipan) paipan.classList.remove('jli-route-hidden');
+      showNotice(term);
+      showFeature(paipan);
+      return;
+    }
+    const target=findPluginByTitle(module);
+    const ready=target && (!out || !out.classList.contains('hide') || !out.contains(target));
+    if(ready){
+      target.classList.remove('jli-route-hidden');
+      clearNotice();
+      showFeature(target);
+    }else{
+      showNotice(term);
+      if(paipan) paipan.classList.remove('jli-route-hidden');
+      showFeature(paipan);
+    }
+  });
 
   function cardTitle(card){
     if(!card) return '';
@@ -845,6 +924,12 @@ function boot(){
       'jlf-pending',
       term
     );
+
+    if(moduleMeta[term]){
+      clearNotice();
+      showFeature(moduleHub);
+      return;
+    }
 
 
     if(
@@ -2200,6 +2285,42 @@ body.jlf-feature-mode
 
 #jlf-route-notice.show{
   display:block;
+}
+
+/* 專屬專業工作台 */
+#jli-module-hub{
+  margin:14px 0 18px;
+  padding:18px;
+  border:1px solid #d6a9df;
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 90% 5%,#f4d87645 0,transparent 25%),
+    linear-gradient(145deg,#fffdfd,#fff5ff 58%,#f5e6ff);
+  box-shadow:0 14px 34px #6212761a,inset 0 1px #fff;
+}
+#jli-module-hub[hidden]{display:none!important}
+.jli-module-intro{padding:4px 4px 16px;border-bottom:1px solid #ead9ec}
+.jli-module-intro small{display:block;color:#a27b22;font-size:10px;font-weight:900;letter-spacing:.16em}
+.jli-module-intro h2{margin:7px 0;color:#5e126e;font-family:"Noto Serif TC",serif;font-size:25px;letter-spacing:.1em}
+.jli-module-intro p{margin:0;color:#6e6070;font-size:13px;line-height:1.85}
+.jli-module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.jli-module-grid button{
+  min-height:98px;padding:12px;border:1px solid #d8b2df;border-radius:16px;
+  display:grid;grid-template-columns:42px minmax(0,1fr);grid-template-rows:1fr auto;gap:4px 10px;
+  text-align:left;background:linear-gradient(145deg,#fff,#fff8ff);color:#551064;
+  box-shadow:0 7px 18px #67127712;cursor:pointer;
+}
+.jli-module-grid button:hover,.jli-module-grid button:focus-visible{border-color:#c49a32;transform:translateY(-1px);box-shadow:0 10px 24px #67127724;outline:none}
+.jli-module-grid i{grid-row:1/3;width:42px;height:42px;display:grid;place-items:center;border:2px solid #d8b44c;border-radius:50%;background:radial-gradient(circle at 35% 28%,#c93cdb,#71118a 72%);color:#ffe687;font-style:normal;font-size:13px;font-weight:900;box-shadow:0 5px 12px #4d075148}
+.jli-module-grid span{min-width:0}.jli-module-grid b{display:block;font-size:14px;letter-spacing:.04em}.jli-module-grid small{display:block;margin-top:4px;color:#786b79;font-size:10px;line-height:1.5}
+.jli-module-grid em{grid-column:2;color:#a07a20;font-style:normal;font-size:10px;font-weight:900;letter-spacing:.08em}
+.jli-pro-preview button:not([disabled]){cursor:pointer;background:linear-gradient(100deg,#681078,#b71bc5);color:#fff;border-color:#d9b453;box-shadow:0 8px 18px #67127728}
+
+@media(max-width:430px){
+  #jli-module-hub{padding:14px;border-radius:18px}
+  .jli-module-grid{grid-template-columns:1fr}
+  .jli-module-grid button{min-height:88px}
+  .jli-module-intro h2{font-size:21px}
 }
 
 
