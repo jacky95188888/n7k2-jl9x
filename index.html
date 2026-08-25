@@ -1280,13 +1280,21 @@ function toLunar(y,m,d){
   }catch(e){return null;}
 }
 
+function lunarToSolar(y,m,d){
+  if(typeof Lunar==='undefined')return null;
+  try{
+    const s=Lunar.fromYmd(y,m,d).getSolar();
+    return {y:s.getYear(),m:s.getMonth(),d:s.getDay()};
+  }catch(e){return null;}
+}
+
 function run(){
   $('err').textContent='';
   let y=parseInt($('y').value,10);
   const m=+$('m').value, d=+$('d').value, h=+$('h').value;
   if(!y||isNaN(y)){$('err').textContent='請輸入年份。';return;}
   if(cal==='roc')y=y+1911;
-  let ly=y,lm=m,ld=d,conv='';
+  let ly=y,lm=m,ld=d,sy=y,sm=m,sd=d,conv='';
   if(cal!=='lun'){
     const L=toLunar(y,m,d);
     if(!L){$('err').textContent='國曆換算元件沒有載入。請檢查網路後重試，或切換到「農曆」直接輸入。';return;}
@@ -1294,10 +1302,14 @@ function run(){
     conv='國曆 '+y+'/'+m+'/'+d+' → 農曆 '+ly+' 年 '+(L.leap?'閏':'')+lm+' 月 '+ld+' 日';
   }else{
     if(d>30){$('err').textContent='農曆日最大為 30。';return;}
+    const S=lunarToSolar(ly,lm,ld);
+    if(!S){$('err').textContent='這個農曆日期不存在，請重新確認年月日。';return;}
+    sy=S.y;sm=S.m;sd=S.d;
     conv='農曆 '+ly+' 年 '+lm+' 月 '+ld+' 日';
   }
   const s=slotsOf(ly,lm,ld,h);
-  cur={s:s,r:ringOf(s),b:bounds(s),lab:labelsOf(s),ly:ly,lm:lm,ld:ld,h:h,conv:conv,
+  cur={s:s,r:ringOf(s),b:bounds(s),lab:labelsOf(s),cal:cal,
+       iy:y,im:m,id:d,ly:ly,lm:lm,ld:ld,sy:sy,sm:sm,sd:sd,h:h,conv:conv,
        g:$('g').value,k:$('k').value};
   sel=0;
   render();
@@ -1340,7 +1352,8 @@ function chartData(){
   if(!cur)return null;
   return {slots:cur.s,ring:cur.r,lab:cur.lab,bounds:cur.b,
           segs:segs(cur.s),wins:windows(cur.r),xun:xunOf(cur.ly),
-          ly:cur.ly,lm:cur.lm,ld:cur.ld,h:cur.h,
+          cal:cur.cal,iy:cur.iy,im:cur.im,id:cur.id,
+          ly:cur.ly,lm:cur.lm,ld:cur.ld,sy:cur.sy,sm:cur.sm,sd:cur.sd,h:cur.h,
           sex:cur.g,focus:cur.k,conv:cur.conv};
 }
 function runStatics(){
@@ -1501,8 +1514,8 @@ function drawPro(){
 <script src="patch-guayi.js"></script>
 <script src="data-liuqin.js"></script>
 <script src="patch-liuqin.js"></script>
-<script src="patch-zhu.js?v=labels-off-v1"></script>
-<script src="patch-sizhu.js?v=changsheng-yun-20260825"></script>
+<script src="patch-zhu.js"></script>
+<script src="patch-sizhu.js"></script>
 <script src="patch-liunian.js"></script>
 <script src="data-qimen.js"></script>
 <script src="data-81.js"></script>
