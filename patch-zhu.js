@@ -145,25 +145,19 @@ function build(){
   var r = c.ring, lab = c.lab, n = r.length;
   var post = r.map(hou);
 
-  /* 第一列：柱名，磁場欄留空 */
+  /* 第一列：柱名。四吉／四凶文字依老師指示暫不上線。 */
   var h = '<tr><th class="zh-lab"></th>';
   for (var i = 0; i < n; i++){
     h += '<th class="zh-lab">' + (lab[i] || '') + '</th>';
-    if (i < n - 1) h += '<th class="zh-lab"></th>';
   }
   h += '</tr>';
 
-  /* 先天、後天各一列，數字之間夾磁場 */
+  /* 先天、後天各一列，只顯示數字與八卦爻線。 */
   [['先天', r], ['後天', post]].forEach(function(row){
     var name = row[0], arr = row[1];
     h += '<tr><td class="zh-row">' + name + '</td>';
     for (var i = 0; i < arr.length; i++){
       h += '<td class="zh-n">' + arr[i] + tri(arr[i]) + '</td>';
-      if (i < arr.length - 1){
-        var s = star(arr[i], arr[i + 1]);
-        h += '<td class="zh-s ' + (s ? (JI[s] ? 'ji' : 'xiong') : '') + '">'
-           + (s || '') + '</td>';
-      }
     }
     h += '</tr>';
   });
@@ -176,10 +170,7 @@ function build(){
   if (box && !box.querySelector('.zh-note')){
     var p = document.createElement('p');
     p.className = 'zh-note';
-    p.innerHTML = '數字下方為該數所配八卦（數轉地支、地支配卦）。'
-                + '磁場標在兩數之間，即該兩數所成之卦。'
-                + '<b>綠為四吉</b>：生氣、天醫、延年、伏位；'
-                + '<i>紅為四凶</i>：絕命、五鬼、六煞、禍害。';
+    p.innerHTML = '數字下方為該數所配八卦（數轉地支、地支配卦）。';
     box.appendChild(p);
   }
   if (box && !box.querySelector('.zh-key')){
