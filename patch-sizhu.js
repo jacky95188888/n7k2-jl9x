@@ -40,6 +40,18 @@ function nayinOf(gz) {
   return i < 0 ? '' : NAYIN[Math.floor(i / 2)];
 }
 
+/* lunar-javascript 的十二長生為簡體字，畫面統一使用繁體。 */
+var DI_SHI_TRAD = {
+  '长生':'長生','沐浴':'沐浴','冠带':'冠帶','临官':'臨官',
+  '帝旺':'帝旺','衰':'衰','病':'病','死':'死','墓':'墓',
+  '绝':'絕','胎':'胎','养':'養'
+};
+function tradDiShi(v) { return DI_SHI_TRAD[v] || v || '—'; }
+function ymdZh(v) {
+  var a = String(v || '').split('-');
+  return a.length === 3 ? (parseInt(a[0],10) + '年' + parseInt(a[1],10) + '月' + parseInt(a[2],10) + '日') : (v || '—');
+}
+
 
 function css() {
   if (document.getElementById('sz-style')) return;
@@ -51,10 +63,18 @@ function css() {
     '#sz-card td.szz{padding-top:0}',
     '#sz-card td.szg small,#sz-card td.szz small{display:block;font-size:10px;font-weight:400;letter-spacing:.1em;color:#9c8b74;margin-top:2px}',
     '#sz-card td.szny{font-size:12px;color:#7a6f5e;letter-spacing:.06em}',
+    '#sz-card td.szstage{padding:9px 3px 10px;background:linear-gradient(180deg,#fffaf0,#fbf1ff);border-top:1px solid rgba(190,143,43,.24)}',
+    '#sz-card td.szstage b{display:block;font-family:var(--ser);font-size:15px;line-height:1.2;color:#68127b;letter-spacing:.12em}',
+    '#sz-card td.szstage small{display:block;margin-top:4px;font-size:9px;color:#a08b70;letter-spacing:.08em}',
+    '#sz-card .szyun{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;gap:5px 13px;align-items:center;margin-top:15px;padding:13px 15px;border:1px solid rgba(190,143,43,.58);border-radius:14px;background:linear-gradient(135deg,#fffaf0 0%,#fff 45%,#faefff 100%);box-shadow:0 8px 22px rgba(91,21,114,.08)}',
+    '#sz-card .szyun:after{content:"";position:absolute;width:74px;height:74px;right:-28px;top:-35px;border:1px solid rgba(190,143,43,.23);border-radius:50%}',
+    '#sz-card .szyun-k{grid-row:1/3;position:relative;z-index:1;padding:7px 9px;border-radius:999px;background:linear-gradient(145deg,#5b086c,#a812c2);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;white-space:nowrap}',
+    '#sz-card .szyun strong{position:relative;z-index:1;color:#5e246c;font-family:var(--ser);font-size:17px;letter-spacing:.07em}',
+    '#sz-card .szyun small{position:relative;z-index:1;color:#8b7864;font-size:11px;line-height:1.5}',
     '#sz-card .szfoot{margin-top:14px;font-size:12.5px;line-height:1.9;color:#7a6f5e}',
     '#sz-card .szfoot b{color:#5b5147;font-weight:600}',
     '#sz-card .szwarn{margin-top:10px;padding:10px 12px;border:1px solid var(--zhu);background:#fdf6f5;font-size:13px;color:var(--zhu);line-height:1.7}',
-    '@media (max-width:420px){#sz-card td.szg,#sz-card td.szz{font-size:22px}}'
+    '@media (max-width:420px){#sz-card td.szg,#sz-card td.szz{font-size:22px}#sz-card .szyun{padding:12px 11px;gap:4px 9px}#sz-card .szyun strong{font-size:15px}}'
   ].join('');
   document.head.appendChild(s);
 }
@@ -110,10 +130,30 @@ function build() {
     p[i].ny = nayinOf(p[i].gz);
   }
 
+  var diShi = [
+    safe(function(){ return ec.getYearDiShi(); }, ''),
+    safe(function(){ return ec.getMonthDiShi(); }, ''),
+    safe(function(){ return ec.getDayDiShi(); }, ''),
+    safe(function(){ return ec.getTimeDiShi(); }, '')
+  ];
+  for (i = 0; i < 4; i++) p[i].di = tradDiShi(diShi[i]);
+
+  /* 性別參數依 lunar-javascript 官方定義：男 1、女 0。 */
+  var yun = safe(function(){ return ec.getYun(c.sex === '男' ? 1 : 0); }, null);
+  var yunInfo = null;
+  if (yun) {
+    yunInfo = {
+      date: safe(function(){ return yun.getStartSolar().toYmd(); }, ''),
+      year: safe(function(){ return yun.getStartYear(); }, 0),
+      month: safe(function(){ return yun.getStartMonth(); }, 0),
+      day: safe(function(){ return yun.getStartDay(); }, 0)
+    };
+  }
+
   return {
     p: p,
     xun: safe(function(){ return ec.getDayXun(); }, ''),
-    h: c.h, conv: c.conv
+    h: c.h, conv: c.conv, yun: yunInfo
   };
 }
 
@@ -158,7 +198,15 @@ function draw() {
     }
     h += '</tr><tr>';
     for (i = 0; i < 4; i++) h += '<td class="szny">' + (d.p[i].ny || '—') + '</td>';
+    h += '</tr><tr>';
+    for (i = 0; i < 4; i++) h += '<td class="szstage"><b>' + (d.p[i].di || '—') + '</b><small>十二長生</small></td>';
     h += '</tr></table>';
+
+    if (d.yun && d.yun.date) {
+      h += '<div class="szyun"><span class="szyun-k">大運起運</span>' +
+           '<strong>' + ymdZh(d.yun.date) + '</strong>' +
+           '<small>出生後 ' + d.yun.year + ' 年 ' + d.yun.month + ' 個月 ' + d.yun.day + ' 日起運</small></div>';
+    }
 
     h += '<div class="szfoot"><b>日主</b>　' + d.p[2].gz.charAt(0) +
          '（' + (GAN_WX[d.p[2].gz.charAt(0)] || '') + '）';
