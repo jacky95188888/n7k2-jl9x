@@ -60,8 +60,6 @@ var RULE = {
   '000':'伏位', '100':'生氣', '010':'絕命', '001':'禍害',
   '110':'五鬼', '011':'天醫', '101':'六煞', '111':'延年'
 };
-var JI = {'生氣':1,'天醫':1,'延年':1,'伏位':1};
-
 var Y = {};
 (function(){
   var G = ['乾','兌','離','震','巽','坎','艮','坤'];
@@ -99,9 +97,12 @@ var CSS =
 '#tp.zhu td.zh-n{font-family:var(--ser,serif);font-size:19px;font-weight:700;' +
   'color:#5d2c20;white-space:nowrap;line-height:1.25}' +
 '#tp.zhu td.zh-s{font-family:var(--ser,serif);font-size:11px;letter-spacing:.02em;' +
-  'line-height:1.35;white-space:nowrap;padding:9px 1px;vertical-align:middle}' +
-'#tp.zhu td.zh-s.ji{color:#2f6b4f}' +
-'#tp.zhu td.zh-s.xiong{color:var(--zhu,#7d1d1d)}' +
+  'line-height:1.35;white-space:nowrap;padding:7px 1px 11px;vertical-align:middle;color:#68127b}' +
+'#tp.zhu tr.zh-mag td{border-top:0;background:linear-gradient(180deg,#fffafd,#fbf0ff)}' +
+'#tp.zhu td.zh-s span{display:inline-flex;min-width:42px;justify-content:center;padding:4px 7px;' +
+  'border:1px solid rgba(190,143,43,.55);border-radius:999px;background:#fffaf4;' +
+  'box-shadow:0 3px 9px rgba(91,21,114,.08);font-weight:700}' +
+'#tp.zhu td.zh-empty{color:#b8a9bc;font-size:12px}' +
 '#tp.zhu th.zh-lab{font-size:11px;letter-spacing:0}' +
 '#tp.zhu td.zh-row{font-size:12px;color:#75553c;white-space:nowrap}' +
 /* 八卦符號：CSS 畫爻線，不用 Unicode 卦符 */
@@ -145,19 +146,26 @@ function build(){
   var r = c.ring, lab = c.lab, n = r.length;
   var post = r.map(hou);
 
-  /* 第一列：柱名。四吉／四凶文字依老師指示暫不上線。 */
+  /* 第一列：柱名。只移除「吉／凶」評語，八宅磁場名稱完整保留。 */
   var h = '<tr><th class="zh-lab"></th>';
   for (var i = 0; i < n; i++){
     h += '<th class="zh-lab">' + (lab[i] || '') + '</th>';
   }
   h += '</tr>';
 
-  /* 先天、後天各一列，只顯示數字與八卦爻線。 */
+  /* 先天、後天各一列：數字、卦線，以及相鄰兩柱的八宅磁場。 */
   [['先天', r], ['後天', post]].forEach(function(row){
     var name = row[0], arr = row[1];
     h += '<tr><td class="zh-row">' + name + '</td>';
     for (var i = 0; i < arr.length; i++){
       h += '<td class="zh-n">' + arr[i] + tri(arr[i]) + '</td>';
+    }
+    h += '</tr>';
+
+    h += '<tr class="zh-mag"><td class="zh-row">磁場</td>';
+    for (var j = 0; j < arr.length; j++){
+      if (j === 0) h += '<td class="zh-empty">—</td>';
+      else h += '<td class="zh-s"><span>' + (star(arr[j - 1], arr[j]) || '—') + '</span></td>';
     }
     h += '</tr>';
   });
@@ -170,7 +178,7 @@ function build(){
   if (box && !box.querySelector('.zh-note')){
     var p = document.createElement('p');
     p.className = 'zh-note';
-    p.innerHTML = '數字下方為該數所配八卦（數轉地支、地支配卦）。';
+    p.innerHTML = '數字下方為該數所配八卦；磁場列依相鄰兩柱的卦象變爻，顯示伏位、生氣、絕命、禍害、五鬼、天醫、六煞或延年。';
     box.appendChild(p);
   }
   if (box && !box.querySelector('.zh-key')){
