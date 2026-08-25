@@ -112,7 +112,16 @@ function build() {
 
   var ec;
   try {
-    ec = Lunar.fromYmdHms(c.ly, c.lm, c.ld, hourOf(c.h), 0, 0).getEightChar();
+    /*
+       chart 同時保存「輸入曆別、農曆日期、換算後國曆日期」。
+       四柱一律從已驗證的國曆日期回推 Lunar，避免把農曆 10 月
+       再誤當國曆月份而落到前一個農曆月。
+    */
+    if (c.sy && c.sm && c.sd && typeof Solar !== 'undefined') {
+      ec = Solar.fromYmdHms(c.sy, c.sm, c.sd, hourOf(c.h), 0, 0).getLunar().getEightChar();
+    } else {
+      ec = Lunar.fromYmdHms(c.ly, c.lm, c.ld, hourOf(c.h), 0, 0).getEightChar();
+    }
   } catch (e) {
     return { warn: '四柱計算失敗：' + (e && e.message ? e.message : '未知錯誤') };
   }
