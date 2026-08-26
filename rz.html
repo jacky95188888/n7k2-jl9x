@@ -212,17 +212,17 @@ body.jl-page-rz .rz-date-card::before,body.jl-page-rz .rz-meta-card::before{cont
   radial-gradient(circle at 82% 18%,color-mix(in srgb,var(--month-a) 22%,transparent),transparent 32%),
   linear-gradient(145deg,rgba(255,255,255,.96),color-mix(in srgb,var(--month-b) 13%,#fff))}
 body.jl-page-rz .rz-date-card::after,body.jl-page-rz .rz-meta-card::after{content:"";position:absolute;inset:10px;border:1px solid color-mix(in srgb,var(--month-a) 32%,transparent);border-radius:22px;z-index:-1;pointer-events:none}
-body.jl-page-rz .month-scene{height:146px;margin:-2px -2px 20px;position:relative;overflow:hidden;border-radius:22px 22px 12px 12px;background:
+body.jl-page-rz .month-scene{height:clamp(300px,82vw,360px);margin:-2px -2px 20px;position:relative;overflow:hidden;border-radius:22px 22px 12px 12px;background:
   linear-gradient(180deg,color-mix(in srgb,var(--month-b) 70%,#fff),color-mix(in srgb,var(--month-c) 26%,#fff));
   border-bottom:1px solid color-mix(in srgb,var(--month-a) 38%,transparent);isolation:isolate}
-body.jl-page-rz .month-scene-art{position:absolute;inset:0;z-index:0;background-image:linear-gradient(90deg,rgba(255,252,255,.96) 0%,rgba(255,252,255,.84) 39%,rgba(255,252,255,.32) 72%,rgba(255,252,255,.12) 100%),var(--month-art);background-position:center;background-size:cover;filter:saturate(.78) contrast(.94);transform:scale(1.012)}
+body.jl-page-rz .month-scene-art{position:absolute;inset:0;z-index:0;background-image:linear-gradient(90deg,rgba(255,252,255,.89) 0%,rgba(255,252,255,.7) 35%,rgba(255,252,255,.18) 68%,rgba(255,252,255,.04) 100%),var(--month-art);background-position:center;background-size:cover;filter:saturate(.9) contrast(.98);transform:scale(1.012)}
 body.jl-page-rz .month-scene::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.08),color-mix(in srgb,var(--month-b) 18%,transparent));pointer-events:none}
 body.jl-page-rz .month-scene::after{content:"";position:absolute;z-index:1;left:20px;bottom:15px;width:74px;height:1px;background:linear-gradient(90deg,var(--month-a),transparent);opacity:.55}
-body.jl-page-rz .month-scene-copy{position:absolute;left:28px;top:25px;z-index:2;text-align:left;color:var(--month-ink)}
+body.jl-page-rz .month-scene-copy{position:absolute;left:28px;top:34px;z-index:2;max-width:72%;text-align:left;color:var(--month-ink)}
 body.jl-page-rz .month-scene-copy small{display:block;margin-bottom:7px;color:var(--month-a);font-size:10px;font-weight:800;letter-spacing:.16em}
-body.jl-page-rz .month-scene-copy strong{display:block;font-family:serif;font-size:29px;letter-spacing:.16em}
-body.jl-page-rz .month-scene-copy span{display:inline-flex;margin-top:8px;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.08em;opacity:.84;background:rgba(255,255,255,.66);border:1px solid color-mix(in srgb,var(--month-a) 22%,transparent);backdrop-filter:blur(4px)}
-body.jl-page-rz .month-scene-icons{position:absolute;right:25px;bottom:18px;z-index:2;display:flex;align-items:flex-end;gap:5px;color:var(--month-a)}
+body.jl-page-rz .month-scene-copy strong{display:block;font-family:serif;font-size:38px;line-height:1.15;letter-spacing:.16em}
+body.jl-page-rz .month-scene-copy span{display:inline-flex;margin-top:14px;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;opacity:.94;background:rgba(255,255,255,.76);border:1px solid color-mix(in srgb,var(--month-a) 30%,transparent);backdrop-filter:blur(6px)}
+body.jl-page-rz .month-scene-icons{position:absolute;right:25px;bottom:24px;z-index:2;display:flex;align-items:flex-end;gap:7px;color:var(--month-a)}
 body.jl-page-rz .month-scene-icons .rz-ico{width:54px;height:54px;padding:12px;border-radius:50%;background:color-mix(in srgb,#fff 68%,var(--month-b));border:1px solid color-mix(in srgb,var(--month-a) 42%,transparent);filter:drop-shadow(0 10px 12px color-mix(in srgb,var(--month-a) 22%,transparent))}
 body.jl-page-rz .month-scene-icons .rz-ico+ .rz-ico{width:35px;height:35px;padding:8px;transform:translateY(-35px)}
 body.jl-page-rz .month-chip{display:inline-flex;align-items:center;gap:7px;margin:0 auto 18px;padding:6px 13px;border-radius:999px;color:var(--month-a);background:color-mix(in srgb,var(--month-b) 24%,#fff);border:1px solid color-mix(in srgb,var(--month-a) 38%,transparent);font-size:12px;font-weight:800;letter-spacing:.12em}
@@ -254,12 +254,12 @@ body.jl-page-rz .rz-month-12{--month-a:#596785;--month-b:#e8edf5;--month-c:#b7c3
 /* 2026-08 版面精修：建立明確層級，減少同款白卡與無效長度 */
 body.jl-page-rz .rz-date-card{padding:0;border-color:color-mix(in srgb,var(--month-a) 38%,#d8b7dc)}
 body.jl-page-rz .rz-date-card::after{inset:8px}
-body.jl-page-rz .month-scene{height:126px;margin:0;border-radius:22px 22px 0 0}
-body.jl-page-rz .month-scene-copy{left:25px;top:20px}
+body.jl-page-rz .month-scene{margin:0;border-radius:22px 22px 0 0}
+body.jl-page-rz .month-scene-copy{left:25px;top:30px}
 body.jl-page-rz .month-scene-copy small{font-size:10px;color:var(--month-ink)}
-body.jl-page-rz .month-scene-copy strong{font-size:27px}
-body.jl-page-rz .month-scene-icons{right:25px;bottom:23px}
-body.jl-page-rz .month-scene-icons .rz-ico{width:48px;height:48px}
+body.jl-page-rz .month-scene-copy strong{font-size:36px}
+body.jl-page-rz .month-scene-icons{right:25px;bottom:26px}
+body.jl-page-rz .month-scene-icons .rz-ico{width:58px;height:58px}
 body.jl-page-rz .month-scene-icons .rz-ico+.rz-ico{display:none}
 body.jl-page-rz .rz-date-card .date-main{position:relative;padding:26px 18px 28px;background:linear-gradient(145deg,color-mix(in srgb,var(--month-b) 20%,#fffdf6),#fff9df)}
 body.jl-page-rz .rz-date-card .date-main::before{content:"本日黃曆";position:absolute;left:22px;top:13px;color:color-mix(in srgb,var(--month-a) 70%,#7a6048);font-size:10px;font-weight:800;letter-spacing:.18em}
@@ -521,7 +521,7 @@ function render(date){
   var month=solar.getMonth(), monthInfo=MONTH_SCENES[month-1]||MONTH_SCENES[0];
 
   /* 日期主體 */
-  h+='<div class="card rz-date-card rz-month-'+month+'">'+monthScene(month,solar.getDay())+'<div class="date-main">'
+  h+='<div class="card rz-date-card rz-month-'+month+'">'+monthScene(month,solar.getDate())+'<div class="date-main">'
    + '<div class="date-sol">'+solar.getYear()+' 年 '+solar.getMonth()+' 月 '
    + solar.getDay()+' 日　星期'+week+'</div>'
    + '<div class="date-lun">'+esc(lunStr)+'</div>'
