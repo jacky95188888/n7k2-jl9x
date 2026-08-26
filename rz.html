@@ -128,32 +128,110 @@ footer{margin-top:30px;padding-top:22px;border-top:1px solid var(--line);
 .meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .meta-item{position:relative;min-height:88px;padding:15px 14px;border:1px solid #e2d2e7;border-radius:14px;
   background:linear-gradient(145deg,#fffefd,#fbf4ff);overflow:hidden}
+.meta-item{padding-right:49px;box-shadow:inset 0 1px 0 #fff,0 7px 18px rgba(104,38,119,.055)}
 .meta-item::after{content:"";position:absolute;width:72px;height:72px;right:-28px;bottom:-35px;
   border:1px solid rgba(185,141,45,.3);border-radius:50%}
 .meta-item b{display:block;margin-bottom:5px;color:#7b287f;font-family:var(--ser);font-size:12px;letter-spacing:.12em}
 .meta-item span{display:block;color:#4b3b4d;font-size:13px;line-height:1.7}
+.rz-ico{width:1em;height:1em;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;vertical-align:-.12em}
+.rz-title-icon .rz-ico{width:17px;height:17px;vertical-align:0}
+.meta-visual{position:absolute;right:11px;top:11px;width:30px;height:30px;display:grid;place-items:center;
+  border:1px solid rgba(199,152,49,.48);border-radius:50%;color:#8b2995;
+  background:radial-gradient(circle at 34% 28%,#fff 0 17%,#f9e8ff 48%,#ead0f3 100%);
+  box-shadow:0 4px 11px rgba(111,31,126,.12),inset 0 0 0 3px rgba(255,255,255,.48)}
+.meta-visual .rz-ico{width:15px;height:15px}
 .detail-list{display:grid;gap:10px}
-.detail-row{padding:14px 16px;border-left:3px solid #c39835;border-radius:2px 12px 12px 2px;
+.detail-row{position:relative;padding:14px 16px 14px 52px;border-left:3px solid #c39835;border-radius:2px 12px 12px 2px;
   background:linear-gradient(90deg,#fff8de,#fffdf8 48%,#fbf5ff)}
 .detail-row b{display:block;color:#6f2378;font-family:var(--ser);font-size:13px;letter-spacing:.12em}
 .detail-row span{display:block;margin-top:5px;color:#5f555f;font-size:13px;line-height:1.8}
+.detail-mark{position:absolute;left:14px;top:15px;width:27px;height:27px;display:grid;place-items:center;
+  border-radius:9px;color:#8a2b91;background:linear-gradient(145deg,#fff,#f4dcfa);border:1px solid #e2c1e8}
+.detail-mark .rz-ico{width:14px;height:14px}
+.yj>div{position:relative;overflow:hidden;border-radius:17px;box-shadow:inset 0 1px 0 #fff}
+.yj>div::after{content:"";position:absolute;right:-34px;bottom:-42px;width:100px;height:100px;
+  border:1px solid rgba(188,143,45,.22);border-radius:50%;pointer-events:none}
+.yj h3{display:flex;align-items:center;justify-content:center;gap:8px}
+.yj-mark{width:35px;height:35px;display:grid;place-items:center;border-radius:50%;font-size:20px;
+  background:#eefaf4;border:1px solid #cceade;box-shadow:0 5px 14px rgba(50,107,79,.08)}
+.yj .j .yj-mark{color:#8c2f3d;background:#fff1f3;border-color:#f0d2d7}
+.yj-mark .rz-ico{width:18px;height:18px}
+.pos{gap:10px;background:transparent;border:0}
+.pos div{position:relative;min-height:116px;padding:22px 8px 16px;border:1px solid #e1cfe5;border-radius:17px;
+  background:linear-gradient(150deg,#fff,#fffafd 60%,#f8effc);box-shadow:0 7px 18px rgba(101,34,118,.055)}
+.pos-mark{width:32px;height:32px;margin:0 auto 9px;display:grid;place-items:center;border-radius:50%;
+  color:#b18125;background:#fff9e9;border:1px solid #e6c46e}
+.pos-mark .rz-ico{width:17px;height:17px}
+.sx div{position:relative;margin:9px 0;padding:13px 12px;border:1px solid #e4d3e8;border-radius:15px;
+  background:linear-gradient(90deg,#fff,#fdf8ff);overflow:hidden}
+.sx div::after{content:"";position:absolute;right:13px;width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle,#fff 0 25%,rgba(137,44,151,.08) 27% 100%)}
+.sx span{position:relative;z-index:1}
+.hrs{gap:10px;background:transparent;border:0}
+.hrs div{position:relative;min-height:128px;padding:16px 6px 12px;border:1px solid #e1d1e4;border-radius:17px;
+  background:linear-gradient(160deg,#fff,#fffafd 62%,#f6ebfa);box-shadow:0 7px 17px rgba(100,34,118,.05)}
+.hrs div.bad{background:linear-gradient(160deg,#fbfaf8,#f6f2ee);border-color:#e8e1d8}
+.hour-mark{width:29px;height:29px;margin:0 auto 7px;display:grid;place-items:center;border-radius:50%;
+  color:#7d2685;background:#f7e7fb;border:1px solid #dfbfe6}
+.hrs div.bad .hour-mark{color:#aaa097;background:#f1ede8;border-color:#e1dbd3}
+.hour-mark .rz-ico{width:15px;height:15px}
 .astro{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.astro>div{padding:15px 10px;text-align:center;border:1px solid #e1d1e4;border-radius:14px;
+.astro>div{position:relative;min-height:110px;padding:15px 10px;text-align:center;border:1px solid #e1d1e4;border-radius:14px;
   background:linear-gradient(180deg,#fff,#fbf3ff)}
 .astro b{display:block;color:#7a2a80;font-family:var(--ser);font-size:12px}
 .astro span{display:block;margin-top:5px;color:#4d3b4e;font-size:13px;line-height:1.7}
+.astro-mark{width:34px;height:34px;margin:0 auto 8px;display:grid;place-items:center;border-radius:50%;
+  color:#a7791d;background:#fff8df;border:1px solid #e8c86f;box-shadow:0 5px 12px rgba(166,119,28,.09)}
+.astro-mark.moon{color:#77408a;background:#f4eaff;border-color:#d8bee4}
+.astro-mark .rz-ico{width:18px;height:18px}
+.rz-icon-sprite{position:absolute;width:0;height:0;overflow:hidden}
 @media(max-width:430px){
   header{min-height:230px;padding:28px 22px;background-position:58% center}
   .jl-page-rz header h1{font-size:31px}
   .hero-kicker{max-width:175px;font-size:11px}
   .meta-grid{grid-template-columns:1fr 1fr;gap:8px}
   .meta-item{min-height:82px;padding:12px 11px}
+  .meta-item{padding-right:45px}
+  .pos div{min-height:108px}
+  .hrs div{min-height:122px}
 }
 </style>
 <link rel="stylesheet" href="theme-v3.css?v=1">
 <link rel="stylesheet" href="inner-theme-v4.css?v=inner-polish-v11">
+<style id="rz-icon-polish">
+body.jl-page-rz .yj h3{width:auto;height:auto;margin:0 0 12px;display:flex;place-items:initial;
+  align-items:center;justify-content:center;gap:8px;border-radius:0;background:transparent}
+body.jl-page-rz .yj .y h3,body.jl-page-rz .yj .j h3{background:transparent}
+body.jl-page-rz .pos div{min-height:116px;padding:18px 8px 16px}
+body.jl-page-rz .pos div::before{content:none}
+body.jl-page-rz .hrs div{min-height:128px;padding:16px 7px 12px}
+body.jl-page-rz .hrs div.bad{opacity:.72}
+@media(max-width:430px){body.jl-page-rz .pos div{min-height:108px}body.jl-page-rz .hrs div{min-height:122px}}
+</style>
 </head>
 <body class="jl-page jl-page-rz">
+<svg class="rz-icon-sprite" aria-hidden="true">
+  <defs>
+    <symbol id="rz-i-book" viewBox="0 0 24 24"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22z"/><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22z"/></symbol>
+    <symbol id="rz-i-leaf" viewBox="0 0 24 24"><path d="M20 4C11 4 5.5 8.6 5.5 15.2c0 2.4 1.6 4.3 4.1 4.3C16.2 19.5 20 13.4 20 4z"/><path d="M4 21c2.8-4.8 6.3-8.2 11-10.7"/></symbol>
+    <symbol id="rz-i-crown" viewBox="0 0 24 24"><path d="m3 7 4.2 3.2L12 4l4.8 6.2L21 7l-2 11H5z"/><path d="M6 21h12"/></symbol>
+    <symbol id="rz-i-lantern" viewBox="0 0 24 24"><path d="M8 4h8M9 2h6M8 20h8M10 22h4"/><path d="M7 7c0-2 2.2-3 5-3s5 1 5 3v10c0 2-2.2 3-5 3s-5-1-5-3z"/><path d="M7 9h10M7 15h10"/></symbol>
+    <symbol id="rz-i-lotus" viewBox="0 0 24 24"><path d="M12 20c-4-4.2-4.1-8.6 0-14 4.1 5.4 4 9.8 0 14z"/><path d="M11.5 20C7.1 19.8 4.2 17.4 3 12c4.2.4 7.1 2.7 8.5 8zM12.5 20c4.4-.2 7.3-2.6 8.5-8-4.2.4-7.1 2.7-8.5 8z"/><path d="M4 22h16"/></symbol>
+    <symbol id="rz-i-stars" viewBox="0 0 24 24"><path d="m12 2 1.2 3.8L17 7l-3.8 1.2L12 12l-1.2-3.8L7 7l3.8-1.2zM19 13l.8 2.2L22 16l-2.2.8L19 19l-.8-2.2L16 16l2.2-.8zM6 14l.9 2.1L9 17l-2.1.9L6 20l-.9-2.1L3 17l2.1-.9z"/></symbol>
+    <symbol id="rz-i-moon" viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.8 8.8 0 1 0 20 15.5z"/></symbol>
+    <symbol id="rz-i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.7L16.5 9"/></symbol>
+    <symbol id="rz-i-ban" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12"/></symbol>
+    <symbol id="rz-i-scroll" viewBox="0 0 24 24"><path d="M7 3h12v15a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6h13"/><path d="M3 6a3 3 0 0 1 6 0v12M12 9h4M12 13h4"/></symbol>
+    <symbol id="rz-i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2.1 4.9-4.9 2.1 2.1-4.9z"/><path d="M12 1v2M12 21v2M1 12h2M21 12h2"/></symbol>
+    <symbol id="rz-i-zodiac" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 4v16M4 12h16M6.3 6.3l11.4 11.4M17.7 6.3 6.3 17.7"/><circle cx="12" cy="12" r="2.2"/></symbol>
+    <symbol id="rz-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="rz-i-sunrise" viewBox="0 0 24 24"><path d="M4 18h16M6 14a6 6 0 0 1 12 0M12 3v4M4.2 7.2l2.3 2.3M19.8 7.2l-2.3 2.3"/><path d="m9 21 3-3 3 3"/></symbol>
+    <symbol id="rz-i-sunset" viewBox="0 0 24 24"><path d="M4 18h16M6 14a6 6 0 0 1 12 0M12 3v4M4.2 7.2l2.3 2.3M19.8 7.2l-2.3 2.3"/><path d="m9 19 3 3 3-3"/></symbol>
+    <symbol id="rz-i-moonrise" viewBox="0 0 24 24"><path d="M4 18h16M17 12a6 6 0 0 1-7-8 7 7 0 1 0 7 8z"/><path d="m9 21 3-3 3 3"/></symbol>
+    <symbol id="rz-i-moonset" viewBox="0 0 24 24"><path d="M4 18h16M17 12a6 6 0 0 1-7-8 7 7 0 1 0 7 8z"/><path d="m9 19 3 3 3-3"/></symbol>
+  </defs>
+</svg>
 <div class="wrap">
 
 <a class="back" href="./">← 回排盤</a>
@@ -240,6 +318,9 @@ function shengxiaoGroups(dz){
 function safe(fn,dflt){ try{ var v=fn(); return (v==null||v==='')?dflt:v; }catch(e){ return dflt; } }
 function esc(s){return String(s).replace(/[&<>]/g,function(c){
   return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+function ico(name,cls){return '<svg class="rz-ico'+(cls?' '+cls:'')+'" aria-hidden="true"><use href="#rz-i-'+name+'"></use></svg>';}
+function metaItem(icon,label,value){return '<div class="meta-item"><i class="meta-visual">'+ico(icon)+'</i><b>'+label+'</b><span>'+value+'</span></div>';}
+function detailItem(icon,label,value){return '<div class="detail-row"><i class="detail-mark">'+ico(icon)+'</i><b>'+label+'</b><span>'+value+'</span></div>';}
 function uniq(a){var o={};return (a||[]).filter(function(v){v=String(v||'').trim();if(!v||o[v])return false;o[v]=1;return true;});}
 function arr(v){return Array.isArray(v)?v:(v?[v]:[]);}
 function fmtTime(d){return d instanceof Date&&!isNaN(d.getTime())?pad(d.getHours())+':'+pad(d.getMinutes()):'—';}
@@ -309,30 +390,30 @@ function render(date){
    + '</div></div>';
 
   /* 日期總覽：全部隨選取日期更新 */
-  h+='<div class="card rz-result-card rz-meta-card"><h2><span class="rz-title-icon">冊</span>黃 曆 總 覽</h2><div class="meta-grid">'
-   + '<div class="meta-item"><b>本月節氣</b><span>'+(jq?esc(jq):'—')+'</span></div>'
-   + '<div class="meta-item"><b>黃帝紀年</b><span>黃帝紀元 '+(solar.getYear()+2697)+' 年</span></div>'
-   + '<div class="meta-item"><b>當天節日</b><span>'+esc(uniq(solarFest.concat(lunarFest)).join('、')||'無特定節日')+'</span></div>'
-   + '<div class="meta-item"><b>佛教節日</b><span>'+esc(fotoFest.join('、')||'無特定佛教節日')+'</span></div>'
-   + '<div class="meta-item"><b>星座</b><span>'+esc(xingzuo?xingzuo+'座':'—')+'</span></div>'
-   + '<div class="meta-item"><b>回曆</b><span>'+esc(hijri(date))+'</span></div>'
+  h+='<div class="card rz-result-card rz-meta-card"><h2><span class="rz-title-icon">'+ico('book')+'</span>黃 曆 總 覽</h2><div class="meta-grid">'
+   + metaItem('leaf','本月節氣',jq?esc(jq):'—')
+   + metaItem('crown','黃帝紀年','黃帝紀元 '+(solar.getYear()+2697)+' 年')
+   + metaItem('lantern','當天節日',esc(uniq(solarFest.concat(lunarFest)).join('、')||'無特定節日'))
+   + metaItem('lotus','佛教節日',esc(fotoFest.join('、')||'無特定佛教節日'))
+   + metaItem('stars','星座',esc(xingzuo?xingzuo+'座':'—'))
+   + metaItem('moon','回曆',esc(hijri(date)))
    + '</div></div>';
 
   /* 宜忌 */
   var yi=safe(function(){return lunar.getDayYi();},[]);
   var ji=safe(function(){return lunar.getDayJi();},[]);
-  h+='<div class="card rz-result-card rz-yj-card"><h2><span class="rz-title-icon">曆</span>今 日 宜 忌</h2><div class="yj">'
-   + '<div class="y"><h3>宜</h3><p>'+(yi.length?esc(yi.join('　')):'—')+'</p></div>'
-   + '<div class="j"><h3>忌</h3><p>'+(ji.length?esc(ji.join('　')):'—')+'</p></div>'
+  h+='<div class="card rz-result-card rz-yj-card"><h2><span class="rz-title-icon">'+ico('check')+'</span>今 日 宜 忌</h2><div class="yj">'
+   + '<div class="y"><h3><i class="yj-mark">'+ico('check')+'</i>宜</h3><p>'+(yi.length?esc(yi.join('　')):'—')+'</p></div>'
+   + '<div class="j"><h3><i class="yj-mark">'+ico('ban')+'</i>忌</h3><p>'+(ji.length?esc(ji.join('　')):'—')+'</p></div>'
    + '</div></div>';
 
-  h+='<div class="card rz-result-card rz-detail-card"><h2><span class="rz-title-icon">鑑</span>老 黃 曆 詳 解</h2><div class="detail-list">'
-   + '<div class="detail-row"><b>彭祖百忌</b><span>'+esc(pengzu.join('；')||'—')+'</span></div>'
-   + '<div class="detail-row"><b>本日命祿</b><span>'+esc(daylu||'—')+'</span></div>'
-   + '<div class="detail-row"><b>星曜</b><span>'+esc(daystar||'—')+'</span></div>'
-   + '<div class="detail-row"><b>吉神</b><span>'+esc(jishen.join('、')||'—')+'</span></div>'
-   + '<div class="detail-row"><b>凶煞</b><span>'+esc(xiongsha.join('、')||'—')+'</span></div>'
-   + '<div class="detail-row"><b>本日物候</b><span>'+esc(wuhou||'—')+'</span></div>'
+  h+='<div class="card rz-result-card rz-detail-card"><h2><span class="rz-title-icon">'+ico('scroll')+'</span>老 黃 曆 詳 解</h2><div class="detail-list">'
+   + detailItem('scroll','彭祖百忌',esc(pengzu.join('；')||'—'))
+   + detailItem('crown','本日命祿',esc(daylu||'—'))
+   + detailItem('stars','星曜',esc(daystar||'—'))
+   + detailItem('lotus','吉神',esc(jishen.join('、')||'—'))
+   + detailItem('ban','凶煞',esc(xiongsha.join('、')||'—'))
+   + detailItem('leaf','本日物候',esc(wuhou||'—'))
    + '</div></div>';
 
   /* 方位 */
@@ -343,9 +424,9 @@ function render(date){
     ['貴神位', safe(function(){return lunar.getDayPositionYangGuiDesc();},'')]
   ].filter(function(p){return p[1];});
   if(pos.length){
-    h+='<div class="card rz-result-card rz-pos-card"><h2><span class="rz-title-icon">方</span>今 日 方 位</h2><div class="pos">';
+    h+='<div class="card rz-result-card rz-pos-card"><h2><span class="rz-title-icon">'+ico('compass')+'</span>今 日 方 位</h2><div class="pos">';
     pos.forEach(function(p){
-      h+='<div><b>'+p[0]+'</b><span>'+esc(p[1])+'</span></div>';
+      h+='<div><i class="pos-mark">'+ico('compass')+'</i><b>'+p[0]+'</b><span>'+esc(p[1])+'</span></div>';
     });
     h+='</div></div>';
   }
@@ -355,7 +436,7 @@ function render(date){
   if(g){
     /* lunar 套件回傳簡體，改用日支自行推沖，不讓簡體字漏進頁面 */
     var chongSX=SX[chong(idx(dz))]||'';
-    h+='<div class="card rz-result-card rz-sx-card"><h2><span class="rz-title-icon">肖</span>今 日 生 肖</h2><div class="sx">'
+    h+='<div class="card rz-result-card rz-sx-card"><h2><span class="rz-title-icon">'+ico('zodiac')+'</span>今 日 生 肖</h2><div class="sx">'
      + '<div class="t1"><b>特吉</b><span>'+(g.good.join('　')||'—')+'</span></div>'
      + '<div class="t2"><b>次吉</b><span>'+(g.mid.join('　')||'—')+'</span></div>'
      + '<div class="t3"><b>帶衰</b><span>'+(g.bad.join('　')||'—')+'</span></div>'
@@ -382,11 +463,11 @@ function render(date){
         var off=(k-start+12)%12;
         var isJi=!!HUANG[off];
         if(isJi) good.push(HR[k][0]);
-        cells+='<div class="'+(isJi?'':'bad')+'"><b>'+HR[k][0]+'時</b>'
+        cells+='<div class="'+(isJi?'':'bad')+'"><i class="hour-mark">'+ico('clock')+'</i><b>'+HR[k][0]+'時</b>'
              + '<span>'+HR[k][1]+'\u2013'+HR[k][2]+'</span>'
              + '<em>'+(isJi?'吉\u3000'+SHEN[off]:'&nbsp;')+'</em></div>';
       }
-      h+='<div class="card rz-result-card rz-hours-card"><h2><span class="rz-title-icon">時</span>今 日 時 辰</h2><div class="hrs">'+cells+'</div>'
+      h+='<div class="card rz-result-card rz-hours-card"><h2><span class="rz-title-icon">'+ico('clock')+'</span>今 日 時 辰</h2><div class="hrs">'+cells+'</div>'
        + '<div class="note">綠字為黃道吉時，共 '+good.length+' 個：'+good.join('、')+'時。<br>'
        + '以日支 '+esc(dz)+' 起青龍於 '+HR[start][0]+'時，順取青龍、明堂、金匱、寶光、玉堂、司命六黃道神。</div></div>';
     }
@@ -394,9 +475,9 @@ function render(date){
 
   var ast=astronomy(date);
   if(ast){
-    h+='<div class="card rz-result-card rz-astro-card"><h2><span class="rz-title-icon">辰</span>日 月 出 落</h2><div class="astro">'
-     + '<div><b>日出時間</b><span>'+ast.sunrise+'</span></div><div><b>日落時間</b><span>'+ast.sunset+'</span></div>'
-     + '<div><b>月出時間</b><span>'+ast.moonrise+'</span></div><div><b>月落時間</b><span>'+ast.moonset+'</span></div>'
+    h+='<div class="card rz-result-card rz-astro-card"><h2><span class="rz-title-icon">'+ico('sunrise')+'</span>日 月 出 落</h2><div class="astro">'
+     + '<div><i class="astro-mark">'+ico('sunrise')+'</i><b>日出時間</b><span>'+ast.sunrise+'</span></div><div><i class="astro-mark">'+ico('sunset')+'</i><b>日落時間</b><span>'+ast.sunset+'</span></div>'
+     + '<div><i class="astro-mark moon">'+ico('moonrise')+'</i><b>月出時間</b><span>'+ast.moonrise+'</span></div><div><i class="astro-mark moon">'+ico('moonset')+'</i><b>月落時間</b><span>'+ast.moonset+'</span></div>'
      + '</div><div class="note">依臺北座標估算；實際時間會因所在地與地形略有差異。</div></div>';
   }
 
