@@ -213,17 +213,18 @@ body.jl-page-rz .rz-date-card::before,body.jl-page-rz .rz-meta-card::before{cont
   linear-gradient(145deg,rgba(255,255,255,.96),color-mix(in srgb,var(--month-b) 13%,#fff))}
 body.jl-page-rz .rz-date-card::after,body.jl-page-rz .rz-meta-card::after{content:"";position:absolute;inset:10px;border:1px solid color-mix(in srgb,var(--month-a) 32%,transparent);border-radius:22px;z-index:-1;pointer-events:none}
 body.jl-page-rz .month-scene{height:clamp(300px,82vw,360px);margin:-2px -2px 20px;position:relative;overflow:hidden;border-radius:22px 22px 12px 12px;background:
-  linear-gradient(180deg,color-mix(in srgb,var(--month-b) 70%,#fff),color-mix(in srgb,var(--month-c) 26%,#fff));
-  border-bottom:1px solid color-mix(in srgb,var(--month-a) 38%,transparent);isolation:isolate}
-body.jl-page-rz .month-scene-art{position:absolute;inset:0;z-index:0;background-image:linear-gradient(90deg,rgba(255,252,255,.89) 0%,rgba(255,252,255,.7) 35%,rgba(255,252,255,.18) 68%,rgba(255,252,255,.04) 100%),var(--month-art);background-position:center;background-size:cover;filter:saturate(.9) contrast(.98);transform:scale(1.012)}
-body.jl-page-rz .month-scene::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.08),color-mix(in srgb,var(--month-b) 18%,transparent));pointer-events:none}
-body.jl-page-rz .month-scene::after{content:"";position:absolute;z-index:1;left:20px;bottom:15px;width:74px;height:1px;background:linear-gradient(90deg,var(--month-a),transparent);opacity:.55}
-body.jl-page-rz .month-scene-copy{position:absolute;left:28px;top:34px;z-index:2;max-width:72%;text-align:left;color:var(--month-ink)}
-body.jl-page-rz .month-scene-copy small{display:block;margin-bottom:7px;color:var(--month-a);font-size:10px;font-weight:800;letter-spacing:.16em}
+  linear-gradient(180deg,color-mix(in srgb,var(--half-b) 72%,#fff),color-mix(in srgb,var(--half-c) 30%,#fff));
+  border-bottom:1px solid color-mix(in srgb,var(--half-a) 42%,transparent);isolation:isolate}
+body.jl-page-rz .month-scene-art{position:absolute;inset:0;z-index:0;background-image:linear-gradient(90deg,color-mix(in srgb,#fff 88%,var(--half-b)) 0%,color-mix(in srgb,#fff 70%,var(--half-b)) 35%,color-mix(in srgb,var(--half-b) 18%,transparent) 68%,rgba(255,252,255,.03) 100%),var(--month-art);background-position:center;background-size:cover;filter:saturate(.94) contrast(.99);transform:scale(1.012)}
+body.jl-page-rz .month-scene-b .month-scene-art{filter:saturate(1.04) contrast(1.015) brightness(.955)}
+body.jl-page-rz .month-scene::before{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.06),color-mix(in srgb,var(--half-c) 23%,transparent));pointer-events:none}
+body.jl-page-rz .month-scene::after{content:"";position:absolute;z-index:1;left:20px;bottom:15px;width:74px;height:1px;background:linear-gradient(90deg,var(--half-a),transparent);opacity:.62}
+body.jl-page-rz .month-scene-copy{position:absolute;left:28px;top:34px;z-index:2;max-width:72%;text-align:left;color:var(--half-ink)}
+body.jl-page-rz .month-scene-copy small{display:block;margin-bottom:7px;color:var(--half-a);font-size:10px;font-weight:800;letter-spacing:.16em}
 body.jl-page-rz .month-scene-copy strong{display:block;font-family:serif;font-size:38px;line-height:1.15;letter-spacing:.16em}
-body.jl-page-rz .month-scene-copy span{display:inline-flex;margin-top:14px;padding:7px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.06em;opacity:.94;background:rgba(255,255,255,.76);border:1px solid color-mix(in srgb,var(--month-a) 30%,transparent);backdrop-filter:blur(6px)}
-body.jl-page-rz .month-scene-icons{position:absolute;right:25px;bottom:24px;z-index:2;display:flex;align-items:flex-end;gap:7px;color:var(--month-a)}
-body.jl-page-rz .month-scene-icons .rz-ico{width:54px;height:54px;padding:12px;border-radius:50%;background:color-mix(in srgb,#fff 68%,var(--month-b));border:1px solid color-mix(in srgb,var(--month-a) 42%,transparent);filter:drop-shadow(0 10px 12px color-mix(in srgb,var(--month-a) 22%,transparent))}
+body.jl-page-rz .month-scene-copy span{display:inline-flex;margin-top:14px;padding:7px 12px;border-radius:999px;color:var(--half-ink);font-size:12px;font-weight:800;letter-spacing:.06em;opacity:.96;background:color-mix(in srgb,#fff 78%,var(--half-b));border:1px solid color-mix(in srgb,var(--half-a) 36%,transparent);box-shadow:0 7px 18px color-mix(in srgb,var(--half-a) 10%,transparent);backdrop-filter:blur(6px)}
+body.jl-page-rz .month-scene-icons{position:absolute;right:25px;bottom:24px;z-index:2;display:flex;align-items:flex-end;gap:7px;color:var(--half-a)}
+body.jl-page-rz .month-scene-icons .rz-ico{width:54px;height:54px;padding:12px;border-radius:50%;background:color-mix(in srgb,#fff 70%,var(--half-b));border:1px solid color-mix(in srgb,var(--half-a) 46%,transparent);filter:drop-shadow(0 10px 12px color-mix(in srgb,var(--half-a) 24%,transparent))}
 body.jl-page-rz .month-scene-icons .rz-ico+ .rz-ico{width:35px;height:35px;padding:8px;transform:translateY(-35px)}
 body.jl-page-rz .month-chip{display:inline-flex;align-items:center;gap:7px;margin:0 auto 18px;padding:6px 13px;border-radius:999px;color:var(--month-a);background:color-mix(in srgb,var(--month-b) 24%,#fff);border:1px solid color-mix(in srgb,var(--month-a) 38%,transparent);font-size:12px;font-weight:800;letter-spacing:.12em}
 body.jl-page-rz .rz-meta-card h2{position:relative;z-index:2}
@@ -249,6 +250,19 @@ body.jl-page-rz .rz-month-9{--month-a:#a06b2e;--month-b:#f7edd9;--month-c:#dfbd7
 body.jl-page-rz .rz-month-10{--month-a:#9a4e3f;--month-b:#f7e4de;--month-c:#d99579;--month-ink:#713529}
 body.jl-page-rz .rz-month-11{--month-a:#697457;--month-b:#edf0e5;--month-c:#b8c19f;--month-ink:#4b553c}
 body.jl-page-rz .rz-month-12{--month-a:#596785;--month-b:#e8edf5;--month-c:#b7c3d8;--month-ink:#3e4b68}
+/* 每月依季節換色；上半月清亮，下半月增加約一級濃度。 */
+body.jl-page-rz .month-scene-a{
+  --half-a:color-mix(in srgb,var(--month-a) 82%,#fff);
+  --half-b:color-mix(in srgb,var(--month-b) 86%,#fff);
+  --half-c:color-mix(in srgb,var(--month-c) 72%,#fff);
+  --half-ink:color-mix(in srgb,var(--month-ink) 88%,#fff)
+}
+body.jl-page-rz .month-scene-b{
+  --half-a:color-mix(in srgb,var(--month-a) 92%,#3b2444);
+  --half-b:color-mix(in srgb,var(--month-b) 78%,var(--month-c));
+  --half-c:color-mix(in srgb,var(--month-c) 88%,var(--month-a));
+  --half-ink:color-mix(in srgb,var(--month-ink) 94%,#24182a)
+}
 @media(max-width:430px){body.jl-page-rz .pos div{min-height:108px}body.jl-page-rz .hrs div{min-height:122px}}
 
 /* 2026-08 版面精修：建立明確層級，減少同款白卡與無效長度 */
@@ -256,7 +270,7 @@ body.jl-page-rz .rz-date-card{padding:0;border-color:color-mix(in srgb,var(--mon
 body.jl-page-rz .rz-date-card::after{inset:8px}
 body.jl-page-rz .month-scene{margin:0;border-radius:22px 22px 0 0}
 body.jl-page-rz .month-scene-copy{left:25px;top:30px}
-body.jl-page-rz .month-scene-copy small{font-size:10px;color:var(--month-ink)}
+body.jl-page-rz .month-scene-copy small{font-size:10px;color:var(--half-a)}
 body.jl-page-rz .month-scene-copy strong{font-size:36px}
 body.jl-page-rz .month-scene-icons{right:25px;bottom:26px}
 body.jl-page-rz .month-scene-icons .rz-ico{width:58px;height:58px}
