@@ -296,7 +296,7 @@ body.jl-page-rz .rz-pos-card .pos>div:nth-child(2) .pos-mark{color:#773181;backg
 body.jl-page-rz .rz-pos-card .pos>div:nth-child(3) .pos-mark{color:#2f745e;background:#e9faf3;border-color:#a9d9c8}
 body.jl-page-rz .rz-pos-card .pos>div:nth-child(4) .pos-mark{color:#3f6390;background:#edf5ff;border-color:#b9cee7}
 
-body.jl-page-rz .sx div::before{content:attr(data-animal);position:absolute;right:58px;top:50%;transform:translateY(-50%);color:rgba(120,46,127,.08);font-family:var(--ser);font-size:31px;font-weight:900;letter-spacing:.12em}
+/* 生肖列以單一清晰文字為主，避免裝飾性大字在窄螢幕重疊內容。 */
 body.jl-page-rz .sx div::after{display:none}
 body.jl-page-rz .sx div{border-left-width:4px;padding-right:18px}
 body.jl-page-rz .sx .t1{border-left-color:#3f8f6c;background:linear-gradient(90deg,#f4fff9,#fff 56%,#fbf6ff)}
@@ -577,9 +577,9 @@ function render(date){
     /* lunar 套件回傳簡體，改用日支自行推沖，不讓簡體字漏進頁面 */
     var chongSX=SX[chong(idx(dz))]||'';
     h+='<div class="card rz-result-card rz-sx-card"><h2><span class="rz-title-icon">'+ico('zodiac')+'</span>今 日 生 肖</h2><div class="sx">'
-     + '<div class="t1" data-animal="'+esc(g.good.join(''))+'"><b>特吉</b><span>'+(g.good.join('　')||'—')+'</span></div>'
-     + '<div class="t2" data-animal="'+esc(g.mid.join(''))+'"><b>次吉</b><span>'+(g.mid.join('　')||'—')+'</span></div>'
-     + '<div class="t3" data-animal="'+esc(g.bad.join(''))+'"><b>帶衰</b><span>'+(g.bad.join('　')||'—')+'</span></div>'
+     + '<div class="t1"><b>特吉</b><span>'+(g.good.join('　')||'—')+'</span></div>'
+     + '<div class="t2"><b>次吉</b><span>'+(g.mid.join('　')||'—')+'</span></div>'
+     + '<div class="t3"><b>帶衰</b><span>'+(g.bad.join('　')||'—')+'</span></div>'
      + '</div>'
      + '<div class="note">日支為 '+esc(dz)+'。特吉取六合與三合，帶衰取沖、刑、害'
      + (chongSX?('，本日沖'+esc(chongSX)):'')+'。</div></div>';
