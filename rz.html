@@ -521,7 +521,7 @@ function render(date){
   var month=solar.getMonth(), monthInfo=MONTH_SCENES[month-1]||MONTH_SCENES[0];
 
   /* 日期主體 */
-  h+='<div class="card rz-date-card rz-month-'+month+'">'+monthScene(month,solar.getDate())+'<div class="date-main">'
+  h+='<div class="card rz-date-card rz-month-'+month+'">'+monthScene(month,solar.getDay())+'<div class="date-main">'
    + '<div class="date-sol">'+solar.getYear()+' 年 '+solar.getMonth()+' 月 '
    + solar.getDay()+' 日　星期'+week+'</div>'
    + '<div class="date-lun">'+esc(lunStr)+'</div>'
