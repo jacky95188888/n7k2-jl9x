@@ -1552,6 +1552,13 @@ body.jlf-feature-mode
 .jlf-tools{
   padding:
     8px 9px 9px;
+
+  background:
+    radial-gradient(circle at 8% 15%,rgba(185,91,211,.16),transparent 27%),
+    radial-gradient(circle at 94% 82%,rgba(224,181,76,.15),transparent 25%),
+    linear-gradient(180deg,#fff8ff,#f3dcf8);
+
+  border-bottom:1px solid rgba(195,139,205,.3);
 }
 
 
@@ -1571,7 +1578,7 @@ body.jlf-feature-mode
 .jlf-card{
   position:relative;
   overflow:hidden;
-  height:146px;
+  height:154px;
 
   padding:
     7px 3px 6px;
@@ -1579,7 +1586,7 @@ body.jlf-feature-mode
   text-align:center;
 
   border:
-    1px solid #d8a1ea;
+    1px solid color-mix(in srgb,var(--card-accent,#a465bd) 42%,#dcc7e1);
 
   border-radius:13px;
 
@@ -1591,8 +1598,9 @@ body.jlf-feature-mode
     );
 
   box-shadow:
-    0 6px 15px
-    rgba(96,16,125,.10);
+    0 9px 21px
+    color-mix(in srgb,var(--card-accent,#a465bd) 15%,transparent),
+    inset 0 1px rgba(255,255,255,.9);
 }
 
 .jlf-card::before{
@@ -1616,12 +1624,12 @@ body.jlf-feature-mode
 
 .jlf-card>*{position:relative;z-index:1}
 
-.jlf-card:nth-child(1){--card-accent:#a465bd;background:linear-gradient(180deg,#fff,#fbf1ff)}
-.jlf-card:nth-child(2){--card-accent:#4f83a6;background:linear-gradient(180deg,#fff,#f1f8ff)}
-.jlf-card:nth-child(3){--card-accent:#b28331;background:linear-gradient(180deg,#fff,#fff8e9)}
-.jlf-card:nth-child(4){--card-accent:#b44f79;background:linear-gradient(180deg,#fff,#fff1f6)}
-.jlf-card:nth-child(5){--card-accent:#3e8b78;background:linear-gradient(180deg,#fff,#effaf6)}
-.jlf-card:nth-child(6){--card-accent:#7c5bab;background:linear-gradient(180deg,#fff,#f4f0ff)}
+.jlf-card:nth-child(1){--card-accent:#a465bd;background:radial-gradient(circle at 50% 8%,#eed3f8,transparent 27%),linear-gradient(180deg,#fff,#f7e7fc)}
+.jlf-card:nth-child(2){--card-accent:#4f83a6;background:radial-gradient(circle at 50% 8%,#d9edf8,transparent 27%),linear-gradient(180deg,#fff,#eaf5fc)}
+.jlf-card:nth-child(3){--card-accent:#b28331;background:radial-gradient(circle at 50% 8%,#f9e5ad,transparent 27%),linear-gradient(180deg,#fff,#fff4d8)}
+.jlf-card:nth-child(4){--card-accent:#b44f79;background:radial-gradient(circle at 50% 8%,#f6d7e5,transparent 27%),linear-gradient(180deg,#fff,#fde8f0)}
+.jlf-card:nth-child(5){--card-accent:#3e8b78;background:radial-gradient(circle at 50% 8%,#d2eee5,transparent 27%),linear-gradient(180deg,#fff,#e6f7f1)}
+.jlf-card:nth-child(6){--card-accent:#7c5bab;background:radial-gradient(circle at 50% 8%,#e2d9f7,transparent 27%),linear-gradient(180deg,#fff,#eee9fb)}
 
 
 .jlf-badge{
@@ -1876,7 +1884,7 @@ body.jlf-feature-mode
   border-radius:12px;
 
   background:
-    linear-gradient(90deg,rgba(255,244,255,.92) 0 43%,rgba(255,244,255,.28) 62%,transparent 78%),
+    linear-gradient(90deg,rgba(255,249,253,.97) 0 42%,rgba(248,222,251,.58) 59%,rgba(75,11,90,.08) 79%),
     url("date-banner-v3.webp") center/cover no-repeat;
 
   box-shadow:
@@ -2103,7 +2111,11 @@ body.jlf-feature-mode
 
   border-radius:11px;
 
-  background:#fff;
+  background:
+    radial-gradient(circle at 94% 6%,rgba(221,181,72,.17),transparent 27%),
+    linear-gradient(145deg,#fff,#f8eafa 62%,#fff8e8);
+
+  box-shadow:0 8px 20px rgba(92,14,112,.1),inset 0 1px #fff;
 }
 
 
