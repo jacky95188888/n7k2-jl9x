@@ -681,6 +681,7 @@ function boot(){
 
   function setInnerMeta(term){
     const m=innerMeta[term] || innerMeta.四柱;
+    document.body.dataset.jliRoute=term;
     innerHead.querySelector('#jli-title').textContent=m.title;
     innerHead.querySelector('#jli-desc').textContent=m.desc;
     innerHead.querySelector('#jli-icon').src=m.icon;
@@ -2339,29 +2340,37 @@ body.jlf-feature-mode
 
 /* 專屬專業工作台 */
 #jli-module-hub{
+  position:relative;
+  overflow:hidden;
   margin:14px 0 18px;
   padding:18px;
   border:1px solid #d6a9df;
   border-radius:22px;
   background:
-    radial-gradient(circle at 90% 5%,#f4d87645 0,transparent 25%),
-    linear-gradient(145deg,#fffdfd,#fff5ff 58%,#f5e6ff);
-  box-shadow:0 14px 34px #6212761a,inset 0 1px #fff;
+    radial-gradient(circle at 90% 5%,color-mix(in srgb,var(--route-b,#d5aa3d) 24%,transparent) 0,transparent 25%),
+    url("assets/celestial-orbit.svg") 118% -42px/230px auto no-repeat,
+    linear-gradient(145deg,#fffdfd,var(--route-pale,#fff5ff) 58%,color-mix(in srgb,var(--route-soft,#f5e6ff) 76%,#fff));
+  box-shadow:0 14px 34px color-mix(in srgb,var(--route-a,#651078) 11%,transparent),inset 0 1px #fff;
 }
+#jli-module-hub:after{content:"";position:absolute;left:18px;right:18px;top:0;height:2px;background:linear-gradient(90deg,transparent,var(--route-b,#d5aa3d),transparent)}
 #jli-module-hub[hidden]{display:none!important}
 .jli-module-intro{padding:4px 4px 16px;border-bottom:1px solid #ead9ec}
-.jli-module-intro small{display:block;color:#a27b22;font-size:10px;font-weight:900;letter-spacing:.16em}
-.jli-module-intro h2{margin:7px 0;color:#5e126e;font-family:"Noto Serif TC",serif;font-size:25px;letter-spacing:.1em}
+.jli-module-intro small{display:block;color:var(--route-b,#a27b22);font-size:10px;font-weight:900;letter-spacing:.16em}
+.jli-module-intro h2{margin:7px 0;color:var(--route-a,#5e126e);font-family:"Noto Serif TC",serif;font-size:25px;letter-spacing:.1em}
 .jli-module-intro p{margin:0;color:#6e6070;font-size:13px;line-height:1.85}
 .jli-module-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
 .jli-module-grid button{
   min-height:98px;padding:12px;border:1px solid #d8b2df;border-radius:16px;
   display:grid;grid-template-columns:42px minmax(0,1fr);grid-template-rows:1fr auto;gap:4px 10px;
-  text-align:left;background:linear-gradient(145deg,#fff,#fff8ff);color:#551064;
-  box-shadow:0 7px 18px #67127712;cursor:pointer;
+  text-align:left;background:linear-gradient(145deg,#fff,#fff8ff);color:var(--route-a,#551064);
+  box-shadow:0 7px 18px color-mix(in srgb,var(--route-a,#651078) 8%,transparent);cursor:pointer;
 }
+.jli-module-grid button:nth-child(1){border-color:#b8d9cf;background:radial-gradient(circle at 96% 8%,#bde5d851,transparent 27%),linear-gradient(145deg,#fff,#ecf9f5)}
+.jli-module-grid button:nth-child(2){border-color:#e3ce92;background:radial-gradient(circle at 96% 8%,#f2d36b50,transparent 27%),linear-gradient(145deg,#fff,#fff7df)}
+.jli-module-grid button:nth-child(3){border-color:#d3bee1;background:linear-gradient(145deg,#fff,#f4efff)}
+.jli-module-grid button:nth-child(4){border-color:#dfbed0;background:linear-gradient(145deg,#fff,#fff0f6)}
 .jli-module-grid button:hover,.jli-module-grid button:focus-visible{border-color:#c49a32;transform:translateY(-1px);box-shadow:0 10px 24px #67127724;outline:none}
-.jli-module-grid i{grid-row:1/3;width:42px;height:42px;display:grid;place-items:center;border:2px solid #d8b44c;border-radius:50%;background:radial-gradient(circle at 35% 28%,#c93cdb,#71118a 72%);color:#ffe687;font-style:normal;font-size:13px;font-weight:900;box-shadow:0 5px 12px #4d075148}
+.jli-module-grid i{grid-row:1/3;width:42px;height:42px;display:grid;place-items:center;border:2px solid #d8b44c;border-radius:50%;background:radial-gradient(circle at 35% 28%,color-mix(in srgb,var(--route-a,#71118a) 55%,#d45ddd),var(--route-a,#71118a) 72%);color:#ffe687;font-style:normal;font-size:13px;font-weight:900;box-shadow:0 5px 12px color-mix(in srgb,var(--route-a,#651078) 34%,transparent)}
 .jli-module-grid span{min-width:0}.jli-module-grid b{display:block;font-size:14px;letter-spacing:.04em}.jli-module-grid small{display:block;margin-top:4px;color:#786b79;font-size:10px;line-height:1.5}
 .jli-module-grid em{grid-column:2;color:#a07a20;font-style:normal;font-size:10px;font-weight:900;letter-spacing:.08em}
 .jli-pro-preview button:not([disabled]){cursor:pointer;background:linear-gradient(100deg,#681078,#b71bc5);color:#fff;border-color:#d9b453;box-shadow:0 8px 18px #67127728}
