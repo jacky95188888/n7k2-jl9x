@@ -1,10 +1,15 @@
-:root{--jl-purple:#651078;--jl-purple2:#aa28cb;--jl-deep:#350441;--jl-gold:#d5aa3d;--jl-gold2:#f5db85;--jl-paper:#fffaff;--jl-ink:#401949}
-body.jlf-feature-mode,body.jl-page-bxcc,body.jl-page-rz{color:var(--jl-ink);background:linear-gradient(180deg,#f8e9fff2 0,#fff9fff6 48%,#f0d5faf2 100%),url("hero-bg-v3.webp") center top/900px auto no-repeat,#f3ddfa!important}
+:root{--jl-purple:#651078;--jl-purple2:#aa28cb;--jl-deep:#350441;--jl-gold:#d5aa3d;--jl-gold2:#f5db85;--jl-paper:#fffaff;--jl-ink:#401949;--route-a:#71127f;--route-b:#d5a73c;--route-soft:#f1dcf6;--route-pale:#fff7ff}
+body[data-jli-route="四柱"]{--route-a:#71127f;--route-b:#c59632;--route-soft:#efd9f5;--route-pale:#fff5ff}
+body[data-jli-route="九宮"]{--route-a:#356d91;--route-b:#b68a2c;--route-soft:#dcecf7;--route-pale:#f4faff}
+body[data-jli-route="奇門"]{--route-a:#397b70;--route-b:#b88b2a;--route-soft:#dcefe9;--route-pale:#f2fbf8}
+body[data-jli-route="六親"]{--route-a:#984d78;--route-b:#bf8d2b;--route-soft:#f3dce8;--route-pale:#fff5f9}
+body[data-jli-route="流年"]{--route-a:#9a6629;--route-b:#8b4b72;--route-soft:#f7e8c9;--route-pale:#fffaf0}
+body.jlf-feature-mode,body.jl-page-bxcc,body.jl-page-rz{color:var(--jl-ink);background:radial-gradient(circle at 8% 12%,color-mix(in srgb,var(--route-a) 17%,transparent),transparent 24%),url("assets/celestial-orbit.svg") 50% 340px/620px auto repeat-y,linear-gradient(180deg,color-mix(in srgb,var(--route-soft) 72%,#fff) 0,#fff9fff6 48%,color-mix(in srgb,var(--route-soft) 82%,#fff) 100%)!important}
 #jli-head{height:auto!important;min-height:0!important;aspect-ratio:auto!important;margin:0 -18px 15px!important;padding:0!important;background:#fffaff;box-shadow:0 8px 24px #67107820}
 .jli-top{height:62px;padding:0 17px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d5ad4f88;background:#ffffffeb;backdrop-filter:blur(13px)}
 .jli-brand{display:flex;align-items:center;gap:9px;border:0;background:transparent;color:#59106c;font-family:inherit;text-align:left}.jli-brand>span{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--jl-gold);color:#a17620;background:linear-gradient(145deg,#fffef7,#f6e3a0);box-shadow:inset 0 0 0 4px #fff,0 4px 10px #72128122}.jli-brand b{font-size:19px}.jli-brand small{display:block;font-size:7px;letter-spacing:1.5px;color:#93722e;margin-top:1px}.jli-home,#jlf-back{border:1px solid #f0cf6e!important;border-radius:999px!important;color:white!important;background:linear-gradient(135deg,#510665,#8e18ae 50%,#bc31d8)!important;box-shadow:inset 0 1px #ffffff66,inset 0 -3px 7px #42004f66,0 6px 15px #67117f42,0 0 0 3px #ddb84c28!important;font:900 11px inherit!important;min-height:38px;padding:0 15px!important;cursor:pointer}
 #jlf-back{display:block!important;margin:0 0 13px!important;width:100%!important}
-.jli-hero{min-height:145px;padding:25px 20px;display:grid;grid-template-columns:1fr 92px;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,#fff9ffef 0 52%,#f3d1f0a8),url("hero-bg-v3.webp") center/cover}.jli-hero:after{content:"";position:absolute;width:190px;height:190px;right:-55px;bottom:-100px;border:1px solid #ba78cf66;border-radius:50%;box-shadow:0 0 0 18px #a64fc51a,0 0 0 40px #a64fc512}.jli-hero em{font-style:normal;font-size:9px;letter-spacing:2.5px;color:#9a7128;font-weight:900}.jli-hero h1{margin:5px 0!important;color:#57106a!important;font-size:27px!important;line-height:1.2!important;text-align:left!important;letter-spacing:.04em!important}.jli-hero p{margin:0;max-width:340px;color:#684d6d;font-size:10px;line-height:1.7}.jli-hero img{width:86px;z-index:2;filter:drop-shadow(0 8px 10px #5c096e55)}
+.jli-hero{min-height:145px;padding:25px 20px;display:grid;grid-template-columns:1fr 92px;align-items:center;position:relative;overflow:hidden;background:linear-gradient(90deg,#fffafbef 0 48%,color-mix(in srgb,var(--route-soft) 74%,transparent)),url("hero-bg-v3.webp") center/cover}.jli-hero:after{content:"";position:absolute;width:190px;height:190px;right:-55px;bottom:-100px;border:1px solid color-mix(in srgb,var(--route-a) 38%,transparent);border-radius:50%;box-shadow:0 0 0 18px color-mix(in srgb,var(--route-a) 10%,transparent),0 0 0 40px color-mix(in srgb,var(--route-b) 8%,transparent)}.jli-hero em{font-style:normal;font-size:9px;letter-spacing:2.5px;color:var(--route-b);font-weight:900}.jli-hero h1{margin:5px 0!important;color:color-mix(in srgb,var(--route-a) 88%,#3d1747)!important;font-size:27px!important;line-height:1.2!important;text-align:left!important;letter-spacing:.04em!important}.jli-hero p{margin:0;max-width:340px;color:#684d6d;font-size:10px;line-height:1.7}.jli-hero img{width:86px;z-index:2;filter:drop-shadow(0 8px 10px color-mix(in srgb,var(--route-a) 36%,transparent))}
 .jli-steps{display:grid;grid-template-columns:repeat(6,minmax(82px,1fr));gap:6px;padding:9px 12px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;scroll-snap-type:x proximity;background:linear-gradient(135deg,#390447,#651078)}.jli-steps::-webkit-scrollbar{display:none}.jli-steps button,.jli-steps a{height:34px;padding:0 10px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;white-space:nowrap;border:1px solid #e0bd6280;border-radius:999px;background:#ffffff0d;color:#efdcaa;text-decoration:none;font:900 9px inherit}.jli-steps .on{color:#fff;border-color:#f0d271;background:linear-gradient(135deg,#8420a4,#bd34d8);box-shadow:inset 0 1px #ffffff55,0 4px 10px #22012955}
 #jl-feature-shell-final>.seal,#jl-feature-shell-final>.hero,#jl-feature-shell-final>header:not(#jli-head){display:none!important;height:0!important;min-height:0!important;aspect-ratio:auto!important;margin:0!important;padding:0!important;border:0!important;background:none!important}
 body.jlf-feature-mode #jl-feature-shell-final>.card,body.jlf-feature-mode #jl-feature-shell-final #out>.card,body.jlf-feature-mode #jl-feature-shell-final #plug>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card,body.jl-page-bxcc .card,body.jl-page-rz .card{position:relative;border:1px solid #d4a3e1!important;border-radius:17px!important;background:linear-gradient(155deg,#fff,#fff5ff)!important;box-shadow:0 10px 25px #60107718,inset 0 1px #fff!important;overflow:hidden}
@@ -43,31 +48,49 @@ body.jlf-feature-mode .qm-cell.on{color:#fff!important;border-color:#e8c65f!impo
 body.jlf-feature-mode .qm-card h4,
 body.jlf-feature-mode .qm-gj .nm,
 body.jlf-feature-mode .qm-zi h5{color:#651078!important}
+body[data-jli-route="奇門"] .qm-h{display:flex;align-items:center;gap:9px;margin:23px 0 11px;padding:8px 13px;border:1px solid #b9d7cd;border-radius:999px;color:#397b70;background:linear-gradient(90deg,#edf9f5,#fff8e3);font:900 12px var(--ser);letter-spacing:.18em;text-indent:0;box-shadow:0 5px 12px rgba(50,111,95,.08)}
+body[data-jli-route="奇門"] .qm-h:before{content:"✦";color:#bd8c27;font-size:9px}
+body[data-jli-route="奇門"] .qm-sg{gap:8px}
+body[data-jli-route="奇門"] .qm-sg .c{border-color:#bfd9d0;border-radius:13px;background:linear-gradient(145deg,#fff,#eef9f5);box-shadow:0 5px 12px rgba(48,106,91,.07)}
+body[data-jli-route="奇門"] .qm-sg .c:nth-child(even){border-color:#dfce9b;background:linear-gradient(145deg,#fff,#fff8e3)}
+body[data-jli-route="奇門"] .qm-plate{gap:6px;padding:8px;border:1px solid #b8d7cd;border-radius:17px;background:radial-gradient(circle at 50% 50%,rgba(196,151,46,.18),transparent 42%),linear-gradient(145deg,#e8f6f1,#f8edfb);box-shadow:inset 0 1px #fff,0 9px 20px rgba(47,104,89,.12)}
+body[data-jli-route="奇門"] .qm-cell{min-height:78px;border:1px solid #d7c8df!important;border-radius:11px!important;box-shadow:inset 0 1px #fff!important}
+body[data-jli-route="奇門"] .qm-cell:nth-child(1){background:#eef8f4!important}body[data-jli-route="奇門"] .qm-cell:nth-child(2){background:#fff3f6!important}body[data-jli-route="奇門"] .qm-cell:nth-child(3){background:#fff8e4!important}body[data-jli-route="奇門"] .qm-cell:nth-child(4){background:#eef5ff!important}body[data-jli-route="奇門"] .qm-cell:nth-child(5){background:#f4edff!important}body[data-jli-route="奇門"] .qm-cell:nth-child(6){background:#fff0f7!important}body[data-jli-route="奇門"] .qm-cell:nth-child(7){background:#fff7e9!important}body[data-jli-route="奇門"] .qm-cell:nth-child(8){background:#eaf8f6!important}body[data-jli-route="奇門"] .qm-cell:nth-child(9){background:#eff0ff!important}
+body[data-jli-route="奇門"] .qm-cell.on{min-height:94px!important;color:#fff!important;background:radial-gradient(circle at 70% 22%,rgba(246,218,126,.2),transparent 25%),linear-gradient(145deg,#28695e,#4c8f81 55%,#704878)!important;box-shadow:inset 0 0 0 1px #f0d47c,0 7px 16px rgba(39,91,79,.28)!important}
+body[data-jli-route="奇門"] .qm-card{border-color:#bad8ce!important;background:radial-gradient(circle at 92% 16%,rgba(199,154,49,.22),transparent 28%),linear-gradient(145deg,#fff,#edf9f5)!important}
+body[data-jli-route="奇門"] .qm-gj{border-left-color:#bd8d28!important;background:linear-gradient(145deg,#fffdf5,#fff6d9 55%,#f3fbf8)!important}
+body[data-jli-route="奇門"] .qm-ly{margin:8px 0;border:1px solid #d7c6df!important;border-radius:12px;background:linear-gradient(145deg,#fff,#f7effa)!important;overflow:hidden}
+body[data-jli-route="奇門"] .qm-ly summary{padding:12px 13px}
+body[data-jli-route="奇門"] .qm-ly .bd{padding:0 13px 14px}
+body[data-jli-route="奇門"] .qm-zi{border-color:#c4d9d2!important;background:linear-gradient(145deg,#fff,#eef9f5 58%,#fff8e1)!important}
 
 /* 五個共用排盤入口：統一手機版精品視覺 */
 body.jlf-feature-mode #jl-feature-shell-final{padding-bottom:20px}
 body.jlf-feature-mode #jli-head{overflow:hidden;border:1px solid #d8afe2;border-radius:0 0 19px 19px}
 body.jlf-feature-mode #jlf-back{margin:13px 0 15px!important;position:relative!important;top:auto!important}
-#jli-guide{position:relative;overflow:hidden;margin:0 0 17px;padding:20px 18px 17px;border:1px solid #d6a6e0;border-radius:18px;background:radial-gradient(circle at 92% 5%,#f2d17340 0,transparent 25%),linear-gradient(110deg,#fffffff8 0 56%,#fff4fff0 76%,#f0d7f7dd),url("hero-bg-v3.webp") 82% 45%/290px auto no-repeat;box-shadow:0 10px 25px #60107718,inset 0 1px #fff}
+#jli-guide{position:relative;overflow:hidden;margin:0 0 17px;padding:20px 18px 17px;border:1px solid color-mix(in srgb,var(--route-a) 32%,#d8c6dc);border-radius:18px;background:radial-gradient(circle at 92% 5%,color-mix(in srgb,var(--route-b) 23%,transparent) 0,transparent 25%),url("assets/celestial-orbit.svg") 116% -40px/220px auto no-repeat,linear-gradient(110deg,#fffffff8 0 52%,var(--route-pale) 76%,color-mix(in srgb,var(--route-soft) 76%,#fff));box-shadow:0 10px 25px color-mix(in srgb,var(--route-a) 10%,transparent),inset 0 1px #fff}
 #jli-guide:before{content:"";position:absolute;right:-50px;top:-62px;width:150px;height:150px;border:1px solid #d6ae4666;border-radius:50%;box-shadow:0 0 0 13px #d9b64a13,0 0 0 29px #8c24a70d;pointer-events:none}
 .jli-guide-head{position:relative;display:flex;align-items:center;gap:12px;z-index:1}
-.jli-guide-head>span{flex:0 0 47px;width:47px;height:47px;display:grid;place-items:center;border:1px solid #e4c05b;border-radius:50%;color:#f7dd8c;background:radial-gradient(circle at 35% 25%,#b84ad0,#681078 62%,#390443);box-shadow:inset 0 0 0 4px #ffffff1f,0 7px 15px #5d0c7040;font:900 18px var(--ser)}
+.jli-guide-head>span{flex:0 0 47px;width:47px;height:47px;display:grid;place-items:center;border:1px solid #e4c05b;border-radius:50%;color:#f7dd8c;background:radial-gradient(circle at 35% 25%,color-mix(in srgb,var(--route-a) 55%,#d05adb),var(--route-a) 65%,color-mix(in srgb,var(--route-a) 78%,#2c1532));box-shadow:inset 0 0 0 4px #ffffff1f,0 7px 15px color-mix(in srgb,var(--route-a) 34%,transparent);font:900 18px var(--ser)}
 .jli-guide-head small{display:block;margin-bottom:3px;color:#a07925;font:800 9px var(--ser);letter-spacing:.17em}
 .jli-guide-head h2{margin:0!important;color:#5e116f!important;text-align:left!important;font:900 18px/1.35 var(--ser)!important;letter-spacing:.04em!important;text-indent:0!important}
 #jli-guide>p{position:relative;margin:14px 0 13px;color:#6f5c75;font-size:13px;line-height:1.85;z-index:1}
 .jli-guide-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px}
-.jli-guide-tags span{padding:5px 10px;border:1px solid #d8b3df;border-radius:999px;color:#6a2477;background:#fffaff;font-size:9px;font-weight:800;letter-spacing:.08em;box-shadow:0 3px 8px #5c0c6c0c}
+.jli-guide-tags span{padding:5px 10px;border:1px solid color-mix(in srgb,var(--route-a) 31%,#ddd0df);border-radius:999px;color:var(--route-a);background:color-mix(in srgb,var(--route-soft) 42%,#fff);font-size:9px;font-weight:800;letter-spacing:.08em;box-shadow:0 3px 8px color-mix(in srgb,var(--route-a) 7%,transparent)}
 .jli-guide-foot{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding-top:13px;border-top:1px solid #dfc8e4}
-.jli-guide-foot>div{min-height:70px;padding:11px 12px;border:1px solid #e2cae6;border-radius:12px;background:#ffffffa8}
+.jli-guide-foot>div{min-height:70px;padding:11px 12px;border:1px solid #e2cae6;border-radius:12px;background:#ffffffc2;box-shadow:0 5px 13px color-mix(in srgb,var(--route-a) 6%,transparent)}
+.jli-guide-foot>div:first-child{border-color:color-mix(in srgb,var(--route-b) 38%,#e2d6b5);background:linear-gradient(145deg,#fff,#fff7df)}
+.jli-guide-foot>div:last-child{border-color:#b9d9ce;background:linear-gradient(145deg,#fff,#ebf8f3)}
 .jli-guide-foot b{display:block;margin-bottom:5px;color:#641476;font:800 10px var(--ser);letter-spacing:.1em}
 .jli-guide-foot b:before{content:"✦";margin-right:6px;color:#c89b2c}
 .jli-guide-foot span{display:block;color:#7b6a7f;font-size:10px;line-height:1.65}
 #jli-reading{margin:0 0 17px;scroll-margin-top:14px}
-.jli-reading-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px;border:1px solid #d7b4df;border-radius:17px;background:#f6e7fa;box-shadow:0 8px 20px #5e0d7112}
+.jli-reading-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px;border:1px solid color-mix(in srgb,var(--route-a) 28%,#dbc8df);border-radius:17px;background:linear-gradient(135deg,color-mix(in srgb,var(--route-soft) 62%,#fff),#fff9ff);box-shadow:0 8px 20px color-mix(in srgb,var(--route-a) 8%,transparent)}
 .jli-reading-tabs button{min-height:57px;display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid transparent;border-radius:13px;color:#74577a;background:transparent;text-align:left;transition:.2s ease}
 .jli-reading-tabs button i{flex:0 0 31px;width:31px;height:31px;display:grid;place-items:center;border:1px solid #d8b4df;border-radius:50%;color:#7a2888;background:#fff;font:900 12px var(--ser);font-style:normal}
 .jli-reading-tabs button span{font:800 12px/1.25 var(--ser);letter-spacing:.05em}.jli-reading-tabs button small{display:block;margin-top:3px;color:#9a879d;font:600 7px sans-serif;letter-spacing:.05em}
-.jli-reading-tabs button.on{border-color:#dfbb52;color:#fff;background:linear-gradient(135deg,#550866,#a522c1);box-shadow:0 6px 14px #620c7530,inset 0 1px #ffffff2c}
+.jli-reading-tabs button:nth-child(2):not(.on){border-color:#c8d7e5;background:linear-gradient(145deg,#fff,#edf6ff);color:#48647e}
+.jli-reading-tabs button.on{border-color:#dfbb52;color:#fff;background:linear-gradient(135deg,color-mix(in srgb,var(--route-a) 82%,#30113a),color-mix(in srgb,var(--route-a) 72%,#c948d4));box-shadow:0 6px 14px color-mix(in srgb,var(--route-a) 28%,transparent),inset 0 1px #ffffff2c}
 .jli-reading-tabs button.on i{border-color:#edcf70;color:#f3d675;background:#ffffff12;box-shadow:inset 0 0 0 3px #ffffff10}.jli-reading-tabs button.on small{color:#e4cfe8}
 .jli-reading-body{position:relative;overflow:hidden;margin-top:10px;padding:20px 17px 16px;border:1px solid #d7a9e0;border-radius:18px;background:radial-gradient(circle at 100% 0,#f1d16d38,transparent 25%),linear-gradient(112deg,#fffffff9 0 58%,#fff5fff2 78%,#efd3f7dc),url("hero-bg-v3.webp") 88% 50%/300px auto no-repeat;box-shadow:0 10px 26px #5c0c7018}
 .jli-reading-body[hidden]{display:none!important}.jli-reading-body:before{content:"";position:absolute;right:-52px;top:-65px;width:155px;height:155px;border:1px solid #d8ae4360;border-radius:50%;box-shadow:0 0 0 13px #d8ae4310,0 0 0 28px #8d28a70b}
@@ -85,7 +108,7 @@ body.jlf-feature-mode #jl-feature-shell-final #out>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plug>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{margin:16px 0!important;padding:22px 18px!important}
-body.jlf-feature-mode #jl-feature-shell-final #paipan{background:radial-gradient(circle at 100% 0,#f2d8fa88 0,transparent 34%),linear-gradient(105deg,#fffffff9 0 58%,#fff8ffeb 78%,#efd1f2cf),url("hero-bg-v3.webp") 88% 100%/330px auto no-repeat!important}
+body.jlf-feature-mode #jl-feature-shell-final #paipan{background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--route-a) 13%,transparent) 0,transparent 34%),url("assets/celestial-orbit.svg") 118% -34px/235px auto no-repeat,linear-gradient(105deg,#fffffff9 0 55%,var(--route-pale) 78%,color-mix(in srgb,var(--route-soft) 72%,#fff))!important}
 body.jlf-feature-mode .jli-paipan-tag{position:absolute;right:15px;top:13px;z-index:3;padding:4px 10px;border:1px solid #d8b54e;border-radius:999px;color:#98701c;background:#fff9de;font:700 9px var(--ser);letter-spacing:.12em;box-shadow:0 3px 8px #7a57151f}
 body.jlf-feature-mode .card>h2{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px!important;padding-bottom:14px!important;font-size:17px!important;letter-spacing:.18em!important;text-indent:0!important}
 body.jlf-feature-mode .card>h2:before{content:"◇";color:#c99e32;font-size:13px}
@@ -96,6 +119,14 @@ body.jlf-feature-mode .seg button{min-height:42px;border-radius:10px!important}
 body.jlf-feature-mode .grid{gap:16px 12px!important}
 body.jlf-feature-mode label{display:block;margin-bottom:6px;color:#806786;font-size:12px;letter-spacing:.1em}
 body.jlf-feature-mode input,body.jlf-feature-mode select{height:48px!important;padding:0 13px!important;font-size:15px!important}
+body.jlf-feature-mode #paipan .grid>div{padding:10px;border:1px solid #ddc5e2;border-radius:14px;background:linear-gradient(145deg,#fff,#fbf2fd);box-shadow:0 5px 13px rgba(92,16,108,.06)}
+body.jlf-feature-mode #paipan .grid>div:nth-child(1){border-color:#c7d6e7;background:linear-gradient(145deg,#fff,#edf5ff)}
+body.jlf-feature-mode #paipan .grid>div:nth-child(2){border-color:#e3bfd0;background:linear-gradient(145deg,#fff,#fff0f6)}
+body.jlf-feature-mode #paipan .grid>div:nth-child(3){border-color:#e2d09a;background:linear-gradient(145deg,#fff,#fff8e1)}
+body.jlf-feature-mode #paipan .grid>div:nth-child(4){border-color:#ccc6e5;background:linear-gradient(145deg,#fff,#f0efff)}
+body.jlf-feature-mode #paipan .grid>div:nth-child(5){border-color:#bbd9cf;background:linear-gradient(145deg,#fff,#edf9f4)}
+body.jlf-feature-mode #paipan .grid>div:nth-child(6){border-color:#dfbfd5;background:linear-gradient(145deg,#fff,#fff1f7)}
+body.jlf-feature-mode #paipan .grid label:before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border:1px solid var(--route-b);border-radius:50%;background:var(--route-a);box-shadow:0 0 0 3px color-mix(in srgb,var(--route-soft) 55%,transparent);vertical-align:1px}
 body.jlf-feature-mode button.go{height:50px!important;margin-top:20px!important;font-size:17px!important}
 body.jlf-feature-mode .feats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important;margin-top:20px!important;padding-top:18px!important;border-top:1px solid #dfc9e5!important}
 body.jlf-feature-mode .feats>div{position:relative;overflow:hidden;min-width:0;min-height:108px;padding:49px 3px 9px!important;border:1px solid #dfbce6!important;border-radius:12px!important;background:radial-gradient(circle at 100% 0,#efd3f840 0,transparent 42%),linear-gradient(145deg,#fff,#fbf0fd)!important;box-shadow:0 5px 12px #5e0e7113,inset 0 1px #fff;text-align:center!important}
@@ -104,6 +135,10 @@ body.jlf-feature-mode .feats>div:nth-child(1):before{content:"盤"}
 body.jlf-feature-mode .feats>div:nth-child(2):before{content:"柱"}
 body.jlf-feature-mode .feats>div:nth-child(3):before{content:"解"}
 body.jlf-feature-mode .feats>div:nth-child(4):before{content:"引"}
+body.jlf-feature-mode .feats>div:nth-child(1){border-color:#c9c4e2!important;background:linear-gradient(145deg,#fff,#efefff)!important}
+body.jlf-feature-mode .feats>div:nth-child(2){border-color:#e2cc95!important;background:linear-gradient(145deg,#fff,#fff7de)!important}
+body.jlf-feature-mode .feats>div:nth-child(3){border-color:#b8d8cd!important;background:linear-gradient(145deg,#fff,#edf9f4)!important}
+body.jlf-feature-mode .feats>div:nth-child(4){border-color:#dfbfd2!important;background:linear-gradient(145deg,#fff,#fff0f6)!important}
 body.jlf-feature-mode .feats>div:after{content:"";position:absolute;right:-17px;bottom:-21px;width:52px;height:52px;border:1px solid #d7b24e44;border-radius:50%;box-shadow:0 0 0 8px #d7b24e0c}
 body.jlf-feature-mode .feats b{display:block;margin:0 0 4px;color:#651078!important;font-family:var(--ser);font-size:10px!important;letter-spacing:0;white-space:nowrap}
 body.jlf-feature-mode .feats span{display:block;color:#89758d!important;font-size:7px!important;line-height:1.45;white-space:nowrap}
@@ -117,6 +152,11 @@ body.jlf-feature-mode .jie,body.jlf-feature-mode .duan,body.jlf-feature-mode .jd
 body.jlf-feature-mode #jlf-route-notice{margin:0 0 18px;padding:13px 14px 13px 43px;border-color:#ddb952;background:linear-gradient(90deg,#fff8dc,#fff5ff);color:#641476;box-shadow:0 5px 13px #5d0c7015;position:relative}
 body.jlf-feature-mode #jlf-route-notice:before{content:"✦";position:absolute;left:14px;top:50%;transform:translateY(-50%);width:21px;height:21px;display:grid;place-items:center;border-radius:50%;color:#f2d575;background:#671078;font-size:10px}
 body.jlf-feature-mode .hint,body.jlf-feature-mode .note{color:#806d84!important}
+body[data-jli-route="奇門"] .qm-in{position:relative;gap:10px;margin-top:16px;padding:43px 12px 12px;border:1px solid #b9d8ce;border-radius:17px;background:radial-gradient(circle at 92% 16%,rgba(203,161,52,.2),transparent 25%),url("assets/celestial-orbit.svg") 112% 48%/150px auto no-repeat,linear-gradient(145deg,#fff,#edf9f5);box-shadow:0 8px 19px rgba(46,105,90,.1)}
+body[data-jli-route="奇門"] .qm-in:before{content:"手機末七碼 · 九宮落位 · 本機換算";position:absolute;left:15px;top:12px;color:#397b70;font:800 10px var(--ser);letter-spacing:.11em}
+body[data-jli-route="奇門"] .qm-in input{background:#ffffffdc!important;border-color:#a8d0c4!important}
+body[data-jli-route="奇門"] .qm-in button{background:linear-gradient(135deg,#28685d,#4b9484 55%,#7b4c8b)!important}
+body[data-jli-route="奇門"] .qm-note{padding:12px 14px;border-left:3px solid #bf9230;border-radius:0 11px 11px 0;background:linear-gradient(90deg,#fff7dd,#f2fbf8)}
 @media(max-width:430px){body.jlf-feature-mode .jli-hero{min-height:132px;padding:20px 16px;grid-template-columns:1fr 78px}body.jlf-feature-mode .jli-hero img{width:74px}body.jlf-feature-mode .jli-hero h1{font-size:25px!important}body.jlf-feature-mode #jl-feature-shell-final>.card,body.jlf-feature-mode #jl-feature-shell-final #out>.card,body.jlf-feature-mode #jl-feature-shell-final #plug>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{padding:20px 15px!important}body.jlf-feature-mode .feats span{font-size:8px!important}#jli-guide{padding:17px 14px 14px}.jli-guide-head>span{flex-basis:42px;width:42px;height:42px;font-size:16px}.jli-guide-head h2{font-size:16px!important}.jli-guide-foot,.bx-guide-foot{grid-template-columns:1fr}.jli-guide-foot>div{min-height:0}body.jl-page-bxcc .bx-guide{padding:17px 14px}.bx-guide-head>span{flex-basis:42px;width:42px;height:42px}.bx-guide-head h2{font-size:15px!important}.jli-reading-tabs button{padding:7px 8px}.jli-reading-points{grid-template-columns:1fr}.jli-reading-points article{min-height:0;display:grid;grid-template-columns:72px 1fr;align-items:center}.jli-reading-points b em{margin-bottom:3px}.jli-reading-points p{margin:0}.jli-reading-body{padding:17px 14px 14px}}
 
 /* 看日子：專屬紫金結果視覺 */
