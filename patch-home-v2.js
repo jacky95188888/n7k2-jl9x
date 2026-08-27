@@ -1499,6 +1499,8 @@ body.jlf-feature-mode
 /* 標題 */
 
 .jlf-section-title{
+  position:relative;
+  overflow:hidden;
   height:34px;
 
   display:flex;
@@ -1522,7 +1524,25 @@ body.jlf-feature-mode
   font-size:11px;
 
   font-weight:900;
+
+  border-top:1px solid rgba(205,151,220,.34);
+  border-bottom:1px solid rgba(205,151,220,.34);
+  box-shadow:inset 0 1px rgba(255,255,255,.72);
 }
+
+.jlf-section-title::before,
+.jlf-section-title::after{
+  content:"✦";
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  color:#b58a28;
+  opacity:.48;
+  font-size:7px;
+}
+
+.jlf-section-title::before{left:22px}
+.jlf-section-title::after{right:22px}
 
 
 
@@ -1548,6 +1568,8 @@ body.jlf-feature-mode
 
 
 .jlf-card{
+  position:relative;
+  overflow:hidden;
   height:146px;
 
   padding:
@@ -1571,6 +1593,34 @@ body.jlf-feature-mode
     0 6px 15px
     rgba(96,16,125,.10);
 }
+
+.jlf-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.88),transparent 46%),
+    url("assets/celestial-orbit.svg") 132% 128%/88px 88px no-repeat;
+  opacity:.42;
+  pointer-events:none;
+}
+
+.jlf-card::after{
+  content:"";
+  position:absolute;
+  left:14%;right:14%;top:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--card-accent,#c78fda),transparent);
+  opacity:.85;
+}
+
+.jlf-card>*{position:relative;z-index:1}
+
+.jlf-card:nth-child(1){--card-accent:#a465bd;background:linear-gradient(180deg,#fff,#fbf1ff)}
+.jlf-card:nth-child(2){--card-accent:#4f83a6;background:linear-gradient(180deg,#fff,#f1f8ff)}
+.jlf-card:nth-child(3){--card-accent:#b28331;background:linear-gradient(180deg,#fff,#fff8e9)}
+.jlf-card:nth-child(4){--card-accent:#b44f79;background:linear-gradient(180deg,#fff,#fff1f6)}
+.jlf-card:nth-child(5){--card-accent:#3e8b78;background:linear-gradient(180deg,#fff,#effaf6)}
+.jlf-card:nth-child(6){--card-accent:#7c5bab;background:linear-gradient(180deg,#fff,#f4f0ff)}
 
 
 .jlf-badge{
