@@ -204,3 +204,118 @@ body.jlf-feature-mode footer .f-sub:after{content:"JUN LING NUMEROLOGY · PROFES
 body.jlf-feature-mode #jlp-foot{padding:16px 16px 22px!important;background:transparent!important}
 body.jlf-feature-mode #jlp-foot .jlp-link{padding:8px 16px!important;border:1px solid #d5ad48!important;border-radius:999px!important;color:#6c3275!important;background:#fffaff!important;box-shadow:0 5px 13px #5b0b6d12!important;font-weight:700!important}
 @media(max-width:390px){body.jlf-feature-mode footer{padding:25px 61px 23px 17px!important}body.jlf-feature-mode footer:after{right:16px;width:38px;height:38px;font-size:15px}body.jlf-feature-mode footer .f-motto{font-size:16px!important;letter-spacing:.18em!important}body.jlf-feature-mode .feats{gap:3px!important}body.jlf-feature-mode .feats>div{padding:47px 2px 8px!important}body.jlf-feature-mode .feats b{font-size:9px!important}body.jlf-feature-mode .feats span{font-size:6px!important}}
+
+/* 2026 年度精品視覺：統一深紫主視覺、彩色資訊紙張與手機節奏 */
+body[data-jli-route="四柱"]{--route-mark:"命";--route-night:#3a0648;--route-jewel:#8f22a8}
+body[data-jli-route="九宮"]{--route-mark:"宮";--route-night:#153b58;--route-jewel:#397fa6}
+body[data-jli-route="奇門"]{--route-mark:"奇";--route-night:#163f3a;--route-jewel:#3e8878}
+body[data-jli-route="六親"]{--route-mark:"親";--route-night:#5b2443;--route-jewel:#a74d77}
+body[data-jli-route="流年"]{--route-mark:"運";--route-night:#563518;--route-jewel:#a06a2c}
+
+body.jlf-feature-mode,
+body.jl-page-bxcc,
+body.jl-page-rz{
+  background:
+    radial-gradient(circle at 8% 9%,color-mix(in srgb,var(--route-a,#7c2c91) 27%,transparent),transparent 24%),
+    radial-gradient(circle at 93% 26%,rgba(224,181,76,.2),transparent 22%),
+    url("assets/celestial-orbit.svg") 50% 315px/560px auto repeat-y,
+    linear-gradient(180deg,#fdf2ff 0,#f4dcf7 48%,#ead0ef 100%)!important;
+}
+
+body.jlf-feature-mode .jli-top{
+  border-bottom-color:#e1bc5b;
+  background:linear-gradient(90deg,rgba(255,255,255,.95),rgba(251,237,255,.91));
+  box-shadow:0 8px 22px rgba(73,7,89,.1);
+}
+
+body.jlf-feature-mode .jli-hero{
+  min-height:172px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 82% 18%,color-mix(in srgb,var(--route-b) 35%,transparent),transparent 24%),
+    linear-gradient(96deg,var(--route-night,#350441) 0 48%,color-mix(in srgb,var(--route-jewel,#8f22a8) 84%,#2d0638) 73%,rgba(38,4,47,.8)),
+    url("hero-bg-v3.webp") 64% 43%/cover no-repeat;
+  box-shadow:inset 0 1px rgba(255,255,255,.2),0 12px 28px color-mix(in srgb,var(--route-a) 24%,transparent);
+}
+body.jlf-feature-mode .jli-hero:before{content:"";position:absolute;inset:9px;border:1px solid rgba(239,205,105,.36);border-radius:15px;pointer-events:none}
+body.jlf-feature-mode .jli-hero:after{border-color:rgba(239,207,113,.35);box-shadow:0 0 0 18px rgba(239,207,113,.08),0 0 0 40px rgba(255,255,255,.04)}
+body.jlf-feature-mode .jli-hero em{color:#f4d677;text-shadow:0 2px 8px rgba(22,1,29,.7)}
+body.jlf-feature-mode .jli-hero h1{color:#fff8e8!important;text-shadow:0 3px 15px rgba(20,1,27,.72)!important}
+body.jlf-feature-mode .jli-hero p{color:#eddfee;text-shadow:0 1px 6px rgba(24,1,30,.68)}
+body.jlf-feature-mode .jli-hero img{filter:drop-shadow(0 11px 15px rgba(20,1,27,.7)) drop-shadow(0 0 12px rgba(239,207,113,.28))}
+
+body.jlf-feature-mode #jli-guide,
+body.jlf-feature-mode #jli-module-hub{
+  border-color:color-mix(in srgb,var(--route-a) 38%,#d7b151);
+  background:
+    radial-gradient(circle at 92% 7%,color-mix(in srgb,var(--route-b) 31%,transparent),transparent 25%),
+    url("assets/celestial-orbit.svg") 116% -34px/230px auto no-repeat,
+    linear-gradient(120deg,#fffdf9 0 48%,color-mix(in srgb,var(--route-soft) 63%,#fff) 78%,#fff5ff);
+  box-shadow:0 16px 36px color-mix(in srgb,var(--route-a) 15%,transparent),inset 0 1px #fff;
+}
+
+body.jlf-feature-mode #jl-feature-shell-final>.card,
+body.jlf-feature-mode #jl-feature-shell-final #out>.card,
+body.jlf-feature-mode #jl-feature-shell-final #plug>.card,
+body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,
+body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{
+  isolation:isolate;
+  border-color:color-mix(in srgb,var(--route-a) 32%,#d7bddc)!important;
+  background:
+    radial-gradient(circle at 101% -3%,color-mix(in srgb,var(--route-b) 18%,transparent),transparent 25%),
+    linear-gradient(145deg,#fffdfc,color-mix(in srgb,var(--route-soft) 28%,#fff) 62%,#fff5ff)!important;
+  box-shadow:0 15px 34px color-mix(in srgb,var(--route-a) 12%,transparent),inset 0 1px #fff!important;
+}
+body.jlf-feature-mode #jl-feature-shell-final>.card:after,
+body.jlf-feature-mode #jl-feature-shell-final #out>.card:after,
+body.jlf-feature-mode #jl-feature-shell-final #plug>.card:after,
+body.jlf-feature-mode #jl-feature-shell-final #plugs>.card:after,
+body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card:after{
+  content:var(--route-mark,"筠");position:absolute;right:-10px;bottom:-19px;z-index:-1;
+  color:color-mix(in srgb,var(--route-a) 8%,transparent);font:900 104px/1 var(--ser);pointer-events:none
+}
+
+body.jlf-feature-mode #paipan{
+  background:
+    radial-gradient(circle at 92% 8%,color-mix(in srgb,var(--route-b) 24%,transparent),transparent 24%),
+    linear-gradient(145deg,#fffefb,#fbf0ff 58%,color-mix(in srgb,var(--route-soft) 46%,#fff))!important;
+}
+body.jlf-feature-mode #paipan .grid>div{box-shadow:0 7px 17px color-mix(in srgb,var(--route-a) 7%,transparent),inset 0 1px #fff}
+body.jlf-feature-mode input:focus,
+body.jlf-feature-mode select:focus{border-color:var(--route-jewel,#9c2ab6)!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--route-a) 13%,transparent),inset 0 2px 5px rgba(61,6,73,.04)!important}
+
+body.jl-page-bxcc header{
+  color:#fff;
+  background:
+    radial-gradient(circle at 82% 15%,rgba(236,198,86,.28),transparent 23%),
+    linear-gradient(100deg,#2d0438 0 49%,#721286 76%,#390544),
+    url("hero-bg-v3.webp") 64% 44%/cover no-repeat!important;
+  border-color:#d9b24b!important;
+  box-shadow:0 18px 38px rgba(56,5,69,.3)!important;
+}
+body.jl-page-bxcc header .eyebrow{color:#f3d573}
+body.jl-page-bxcc header h1{color:#fff8e5!important;text-shadow:0 3px 14px rgba(24,1,30,.75)}
+body.jl-page-bxcc header .sub{color:#ead8ed}
+body.jl-page-bxcc .bx-input-card{background:radial-gradient(circle at 96% 7%,rgba(214,171,58,.22),transparent 25%),linear-gradient(145deg,#fffdf8,#f7e9fb)!important}
+body.jl-page-bxcc .bx-grid-card{background:radial-gradient(circle at 94% 5%,rgba(70,133,167,.19),transparent 26%),linear-gradient(145deg,#fff,#edf7ff)!important;border-color:#b8d1e0!important}
+body.jl-page-bxcc .bx-dict-card{background:radial-gradient(circle at 94% 5%,rgba(61,143,112,.17),transparent 26%),linear-gradient(145deg,#fff,#edf9f4 54%,#fff2f6)!important;border-color:#b8d9cd!important}
+body.jl-page-bxcc .bx-input-card h2:before{content:"啟"}
+body.jl-page-bxcc .bx-grid-card h2:before{content:"數"}
+body.jl-page-bxcc .bx-dict-card h2:before{content:"星"}
+body.jl-page-bxcc .bx-input-card h2:before,
+body.jl-page-bxcc .bx-grid-card h2:before,
+body.jl-page-bxcc .bx-dict-card h2:before{width:31px;height:31px;display:inline-grid;place-items:center;margin-right:9px;border:1px solid #dfb84f;border-radius:50%;color:#f5db82;background:linear-gradient(145deg,#551065,#9e26b6);box-shadow:0 5px 12px rgba(74,8,89,.25);font-size:11px;vertical-align:middle}
+body.jl-page-bxcc #grid{overflow:hidden;border:1px solid #c2d6e4;border-radius:14px;background:rgba(255,255,255,.82);box-shadow:inset 0 1px #fff,0 8px 18px rgba(45,93,124,.08)}
+body.jl-page-bxcc #dict dt{padding:7px 10px;border-radius:9px;background:linear-gradient(90deg,rgba(255,255,255,.94),transparent)}
+
+@media(max-width:430px){
+  body.jlf-feature-mode .jli-hero{min-height:154px;padding:22px 16px}
+  body.jlf-feature-mode .jli-hero:before{inset:7px}
+  body.jlf-feature-mode #jli-guide,body.jlf-feature-mode #jli-module-hub{margin-bottom:14px}
+  body.jlf-feature-mode #jl-feature-shell-final>.card,
+  body.jlf-feature-mode #jl-feature-shell-final #out>.card,
+  body.jlf-feature-mode #jl-feature-shell-final #plug>.card,
+  body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,
+  body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{margin-bottom:14px!important}
+  body.jl-page-bxcc .card{margin:14px 0;padding:19px 15px!important}
+}
