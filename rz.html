@@ -444,6 +444,7 @@ body.jl-page-rz .rz-result-card>.note{padding:13px 15px;border-left:3px solid co
 
 </div>
 
+<script src="traditional-zh.js?v=traditional-v1"></script>
 <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/suncalc@1.9.0/suncalc.js"></script>
 <script>
@@ -497,8 +498,9 @@ function shengxiaoGroups(dz){
 
 function safe(fn,dflt){ try{ var v=fn(); return (v==null||v==='')?dflt:v; }catch(e){ return dflt; } }
 function tradText(s){
-  var map={'东':'東','动':'動','进':'進','开':'開','词':'詞','讼':'訟','纳':'納','仓':'倉','盖':'蓋','迁':'遷','启':'啟','竖':'豎','殓':'殮','阴':'陰','阳':'陽','将':'將','鸣':'鳴','时':'時','败':'敗','离':'離','医':'醫','签':'簽','约':'約','亲':'親','会':'會','国':'國','历':'曆','岁':'歲','龙':'龍','鸡':'雞','猪':'豬'};
-  return String(s||'').replace(/[东动进开词讼纳仓盖迁启竖殓阴阳将鸣时败离医签约亲会国历岁龙鸡猪]/g,function(c){return map[c]||c;});
+  if(window.JLTrad) return window.JLTrad.text(s);
+  var map={'处':'處','东':'東','动':'動','进':'進','开':'開','词':'詞','讼':'訟','纳':'納','仓':'倉','盖':'蓋','迁':'遷','启':'啟','竖':'豎','殓':'殮','阴':'陰','阳':'陽','将':'將','鸣':'鳴','时':'時','败':'敗','离':'離','医':'醫','签':'簽','约':'約','亲':'親','会':'會','国':'國','历':'曆','岁':'歲','龙':'龍','鸡':'雞','猪':'豬'};
+  return String(s||'').replace(/[处东动进开词讼纳仓盖迁启竖殓阴阳将鸣时败离医签约亲会国历岁龙鸡猪]/g,function(c){return map[c]||c;});
 }
 function esc(s){return tradText(s).replace(/[&<>]/g,function(c){
   return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
