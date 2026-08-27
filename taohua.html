@@ -37,7 +37,7 @@ body:before{content:"";position:fixed;inset:0;z-index:-1;opacity:.28;background-
 @media(max-width:520px){.wrap{padding:0 14px}.hero{min-height:245px;grid-template-columns:1fr 108px;padding:25px 17px}.hero h1{font-size:30px}.hero-badge{width:110px}.hero p{font-size:10px}.principles{gap:4px}.principles div{padding:7px 3px}.principles span{font-size:7px}.panel{padding:20px 15px}.guide{grid-template-columns:1fr}.guide article{min-height:0;display:grid;grid-template-columns:35px 70px 1fr;align-items:center}.guide b{margin:0}.form-row{grid-template-columns:120px 1fr}.interpret{grid-template-columns:1fr}.source-reading{font-size:15px}}
 @media(max-width:370px){.hero{grid-template-columns:1fr 84px}.hero-badge{width:86px}.hero h1{font-size:27px}.panel{padding:18px 12px}.form-row{grid-template-columns:1fr}.coins{gap:5px}.result-code b{width:33px;height:33px}.footer b{font-size:16px}}
 /* 桃花神數精品視覺層：使用較高選擇器，避免共用 theme-v3 覆蓋首屏 */
-body.jl-page-taohua{background:radial-gradient(circle at 7% 12%,#c46ae02b 0,transparent 25%),radial-gradient(circle at 92% 34%,#f1cf5e24 0,transparent 26%),linear-gradient(180deg,#fff9ff 0,#f4d6f8 55%,#e8c1ef 100%)}
+body.jl-page-taohua{background:radial-gradient(circle at 7% 12%,#c46ae02b 0,transparent 25%),radial-gradient(circle at 92% 34%,#f1cf5e24 0,transparent 26%),url("assets/peach-oracle.svg") 50% 310px/620px auto repeat-y,linear-gradient(180deg,#fff9ff 0,#f4d6f8 55%,#e8c1ef 100%)}
 body.jl-page-taohua .hero{min-height:286px;margin:14px 0 22px;padding:31px 24px;border:1px solid #e4bf58;color:#fff1ff;background:radial-gradient(circle at 16% 16%,#df68ec52 0,transparent 26%),radial-gradient(circle at 83% 28%,#f1cf6850 0,transparent 19%),linear-gradient(103deg,#26022ff2 0 43%,#701080e8 72%,#300238f2),url("hero-bg-v3.webp") 62% 48%/cover no-repeat;box-shadow:0 20px 42px #3c064b45,inset 0 1px #ffffff42}
 body.jl-page-taohua .hero:before{border-color:#f0d47770}
 body.jl-page-taohua .hero:after{content:"✿";display:grid;place-items:center;color:#f5d87d22;font:900 118px var(--ser);border-color:#f2da7a66}
@@ -48,18 +48,43 @@ body.jl-page-taohua .hero p{color:#f3e6f5;font-weight:600;text-shadow:0 1px 5px 
 body.jl-page-taohua .hero-badge{filter:drop-shadow(0 15px 22px #16011d99) drop-shadow(0 0 14px #f3d57855)}
 body.jl-page-taohua .principles div{border-color:#ebcc6b73;background:linear-gradient(145deg,#ffffff1f,#ffffff09);box-shadow:inset 0 1px #ffffff2e;backdrop-filter:blur(5px)}
 body.jl-page-taohua .principles b{color:#ffe58d;font-weight:900}body.jl-page-taohua .principles span{color:#ead6ed}
-body.jl-page-taohua .panel{border-color:#d6a9df;background:radial-gradient(circle at 100% 0,#eac7f45c 0,transparent 30%),linear-gradient(145deg,#fffffff5,#fff5fff0);box-shadow:0 15px 32px #5a0a6c20,inset 0 1px #fff}
+body.jl-page-taohua .panel{border-color:#d6a9df;background:radial-gradient(circle at 100% 0,#eac7f45c 0,transparent 30%),url("assets/peach-oracle.svg") 118% 105%/270px auto no-repeat,linear-gradient(145deg,#fffffff7,#fff5fff2);box-shadow:0 15px 32px #5a0a6c20,inset 0 1px #fff}
 body.jl-page-taohua .panel:before{content:"";position:absolute;left:18px;right:18px;top:0;height:2px;background:linear-gradient(90deg,transparent,#deb742,#f6df91,#deb742,transparent)}
+body.jl-page-taohua .panel:nth-of-type(1){background:radial-gradient(circle at 92% 12%,#f5d67b42,transparent 27%),url("assets/peach-oracle.svg") 122% 112%/280px auto no-repeat,linear-gradient(145deg,#fffefd,#fff7ed 47%,#fdf1ff)}
+body.jl-page-taohua .panel:nth-of-type(2){background:radial-gradient(circle at 8% 95%,#ca6bdd26,transparent 28%),url("assets/peach-oracle.svg") 110% 96%/310px auto no-repeat,linear-gradient(145deg,#fff,#f9efff 55%,#fff7ea)}
+body.jl-page-taohua .panel.result{background:radial-gradient(circle at 88% 10%,#f0cf6d36,transparent 26%),url("assets/celestial-orbit.svg") 120% 0/230px auto no-repeat,linear-gradient(145deg,#fff,#fff7e8 52%,#f9eeff)}
 body.jl-page-taohua .guide article{overflow:hidden;min-height:112px;padding:14px 11px;border-color:#dcbde3;background:radial-gradient(circle at 100% 0,#f0d4f56e 0,transparent 42%),linear-gradient(145deg,#fff,#fff7ff);box-shadow:0 6px 14px #5f0d7112,inset 0 1px #fff}
 body.jl-page-taohua .guide article:after{content:"";position:absolute;right:-19px;bottom:-20px;width:55px;height:55px;border:1px solid #dfbd5860;border-radius:50%}
 body.jl-page-taohua .guide em{width:25px;height:25px;display:grid;place-items:center;border:1px solid #d8ad42;border-radius:50%;color:#f3d980;background:#651078;font-size:8px;letter-spacing:.05em}
 body.jl-page-taohua .guide b{margin:7px 0 4px;font-weight:900}body.jl-page-taohua .guide p{color:#765f7b;line-height:1.65}
+body.jl-page-taohua .guide article:nth-child(1){border-color:#dfbfdc;background:linear-gradient(145deg,#fff,#fff1f6)}
+body.jl-page-taohua .guide article:nth-child(1) em{background:#8d376b}
+body.jl-page-taohua .guide article:nth-child(2){border-color:#e3ce9a;background:linear-gradient(145deg,#fff,#fff8e5)}
+body.jl-page-taohua .guide article:nth-child(2) em{background:#99701e}
+body.jl-page-taohua .guide article:nth-child(3){border-color:#b8d9cf;background:linear-gradient(145deg,#fff,#eefaf6)}
+body.jl-page-taohua .guide article:nth-child(3) em{background:#397867}
+body.jl-page-taohua .field label:before{content:"◆";margin-right:6px;color:#c49b31;font-size:7px;vertical-align:1px}
+body.jl-page-taohua .field select,body.jl-page-taohua .field input{border-color:#d7b4df;background:linear-gradient(180deg,#fff,#fff9ff);box-shadow:inset 0 2px 7px #5a0b6c0c,0 5px 12px #6411760b}
 body.jl-page-taohua .mode-tabs{border-color:#d9b5e1;background:linear-gradient(145deg,#f6e3fa,#fff7ff);box-shadow:inset 0 2px 7px #64117612}
 body.jl-page-taohua .mode-tabs button{min-height:52px;font-weight:900}body.jl-page-taohua .mode-tabs button.on{background:linear-gradient(135deg,#4c055a,#9220aa 58%,#c838db);box-shadow:0 7px 15px #5f0d7138,inset 0 1px #ffffff55}
 body.jl-page-taohua .coin{position:relative;border-color:#ddb13d;color:#ffe486;background:radial-gradient(circle at 34% 24%,#e85bf1,#86129b 55%,#35033e 78%);box-shadow:inset 0 0 0 5px #ffffff15,inset 0 -8px 16px #28002f55,0 9px 18px #54096742,0 0 0 3px #ddb13d20;font-size:22px}
 body.jl-page-taohua .coin:before{content:"";position:absolute;inset:8px;border:1px solid #f5d9744d;border-radius:50%}
+body.jl-page-taohua .draw-panel{position:relative;padding:15px 12px 12px;border:1px solid #e1c4e7;border-radius:19px;background:radial-gradient(circle at 50% 110%,#f0cd7140,transparent 31%),url("assets/celestial-orbit.svg") 50% 50%/260px auto no-repeat,linear-gradient(145deg,#fff,#fbf0ff);box-shadow:inset 0 1px #fff,0 8px 18px #5c0d6d12}
+body.jl-page-taohua .slot{position:relative;overflow:hidden;min-height:82px;background:linear-gradient(155deg,#fff,#fbecfd)}
+body.jl-page-taohua .slot:before{content:"";position:absolute;inset:auto -18px -25px auto;width:54px;height:54px;border:1px solid #d9ae4260;border-radius:50%}
+body.jl-page-taohua .slot:nth-child(1){border-color:#d9b4df;background:linear-gradient(155deg,#fff,#fff0f6)}
+body.jl-page-taohua .slot:nth-child(2){border-color:#e0ca92;background:linear-gradient(155deg,#fff,#fff8e3)}
+body.jl-page-taohua .slot:nth-child(3){border-color:#b7d8cd;background:linear-gradient(155deg,#fff,#eefaf5)}
+body.jl-page-taohua .slot:nth-child(4){border-color:#bdcde4;background:linear-gradient(155deg,#fff,#eff5ff)}
+body.jl-page-taohua .coins{margin-top:12px}
+body.jl-page-taohua .coin:after{content:"";position:absolute;left:20%;top:15%;width:24%;height:11%;border-radius:50%;background:#fff;opacity:.28;filter:blur(2px);transform:rotate(-28deg)}
+body.jl-page-taohua .actions{margin-top:16px}
+body.jl-page-taohua .btn.primary{background:linear-gradient(105deg,#4b0559,#8f1aa8 48%,#cb3bd8);box-shadow:0 9px 20px #62107438,inset 0 1px #ffffff55}
+body.jl-page-taohua .interpret article:first-child{border-color:#dec78c;background:linear-gradient(145deg,#fffdf4,#fff7dc)}
+body.jl-page-taohua .interpret article:last-child{border-color:#bdd8ce;background:linear-gradient(145deg,#f8fffc,#eaf8f2)}
+body.jl-page-taohua .source-reading{background:radial-gradient(circle at 92% 16%,#e8c55c38,transparent 25%),linear-gradient(145deg,#fff,#fff3df 52%,#fff4ff);box-shadow:inset 0 1px #fff,0 7px 18px #5d0d6e12}
 body.jl-page-taohua .footer{background:radial-gradient(circle at 88% 25%,#d85ce75c,transparent 27%),linear-gradient(105deg,#220229 0,#5d0a6d 58%,#31033a),url("hero-bg-v3.webp") 72% 55%/cover no-repeat}
-@media(max-width:520px){body.jl-page-taohua .hero{min-height:265px;grid-template-columns:1fr 108px;padding:25px 17px}body.jl-page-taohua .hero h1{font-size:30px}.guide article{min-height:74px!important;grid-template-columns:35px 82px 1fr!important}}
+@media(max-width:520px){body.jl-page-taohua .hero{min-height:265px;grid-template-columns:1fr 108px;padding:25px 17px}body.jl-page-taohua .hero h1{font-size:30px}.guide article{min-height:74px!important;grid-template-columns:35px 82px 1fr!important}body.jl-page-taohua .draw-panel{padding:13px 9px 10px}body.jl-page-taohua .slot{min-height:78px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.coin:active{transform:none}}
 </style>
 </head>
