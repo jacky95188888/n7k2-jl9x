@@ -21,6 +21,7 @@ var ZHI = ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','�
 var GAN_WX = {甲:'木',乙:'木',丙:'火',丁:'火',戊:'土',己:'土',庚:'金',辛:'金',壬:'水',癸:'水'};
 var ZHI_WX = {子:'水',丑:'土',寅:'木',卯:'木',辰:'土',巳:'火',午:'火',未:'土',申:'金',酉:'金',戌:'土',亥:'水'};
 var COL = {木:'#3d6b3d',火:'#a13a2a',土:'#8a6a24',金:'#7a6f5e',水:'#2f5d8a'};
+var CORE_COL = {木:'#89ddb5',火:'#ff9f91',土:'#f3d178',金:'#dce2f3',水:'#8fcaf3'};
 
 /* 六十甲子納音（繁體）—— lunar-javascript 回傳簡體，故自備此表 */
 var GAN10 = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
@@ -58,23 +59,49 @@ function css() {
   var s = document.createElement('style');
   s.id = 'sz-style';
   s.textContent = [
-    '#sz-card table{table-layout:fixed}',
-    '#sz-card td.szg,#sz-card td.szz{font-family:var(--ser);font-size:26px;font-weight:700;line-height:1.25;padding:10px 4px}',
-    '#sz-card td.szz{padding-top:0}',
-    '#sz-card td.szg small,#sz-card td.szz small{display:block;font-size:10px;font-weight:400;letter-spacing:.1em;color:#9c8b74;margin-top:2px}',
-    '#sz-card td.szny{font-size:12px;color:#7a6f5e;letter-spacing:.06em}',
-    '#sz-card td.szstage{padding:9px 3px 10px;background:linear-gradient(180deg,#fffaf0,#fbf1ff);border-top:1px solid rgba(190,143,43,.24)}',
-    '#sz-card td.szstage b{display:block;font-family:var(--ser);font-size:15px;line-height:1.2;color:#68127b;letter-spacing:.12em}',
-    '#sz-card td.szstage small{display:block;margin-top:4px;font-size:9px;color:#a08b70;letter-spacing:.08em}',
-    '#sz-card .szyun{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;gap:5px 13px;align-items:center;margin-top:15px;padding:13px 15px;border:1px solid rgba(190,143,43,.58);border-radius:14px;background:linear-gradient(135deg,#fffaf0 0%,#fff 45%,#faefff 100%);box-shadow:0 8px 22px rgba(91,21,114,.08)}',
-    '#sz-card .szyun:after{content:"";position:absolute;width:74px;height:74px;right:-28px;top:-35px;border:1px solid rgba(190,143,43,.23);border-radius:50%}',
-    '#sz-card .szyun-k{grid-row:1/3;position:relative;z-index:1;padding:7px 9px;border-radius:999px;background:linear-gradient(145deg,#5b086c,#a812c2);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;white-space:nowrap}',
-    '#sz-card .szyun strong{position:relative;z-index:1;color:#5e246c;font-family:var(--ser);font-size:17px;letter-spacing:.07em}',
-    '#sz-card .szyun small{position:relative;z-index:1;color:#8b7864;font-size:11px;line-height:1.5}',
-    '#sz-card .szfoot{margin-top:14px;font-size:12.5px;line-height:1.9;color:#7a6f5e}',
-    '#sz-card .szfoot b{color:#5b5147;font-weight:600}',
+    '#sz-card{padding:0!important;border-color:#d8b550!important;background:#291032!important;isolation:isolate}',
+    '#sz-card:before{display:none}',
+    '#sz-card .sz-dashboard-head{position:relative;overflow:hidden;min-height:148px;display:grid;grid-template-columns:48px 1fr 78px;align-items:center;gap:12px;padding:22px 20px;color:#fff;background:radial-gradient(circle at 84% 18%,rgba(245,210,104,.24),transparent 25%),linear-gradient(100deg,#26032f 0,#5d0c70 56%,#8b327f 100%),url("hero-bg-v3.webp") 72% 46%/cover no-repeat}',
+    '#sz-card .sz-dashboard-head:before{content:"";position:absolute;inset:8px;border:1px solid rgba(239,207,109,.42);border-radius:16px;pointer-events:none}',
+    '#sz-card .sz-seal{position:relative;width:48px;height:48px;display:grid;place-items:center;border:1px solid #efd06e;border-radius:50%;color:#f6da80;background:radial-gradient(circle at 34% 25%,#c14bd1,#641078 62%,#33023d);box-shadow:inset 0 0 0 4px rgba(255,255,255,.12),0 8px 18px rgba(24,1,30,.5);font:900 18px var(--ser)}',
+    '#sz-card .sz-head-copy{position:relative;min-width:0}',
+    '#sz-card .sz-head-copy small{display:block;margin-bottom:5px;color:#f1cf73;font:800 8px sans-serif;letter-spacing:.2em}',
+    '#sz-card .sz-head-copy h2{margin:0!important;padding:0!important;color:#fff8e7!important;text-align:left!important;font:900 24px/1.25 var(--ser)!important;letter-spacing:.18em!important;text-indent:0!important;text-shadow:0 3px 12px rgba(24,1,30,.72)}',
+    '#sz-card .sz-head-copy h2:after{display:none}',
+    '#sz-card .sz-head-copy p{margin:6px 0 0;color:#e8d7eb;font-size:10px;line-height:1.6}',
+    '#sz-card .sz-daycore{position:relative;display:grid;place-items:center;min-height:86px;border:1px solid rgba(239,207,109,.62);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.06));box-shadow:inset 0 1px rgba(255,255,255,.2),0 8px 20px rgba(31,2,38,.28);backdrop-filter:blur(8px)}',
+    '#sz-card .sz-daycore small{color:#f1d37b;font-size:8px;letter-spacing:.14em}',
+    '#sz-card .sz-daycore strong{font:900 31px/1 var(--ser);text-shadow:0 3px 9px rgba(24,1,30,.55)}',
+    '#sz-card .sz-daycore span{color:#f3e6f4;font-size:9px}',
+    '#sz-card .sz-dashboard-body{position:relative;padding:18px;background:radial-gradient(circle at 96% 8%,rgba(219,178,66,.16),transparent 24%),url("assets/celestial-orbit.svg") 116% 10%/210px auto no-repeat,linear-gradient(180deg,#fffafc,#f5e6f8)}',
+    '#sz-card .sz-pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}',
+    '#sz-card .sz-pillar{position:relative;overflow:hidden;min-width:0;padding:11px 6px 10px;border:1px solid var(--wx-line,#d9b9df);border-radius:15px;background:linear-gradient(155deg,#fff,var(--wx-soft,#f7ebfa));box-shadow:0 8px 18px rgba(67,10,80,.08),inset 0 1px #fff;text-align:center}',
+    '#sz-card .sz-pillar:after{content:"";position:absolute;right:-18px;bottom:-22px;width:52px;height:52px;border:1px solid color-mix(in srgb,var(--wx,#7a2b88) 22%,transparent);border-radius:50%;box-shadow:0 0 0 8px color-mix(in srgb,var(--wx,#7a2b88) 6%,transparent)}',
+    '#sz-card .sz-pillar header{margin:0 0 8px!important;padding:0 0 7px!important;border:0!important;border-bottom:1px solid color-mix(in srgb,var(--wx,#7a2b88) 18%,transparent)!important;border-radius:0!important;background:none!important;box-shadow:none!important;color:var(--wx,#6a2076)!important;font-size:10px!important;font-weight:900;letter-spacing:.1em}',
+    '#sz-card .sz-gz{position:relative;z-index:1;display:flex;justify-content:center;gap:2px;color:var(--wx,#651078);font:900 28px/1.1 var(--ser)}',
+    '#sz-card .sz-elements{position:relative;z-index:1;margin:5px 0 8px;color:#8d788f;font-size:8px;letter-spacing:.12em}',
+    '#sz-card .sz-nayin{position:relative;z-index:1;min-height:30px;display:grid;place-items:center;color:#6e5b70;font-size:9px;line-height:1.4}',
+    '#sz-card .sz-stage{position:relative;z-index:1;display:inline-flex;margin-top:5px;padding:4px 7px;border:1px solid color-mix(in srgb,var(--wx,#7a2b88) 28%,#ddd);border-radius:999px;color:var(--wx,#651078);background:rgba(255,255,255,.82);font-size:9px;font-weight:800;white-space:nowrap}',
+    '#sz-card .sz-wx-木{--wx:#3b8062;--wx-line:#add6c7;--wx-soft:#eaf8f2}',
+    '#sz-card .sz-wx-火{--wx:#a74743;--wx-line:#e4b9b5;--wx-soft:#fff0ed}',
+    '#sz-card .sz-wx-土{--wx:#9a7025;--wx-line:#e0ca94;--wx-soft:#fff7df}',
+    '#sz-card .sz-wx-金{--wx:#6b7187;--wx-line:#c9cddd;--wx-soft:#f0f2f8}',
+    '#sz-card .sz-wx-水{--wx:#356b94;--wx-line:#b5cee1;--wx-soft:#eaf4fb}',
+    '#sz-card .sz-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}',
+    '#sz-card .sz-summary>div{min-width:0;padding:11px 10px;border:1px solid #ddc6e1;border-radius:12px;background:rgba(255,255,255,.78);box-shadow:inset 0 1px #fff}',
+    '#sz-card .sz-summary>div:nth-child(1){border-color:#dcc17c;background:linear-gradient(145deg,#fff,#fff6d9)}',
+    '#sz-card .sz-summary>div:nth-child(2){border-color:#c8bde0;background:linear-gradient(145deg,#fff,#f0ecff)}',
+    '#sz-card .sz-summary>div:nth-child(3){border-color:#b9d8cd;background:linear-gradient(145deg,#fff,#edf9f4)}',
+    '#sz-card .sz-summary small{display:block;margin-bottom:4px;color:#957a99;font-size:8px;letter-spacing:.12em}',
+    '#sz-card .sz-summary strong{display:block;color:#611371;font:900 14px/1.4 var(--ser)}',
+    '#sz-card .szyun{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr;gap:4px 13px;align-items:center;margin-top:10px;padding:13px 15px;border:1px solid #d6b34d;border-radius:14px;background:radial-gradient(circle at 94% 10%,rgba(221,180,65,.22),transparent 27%),linear-gradient(135deg,#fff8dc,#fff 46%,#f5e8f8);box-shadow:0 9px 22px rgba(79,13,92,.1)}',
+    '#sz-card .szyun:after{content:"運";position:absolute;right:9px;bottom:-20px;color:rgba(111,37,120,.07);font:900 72px/1 var(--ser)}',
+    '#sz-card .szyun-k{grid-row:1/3;position:relative;z-index:1;padding:8px 10px;border:1px solid #edcf70;border-radius:999px;background:linear-gradient(145deg,#4b075a,#9f25b7);color:#fff5d6;font-size:10px;font-weight:900;letter-spacing:.12em;white-space:nowrap}',
+    '#sz-card .szyun strong{position:relative;z-index:1;color:#5e246c;font:900 16px var(--ser);letter-spacing:.06em}',
+    '#sz-card .szyun small{position:relative;z-index:1;color:#806e82;font-size:10px;line-height:1.5}',
+    '#sz-card .sz-conv{margin-top:10px;padding:9px 12px;border-left:3px solid #c69b32;border-radius:0 10px 10px 0;color:#79667c;background:rgba(255,249,226,.74);font-size:10px;line-height:1.6}',
     '#sz-card .szwarn{margin-top:10px;padding:10px 12px;border:1px solid var(--zhu);background:#fdf6f5;font-size:13px;color:var(--zhu);line-height:1.7}',
-    '@media (max-width:420px){#sz-card td.szg,#sz-card td.szz{font-size:22px}#sz-card .szyun{padding:12px 11px;gap:4px 9px}#sz-card .szyun strong{font-size:15px}}'
+    '@media (max-width:420px){#sz-card .sz-dashboard-head{min-height:132px;grid-template-columns:40px 1fr 66px;gap:9px;padding:18px 14px}#sz-card .sz-seal{width:40px;height:40px;font-size:15px}#sz-card .sz-head-copy h2{font-size:19px!important;letter-spacing:.12em!important}#sz-card .sz-head-copy p{font-size:8px}#sz-card .sz-daycore{min-height:74px;border-radius:14px}#sz-card .sz-daycore strong{font-size:26px}#sz-card .sz-dashboard-body{padding:14px 11px}#sz-card .sz-pillars{gap:5px}#sz-card .sz-pillar{padding:9px 3px 8px;border-radius:12px}#sz-card .sz-pillar header{font-size:9px!important}#sz-card .sz-gz{font-size:23px}#sz-card .sz-nayin{font-size:8px}#sz-card .sz-stage{padding:3px 5px;font-size:8px}#sz-card .sz-summary{gap:5px}#sz-card .sz-summary>div{padding:9px 6px}#sz-card .sz-summary strong{font-size:12px}#sz-card .szyun{padding:11px 9px;gap:4px 8px}#sz-card .szyun strong{font-size:14px}}'
   ].join('');
   document.head.appendChild(s);
 }
@@ -188,28 +215,30 @@ function draw() {
     }
   }
 
-  var h = '<h2>四 柱 八 字</h2>', i, g, z;
+  var h = '', i, g, z, wx;
 
   if (d.p) {
-    h += '<table><tr>';
-    for (i = 0; i < 4; i++) h += '<th>' + d.p[i].lab + '</th>';
-    h += '</tr><tr>';
+    g = d.p[2].gz.charAt(0);
+    wx = GAN_WX[g] || '';
+    h += '<div class="sz-dashboard-head"><div class="sz-seal">命</div>' +
+         '<div class="sz-head-copy"><small>FOUR PILLARS · DESTINY CHART</small><h2>四柱八字</h2><p>年月日時成四柱・先看日主，再讀五行與人生節奏</p></div>' +
+         '<div class="sz-daycore"><small>日主核心</small><strong style="color:' + (CORE_COL[wx] || '#f5d978') + '">' + g + '</strong><span>' + wx + '命</span></div></div>' +
+         '<div class="sz-dashboard-body"><div class="sz-pillars">';
+
     for (i = 0; i < 4; i++) {
       g = d.p[i].gz.charAt(0);
-      h += '<td class="szg" style="color:' + (COL[GAN_WX[g]] || '#5d2c20') + '">' + g +
-           '<small>' + (GAN_WX[g] || '') + '</small></td>';
-    }
-    h += '</tr><tr>';
-    for (i = 0; i < 4; i++) {
       z = d.p[i].gz.charAt(1);
-      h += '<td class="szz" style="color:' + (COL[ZHI_WX[z]] || '#5d2c20') + '">' + z +
-           '<small>' + (ZHI_WX[z] || '') + '</small></td>';
+      wx = GAN_WX[g] || ZHI_WX[z] || '';
+      h += '<article class="sz-pillar sz-wx-' + wx + '"><header>' + d.p[i].lab.replace(/\s/g,'') + '</header>' +
+           '<div class="sz-gz"><span>' + g + '</span><span>' + z + '</span></div>' +
+           '<div class="sz-elements">' + (GAN_WX[g] || '—') + '・' + (ZHI_WX[z] || '—') + '</div>' +
+           '<div class="sz-nayin">' + (d.p[i].ny || '—') + '</div>' +
+           '<span class="sz-stage">' + (d.p[i].di || '—') + '</span></article>';
     }
-    h += '</tr><tr>';
-    for (i = 0; i < 4; i++) h += '<td class="szny">' + (d.p[i].ny || '—') + '</td>';
-    h += '</tr><tr>';
-    for (i = 0; i < 4; i++) h += '<td class="szstage"><b>' + (d.p[i].di || '—') + '</b><small>十二長生</small></td>';
-    h += '</tr></table>';
+    h += '</div><div class="sz-summary">' +
+         '<div><small>日主五行</small><strong>' + d.p[2].gz.charAt(0) + '・' + (GAN_WX[d.p[2].gz.charAt(0)] || '—') + '</strong></div>' +
+         '<div><small>日柱旬</small><strong>' + (d.xun || '—') + '</strong></div>' +
+         '<div><small>出生時辰</small><strong>' + (ZHI[(d.h || 1) - 1] || '—') + '時</strong></div></div>';
 
     if (d.yun && d.yun.date) {
       h += '<div class="szyun"><span class="szyun-k">大運起運</span>' +
@@ -217,13 +246,8 @@ function draw() {
            '<small>出生後 ' + d.yun.year + ' 年 ' + d.yun.month + ' 個月 ' + d.yun.day + ' 日起運</small></div>';
     }
 
-    h += '<div class="szfoot"><b>日主</b>　' + d.p[2].gz.charAt(0) +
-         '（' + (GAN_WX[d.p[2].gz.charAt(0)] || '') + '）';
-    if (d.xun) h += '　　<b>日柱旬</b>　' + d.xun;
-    /* 【老師指示】旬空不呈現在工具上，屬口授內容 */
-    h += '<br>時辰　' + (ZHI[(d.h || 1) - 1] || '') + '時' +
-         (ZI_NEXT_DAY ? '（子時以晚子計，跨日）' : '');
-    if (d.conv) h += '<br>' + d.conv;
+    if (d.conv || ZI_NEXT_DAY) h += '<div class="sz-conv">' +
+      (ZI_NEXT_DAY ? '子時採晚子跨日規則。' : '') + (d.conv || '') + '</div>';
     h += '</div>';
   }
 
