@@ -4,13 +4,14 @@
    - 圖片 / 字型 一律「先用快取、背景更新」→ 省流量、開得快。
    - 改版時只要把下面 VERSION 的數字 +1，舊快取會自動清掉。
 */
-const VERSION = 'jl-v7-premium-visual-system';
+const VERSION = 'jl-v8-traditional-zh';
 const CORE = [
   './',
   './index.html',
   './taohua.html',
   './rz.html',
   './data-taohua.js',
+  './traditional-zh.js?v=traditional-v1',
   './badge-taohua-v1.svg',
   './assets/celestial-orbit.svg',
   './assets/peach-oracle.svg',
