@@ -41,8 +41,11 @@
     'font-family:inherit;}',
     '.jlp-btn:hover{background:linear-gradient(135deg,#430451,#7c1398 55%,#a728c1);}',
     '.jlp-btn:focus-visible,.jlp-link:focus-visible{outline:2px solid #C9A227;outline-offset:2px;}',
-    '.jlp-foot{text-align:center;padding:26px 16px 34px;}',
-    '.jlp-link{font-size:12px;color:#6B6259;text-decoration:none;border-bottom:1px solid #C9A227;',
+    '.jlp-foot{position:relative;overflow:hidden;width:min(calc(100% - 28px),620px);margin:14px auto 22px;padding:18px 16px;text-align:center;',
+    'border:1px solid rgba(218,180,72,.72);border-radius:18px;background:radial-gradient(circle at 88% 24%,rgba(213,92,228,.28),transparent 28%),url("assets/celestial-orbit.svg") 105% 52%/150px no-repeat,linear-gradient(105deg,#270230,#641078 58%,#34043e);',
+    'box-shadow:0 12px 26px rgba(71,8,85,.2),inset 0 1px rgba(255,255,255,.2);}',
+    '.jlp-foot:before{content:"隱私安心 · 本機運算 · 不留紀錄";display:block;margin-bottom:5px;color:#efd987;font-size:10px;font-weight:800;letter-spacing:.14em;}',
+    '.jlp-link{font-size:12px;color:#fff3ff;text-decoration:none;border-bottom:1px solid #E1C45D;',
     'padding-bottom:2px;cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;',
     'font-family:inherit;}'
   ].join('');
