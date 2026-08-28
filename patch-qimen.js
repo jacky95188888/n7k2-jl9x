@@ -77,6 +77,13 @@ function css(){
   '.qm-gj .jx{font-size:12px;margin-left:8px;letter-spacing:.12em;color:#8a7a64}',
   '.qm-gj .pr{font-size:11px;color:#a08d72;letter-spacing:.14em;margin:2px 0 0}',
   '.qm-gj p{margin:8px 0 0;font-size:15px;color:#3b332c;line-height:1.8}',
+  '.qm-classic{margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}',
+  '.qm-classic summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--zhu);font-size:14px;font-weight:700;letter-spacing:.08em}',
+  '.qm-classic summary::-webkit-details-marker{display:none}',
+  '.qm-classic summary:after{content:"\\FF0B";margin-left:auto;color:var(--gold)}',
+  '.qm-classic[open] summary:after{content:"\\FF0D"}',
+  '.qm-classic .qm-classic-body{margin:10px 0 0;padding:12px 13px;border-radius:2px;background:#f8f2e8;color:#3b332c;font-size:14px;line-height:1.9}',
+  '.qm-classic small{display:block;margin-top:8px;color:#8f8069;font-size:11px;line-height:1.7}',
   '.qm-ly{border-bottom:1px solid var(--line)}',
   '.qm-ly summary{list-style:none;cursor:pointer;padding:12px 2px;display:flex;align-items:baseline;gap:9px}',
   '.qm-ly summary::-webkit-details-marker{display:none}',
@@ -218,9 +225,15 @@ function run(){
   el('qmGong').innerHTML='<h4>'+G.n+'</h4><span class="wx">五行 '+G.wx+'</span><p>'+G.t+'</p>'+
     (fh?'<div class="qm-flags">'+fh+'</div>':'');
 
-  var gj=D.geju[GAN[tian]+GAN[di]]||['—','平','此組合無專名，依五行生剋參詳。'];
+  var gejuKey=GAN[tian]+GAN[di];
+  var gj=D.geju[gejuKey]||['—','平','此組合無專名，依五行生剋參詳。'];
+  var classic=D.classic&&D.classic[gejuKey];
+  var classicHtml=classic
+    ? '<details class="qm-classic"><summary>古法十干克應詳解</summary><div class="qm-classic-body">'+classic+
+      '<small>依《奇門遁甲——十干克應的看法》整理。古法文字須合參八門、九星、八神及迫、墓、擊刑，不可單憑一組干象定吉凶。</small></div></details>'
+    : '';
   el('qmGj').innerHTML='<span class="nm">'+gj[0]+'</span><span class="jx">'+gj[1]+'</span>'+
-    '<p class="pr">天盤 '+GAN[tian]+' 加 地盤 '+GAN[di]+'</p><p>'+gj[2]+'</p>';
+    '<p class="pr">天盤 '+GAN[tian]+' 加 地盤 '+GAN[di]+'</p><p>'+gj[2]+'</p>'+classicHtml;
 
   var L=[
     ['第五碼 · 倒數第7','宮位',G.n,'所處的環境、平台與空間，能否發揮。',G.t],
