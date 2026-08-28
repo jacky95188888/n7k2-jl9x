@@ -107,9 +107,23 @@
     document.body.classList.add('jl-catalog-ready');
   }
 
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',mountCatalog);
-  }else{
+  function loadTaohuaGuide(){
+    if(!document.body.classList.contains('jl-page-taohua')) return;
+    if(document.getElementById('th-guide-loader')) return;
+    var script=document.createElement('script');
+    script.id='th-guide-loader';
+    script.src='taohua-guide-v2.js?v=1234-guide-20260828';
+    document.body.appendChild(script);
+  }
+
+  function boot(){
     mountCatalog();
+    loadTaohuaGuide();
+  }
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',boot);
+  }else{
+    boot();
   }
 })();
