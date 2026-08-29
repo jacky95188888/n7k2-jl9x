@@ -56,7 +56,17 @@ var CSS = [
   '.jg-c.jg-off{background:#f3ede2}',
   '.jg-c.jg-off .jg-n{display:none}',
   '.jg-c.jg-mid{background:#f7efe2}',
-  '.jg-note{margin-top:12px;font-size:12px;color:#85776c;line-height:1.8}'
+  '.jg-note{margin-top:12px;font-size:12px;color:#85776c;line-height:1.8}',
+  '.jg-star-card{margin-top:24px;padding:16px 12px 14px;border:1px solid #cdbfa7;background:#fffdf9}',
+  '.jg-star-title{text-align:center;margin:0 0 12px;color:#5d2c20;font-family:var(--ser,serif);font-size:16px;font-weight:700;letter-spacing:.12em}',
+  '.jg-axis{text-align:center;color:#5d2c20;font-size:14px;font-weight:800;line-height:1.5}',
+  '.jg-star-row{display:grid;grid-template-columns:22px minmax(0,1fr) 22px;align-items:center;gap:5px}',
+  '.jg-axis-side{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.1em}',
+  '.jg-star-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #9c8b74;background:#9c8b74;gap:1px}',
+  '.jg-star-cell{position:relative;min-height:75px;display:flex;align-items:center;justify-content:center;padding:16px 3px 8px;background:#fffdf9;color:#241f1c;text-align:center;font-family:var(--ser,serif);font-size:15px;font-weight:700}',
+  '.jg-star-cell em{position:absolute;right:7px;top:4px;color:#a12626;font-family:Arial,sans-serif;font-size:16px;font-style:normal;font-weight:800}',
+  '.jg-star-note{margin:10px 0 0;text-align:center;color:#85776c;font-size:11px;letter-spacing:.06em}',
+  '@media(max-width:390px){.jg-star-card{padding-left:8px;padding-right:8px}.jg-star-row{grid-template-columns:18px minmax(0,1fr) 18px;gap:3px}.jg-star-cell{min-height:68px;font-size:13px}.jg-star-cell em{right:5px;font-size:14px}}'
 ].join('');
 
 function css(){
@@ -118,6 +128,29 @@ function render(raw){
 }
 
 /* ---------- 面板 ---------- */
+function starTable(){
+  var stars = [
+    ['天輔星',4], ['天英星',9], ['天芮星',2],
+    ['天沖星',3], ['天禽星',5], ['天柱星',7],
+    ['天任星',8], ['天蓬星',1], ['天心星',6]
+  ];
+  var cells = '';
+  for (var i = 0; i < stars.length; i++){
+    cells += '<div class="jg-star-cell"><span>' + stars[i][0] + '</span><em>' + stars[i][1] + '</em></div>';
+  }
+  return '<section class="jg-star-card" aria-label="九宮九星對照表">' +
+           '<h3 class="jg-star-title">九宮九星對照表</h3>' +
+           '<div class="jg-axis">南</div>' +
+           '<div class="jg-star-row">' +
+             '<div class="jg-axis jg-axis-side">東</div>' +
+             '<div class="jg-star-grid">' + cells + '</div>' +
+             '<div class="jg-axis jg-axis-side">西</div>' +
+           '</div>' +
+           '<div class="jg-axis">北</div>' +
+           '<p class="jg-star-note">固定九宮星位 · 南上北下 · 東左西右</p>' +
+         '</section>';
+}
+
 function panel(){
   css();
   return '<div class="jg-in">' +
@@ -126,7 +159,8 @@ function panel(){
            '<button id="jg-go" type="button">起 盤</button>' +
          '</div>' +
          '<div class="jg-err" id="jg-err"></div>' +
-         '<div id="jg-out"></div>';
+         '<div id="jg-out"></div>' +
+         starTable();
 }
 
 /* 事件用委派，面板重繪也不會失效 */
