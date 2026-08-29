@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#3b0648">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>奇門81格象意｜筠玲易數</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--deep:#2d0337;--purple:#651078;--purple2:#9e26b7;--gold:#dcb64d;--gold2:#f5df8c;--paper:#fffaff;--ink:#4d2854;--muted:#7b687f;--line:#dfc4e4;--ser:"Noto Serif TC","Songti TC",serif;--sans:-apple-system,BlinkMacSystemFont,"PingFang TC","Noto Sans TC",sans-serif}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;padding:0 0 max(36px,env(safe-area-inset-bottom));color:var(--ink);background:radial-gradient(circle at 8% 6%,#d99bea36,transparent 26%),radial-gradient(circle at 92% 34%,#e7c3582b,transparent 22%),linear-gradient(180deg,#fffaff,#f1dcf6);font:14px/1.8 var(--sans)}
+.wrap{width:min(100%,720px);margin:auto;padding:0 14px}
+.top{position:sticky;top:0;z-index:50;margin:0 -14px;padding:max(8px,env(safe-area-inset-top)) 14px 8px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,#2b0335f5,#650d76f5,#30043bf5);border-bottom:1px solid #d8b448;box-shadow:0 8px 22px #31043d28;backdrop-filter:blur(12px)}
+.brand{display:flex;align-items:center;gap:8px;color:#f5df91;text-decoration:none;font:900 18px var(--ser);letter-spacing:.07em}.brand i{width:34px;height:34px;display:grid;place-items:center;border:1.5px solid #dfbd59;border-radius:50%;font-style:normal;font-size:13px}.back{padding:8px 11px;border:1px solid #d9b74e;border-radius:999px;color:#f5df91;text-decoration:none;font-size:11px;font-weight:900}
+.hero{position:relative;overflow:hidden;margin:14px 0;padding:25px 21px 24px;border:1px solid #deb94f;border-radius:24px;color:#fff;background:radial-gradient(circle at 88% 18%,#cf50df66,transparent 28%),url("assets/celestial-orbit.svg") 117% -58px/270px auto no-repeat,linear-gradient(110deg,#280231,#6b0d7c 62%,#35043f);box-shadow:0 17px 37px #3e074b34,inset 0 1px #ffffff38}
+.hero:before{content:"";position:absolute;inset:8px;border:1px solid #e9cb6850;border-radius:17px;pointer-events:none}.hero>*{position:relative}.hero small{color:#efd372;font-size:9px;font-weight:900;letter-spacing:.18em}.hero h1{margin:6px 0 5px;color:#fff;font:900 31px/1.25 var(--ser);letter-spacing:.11em;text-shadow:0 3px 14px #210026}.hero p{max-width:490px;margin:0;color:#eedff1;font-size:12px;line-height:1.8}.hero b{display:inline-block;margin-top:12px;padding:5px 10px;border:1px solid #d9b752;border-radius:999px;color:#ffe995;background:#ffffff10;font-size:10px;letter-spacing:.08em}
+.panel{position:relative;margin:14px 0;padding:19px 16px;border:1px solid var(--line);border-radius:21px;background:radial-gradient(circle at 96% 4%,#ebcef25c,transparent 29%),linear-gradient(145deg,#fff,#fff8ff);box-shadow:0 11px 27px #5a0b6b18,inset 0 1px #fff}.panel:before{content:"";position:absolute;left:18px;right:18px;top:0;height:2px;background:linear-gradient(90deg,transparent,#d8b342,transparent)}
+.head{display:flex;align-items:center;gap:10px;margin-bottom:13px}.head i{width:39px;height:39px;display:grid;place-items:center;border:1px solid #ddb84d;border-radius:50%;color:#ffe58e;background:linear-gradient(145deg,#531064,#9d25b6);font:900 14px var(--ser);font-style:normal}.head small{display:block;color:#a57e28;font-size:8px;font-weight:900;letter-spacing:.15em}.head h2{margin:2px 0 0;color:#5d106d;font:900 19px var(--ser);letter-spacing:.07em}
+.selectors{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{display:block;margin-bottom:5px;color:#715876;font-size:11px;font-weight:800}.field select{width:100%;height:48px;padding:0 12px;border:1px solid #d7b6dd;border-radius:12px;color:#53115f;background:#fff;font:900 16px var(--ser)}
+.result{margin-top:14px;padding:18px 16px;border:1px solid #d8b64d;border-radius:16px;background:radial-gradient(circle at 95% 5%,#edcb6550,transparent 30%),linear-gradient(145deg,#fffdf3,#fff7df 55%,#fff7ff)}.result-code{display:flex;align-items:center;gap:8px;color:#7d6220;font-size:10px;font-weight:900;letter-spacing:.11em}.result-code b{display:inline-grid;place-items:center;min-width:40px;height:40px;padding:0 8px;border:1px solid #dfbc54;border-radius:50%;color:#ffe58c;background:linear-gradient(145deg,#51065f,#9420ad);font:900 17px var(--ser);letter-spacing:0}.result h3{margin:10px 0 6px;color:#5a0d68;font:900 23px var(--ser);letter-spacing:.08em}.result p{margin:0;color:#5d4861;font:700 14px/1.95 var(--ser)}
+.axis{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;padding:9px 11px;border-radius:12px;color:#745678;background:#f8eafb;font-size:10px;font-weight:800}.axis b{color:#651078}
+.matrix{display:grid;grid-template-columns:30px repeat(9,minmax(0,1fr));gap:3px}.matrix .corner,.matrix .label{display:grid;place-items:center;min-height:31px;border-radius:8px;color:#7b6227;background:#fff4cf;font:900 11px var(--ser)}.matrix .corner{font-size:8px}.matrix button{min-width:0;height:38px;padding:0;border:1px solid #dfc7e4;border-radius:8px;color:#5d2c65;background:linear-gradient(145deg,#fff,#fff5ff);font:900 10px var(--ser);cursor:pointer}.matrix button:hover,.matrix button:focus-visible,.matrix button.on{border-color:#d8b247;color:#ffe68d;background:linear-gradient(145deg,#50055f,#9420ad);outline:none;box-shadow:0 5px 12px #5a0b6c28}
+.note{margin:13px 0 0;padding:10px 12px;border-left:3px solid #d5ad3c;color:#7c687f;background:#fff7df;font-size:10px;line-height:1.7}
+.footer{margin:18px 0 0;padding:20px;border:1px solid #d8b448;border-radius:18px;color:#efd98d;background:linear-gradient(100deg,#280230,#650d76);text-align:center;font:800 12px var(--ser);letter-spacing:.09em}
+@media(max-width:430px){.hero{padding:22px 17px}.hero h1{font-size:27px}.panel{padding:17px 11px}.matrix{grid-template-columns:24px repeat(9,minmax(0,1fr));gap:2px}.matrix .corner,.matrix .label{min-height:27px;border-radius:6px;font-size:9px}.matrix .corner{font-size:7px}.matrix button{height:34px;border-radius:6px;font-size:9px}.result{padding:16px 13px}.result h3{font-size:20px}.result p{font-size:13px}.selectors{gap:7px}.field select{font-size:14px}}
+@media(max-width:360px){.wrap{padding:0 9px}.top{margin:0 -9px;padding-left:9px;padding-right:9px}.matrix{grid-template-columns:21px repeat(9,minmax(0,1fr));gap:1px}.matrix button{height:31px;font-size:8px}.matrix .corner,.matrix .label{min-height:25px;font-size:8px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="top"><a class="brand" href="index.html"><i>筠</i>筠玲易數</a><a class="back" href="index.html?route=%E5%A5%87%E9%96%80">← 回奇門號碼</a></header>
+<section class="hero"><small>QIMEN · 81 STEM COMBINATIONS</small><h1>奇門81格象意</h1><p>天盤九干 × 地盤九干，共81組十干克應。直接選擇組合，即可查看筠玲老師提供教材中的完整象意。</p><b id="data-count">資料檢查中</b></section>
+<section class="panel">
+<div class="head"><i>查</i><div><small>SELECT A COMBINATION</small><h2>選擇天盤與地盤</h2></div></div>
+<div class="selectors"><div class="field"><label for="sky">天盤干</label><select id="sky"></select></div><div class="field"><label for="earth">地盤干</label><select id="earth"></select></div></div>
+<div class="result" id="result" aria-live="polite"><div class="result-code"><b id="sky-badge">戊</b><span>天盤加地盤</span><b id="earth-badge">戊</b></div><h3 id="result-title">戊加戊</h3><p id="result-text"></p></div>
+</section>
+<section class="panel">
+<div class="head"><i>81</i><div><small>COMPLETE MATRIX</small><h2>81格完整對照表</h2></div></div>
+<div class="axis"><span><b>左側：</b>天盤干</span><span><b>上方：</b>地盤干</span></div>
+<div class="matrix" id="matrix"></div>
+<div class="note">閱讀方式：先看天盤干，再看地盤干。例如「天盤戊、地盤丙」即查「戊加丙」。象意仍需合參八門、九星、八神，以及門迫、入墓、擊刑，不宜只憑單一干象定吉凶。</div>
+</section>
+<footer class="footer">筠玲易數 · 奇門81格象意資料庫</footer>
+</main>
+<script src="traditional-zh.js?v=traditional-v1"></script>
+<script src="data-qimen.js?v=qimen-81-complete-20260829"></script>
+<script>
+(function(){
+'use strict';
+var stems=['戊','乙','丙','丁','己','庚','辛','壬','癸'];
+var data=(window.QMDATA&&window.QMDATA.classic)||{};
+var sky=document.getElementById('sky'),earth=document.getElementById('earth'),matrix=document.getElementById('matrix');
+stems.forEach(function(s){sky.add(new Option(s,s));earth.add(new Option(s,s));});
+function key(){return sky.value+earth.value}
+function render(){
+ var k=key(),text=data[k]||'此組資料尚未建立。';
+ document.getElementById('sky-badge').textContent=sky.value;
+ document.getElementById('earth-badge').textContent=earth.value;
+ document.getElementById('result-title').textContent=sky.value+'加'+earth.value;
+ document.getElementById('result-text').textContent=text;
+ matrix.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.key===k);});
+ try{history.replaceState(null,'',location.pathname+'?key='+encodeURIComponent(k));}catch(e){}
+}
+function buildMatrix(){
+ var h='<span class="corner">天＼地</span>';
+ stems.forEach(function(s){h+='<span class="label">'+s+'</span>'});
+ stems.forEach(function(a){
+  h+='<span class="label">'+a+'</span>';
+  stems.forEach(function(b){var k=a+b;h+='<button type="button" data-key="'+k+'" aria-label="'+a+'加'+b+'">'+a+b+'</button>'});
+ });
+ matrix.innerHTML=h;
+ matrix.addEventListener('click',function(e){var b=e.target.closest('button[data-key]');if(!b)return;sky.value=b.dataset.key.charAt(0);earth.value=b.dataset.key.charAt(1);render();document.getElementById('result').scrollIntoView({behavior:'smooth',block:'center'});});
+}
+sky.addEventListener('change',render);earth.addEventListener('change',render);
+buildMatrix();
+var initial=new URLSearchParams(location.search).get('key');
+if(initial&&data[initial]){sky.value=initial.charAt(0);earth.value=initial.charAt(1);}
+var keys=stems.flatMap(function(a){return stems.map(function(b){return a+b})});
+var complete=keys.filter(function(k){return data[k]}).length;
+document.getElementById('data-count').textContent='已載入 '+complete+'／81 組'+(complete===81?' · 完整無缺漏':' · 尚有缺漏');
+render();
+})();
+</script>
+</body>
+</html>
