@@ -76,21 +76,6 @@ input[type=text]:focus{outline:2px solid var(--gold);outline-offset:1px;border-c
 .tally{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13px}
 .tally b{color:var(--seal)}
 .empty{font-size:13px;color:var(--ink2);text-align:center;padding:14px 0}
-.gua-sequence{margin:2px 0 18px;padding:15px 12px 12px;border:1px solid var(--line);border-radius:5px;background:#fffaf0}
-.gua-sequence-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin-bottom:12px}
-.gua-sequence-head b{color:var(--seal);font-size:14px;letter-spacing:.14em}
-.gua-sequence-head small{color:var(--ink2);font-size:10.5px}
-.gua-scroll{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 8px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent}
-.gua-item{position:relative;flex:1 0 58px;min-width:58px;padding:9px 5px 8px;text-align:center;border:1px solid #e3d5b8;border-radius:5px;background:linear-gradient(180deg,#fff,#f5ead3)}
-.gua-item:not(:last-child):after{content:"›";position:absolute;right:-8px;top:37px;z-index:2;color:var(--gold);font-weight:700}
-.gua-num{display:block;color:var(--seal);font-size:19px;font-weight:700;line-height:1.2}
-.gua-shape{width:38px;margin:7px auto 6px;display:grid;gap:4px}
-.gua-yao{height:4px;display:flex;justify-content:space-between}
-.gua-yao.yang{background:var(--seal)}
-.gua-yao.yin span{display:block;width:16px;background:var(--seal)}
-.gua-name{display:block;color:var(--ink);font-size:12px;font-weight:700;line-height:1.3}
-.gua-zhi{display:block;color:var(--ink2);font-size:10px;line-height:1.4}
-
 table{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed}
 th,td{border:1px solid var(--line);padding:6px 2px;text-align:center}
 th{background:#EFE5CE;color:var(--seal);font-weight:700}
@@ -346,34 +331,6 @@ function makePairs(arr){
   return p;
 }
 
-/* 將每個數字依序列成三爻卦形，對應老師的「列卦」閱讀方式 */
-function drawYao(gua){
-  var bits = YAO[gua] || '';
-  var h = '<span class="gua-shape" aria-label="' + esc(gua) + '卦卦形">';
-  for (var i = 0; i < bits.length; i++){
-    h += bits.charAt(i) === '1'
-      ? '<i class="gua-yao yang"></i>'
-      : '<i class="gua-yao yin"><span></span><span></span></i>';
-  }
-  return h + '</span>';
-}
-
-function renderGuaSequence(arr){
-  if (rule !== 'younian') return '';
-  var h = '<section class="gua-sequence" aria-label="卦形排列">'
-        + '<div class="gua-sequence-head"><b>卦形排列</b><small>每一個數字依序列卦</small></div>'
-        + '<div class="gua-scroll">';
-  arr.forEach(function(n){
-    h += '<div class="gua-item">'
-       + '<strong class="gua-num">' + esc(n) + '</strong>'
-       + drawYao(GUA[n])
-       + '<span class="gua-name">' + esc(GUA[n]) + '卦</span>'
-       + '<small class="gua-zhi">' + esc(ZHI[n]) + '支</small>'
-       + '</div>';
-  });
-  return h + '</div></section>';
-}
-
 function render(raw){
   var all = parseInput(raw);
   if (all.length < 2){
@@ -424,7 +381,7 @@ function render(raw){
           + (rule === 'younian' ? '遊年法只取 1 至 12。' : '0 依附前數，5 為連接數，兩者本身不成場。')
           + '</span>';
   }
-  out.innerHTML = renderGuaSequence(arr) + html + '<div class="tally">' + line + '</div>';
+  out.innerHTML = html + '<div class="tally">' + line + '</div>';
 }
 
 /* ─────────── 對照表 ─────────── */
