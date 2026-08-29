@@ -106,6 +106,12 @@ function boot(){
 
 <section class="jlf-tools" id="jlf-tools">
 
+  <div class="jlf-tools-intro">
+    <span>✦</span>
+    <h2>選擇您想查看的項目</h2>
+    <p>一排一功能 · 清楚好找 · 點擊即進入</p>
+  </div>
+
   <div class="jlf-grid">
 
 
@@ -422,6 +428,27 @@ function boot(){
 `;
 
   wrap.insertBefore(home,feature);
+
+  /* 功能入口統一為直式單欄；桃花神數置頂，每一整排都可點擊。 */
+  const toolGrid=home.querySelector('.jlf-grid');
+  const taohuaCard=home.querySelector('.jlf-taohua');
+  if(toolGrid && taohuaCard) toolGrid.prepend(taohuaCard);
+
+  home.querySelectorAll('.jlf-card').forEach(function(card){
+    card.tabIndex=0;
+    card.setAttribute('role','link');
+    card.addEventListener('click',function(event){
+      if(event.target.closest('button,a')) return;
+      const action=card.querySelector('button,a');
+      if(action) action.click();
+    });
+    card.addEventListener('keydown',function(event){
+      if(event.key!=='Enter' && event.key!==' ') return;
+      event.preventDefault();
+      const action=card.querySelector('button,a');
+      if(action) action.click();
+    });
+  });
 
 
   /* 返回首頁 */
@@ -1547,324 +1574,250 @@ body.jlf-feature-mode
 
 
 
-/* 六大卡片 */
+/* 功能入口｜直式單欄精品卡片 */
 
 .jlf-tools{
-  padding:
-    8px 9px 9px;
-
-  background:
-    radial-gradient(circle at 8% 15%,rgba(185,91,211,.16),transparent 27%),
-    radial-gradient(circle at 94% 82%,rgba(224,181,76,.15),transparent 25%),
-    linear-gradient(180deg,#fff8ff,#f3dcf8);
-
-  border-bottom:1px solid rgba(195,139,205,.3);
-}
-
-
-.jlf-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(0,1fr)
-    );
-
-  gap:7px;
-}
-
-
-.jlf-card{
   position:relative;
   overflow:hidden;
-  height:154px;
-
-  padding:
-    7px 3px 6px;
-
-  text-align:center;
-
-  border:
-    1px solid color-mix(in srgb,var(--card-accent,#a465bd) 42%,#dcc7e1);
-
-  border-radius:13px;
-
+  padding:26px 20px 30px;
   background:
-    linear-gradient(
-      180deg,
-      #fff 0%,
-      #fff8ff 100%
-    );
-
-  box-shadow:
-    0 9px 21px
-    color-mix(in srgb,var(--card-accent,#a465bd) 15%,transparent),
-    inset 0 1px rgba(255,255,255,.9);
+    radial-gradient(circle at 8% 8%,rgba(255,255,255,.92),transparent 24%),
+    radial-gradient(circle at 92% 90%,rgba(202,135,218,.20),transparent 30%),
+    linear-gradient(180deg,#f8edfb 0%,#ead7f1 100%);
+  border-bottom:1px solid rgba(173,116,184,.34);
 }
 
-.jlf-card::before{
+.jlf-tools::before,
+.jlf-tools::after{
   content:"";
   position:absolute;
-  inset:0;
-  background:
-    linear-gradient(135deg,rgba(255,255,255,.88),transparent 46%),
-    url("assets/celestial-orbit.svg") 132% 128%/88px 88px no-repeat;
-  opacity:.42;
+  width:150px;
+  height:150px;
+  border:1px solid rgba(194,150,95,.18);
+  border-radius:50%;
   pointer-events:none;
 }
+.jlf-tools::before{left:-96px;top:58px}
+.jlf-tools::after{right:-110px;bottom:32px}
 
-.jlf-card::after{
+.jlf-tools-intro{
+  position:relative;
+  z-index:1;
+  max-width:700px;
+  margin:0 auto 22px;
+  text-align:center;
+}
+.jlf-tools-intro span{display:block;color:#bd8c36;font-size:13px}
+.jlf-tools-intro h2{
+  margin:4px 0 6px;
+  color:#3e124b;
+  font-family:"Noto Serif TC",serif;
+  font-size:25px;
+  line-height:1.35;
+  letter-spacing:.08em;
+}
+.jlf-tools-intro p{margin:0;color:#705b76;font-size:11px;letter-spacing:.09em}
+
+.jlf-grid{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:700px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+
+.jlf-card,
+.jlf-taohua{
+  --card-accent:#7d2c93;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  min-height:112px;
+  margin:0;
+  padding:10px 17px 10px 12px;
+  display:grid;
+  grid-template-columns:94px minmax(0,1fr) 48px;
+  grid-template-rows:auto auto auto;
+  align-items:center;
+  column-gap:14px;
+  text-align:left;
+  border:1px solid color-mix(in srgb,var(--card-accent) 34%,#d8bdde);
+  border-radius:22px;
+  color:#3e1648;
+  background:
+    radial-gradient(circle at 12% 50%,color-mix(in srgb,var(--card-accent) 19%,transparent),transparent 23%),
+    linear-gradient(100deg,rgba(255,255,255,.96),rgba(255,250,255,.84));
+  box-shadow:
+    0 9px 22px color-mix(in srgb,var(--card-accent) 16%,transparent),
+    inset 0 1px rgba(255,255,255,.92);
+  cursor:pointer;
+  text-decoration:none;
+  transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+
+.jlf-card::before,
+.jlf-taohua::before{
   content:"";
   position:absolute;
-  left:14%;right:14%;top:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--card-accent,#c78fda),transparent);
-  opacity:.85;
+  inset:5px;
+  z-index:-1;
+  border:1px solid rgba(206,165,93,.38);
+  border-radius:17px;
+  pointer-events:none;
+}
+.jlf-card::after,
+.jlf-taohua::after{
+  content:"";
+  position:absolute;
+  left:107px;
+  top:24px;
+  bottom:24px;
+  width:1px;
+  background:linear-gradient(transparent,#c49543,transparent);
+  opacity:.6;
 }
 
-.jlf-card>*{position:relative;z-index:1}
+.jlf-card:hover,
+.jlf-card:focus-visible,
+.jlf-taohua:hover,
+.jlf-taohua:focus-visible{
+  transform:translateY(-2px);
+  border-color:#c79d49;
+  box-shadow:0 13px 28px color-mix(in srgb,var(--card-accent) 22%,transparent),inset 0 1px #fff;
+  outline:none;
+}
 
-.jlf-card:nth-child(1){--card-accent:#a465bd;background:radial-gradient(circle at 50% 8%,#eed3f8,transparent 27%),linear-gradient(180deg,#fff,#f7e7fc)}
-.jlf-card:nth-child(2){--card-accent:#4f83a6;background:radial-gradient(circle at 50% 8%,#d9edf8,transparent 27%),linear-gradient(180deg,#fff,#eaf5fc)}
-.jlf-card:nth-child(3){--card-accent:#b28331;background:radial-gradient(circle at 50% 8%,#f9e5ad,transparent 27%),linear-gradient(180deg,#fff,#fff4d8)}
-.jlf-card:nth-child(4){--card-accent:#b44f79;background:radial-gradient(circle at 50% 8%,#f6d7e5,transparent 27%),linear-gradient(180deg,#fff,#fde8f0)}
-.jlf-card:nth-child(5){--card-accent:#3e8b78;background:radial-gradient(circle at 50% 8%,#d2eee5,transparent 27%),linear-gradient(180deg,#fff,#e6f7f1)}
-.jlf-card:nth-child(6){--card-accent:#7c5bab;background:radial-gradient(circle at 50% 8%,#e2d9f7,transparent 27%),linear-gradient(180deg,#fff,#eee9fb)}
-
+.jlf-card:nth-child(2){--card-accent:#376c9b}
+.jlf-card:nth-child(3){--card-accent:#a67427}
+.jlf-card:nth-child(4){--card-accent:#a94477}
+.jlf-card:nth-child(5){--card-accent:#348372}
+.jlf-card:nth-child(6){--card-accent:#6e50a5}
+.jlf-card:nth-child(7){--card-accent:#966526}
 
 .jlf-badge{
+  grid-column:1;
+  grid-row:1/4;
   position:relative;
-
-  width:50px;
-  height:50px;
-
-  margin:
-    0 auto 5px;
-
+  width:86px;
+  height:86px;
+  margin:0;
   display:grid;
   place-items:center;
-
-  border:0;
-  background:transparent;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 38% 30%,rgba(255,255,255,.46),transparent 24%),
+    radial-gradient(circle,color-mix(in srgb,var(--card-accent) 54%,#50105f),#35113e 72%);
+  box-shadow:
+    0 8px 16px color-mix(in srgb,var(--card-accent) 35%,transparent),
+    inset 0 0 0 2px rgba(225,188,101,.72),
+    inset 0 0 0 6px rgba(255,255,255,.11);
 }
-
 .jlf-badge::before{
   content:"";
   position:absolute;
-  inset:-8px;
+  inset:-5px;
+  border:1px solid rgba(198,151,67,.5);
   border-radius:50%;
-  background:radial-gradient(circle,rgba(245,211,104,.26),transparent 64%);
-  filter:blur(3px);
-  z-index:-1;
+  box-shadow:0 0 16px color-mix(in srgb,var(--card-accent) 24%,transparent);
 }
-
-
-.jlf-badge::after{
-  content:none;
-}
-
+.jlf-badge::after{content:none}
 .jlf-badge img{
   display:block;
-  width:100%;
-  height:100%;
+  width:82px;
+  height:82px;
   object-fit:contain;
-  filter:drop-shadow(0 5px 6px rgba(70,7,89,.34));
+  filter:drop-shadow(0 6px 7px rgba(51,7,62,.34));
 }
-
-
-.jlf-badge svg{
-  width:38px;
-  height:38px;
-
-  fill:none;
-
-  stroke:
-    var(--gold2);
-
-  stroke-width:1.8;
-
-  filter:
-    drop-shadow(
-      0 1px 1px
-      rgba(42,2,51,.5)
-    );
-}
-
-
-.jlf-badge svg text{
-  fill:
-    var(--gold2);
-
-  stroke:none;
-
-  font-family:
-    "Noto Serif TC",
-    serif;
-
-  font-size:13px;
-
-  font-weight:900;
-}
-
-.jlf-badge svg .badge-char{
-  font-size:15px;
-  text-anchor:middle;
-  dominant-baseline:middle;
-}
-
-.jlf-badge svg .badge-word{
-  font-size:15px;
-  letter-spacing:2px;
-  text-anchor:middle;
-}
-
-.jlf-badge svg .trigram{
-  font-family:serif;
-  font-size:11px;
-  text-anchor:middle;
-}
-
-
-.jlf-badge .ring2{
-  stroke:
-    rgba(246,218,126,.9);
-}
-
-
-.jlf-badge-text{
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  color:
-    var(--gold2);
-
-  font-family:
-    "Noto Serif TC",
-    serif;
-
-  font-size:10px;
-
-  line-height:1.08;
-
-  text-shadow:
-    0 1px 2px
-    #3b0646;
-}
-
 
 .jlf-card h3{
-  margin:
-    0 0 2px;
-
-  color:#61117a;
-
-  font-family:
-    "Noto Serif TC",
-    serif;
-
-  font-size:10px;
-
-  white-space:nowrap;
+  grid-column:2;
+  grid-row:1;
+  align-self:end;
+  margin:0 0 2px;
+  color:#3f1649;
+  font-family:"Noto Serif TC",serif;
+  font-size:20px;
+  line-height:1.25;
+  letter-spacing:.08em;
+  white-space:normal;
 }
-
-
 .jlf-card p{
+  grid-column:2;
+  grid-row:2;
   margin:0;
-
-  color:#57485c;
-
-  font-size:7.5px;
-
-  white-space:nowrap;
+  color:#66556b;
+  font-size:12px;
+  line-height:1.45;
+  white-space:normal;
 }
-
-
 .jlf-card small{
+  grid-column:2;
+  grid-row:3;
+  align-self:start;
   display:block;
-
-  margin-top:2px;
-
-  color:#78677b;
-
-  font-size:6.5px;
-
-  line-height:1.2;
-}
-
-
-.jlf-card button,
-.jlf-card > a{
-  width:90px;
-  max-width:94%;
-  height:38px;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-
-  margin-top:5px;
-
-  border:1px solid rgba(241,203,102,.62);
-
-  border-radius:999px;
-
-  padding:0 10px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #6e0c90,
-      #a92bd1
-    );
-
-  color:#fff;
-
-  text-decoration:none;
-
+  margin:2px 0 0;
+  color:#94744a;
   font-size:9px;
-  letter-spacing:.06em;
-
-  font-weight:900;
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.22),
-    0 5px 11px rgba(82,9,105,.26);
+  line-height:1.35;
 }
-
-
-/* 桃花神數新功能 */
-
-.jlf-taohua{
-  position:relative;
-  overflow:hidden;
-  min-height:90px;
-  margin:0 9px 8px;
-  padding:12px 13px;
+.jlf-card button,
+.jlf-card > a,
+.jlf-taohua b{
+  grid-column:3;
+  grid-row:1/4;
+  align-self:center;
+  justify-self:end;
+  width:42px;
+  height:42px;
+  margin:0;
+  padding:0;
   display:grid;
-  grid-template-columns:68px 1fr auto;
-  align-items:center;
-  gap:10px;
-  border:1px solid #d9ad3d;
-  border-radius:17px;
-  color:#fff4ff;
-  background:radial-gradient(circle at 88% 22%,#df62ec75 0,transparent 29%),linear-gradient(108deg,#25022e,#68117a 58%,#3b0446);
-  box-shadow:0 8px 19px #4c075d2d,inset 0 1px #ffffff2b;
+  place-items:center;
+  border:1px solid #c89642;
+  border-radius:50%;
+  color:transparent;
+  background:linear-gradient(145deg,#ffe6a4,#c88f35);
+  box-shadow:inset 0 1px rgba(255,255,255,.8),0 5px 12px rgba(106,62,23,.22);
+  font-size:0;
   text-decoration:none;
 }
+.jlf-card button::after,
+.jlf-card > a::after,
+.jlf-taohua b::after{
+  content:"›";
+  color:#4a2542;
+  font-family:Arial,sans-serif;
+  font-size:30px;
+  font-weight:400;
+  line-height:1;
+  transform:translateY(-1px);
+}
 
-.jlf-taohua:before{content:"";position:absolute;inset:6px;border:1px solid #e6c55a45;border-radius:12px;pointer-events:none}
-.jlf-taohua img{position:relative;z-index:1;width:66px;height:66px;filter:drop-shadow(0 7px 10px #19011f99)}
-.jlf-taohua div{position:relative;z-index:1;min-width:0}
-.jlf-taohua small{display:block;color:#f1d2f6;font-size:7px;font-weight:900;letter-spacing:.13em;text-shadow:0 1px 3px #210026}
-.jlf-taohua-title{display:block;margin:3px 0 2px;color:#ffe48b;font-family:"Noto Serif TC",serif;font-size:18px;font-weight:900;line-height:1.25;letter-spacing:.14em;text-shadow:0 2px 5px #210026}
-.jlf-taohua p{margin:0;color:#fff4ff;font-size:8px;font-weight:700;line-height:1.55;text-shadow:0 1px 3px #210026}
-.jlf-taohua b{position:relative;z-index:1;padding:9px 12px;border:1px solid #f2d36e;border-radius:999px;color:#ffe691;background:#5a0c69;font-size:9px;font-weight:900;white-space:nowrap;box-shadow:inset 0 1px #ffffff35,0 4px 12px #21002655}
-.jlf-taohua:hover b,.jlf-taohua:focus-visible b{color:#561067;background:#f7df87}.jlf-taohua:focus-visible{outline:3px solid #e3c65e;outline-offset:2px}
-
-
+.jlf-taohua{--card-accent:#b83e74}
+.jlf-taohua > img{
+  grid-column:1;
+  grid-row:1/4;
+  width:86px;
+  height:86px;
+  object-fit:contain;
+  filter:drop-shadow(0 7px 10px rgba(105,23,80,.34));
+}
+.jlf-taohua > div{grid-column:2;grid-row:1/4;min-width:0}
+.jlf-taohua small{display:none}
+.jlf-taohua-title{
+  display:block;
+  margin:0 0 3px;
+  color:#3f1649;
+  font-family:"Noto Serif TC",serif;
+  font-size:20px;
+  line-height:1.25;
+  letter-spacing:.08em;
+  text-shadow:none;
+}
+.jlf-taohua p{margin:0;color:#66556b;font-size:12px;line-height:1.5;font-weight:400;text-shadow:none}
 
 /* 擇吉看日 */
 
@@ -2396,22 +2349,30 @@ body.jlf-feature-mode
 
 
 
-/* 手機維持 3 欄 */
-
+/* 手機功能入口：維持單欄、放大點擊區 */
 @media(max-width:430px){
-
-  .jlf-nav{
-    display:none;
+  .jlf-nav{display:none}
+  .jlf-tools{padding:22px 14px 25px}
+  .jlf-tools-intro{margin-bottom:17px}
+  .jlf-tools-intro h2{font-size:22px}
+  .jlf-tools-intro p{font-size:10px}
+  .jlf-grid{grid-template-columns:1fr;gap:11px}
+  .jlf-card,.jlf-taohua{
+    min-height:104px;
+    padding:9px 13px 9px 10px;
+    grid-template-columns:82px minmax(0,1fr) 42px;
+    column-gap:11px;
+    border-radius:19px;
   }
-
-  .jlf-grid{
-    grid-template-columns:
-      repeat(
-        3,
-        minmax(0,1fr)
-      );
-  }
-
+  .jlf-card::before,.jlf-taohua::before{border-radius:14px}
+  .jlf-card::after,.jlf-taohua::after{left:94px;top:22px;bottom:22px}
+  .jlf-badge,.jlf-taohua > img{width:76px;height:76px}
+  .jlf-badge img{width:73px;height:73px}
+  .jlf-card h3,.jlf-taohua-title{font-size:18px;letter-spacing:.05em}
+  .jlf-card p,.jlf-taohua p{font-size:11px}
+  .jlf-card small{display:none}
+  .jlf-card button,.jlf-card > a,.jlf-taohua b{width:38px;height:38px}
+  .jlf-card button::after,.jlf-card > a::after,.jlf-taohua b::after{font-size:27px}
 }
 
 `;
