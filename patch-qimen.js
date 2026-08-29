@@ -56,13 +56,13 @@ function css(){
   '.qm-cell{background:#3a302b;min-height:70px;padding:6px 3px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a9998a}',
   '.qm-cell .gn{font-size:11px;letter-spacing:.08em}',
   '.qm-cell .nu{font-size:18px;color:#6d5f54;font-weight:600}',
-  '.qm-cell.on{background:#4a1a17;color:#f2e6d2;box-shadow:inset 0 0 0 1px var(--gold);min-height:92px}',
-  '.qm-cell.on .gn{color:var(--gold);margin-bottom:4px}',
-  /* ★ 落宮格：2 欄 3 列，與老師 App 一致 */
-  '.qm-cell.on .st2{display:grid;grid-template-columns:auto auto;gap:3px 10px;',
-    'justify-content:center;text-align:center;font-size:12.5px;line-height:1.45;letter-spacing:.03em}',
-  '.qm-cell.on .st2 u{text-decoration:none;color:#f7e9cd;font-weight:600}',
-  '.qm-cell.on .st2 i{font-style:normal;color:#e0c98f}',
+  '.qm-cell.on{position:relative;background:#4a1a17;color:#f2e6d2;box-shadow:inset 0 0 0 1px var(--gold);min-height:104px;padding:7px}',
+  /* ★ 老師確認版：亮宮內只列原始數字，不顯示國字 */
+  '.qm-cell.on .st2{width:min(100%,86px);display:grid;grid-template-columns:repeat(2,minmax(24px,1fr));',
+    'justify-content:center;text-align:center;font-family:Arial,sans-serif;font-size:24px;line-height:1;font-weight:800;color:#f8e7bd}',
+  '.qm-cell.on .st2 b{display:grid;place-items:center;min-height:29px;padding:2px 4px;font:inherit;color:inherit}',
+  '.qm-cell.on .st2 b:nth-child(odd){border-right:1px solid rgba(224,201,143,.72)}',
+  '.qm-cell.on .st2 b:nth-child(-n+4){border-bottom:1px solid rgba(224,201,143,.72)}',
   '.qm-cap{font-size:11px;color:#9c8b74;text-align:center;margin:7px 0 0;letter-spacing:.1em}',
   '.qm-card{border:1px solid var(--line);background:#fff;border-radius:2px;padding:14px 15px;margin:11px 0 0}',
   '.qm-card h4{margin:0 0 3px;font-size:19px;color:var(--zhu);letter-spacing:.08em;font-weight:700}',
@@ -189,20 +189,20 @@ function run(){
   for(var q=0;q<9;q++){
     var c=LUOSHU[q];
     if(c===gong){
-      p+='<div class="qm-cell on"><span class="gn">'+GNAME[c]+'宮</span>'+
+      p+='<div class="qm-cell on" aria-label="落宮數字卦 '+shen+' '+yin+' '+tian+' '+xing+' '+di+' '+men+'">'+
          '<span class="st2">'+
-           '<i>'+D.shen[shen].n+'</i><u>'+GAN[yin]+'</u>'+
-           '<u>'+GAN[tian]+'</u><i>'+D.xing[xing].n+'</i>'+
-           '<u>'+GAN[di]+'</u><u>'+D.men[men].n+'</u>'+
+           '<b>'+shen+'</b><b>'+yin+'</b>'+
+           '<b>'+tian+'</b><b>'+xing+'</b>'+
+           '<b>'+di+'</b><b>'+men+'</b>'+
          '</span></div>';
     }else{
-      p+='<div class="qm-cell"><span class="gn">'+GNAME[c]+'</span><span class="nu">'+c+'</span></div>';
+      p+='<div class="qm-cell"><span class="nu">'+c+'</span></div>';
     }
   }
   el('qmPlate').innerHTML=p;
   el('qmCap').textContent = gong===0
     ? '第五碼為 0，落空亡，九宮無實位可入。'
-    : '洛書九宮 · 亮宮為所落之位（左上八神、右上引干、左中天盤干、右中九星、左下地盤干、右下八門）';
+    : '洛書九宮 · 亮宮為純數字卦（左上八神數、右上引干數、左中天盤干數、右中九星數、左下地盤干數、右下八門數）';
 
   var fl=[],gt=GAN[tian],gd=GAN[di];
   if(gong===0) fl.push(['空亡宮','']);
