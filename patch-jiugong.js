@@ -11,7 +11,7 @@
      上中（離九）、下中（坎一）不用 —— 老師：「那格不用」。
      老師：「第七碼永遠是中宮」＝倒數第七碼落中宮，吻合。
 
-   驗證例：0921725239，末七碼 1725239
+   老師確認：九宮格內只列數字，不顯示宮名國字。\n\n   驗證例：0921725239，末七碼 1725239
        2  ·  7
        3  1  5
        9  ·  2
@@ -49,11 +49,10 @@ var CSS = [
   '.jg-err{min-height:1.4em;margin-bottom:10px;color:#a12626;font-size:13px}',
   '.jg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;',
     'background:#cdbfa7;border:1px solid #cdbfa7}',
-  '.jg-c{background:#fffdf9;padding:12px 4px;text-align:center;min-height:78px;',
-    'display:flex;flex-direction:column;justify-content:center}',
-  '.jg-c .jg-p{font-family:var(--ser,serif);font-size:11px;letter-spacing:.06em;color:#85776c}',
-  '.jg-c .jg-n{font-family:var(--ser,serif);font-size:27px;font-weight:700;',
-    'line-height:1.2;color:#5d2c20;margin-top:2px}',
+  '.jg-c{background:#fffdf9;padding:10px 4px;text-align:center;min-height:88px;',
+    'display:flex;align-items:center;justify-content:center}',
+  '.jg-c .jg-n{font-family:Arial,sans-serif;font-size:38px;font-weight:800;',
+    'line-height:1;color:#5d2c20}',
   '.jg-c.jg-off{background:#f3ede2}',
   '.jg-c.jg-off .jg-n{display:none}',
   '.jg-c.jg-mid{background:#f7efe2}',
@@ -89,8 +88,7 @@ function cellHTML(key, r){
   if (info.off) cls += ' jg-off';
   if (key === 'c') cls += ' jg-mid';
   var body = hit ? ('<div class="jg-n">' + hit.n + '</div>') : '';
-  return '<div class="' + cls + '">' +
-           '<div class="jg-p">' + info.name + '</div>' +
+  return '<div class="' + cls + '" aria-label="' + info.name + '">' +
            body +
          '</div>';
 }
