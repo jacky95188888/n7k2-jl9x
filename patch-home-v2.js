@@ -521,7 +521,7 @@ function boot(){
       desc:'奇門入口分為手機數字落宮與 81 象意兩套工具；可直接選擇需要的分析，不再顯示四柱生辰排盤。',
       items:[
         ['奇門手機排盤','末七碼落宮、門路與逐碼詳解','奇門手機號論斷','奇'],
-        ['81 象意查詢','1～81 數理吉凶與完整象意','數理象意','81']
+        ['奇門81格象意','天盤九干 × 地盤九干完整克應','qimen81','81']
       ]
     }
   };
@@ -771,6 +771,10 @@ function boot(){
     if(!btn) return;
     const module=btn.dataset.jliModule;
     const term=sessionStorage.getItem('jlf-active-route') || '四柱';
+    if(module==='qimen81'){
+      location.href='qimen-81.html';
+      return;
+    }
     if(module==='birth'){
       if(paipan) paipan.classList.remove('jli-route-hidden');
       showNotice(term);
