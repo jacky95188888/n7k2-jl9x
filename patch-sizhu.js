@@ -71,7 +71,10 @@ function css() {
   var s = document.createElement('style');
   s.id = 'sz-style';
   s.textContent = [
-    '#sz-card{padding:0!important;border-color:#d8b550!important;background:#291032!important;isolation:isolate}',
+    '#sz-card{margin-bottom:6px;padding:0!important;border-color:#d8b550!important;background:#291032!important;isolation:isolate}',
+    '#out .card.sz-near-card{margin-top:0;margin-bottom:6px}',
+    '#sz-dayun-card{margin-top:0;padding:13px;border-color:#d8bf79;background:linear-gradient(145deg,#fffdf7,#fff8fd)}',
+    '#sz-dayun-card .sz-dayun-block{margin-top:0}',
     '#sz-card:before{display:none}',
     '#sz-card .sz-dashboard-head{position:relative;overflow:hidden;min-height:148px;display:grid;grid-template-columns:48px 1fr 78px;align-items:center;gap:12px;padding:22px 20px;color:#fff;background:radial-gradient(circle at 84% 18%,rgba(245,210,104,.24),transparent 25%),linear-gradient(100deg,#26032f 0,#5d0c70 56%,#8b327f 100%),url("hero-bg-v3.webp") 72% 46%/cover no-repeat}',
     '#sz-card .sz-dashboard-head:before{content:"";position:absolute;inset:8px;border:1px solid rgba(239,207,109,.42);border-radius:16px;pointer-events:none}',
@@ -289,21 +292,13 @@ function draw() {
   if (!d) return;
 
   var card = document.getElementById('sz-card');
+  var out = document.getElementById('out');
   if (!card) {
     card = document.createElement('div');
     card.className = 'card';
     card.id = 'sz-card';
-    var anchor = findAnchor();
-    var out = document.getElementById('out');
-    if (anchor && anchor.parentNode) {
-      anchor.parentNode.insertBefore(card, anchor);
-    } else if (out && out.firstChild) {
-      out.insertBefore(card, out.firstChild);
-    } else if (out) {
-      out.appendChild(card);
-    } else {
-      return;
-    }
+    if (out) out.appendChild(card);
+    else return;
   }
 
   var h = '', i, g, z, wx;
@@ -337,8 +332,6 @@ function draw() {
            '<small>出生後 ' + d.yun.year + ' 年 ' + d.yun.month + ' 個月 ' + d.yun.day + ' 日起運・' + (d.yun.forward ? '順行' : '逆行') + '</small></div>';
     }
 
-    h += dayunHtml(d);
-
     if (d.conv || ZI_NEXT_DAY) h += '<div class="sz-conv">' +
       (ZI_NEXT_DAY ? '子時採晚子跨日規則。' : '') + (d.conv || '') + '</div>';
     h += '</div>';
@@ -347,6 +340,34 @@ function draw() {
   if (d.warn) h += '<div class="szwarn">' + d.warn + '</div>';
 
   card.innerHTML = h;
+
+  /*
+     固定閱讀順序：
+     四柱八字 → 先天・後天 → 十年大運 → 六柱環與其他內容。
+     直接移動既有節點，不複製、不重建先天後天計算。
+  */
+  var anchor = findAnchor();
+  if (out) {
+    out.insertBefore(card, out.firstElementChild);
+    if (anchor) {
+      anchor.classList.add('sz-near-card');
+      card.insertAdjacentElement('afterend', anchor);
+    }
+  }
+
+  var dayunCard = document.getElementById('sz-dayun-card');
+  if (d.daYun && d.daYun.length) {
+    if (!dayunCard) {
+      dayunCard = document.createElement('div');
+      dayunCard.className = 'card';
+      dayunCard.id = 'sz-dayun-card';
+    }
+    dayunCard.innerHTML = dayunHtml(d);
+    if (anchor) anchor.insertAdjacentElement('afterend', dayunCard);
+    else card.insertAdjacentElement('afterend', dayunCard);
+  } else if (dayunCard) {
+    dayunCard.remove();
+  }
 }
 
 function go() {
