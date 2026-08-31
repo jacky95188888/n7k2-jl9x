@@ -26,7 +26,14 @@ var CSS =
 '.lq-verdict b{color:var(--zhu,#7d1d1d);font-family:var(--ser,serif);letter-spacing:.1em}' +
 '.lq-note{font-size:12px;color:#85776c;line-height:1.8;margin:0 0 14px}' +
 'td.lq-x{color:#8a7f70}' +
-'td.lq-me{color:var(--zhu,#7d1d1d);font-weight:700}';
+'td.lq-me{color:var(--zhu,#7d1d1d);font-weight:700}' +
+'.lq-pro-gate{padding:18px;border:1px solid #d7b65a;border-radius:14px;background:linear-gradient(145deg,#fffdf8,#fbf0ff);text-align:center}' +
+'.lq-pro-gate strong{display:block;color:#5b166d;font-family:var(--ser,serif);font-size:20px;letter-spacing:.12em}' +
+'.lq-pro-gate p{margin:8px 0 13px;color:#725f68;font-size:13px;line-height:1.65}' +
+'.lq-pro-row{display:flex;gap:8px;max-width:320px;margin:auto}' +
+'.lq-pro-row input{min-width:0;flex:1;padding:11px 12px;border:1px solid #cdb5d3;border-radius:10px;background:#fff;font-size:16px;text-align:center}' +
+'.lq-pro-row button{padding:11px 18px;border:0;border-radius:10px;background:#68117a;color:#fff;font-weight:800}' +
+'.lq-pro-msg{display:block;min-height:20px;margin-top:7px;color:#a13a2a;font-size:12px}';
 
 function css(){
   if (document.getElementById('lq-css')) return;
