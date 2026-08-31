@@ -94,7 +94,7 @@ function css(){
 }
 
 function titleOf(card){
-  var h = card.querySelector('h2');
+  var h = card.querySelector('h2,h3');
   return h ? (h.textContent || '').replace(/\s/g, '') : '';
 }
 
