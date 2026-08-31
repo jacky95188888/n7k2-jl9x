@@ -108,6 +108,8 @@ body.jlf-feature-mode #jl-feature-shell-final #out>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plug>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plugs>.card,
 body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{margin:16px 0!important;padding:22px 18px!important}
+body.jlf-feature-mode #jl-feature-shell-final #out>.card.ly-join-top{margin-bottom:0!important}
+body.jlf-feature-mode #jl-feature-shell-final #out>.card.ly-join-bot{margin-top:0!important}
 body.jlf-feature-mode #jl-feature-shell-final #paipan{background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--route-a) 13%,transparent) 0,transparent 34%),url("assets/celestial-orbit.svg") 118% -34px/235px auto no-repeat,linear-gradient(105deg,#fffffff9 0 55%,var(--route-pale) 78%,color-mix(in srgb,var(--route-soft) 72%,#fff))!important}
 body.jlf-feature-mode .jli-paipan-tag{position:absolute;right:15px;top:13px;z-index:3;padding:4px 10px;border:1px solid #d8b54e;border-radius:999px;color:#98701c;background:#fff9de;font:700 9px var(--ser);letter-spacing:.12em;box-shadow:0 3px 8px #7a57151f}
 body.jlf-feature-mode .card>h2{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:20px!important;padding-bottom:14px!important;font-size:17px!important;letter-spacing:.18em!important;text-indent:0!important}
