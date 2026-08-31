@@ -94,8 +94,12 @@ function tri(n){
 var CSS =
 '#tp.zhu{table-layout:auto}' +
 '#tp.zhu th,#tp.zhu td{padding:9px 2px}' +
-'#tp.zhu td.zh-n{font-family:var(--ser,serif);font-size:19px;font-weight:700;' +
-  'color:#5d2c20;white-space:nowrap;line-height:1.25}' +
+'#tp.zhu td.zh-n{position:relative;font-family:var(--ser,serif);font-size:19px;font-weight:700;' +
+  'color:#5d2c20;white-space:nowrap;line-height:1.25;padding-top:12px}' +
+'#tp.zhu .zh-between{position:absolute;z-index:2;left:0;top:13px;transform:translateX(-50%);' +
+  'display:inline-flex;align-items:center;justify-content:center;min-width:34px;padding:3px 4px;' +
+  'border:1px solid rgba(190,143,43,.6);border-radius:999px;background:#fffaf4;color:#68127b;' +
+  'font-family:var(--ser,serif);font-size:9px;font-weight:800;line-height:1;box-shadow:0 2px 7px rgba(91,21,114,.1)}' +
 '#tp.zhu td.zh-s{font-family:var(--ser,serif);font-size:11px;letter-spacing:.02em;' +
   'line-height:1.35;white-space:nowrap;padding:7px 1px 11px;vertical-align:middle;color:#68127b}' +
 '#tp.zhu tr.zh-mag td{border-top:0;background:linear-gradient(180deg,#fffafd,#fbf0ff)}' +
@@ -153,19 +157,13 @@ function build(){
   }
   h += '</tr>';
 
-  /* 先天、後天各一列：數字、卦線，以及相鄰兩柱的八宅磁場。 */
+  /* 先天、後天各一列：磁場名稱直接置於相鄰兩數正中間，例如 10－六煞－6。 */
   [['先天', r], ['後天', post]].forEach(function(row){
     var name = row[0], arr = row[1];
     h += '<tr><td class="zh-row">' + name + '</td>';
     for (var i = 0; i < arr.length; i++){
-      h += '<td class="zh-n">' + arr[i] + tri(arr[i]) + '</td>';
-    }
-    h += '</tr>';
-
-    h += '<tr class="zh-mag"><td class="zh-row">磁場</td>';
-    for (var j = 0; j < arr.length; j++){
-      if (j === 0) h += '<td class="zh-empty">—</td>';
-      else h += '<td class="zh-s"><span>' + (star(arr[j - 1], arr[j]) || '—') + '</span></td>';
+      var between = i === 0 ? '' : '<span class="zh-between">' + (star(arr[i - 1], arr[i]) || '—') + '</span>';
+      h += '<td class="zh-n">' + between + arr[i] + tri(arr[i]) + '</td>';
     }
     h += '</tr>';
   });
@@ -178,7 +176,7 @@ function build(){
   if (box && !box.querySelector('.zh-note')){
     var p = document.createElement('p');
     p.className = 'zh-note';
-    p.innerHTML = '數字下方為該數所配八卦；磁場列依相鄰兩柱的卦象變爻，顯示伏位、生氣、絕命、禍害、五鬼、天醫、六煞或延年。';
+    p.innerHTML = '數字下方為該數所配八卦；相鄰兩數中間顯示八宅磁場：伏位、生氣、絕命、禍害、五鬼、天醫、六煞或延年。';
     box.appendChild(p);
   }
   if (box && !box.querySelector('.zh-key')){
