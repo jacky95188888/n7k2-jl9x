@@ -350,7 +350,8 @@ function draw() {
   if (out) {
     out.insertBefore(card, out.firstElementChild);
     if (anchor) {
-      anchor.classList.add('sz-near-card');
+      card.classList.add('ly-join-top');
+      anchor.classList.add('sz-near-card', 'ly-join-bot');
       card.insertAdjacentElement('afterend', anchor);
     }
   }
