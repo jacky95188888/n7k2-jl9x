@@ -23,6 +23,18 @@ var ZHI_WX = {子:'水',丑:'土',寅:'木',卯:'木',辰:'土',巳:'火',午:'�
 var COL = {木:'#3d6b3d',火:'#a13a2a',土:'#8a6a24',金:'#7a6f5e',水:'#2f5d8a'};
 var CORE_COL = {木:'#89ddb5',火:'#ff9f91',土:'#f3d178',金:'#dce2f3',水:'#8fcaf3'};
 
+function tenGod(dayGan, targetGan) {
+  var d = GAN10.indexOf(dayGan), t = GAN10.indexOf(targetGan);
+  if (d < 0 || t < 0) return '';
+  var de = Math.floor(d / 2), te = Math.floor(t / 2), same = (d % 2) === (t % 2);
+  if (de === te) return same ? '比肩' : '劫財';
+  if ((te + 1) % 5 === de) return same ? '偏印' : '正印';
+  if ((de + 1) % 5 === te) return same ? '食神' : '傷官';
+  if ((de + 2) % 5 === te) return same ? '偏財' : '正財';
+  if ((te + 2) % 5 === de) return same ? '七殺' : '正官';
+  return '';
+}
+
 /* 六十甲子納音（繁體）—— lunar-javascript 回傳簡體，故自備此表 */
 var GAN10 = ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
 var NAYIN = ['海中金','爐中火','大林木','路旁土','劍鋒金','山頭火',
@@ -99,9 +111,31 @@ function css() {
     '#sz-card .szyun-k{grid-row:1/3;position:relative;z-index:1;padding:8px 10px;border:1px solid #edcf70;border-radius:999px;background:linear-gradient(145deg,#4b075a,#9f25b7);color:#fff5d6;font-size:10px;font-weight:900;letter-spacing:.12em;white-space:nowrap}',
     '#sz-card .szyun strong{position:relative;z-index:1;color:#5e246c;font:900 16px var(--ser);letter-spacing:.06em}',
     '#sz-card .szyun small{position:relative;z-index:1;color:#806e82;font-size:10px;line-height:1.5}',
+    '#sz-card .sz-dayun-block{margin-top:14px;padding:13px;border:1px solid #d8bf79;border-radius:16px;background:linear-gradient(145deg,#fffdf6,#fff7fd)}',
+    '#sz-card .sz-dayun-title{display:flex;justify-content:space-between;gap:10px;align-items:end;margin-bottom:8px}',
+    '#sz-card .sz-dayun-title h3{margin:0;color:#641174;font:900 16px var(--ser);letter-spacing:.12em}',
+    '#sz-card .sz-dayun-title span{color:#8b7888;font-size:9px;text-align:right}',
+    '#sz-card .sz-dayun-scroll{overflow-x:auto;padding-bottom:7px;-webkit-overflow-scrolling:touch}',
+    '#sz-card .sz-dayun-list{display:grid;grid-template-columns:repeat(8,88px);gap:7px;min-width:max-content}',
+    '#sz-card .sz-dayun-item{min-height:116px;padding:8px 4px;border:1px solid #decddd;border-radius:12px;background:linear-gradient(180deg,#fff,#faf2fb);color:#62515e;text-align:center;cursor:pointer}',
+    '#sz-card .sz-dayun-item small,#sz-card .sz-dayun-item span,#sz-card .sz-dayun-item em{display:block;font-size:9px}',
+    '#sz-card .sz-dayun-item span{margin-top:2px;color:#988793}',
+    '#sz-card .sz-dayun-item strong{display:block;margin:6px 0 3px;color:#671078;font:900 23px var(--ser);letter-spacing:.06em}',
+    '#sz-card .sz-dayun-item em{color:#a76127;font-style:normal}',
+    '#sz-card .sz-dayun-item.is-active{border-color:#c59a30;background:linear-gradient(180deg,#fff7d7,#fff0fb);box-shadow:inset 0 0 0 1px #e1bb57,0 6px 15px rgba(95,17,106,.14)}',
+    '#sz-card .sz-flow{margin-top:11px;overflow:hidden;border:1px solid #dfccdf;border-radius:13px;background:#fff}',
+    '#sz-card .sz-flow-head{display:flex;justify-content:space-between;gap:8px;padding:9px 11px;background:linear-gradient(90deg,#5c0b6d,#91257f);color:#fff}',
+    '#sz-card .sz-flow-head b{font-size:11px}#sz-card .sz-flow-head span{font-size:9px}',
+    '#sz-card .sz-flow-grid{display:grid;grid-template-columns:repeat(5,1fr)}',
+    '#sz-card .sz-flow-grid>div{padding:8px 2px;text-align:center;border-right:1px solid #eee0ec;border-bottom:1px solid #eee0ec}',
+    '#sz-card .sz-flow-grid>div:nth-child(5n){border-right:0}#sz-card .sz-flow-grid>div:nth-last-child(-n+5){border-bottom:0}',
+    '#sz-card .sz-flow-grid small,#sz-card .sz-flow-grid span,#sz-card .sz-flow-grid em{display:block;font-size:8px}',
+    '#sz-card .sz-flow-grid strong{display:block;margin:2px 0;color:#6a1079;font:900 17px var(--ser)}',
+    '#sz-card .sz-flow-grid span{color:#766773}#sz-card .sz-flow-grid em{color:#a9652f;font-style:normal}',
+    '#sz-card .sz-dayun-note{margin:9px 1px 0;color:#897b86;font-size:9px;line-height:1.6}',
     '#sz-card .sz-conv{margin-top:10px;padding:9px 12px;border-left:3px solid #c69b32;border-radius:0 10px 10px 0;color:#79667c;background:rgba(255,249,226,.74);font-size:10px;line-height:1.6}',
     '#sz-card .szwarn{margin-top:10px;padding:10px 12px;border:1px solid var(--zhu);background:#fdf6f5;font-size:13px;color:var(--zhu);line-height:1.7}',
-    '@media (max-width:420px){#sz-card .sz-dashboard-head{min-height:132px;grid-template-columns:40px 1fr 66px;gap:9px;padding:18px 14px}#sz-card .sz-seal{width:40px;height:40px;font-size:15px}#sz-card .sz-head-copy h2{font-size:19px!important;letter-spacing:.12em!important}#sz-card .sz-head-copy p{font-size:8px}#sz-card .sz-daycore{min-height:74px;border-radius:14px}#sz-card .sz-daycore strong{font-size:26px}#sz-card .sz-dashboard-body{padding:14px 11px}#sz-card .sz-pillars{gap:5px}#sz-card .sz-pillar{padding:9px 3px 8px;border-radius:12px}#sz-card .sz-pillar header{font-size:9px!important}#sz-card .sz-gz{font-size:23px}#sz-card .sz-nayin{font-size:8px}#sz-card .sz-stage{padding:3px 5px;font-size:8px}#sz-card .sz-summary{gap:5px}#sz-card .sz-summary>div{padding:9px 6px}#sz-card .sz-summary strong{font-size:12px}#sz-card .szyun{padding:11px 9px;gap:4px 8px}#sz-card .szyun strong{font-size:14px}}'
+    '@media (max-width:420px){#sz-card .sz-dashboard-head{min-height:132px;grid-template-columns:40px 1fr 66px;gap:9px;padding:18px 14px}#sz-card .sz-seal{width:40px;height:40px;font-size:15px}#sz-card .sz-head-copy h2{font-size:19px!important;letter-spacing:.12em!important}#sz-card .sz-head-copy p{font-size:8px}#sz-card .sz-daycore{min-height:74px;border-radius:14px}#sz-card .sz-daycore strong{font-size:26px}#sz-card .sz-dashboard-body{padding:14px 11px}#sz-card .sz-pillars{gap:5px}#sz-card .sz-pillar{padding:9px 3px 8px;border-radius:12px}#sz-card .sz-pillar header{font-size:9px!important}#sz-card .sz-gz{font-size:23px}#sz-card .sz-nayin{font-size:8px}#sz-card .sz-stage{padding:3px 5px;font-size:8px}#sz-card .sz-summary{gap:5px}#sz-card .sz-summary>div{padding:9px 6px}#sz-card .sz-summary strong{font-size:12px}#sz-card .szyun{padding:11px 9px;gap:4px 8px}#sz-card .szyun strong{font-size:14px}#sz-card .sz-dayun-block{padding:10px}#sz-card .sz-dayun-title{align-items:flex-start;flex-direction:column}#sz-card .sz-dayun-title span{text-align:left}#sz-card .sz-flow-grid{grid-template-columns:repeat(2,1fr)}#sz-card .sz-flow-grid>div,#sz-card .sz-flow-grid>div:nth-child(5n),#sz-card .sz-flow-grid>div:nth-last-child(-n+5){border-right:1px solid #eee0ec;border-bottom:1px solid #eee0ec}#sz-card .sz-flow-grid>div:nth-child(2n){border-right:0}#sz-card .sz-flow-grid>div:nth-last-child(-n+2){border-bottom:0}}'
   ].join('');
   document.head.appendChild(s);
 }
@@ -176,25 +210,82 @@ function build() {
 
   /* 性別參數依 lunar-javascript 官方定義：男 1、女 0。 */
   var yun = safe(function(){ return ec.getYun(c.sex === '男' ? 1 : 0); }, null);
-  var yunInfo = null;
+  var yunInfo = null, daYunInfo = [], activeDaYun = 1;
   if (yun) {
     yunInfo = {
       date: safe(function(){ return yun.getStartSolar().toYmd(); }, ''),
       year: safe(function(){ return yun.getStartYear(); }, 0),
       month: safe(function(){ return yun.getStartMonth(); }, 0),
-      day: safe(function(){ return yun.getStartDay(); }, 0)
+      day: safe(function(){ return yun.getStartDay(); }, 0),
+      forward: safe(function(){ return yun.isForward(); }, true)
     };
+    var daYunList = safe(function(){ return yun.getDaYun(9); }, []);
+    var currentYear = new Date().getFullYear();
+    for (i = 1; i < daYunList.length; i++) {
+      var dy = daYunList[i], gz = safe(function(){ return dy.getGanZhi(); }, '');
+      var years = safe(function(){ return dy.getLiuNian(); }, []);
+      var item = {
+        index: i,
+        startAge: safe(function(){ return dy.getStartAge(); }, 0),
+        endAge: safe(function(){ return dy.getEndAge(); }, 0),
+        startYear: safe(function(){ return dy.getStartYear(); }, 0),
+        endYear: safe(function(){ return dy.getEndYear(); }, 0),
+        gz: gz,
+        god: tenGod(ec.getDayGan(), gz.charAt(0)),
+        years: []
+      };
+      for (var j = 0; j < years.length; j++) {
+        var ln = years[j], lgz = safe(function(){ return ln.getGanZhi(); }, '');
+        item.years.push({
+          year: safe(function(){ return ln.getYear(); }, 0),
+          age: safe(function(){ return ln.getAge(); }, 0),
+          gz: lgz,
+          god: tenGod(ec.getDayGan(), lgz.charAt(0))
+        });
+      }
+      if (currentYear >= item.startYear && currentYear <= item.endYear) activeDaYun = i;
+      daYunInfo.push(item);
+    }
   }
 
   return {
     p: p,
     xun: safe(function(){ return ec.getDayXun(); }, ''),
-    h: c.h, conv: c.conv, yun: yunInfo
+    h: c.h, conv: c.conv, yun: yunInfo,
+    dayGan: safe(function(){ return ec.getDayGan(); }, ''),
+    daYun: daYunInfo, activeDaYun: activeDaYun
   };
 }
 
+function flowHtml(d, index) {
+  if (!d || !d.daYun || !d.daYun.length) return '<div class="sz-dayun-note">尚無流年資料。</div>';
+  var item = null;
+  for (var i = 0; i < d.daYun.length; i++) if (d.daYun[i].index === index) item = d.daYun[i];
+  if (!item) item = d.daYun[0];
+  var h = '<div class="sz-flow-head"><b>' + item.gz + '大運｜' + item.startAge + '–' + item.endAge + '歲</b><span>' + item.startYear + '–' + item.endYear + '</span></div><div class="sz-flow-grid">';
+  for (i = 0; i < item.years.length; i++) {
+    var y = item.years[i];
+    h += '<div><small>' + y.year + '</small><strong>' + y.gz + '</strong><span>' + y.age + '歲</span><em>' + y.god + '</em></div>';
+  }
+  return h + '</div>';
+}
+
+function dayunHtml(d) {
+  if (!d.daYun || !d.daYun.length) return '';
+  var h = '<div class="sz-dayun-block"><div class="sz-dayun-title"><h3>十年大運</h3><span>左右滑動查看全部；點選大運可切換下方流年</span></div><div class="sz-dayun-scroll"><div class="sz-dayun-list">';
+  for (var i = 0; i < d.daYun.length; i++) {
+    var x = d.daYun[i], on = x.index === d.activeDaYun ? ' is-active' : '';
+    h += '<button type="button" class="sz-dayun-item' + on + '" data-sz-dayun="' + x.index + '"><small>' + x.startAge + '–' + x.endAge + '歲</small><span>' + x.startYear + '–' + x.endYear + '</span><strong>' + x.gz + '</strong><em>' + x.god + '</em></button>';
+  }
+  h += '</div></div><div class="sz-flow">' + flowHtml(d, d.activeDaYun) + '</div><p class="sz-dayun-note">大運與流年需配合原局強弱、喜忌、刑沖合害綜合判讀，不以單一干支直接論吉凶。</p></div>';
+  return h;
+}
+
+var lastData = null;
+
 function draw() {
   var d = build();
+  lastData = d;
   if (!d) return;
 
   var card = document.getElementById('sz-card');
@@ -243,8 +334,10 @@ function draw() {
     if (d.yun && d.yun.date) {
       h += '<div class="szyun"><span class="szyun-k">大運起運</span>' +
            '<strong>' + ymdZh(d.yun.date) + '</strong>' +
-           '<small>出生後 ' + d.yun.year + ' 年 ' + d.yun.month + ' 個月 ' + d.yun.day + ' 日起運</small></div>';
+           '<small>出生後 ' + d.yun.year + ' 年 ' + d.yun.month + ' 個月 ' + d.yun.day + ' 日起運・' + (d.yun.forward ? '順行' : '逆行') + '</small></div>';
     }
+
+    h += dayunHtml(d);
 
     if (d.conv || ZI_NEXT_DAY) h += '<div class="sz-conv">' +
       (ZI_NEXT_DAY ? '子時採晚子跨日規則。' : '') + (d.conv || '') + '</div>';
@@ -281,6 +374,17 @@ function hook() {
 
 document.addEventListener('click', function (e) {
   var t = e.target;
+  var dy = t && t.closest ? t.closest('[data-sz-dayun]') : null;
+  if (dy && lastData) {
+    var card = dy.closest('#sz-card');
+    if (card) {
+      var buttons = card.querySelectorAll('[data-sz-dayun]');
+      for (var i = 0; i < buttons.length; i++) buttons[i].classList.toggle('is-active', buttons[i] === dy);
+      var flow = card.querySelector('.sz-flow');
+      if (flow) flow.innerHTML = flowHtml(lastData, parseInt(dy.getAttribute('data-sz-dayun'), 10));
+    }
+    return;
+  }
   if (t && (t.id === 'go' || (t.closest && t.closest('#go')))) {
     setTimeout(go, 120);
     setTimeout(go, 600);
