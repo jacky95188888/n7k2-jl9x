@@ -102,8 +102,50 @@ function wuxingPanel(c){
   return h;
 }
 
-/* ---------- 六親全覽 ---------- */
+/* ---------- 六親全覽（專業版密碼 1314） ---------- */
+var PRO_KEY = 'jl_liuqin_pro_1314';
+
+function proUnlocked(){
+  try { return sessionStorage.getItem(PRO_KEY) === '1'; }
+  catch(e){ return false; }
+}
+
+function proGate(){
+  return '<div class="lq-pro-gate" role="group" aria-label="六親專業版解鎖">'
+    + '<strong>六親專業版</strong>'
+    + '<p>六親對照屬於專業內容，請輸入密碼後查看。</p>'
+    + '<div class="lq-pro-row"><input type="password" inputmode="numeric" maxlength="4" placeholder="輸入密碼" aria-label="專業版密碼">'
+    + '<button type="button">解鎖</button></div>'
+    + '<small class="lq-pro-msg" aria-live="polite"></small></div>';
+}
+
+function bindProGate(){
+  document.querySelectorAll('.lq-pro-gate').forEach(function(gate){
+    if(gate.dataset.bound) return;
+    gate.dataset.bound = '1';
+    var input = gate.querySelector('input');
+    var button = gate.querySelector('button');
+    var submit = function(){
+      if((input.value || '').trim() !== '1314'){
+        input.value = '';
+        gate.querySelector('.lq-pro-msg').textContent = '密碼不正確，請再輸入一次。';
+        input.focus();
+        return;
+      }
+      try { sessionStorage.setItem(PRO_KEY,'1'); } catch(e){}
+      if(window.PP && window.PP.render) window.PP.render();
+      else location.reload();
+    };
+    button.addEventListener('click',submit);
+    input.addEventListener('keydown',function(e){ if(e.key === 'Enter') submit(); });
+  });
+}
+
 function liuqinPanel(c){
+  if(!proUnlocked()){
+    setTimeout(bindProGate,0);
+    return proGate();
+  }
   var L = window.JL_LIUQIN;
   if (!L) return '<div class="jdu">data-liuqin.js 沒有載入。</div>';
 
