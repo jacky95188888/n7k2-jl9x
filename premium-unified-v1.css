@@ -1,0 +1,308 @@
+/* 筠玲易數｜全站紫晶金箔高級視覺層 v1
+   目標：保留既有功能與排盤邏輯，只統一配色、材質、卡片、按鈕、表單與內頁氛圍。
+*/
+:root{
+  --jlp-deep:#2e063b;
+  --jlp-purple:#5b0b73;
+  --jlp-purple-2:#8f1cac;
+  --jlp-purple-3:#bd43d4;
+  --jlp-lilac:#eed5f6;
+  --jlp-lilac-2:#f8ecfb;
+  --jlp-paper:#fffaff;
+  --jlp-paper-2:#fff6ff;
+  --jlp-gold:#d5ab49;
+  --jlp-gold-2:#f0d77b;
+  --jlp-ink:#3d1748;
+  --jlp-muted:#725b78;
+  --jlp-line:rgba(191,132,207,.48);
+  --jlp-shadow:0 14px 34px rgba(69,6,88,.15),0 3px 9px rgba(70,10,86,.08);
+  --jlp-shadow-soft:0 8px 22px rgba(77,10,94,.11);
+}
+
+html body.jl-page,
+html body.jlf-feature-mode,
+html body.jl-page-bxcc,
+html body.jl-page-rz,
+html body{
+  color:var(--jlp-ink);
+}
+
+html body.jl-page,
+html body.jlf-feature-mode,
+html body.jl-page-bxcc,
+html body.jl-page-rz{
+  background:
+    radial-gradient(circle at 14% 8%,rgba(255,255,255,.88),transparent 25%),
+    radial-gradient(circle at 86% 22%,rgba(208,117,227,.16),transparent 24%),
+    radial-gradient(circle at 52% 68%,rgba(221,183,92,.10),transparent 20%),
+    url("assets/celestial-orbit.svg") center 260px/620px auto repeat-y,
+    linear-gradient(180deg,#f9e9fb 0%,#f3dcf8 48%,#ead0f2 100%) !important;
+  background-attachment:scroll,scroll,scroll,scroll,scroll !important;
+}
+
+html body.jl-page::before,
+html body.jlf-feature-mode::before,
+html body.jl-page-bxcc::before,
+html body.jl-page-rz::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.36;
+  background:
+    radial-gradient(circle at 18% 18%,rgba(255,255,255,.72) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 82% 30%,rgba(255,255,255,.56) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 34% 74%,rgba(213,171,73,.28) 0 1px,transparent 1.5px);
+  background-size:24px 24px,31px 31px,37px 37px;
+}
+
+/* 內頁路由全部回到同一套紫金色，不再各自跳藍、綠、棕 */
+html body[data-jli-route]{
+  --route-a:var(--jlp-purple) !important;
+  --route-b:var(--jlp-gold) !important;
+  --route-soft:var(--jlp-lilac) !important;
+  --route-pale:var(--jlp-paper-2) !important;
+}
+
+/* 頂部品牌列 */
+html body .jli-top{
+  min-height:66px !important;
+  border-bottom:1px solid rgba(229,199,112,.82) !important;
+  background:
+    radial-gradient(circle at 15% -20%,rgba(255,255,255,.18),transparent 42%),
+    linear-gradient(135deg,#270432 0%,#4d075f 48%,#2e073a 100%) !important;
+  box-shadow:0 8px 22px rgba(49,3,61,.18) !important;
+  backdrop-filter:blur(16px) !important;
+}
+html body .jli-brand,
+html body .jli-brand b{color:#f1d58b !important;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+html body .jli-brand small{color:#d9b95e !important}
+html body .jli-brand>span{
+  border-color:#e6c367 !important;
+  color:#6c177d !important;
+  background:linear-gradient(145deg,#fff9df,#e7c362) !important;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.62),0 5px 14px rgba(0,0,0,.22) !important;
+}
+
+/* Hero：保留原圖，但加深紫金氛圍與玻璃紙感 */
+html body .jli-hero{
+  min-height:168px !important;
+  border-bottom:1px solid rgba(216,181,81,.64) !important;
+  background:
+    linear-gradient(90deg,rgba(255,248,255,.96) 0%,rgba(251,232,255,.90) 48%,rgba(129,31,151,.16) 100%),
+    url("hero-bg-v3.webp") center/cover !important;
+  box-shadow:inset 0 -1px rgba(255,255,255,.65) !important;
+}
+html body .jli-hero em{color:#b18427 !important;font-size:10px !important}
+html body .jli-hero h1{color:#4c075f !important;text-shadow:0 2px 14px rgba(116,27,139,.13) !important}
+html body .jli-hero p{color:#684b70 !important}
+html body .jli-hero img{filter:drop-shadow(0 10px 13px rgba(73,7,91,.28)) saturate(1.08) !important}
+
+/* 步驟列 / 快捷列 */
+html body .jli-steps{
+  padding:10px 12px !important;
+  background:linear-gradient(135deg,#2f053b,#5b0b70 58%,#390547) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.06),0 7px 16px rgba(52,5,65,.14) !important;
+}
+html body .jli-steps button,
+html body .jli-steps a{
+  border-color:rgba(227,196,105,.58) !important;
+  color:#ecd99f !important;
+  background:rgba(255,255,255,.06) !important;
+}
+html body .jli-steps .on{
+  color:#fff !important;
+  border-color:#efd16f !important;
+  background:linear-gradient(135deg,#71118b,#b82fd0) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.36),0 5px 13px rgba(30,0,39,.35) !important;
+}
+
+/* 卡片：白玉紙張＋香檳金上光 */
+html body.jl-page .card,
+html body.jlf-feature-mode #jl-feature-shell-final .card,
+html body.jl-page-bxcc .card,
+html body.jl-page-rz .card,
+html body .jlf-card,
+html body .feature-card{
+  position:relative !important;
+  overflow:hidden !important;
+  border:1px solid rgba(198,145,211,.62) !important;
+  border-radius:22px !important;
+  background:
+    radial-gradient(circle at 90% 0%,rgba(239,215,123,.13),transparent 26%),
+    linear-gradient(150deg,rgba(255,255,255,.985),rgba(255,247,255,.955)) !important;
+  box-shadow:var(--jlp-shadow) !important;
+}
+html body.jl-page .card::before,
+html body.jlf-feature-mode #jl-feature-shell-final .card::before,
+html body.jl-page-bxcc .card::before,
+html body.jl-page-rz .card::before,
+html body .jlf-card::before,
+html body .feature-card::before{
+  content:"" !important;
+  position:absolute !important;
+  left:18px !important;
+  right:18px !important;
+  top:0 !important;
+  height:2px !important;
+  background:linear-gradient(90deg,transparent,#efd475 48%,transparent) !important;
+  opacity:.96 !important;
+}
+
+html body h1,
+html body h2,
+html body h3,
+html body .card h2,
+html body .card h3{color:var(--jlp-purple) !important}
+html body h2::after{background:linear-gradient(90deg,transparent,var(--jlp-gold),transparent) !important}
+
+/* 表單 */
+html body.jl-page input,
+html body.jl-page select,
+html body.jlf-feature-mode input,
+html body.jlf-feature-mode select,
+html body.jl-page-bxcc input,
+html body.jl-page-bxcc select,
+html body.jl-page-rz input,
+html body.jl-page-rz select{
+  min-height:44px !important;
+  border:1px solid rgba(183,126,198,.56) !important;
+  border-radius:13px !important;
+  background:rgba(255,255,255,.96) !important;
+  color:#43204d !important;
+  box-shadow:inset 0 2px 6px rgba(80,7,96,.045),0 2px 7px rgba(93,21,108,.045) !important;
+}
+html body input:focus,
+html body select:focus{
+  outline:none !important;
+  border-color:#9a36b4 !important;
+  box-shadow:0 0 0 3px rgba(154,54,180,.12),0 6px 14px rgba(78,11,92,.08) !important;
+}
+
+/* 主按鈕 */
+html body.jl-page .btn,
+html body.jl-page .go,
+html body.jlf-feature-mode .go,
+html body.jlf-feature-mode .lock button,
+html body.jlf-feature-mode .qm-in button,
+html body.jlf-feature-mode .jg-in button,
+html body.jlf-feature-mode .ly-m button,
+html body.jl-page-bxcc #go,
+html body.jl-page-rz #go,
+html body .jli-home,
+html body #jlf-back,
+html body.jl-page-bxcc .back,
+html body.jl-page-rz .back{
+  border:1px solid #efcf6c !important;
+  border-radius:999px !important;
+  color:#fff !important;
+  background:linear-gradient(135deg,#4a055c 0%,#8614a5 48%,#bd33d4 100%) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.42),inset 0 -3px 8px rgba(48,0,60,.32),0 8px 18px rgba(80,9,97,.28),0 0 0 3px rgba(218,181,72,.13) !important;
+  text-shadow:0 1px 5px rgba(0,0,0,.18) !important;
+}
+html body.jl-page .btn:active,
+html body.jl-page .go:active,
+html body.jlf-feature-mode .go:active{transform:translateY(1px);filter:brightness(.97)}
+
+/* 次要按鈕 / 分頁 */
+html body.jlf-feature-mode .seg button,
+html body.jlf-feature-mode .tabs button,
+html body.jlf-feature-mode .qm-zg button,
+html body.jl-page-bxcc .modes button,
+html body.jl-page-rz .quick button,
+html body.jl-page .modes button,
+html body.jl-page .quick button{
+  border:1px solid rgba(190,137,204,.58) !important;
+  border-radius:12px !important;
+  color:#6f397b !important;
+  background:linear-gradient(180deg,#fff,#fff7ff) !important;
+  box-shadow:0 5px 12px rgba(87,15,100,.08) !important;
+}
+html body.jlf-feature-mode .seg button[aria-pressed="true"],
+html body.jlf-feature-mode .tabs button[aria-pressed="true"],
+html body.jlf-feature-mode .qm-zg button.on,
+html body.jl-page-bxcc .modes button[aria-pressed="true"]{
+  color:#fff !important;
+  border-color:#edcf70 !important;
+  background:linear-gradient(135deg,#5b096f,#a823c6) !important;
+  box-shadow:inset 0 1px rgba(255,255,255,.33),0 6px 13px rgba(74,6,89,.22) !important;
+}
+
+/* 表格與結果區 */
+html body.jl-page table,
+html body.jlf-feature-mode table{border-radius:14px !important;overflow:hidden !important;background:#fffaff !important;box-shadow:var(--jlp-shadow-soft) !important}
+html body.jl-page th,
+html body.jlf-feature-mode th{background:linear-gradient(180deg,#f0d8f7,#ead0f3) !important;color:#5c0d70 !important}
+html body.jl-page th,
+html body.jl-page td,
+html body.jlf-feature-mode th,
+html body.jlf-feature-mode td{border-color:rgba(188,137,200,.34) !important}
+
+html body.jlf-feature-mode .qm-card,
+html body.jlf-feature-mode .qm-gj,
+html body.jlf-feature-mode .qm-zi,
+html body.jlf-feature-mode .qm-ly,
+html body.jlf-feature-mode .jg-grid,
+html body.jlf-feature-mode .jie,
+html body.jlf-feature-mode .duan,
+html body.jlf-feature-mode .jdu{
+  color:#4b2853 !important;
+  border-color:rgba(191,139,204,.55) !important;
+  background:linear-gradient(145deg,#fff,#fff6ff) !important;
+  box-shadow:var(--jlp-shadow-soft) !important;
+}
+
+/* 奇門等原先不同色塊，也統一紫晶紙感 */
+html body[data-jli-route] .qm-h{
+  color:#651078 !important;
+  border-color:#d7b1df !important;
+  background:linear-gradient(90deg,#f9edfc,#fff8e6) !important;
+}
+html body[data-jli-route] .qm-sg .c,
+html body[data-jli-route] .qm-sg .c:nth-child(even){
+  border-color:#d8b8df !important;
+  background:linear-gradient(145deg,#fff,#faf0fd) !important;
+}
+html body[data-jli-route] .qm-plate{
+  border-color:#d5b2de !important;
+  background:radial-gradient(circle at 50% 50%,rgba(211,171,67,.15),transparent 42%),linear-gradient(145deg,#f8ebfb,#fff8ff) !important;
+  box-shadow:inset 0 1px #fff,0 9px 22px rgba(75,8,91,.12) !important;
+}
+html body[data-jli-route] .qm-cell,
+html body[data-jli-route] .qm-cell:nth-child(n){
+  color:#5a3262 !important;
+  border-color:#dbc0e2 !important;
+  background:#fffaff !important;
+}
+html body[data-jli-route] .qm-cell.on{
+  color:#fff !important;
+  border-color:#e8c965 !important;
+  background:linear-gradient(145deg,#58076b,#a423c0) !important;
+}
+
+/* 擇日頁保留季節大圖，外框改成精品相框 */
+html body.jl-page-rz header:after{
+  border:1px solid #e8c865 !important;
+  border-radius:18px !important;
+  box-shadow:0 13px 28px rgba(71,6,86,.22),inset 0 0 0 1px rgba(255,255,255,.68) !important;
+}
+
+/* Footer */
+html body.jl-page footer:not(.jlf-footer),
+html body.jlf-feature-mode footer:not(.jlf-footer){
+  border-top:1px solid rgba(226,191,92,.38) !important;
+  background:linear-gradient(135deg,#260331,#500663 56%,#30043d) !important;
+  color:#ead9ee !important;
+  box-shadow:0 -8px 26px rgba(49,4,61,.12) !important;
+}
+
+/* 手機尺寸微調 */
+@media(max-width:430px){
+  html body .jli-hero{min-height:154px !important;padding:24px 17px !important}
+  html body .jli-hero h1{font-size:28px !important}
+  html body.jl-page .card,
+  html body.jlf-feature-mode #jl-feature-shell-final .card,
+  html body.jl-page-bxcc .card,
+  html body.jl-page-rz .card{border-radius:19px !important}
+}
