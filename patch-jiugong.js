@@ -49,13 +49,19 @@ var CSS = [
   '.jg-err{min-height:1.4em;margin-bottom:10px;color:#a12626;font-size:13px}',
   '.jg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;',
     'background:#cdbfa7;border:1px solid #cdbfa7}',
-  '.jg-c{background:#fffdf9;padding:10px 4px;text-align:center;min-height:88px;',
-    'display:flex;align-items:center;justify-content:center}',
-  '.jg-c .jg-n{font-family:Arial,sans-serif;font-size:38px;font-weight:800;',
-    'line-height:1;color:#5d2c20}',
-  '.jg-c.jg-off{background:#f3ede2}',
+  '.jg-c{position:relative;padding:10px 4px;text-align:center;min-height:88px;',
+    'display:flex;align-items:center;justify-content:center;overflow:hidden}',
+  '.jg-c:after{content:"";position:absolute;inset:5px;border:1px solid rgba(255,255,255,.3);pointer-events:none}',
+  '.jg-c .jg-n{position:relative;z-index:1;font-family:Arial,sans-serif;font-size:38px;font-weight:900;',
+    'line-height:1;color:#fff;text-shadow:0 2px 5px rgba(20,8,28,.35)}',
+  '.jg-c.jg-mu{background:linear-gradient(145deg,#2f9b6a,#166c4b)}',
+  '.jg-c.jg-huo{background:linear-gradient(145deg,#df515e,#a91f3d)}',
+  '.jg-c.jg-tu{background:linear-gradient(145deg,#e8b949,#b97914)}',
+  '.jg-c.jg-jin{background:linear-gradient(145deg,#50586b,#252a38)}',
+  '.jg-c.jg-shui{background:linear-gradient(145deg,#3678a8,#16456e)}',
+  '.jg-c.jg-off{filter:saturate(.86)}',
   '.jg-c.jg-off .jg-n{display:none}',
-  '.jg-c.jg-mid{background:#f7efe2}',
+  '.jg-c.jg-mid{box-shadow:inset 0 0 0 3px rgba(255,235,159,.45)}',
   '.jg-note{margin-top:12px;font-size:12px;color:#85776c;line-height:1.8}',
   '.jg-star-card{margin-top:24px;padding:16px 12px 14px;border:1px solid #cdbfa7;background:#fffdf9}',
   '.jg-star-title{text-align:center;margin:0 0 12px;color:#5d2c20;font-family:var(--ser,serif);font-size:16px;font-weight:700;letter-spacing:.12em}',
@@ -63,8 +69,13 @@ var CSS = [
   '.jg-star-row{display:grid;grid-template-columns:22px minmax(0,1fr) 22px;align-items:center;gap:5px}',
   '.jg-axis-side{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.1em}',
   '.jg-star-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #9c8b74;background:#9c8b74;gap:1px}',
-  '.jg-star-cell{position:relative;min-height:75px;display:flex;align-items:center;justify-content:center;padding:16px 3px 8px;background:#fffdf9;color:#241f1c;text-align:center;font-family:var(--ser,serif);font-size:15px;font-weight:700}',
-  '.jg-star-cell em{position:absolute;right:7px;top:4px;color:#a12626;font-family:Arial,sans-serif;font-size:16px;font-style:normal;font-weight:800}',
+  '.jg-star-cell{position:relative;min-height:75px;display:flex;align-items:center;justify-content:center;padding:16px 3px 8px;color:#fff;text-align:center;font-family:var(--ser,serif);font-size:15px;font-weight:800;text-shadow:0 1px 3px rgba(20,8,28,.35)}',
+  '.jg-star-cell.jg-mu{background:linear-gradient(145deg,#2f9b6a,#166c4b)}',
+  '.jg-star-cell.jg-huo{background:linear-gradient(145deg,#df515e,#a91f3d)}',
+  '.jg-star-cell.jg-tu{background:linear-gradient(145deg,#e8b949,#b97914)}',
+  '.jg-star-cell.jg-jin{background:linear-gradient(145deg,#50586b,#252a38)}',
+  '.jg-star-cell.jg-shui{background:linear-gradient(145deg,#3678a8,#16456e)}',
+  '.jg-star-cell em{position:absolute;right:7px;top:4px;color:#fff5bd;font-family:Arial,sans-serif;font-size:16px;font-style:normal;font-weight:900;text-shadow:0 1px 3px rgba(20,8,28,.5)}',
   '.jg-star-note{margin:10px 0 0;text-align:center;color:#85776c;font-size:11px;letter-spacing:.06em}',
   '@media(max-width:390px){.jg-star-card{padding-left:8px;padding-right:8px}.jg-star-row{grid-template-columns:18px minmax(0,1fr) 18px;gap:3px}.jg-star-cell{min-height:68px;font-size:13px}.jg-star-cell em{right:5px;font-size:14px}}'
 ].join('');
@@ -91,10 +102,14 @@ function compute(raw){
 }
 
 /* ---------- 畫盤 ---------- */
+function wxClass(wx){
+  return {木:'jg-mu',火:'jg-huo',土:'jg-tu',金:'jg-jin',水:'jg-shui'}[wx] || 'jg-tu';
+}
+
 function cellHTML(key, r){
   var info = CELL[key];
   var hit = r.cells[key];
-  var cls = 'jg-c';
+  var cls = 'jg-c ' + wxClass(info.wx);
   if (info.off) cls += ' jg-off';
   if (key === 'c') cls += ' jg-mid';
   var body = hit ? ('<div class="jg-n">' + hit.n + '</div>') : '';
@@ -136,7 +151,9 @@ function starTable(){
   ];
   var cells = '';
   for (var i = 0; i < stars.length; i++){
-    cells += '<div class="jg-star-cell"><span>' + stars[i][0] + '</span><em>' + stars[i][1] + '</em></div>';
+    var info = null;
+    for (var key in CELL){ if (CELL[key].lo === stars[i][1]) { info = CELL[key]; break; } }
+    cells += '<div class="jg-star-cell ' + wxClass(info ? info.wx : '土') + '"><span>' + stars[i][0] + '</span><em>' + stars[i][1] + '</em></div>';
   }
   return '<section class="jg-star-card" aria-label="九宮九星對照表">' +
            '<h3 class="jg-star-title">九宮九星對照表</h3>' +
