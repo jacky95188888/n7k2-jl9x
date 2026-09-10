@@ -807,7 +807,27 @@ function boot(){
     });
   }
 
+  function visualTone(title,index){
+    const rules=[
+      [/五行|本命|萬物類象|四柱八字/,'wood'],
+      [/先天|後天|陰陽|桃花/,'fire'],
+      [/六親|大運|流年|擇日/,'earth'],
+      [/奇門|九宮|八星|手機|數理/,'water'],
+      [/卦義|格局|專業|詳解/,'metal']
+    ];
+    for(let i=0;i<rules.length;i++) if(rules[i][0].test(title)) return rules[i][1];
+    return ['wood','fire','earth','water','metal'][index%5];
+  }
+
+  function decorateCards(){
+    feature.querySelectorAll('.card').forEach(function(card,index){
+      card.classList.remove('jl-tone-wood','jl-tone-fire','jl-tone-earth','jl-tone-water','jl-tone-metal');
+      card.classList.add('jl-tone-'+visualTone(cardTitle(card),index));
+    });
+  }
+
   function hideEmptyCards(){
+    decorateCards();
     feature.querySelectorAll('.card').forEach(function(card){
       const hasUseful=card.querySelector('input,select,button,table,svg,canvas,img,[id^="qm"],[id^="jg"]');
       const hasText=clean(card.textContent).length>0;
