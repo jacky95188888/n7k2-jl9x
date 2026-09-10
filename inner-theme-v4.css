@@ -321,3 +321,89 @@ body.jl-page-bxcc #dict dt{padding:7px 10px;border-radius:9px;background:linear-
   body.jlf-feature-mode #jl-feature-shell-final #plugs0>.card{margin-bottom:14px!important}
   body.jl-page-bxcc .card{margin:14px 0;padding:19px 15px!important}
 }
+
+
+/* 2026-09 全站內頁五行彩色進化：卡片、表格與解說保持同一色系 */
+body.jlf-feature-mode .card.jl-tone-wood{--tone-deep:#176347;--tone-main:#2f9b6a;--tone-soft:#e7f7ef;--tone-line:#9fd3bc;--tone-mark:"木"}
+body.jlf-feature-mode .card.jl-tone-fire{--tone-deep:#9c2940;--tone-main:#dc5262;--tone-soft:#fff0f3;--tone-line:#eab5bf;--tone-mark:"火"}
+body.jlf-feature-mode .card.jl-tone-earth{--tone-deep:#956019;--tone-main:#d2a23b;--tone-soft:#fff7dd;--tone-line:#e4ca83;--tone-mark:"土"}
+body.jlf-feature-mode .card.jl-tone-water{--tone-deep:#235d88;--tone-main:#3d87b5;--tone-soft:#eaf6ff;--tone-line:#a9cee3;--tone-mark:"水"}
+body.jlf-feature-mode .card.jl-tone-metal{--tone-deep:#4d4968;--tone-main:#777493;--tone-soft:#f0effa;--tone-line:#c6c3da;--tone-mark:"金"}
+
+body.jlf-feature-mode #jl-feature-shell-final .card[class*="jl-tone-"]{
+  border-color:var(--tone-line)!important;
+  background:
+    radial-gradient(circle at 92% 9%,color-mix(in srgb,var(--tone-main) 20%,transparent) 0,transparent 24%),
+    repeating-linear-gradient(135deg,transparent 0 22px,color-mix(in srgb,var(--tone-main) 4%,transparent) 23px 24px),
+    linear-gradient(145deg,#fff 0,var(--tone-soft) 76%,#fff 100%)!important;
+  box-shadow:0 15px 34px color-mix(in srgb,var(--tone-deep) 14%,transparent),inset 0 1px #fff!important
+}
+body.jlf-feature-mode #jl-feature-shell-final .card[class*="jl-tone-"]:after{
+  content:var(--tone-mark);right:-5px;bottom:-17px;color:color-mix(in srgb,var(--tone-main) 10%,transparent);font-size:108px
+}
+body.jlf-feature-mode .card[class*="jl-tone-"]>h2{
+  color:var(--tone-deep)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"]>h2:before{
+  content:var(--tone-mark);width:31px;height:31px;display:grid;place-items:center;flex:0 0 31px;
+  border:1px solid color-mix(in srgb,var(--tone-main) 72%,#d5ae42);border-radius:50%;
+  color:#fff7d6;background:linear-gradient(145deg,var(--tone-main),var(--tone-deep));
+  box-shadow:inset 0 0 0 3px #ffffff26,0 5px 12px color-mix(in srgb,var(--tone-deep) 24%,transparent);
+  font-size:11px;letter-spacing:0
+}
+body.jlf-feature-mode .card[class*="jl-tone-"]>h2:after{
+  background:linear-gradient(90deg,transparent,var(--tone-main),transparent)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] table{
+  border-color:var(--tone-line)!important;
+  box-shadow:0 7px 18px color-mix(in srgb,var(--tone-deep) 8%,transparent)
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] th{
+  color:#fff8df!important;
+  background:linear-gradient(135deg,var(--tone-deep),color-mix(in srgb,var(--tone-main) 78%,var(--tone-deep)))!important;
+  border-color:color-mix(in srgb,var(--tone-main) 74%,#fff)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] td{
+  color:#4f4052!important;
+  background:color-mix(in srgb,var(--tone-soft) 58%,#fff)!important;
+  border-color:color-mix(in srgb,var(--tone-line) 52%,#fff)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] tr:nth-child(even) td{
+  background:color-mix(in srgb,var(--tone-soft) 86%,#fff)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] td.n,
+body.jlf-feature-mode .card[class*="jl-tone-"] td.zh-n{
+  color:var(--tone-deep)!important;font-weight:900
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] .jdu,
+body.jlf-feature-mode .card[class*="jl-tone-"] .duan,
+body.jlf-feature-mode .card[class*="jl-tone-"] .jie,
+body.jlf-feature-mode .card[class*="jl-tone-"] .lq-verdict,
+body.jlf-feature-mode .card[class*="jl-tone-"] details{
+  border-color:var(--tone-line)!important;
+  background:
+    radial-gradient(circle at 96% 5%,color-mix(in srgb,var(--tone-main) 14%,transparent),transparent 25%),
+    linear-gradient(145deg,#fff,color-mix(in srgb,var(--tone-soft) 78%,#fff))!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] .bar{
+  border-color:var(--tone-line)!important;background:var(--tone-soft)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] .bar div{
+  color:var(--tone-deep)!important;background:color-mix(in srgb,var(--tone-soft) 72%,#fff)!important;
+  border-color:var(--tone-line)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] .bar div:nth-child(even){
+  background:color-mix(in srgb,var(--tone-main) 17%,#fff)!important
+}
+body.jlf-feature-mode .card[class*="jl-tone-"] p,
+body.jlf-feature-mode .card[class*="jl-tone-"] .jdu{line-height:1.9}
+body.jlf-feature-mode .card[class*="jl-tone-"] .hint,
+body.jlf-feature-mode .card[class*="jl-tone-"] .lq-note,
+body.jlf-feature-mode .card[class*="jl-tone-"] .gxnote{color:color-mix(in srgb,var(--tone-deep) 72%,#766b78)!important}
+
+@media(max-width:430px){
+  body.jlf-feature-mode #jl-feature-shell-final .card[class*="jl-tone-"]{border-radius:16px!important}
+  body.jlf-feature-mode .card[class*="jl-tone-"]>h2{gap:7px;font-size:16px!important}
+  body.jlf-feature-mode .card[class*="jl-tone-"]>h2:before{width:29px;height:29px;flex-basis:29px}
+  body.jlf-feature-mode .card[class*="jl-tone-"] .jdu{font-size:13px!important}
+}
