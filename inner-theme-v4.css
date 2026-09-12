@@ -407,3 +407,8 @@ body.jlf-feature-mode .card[class*="jl-tone-"] .gxnote{color:color-mix(in srgb,v
   body.jlf-feature-mode .card[class*="jl-tone-"]>h2:before{width:29px;height:29px;flex-basis:29px}
   body.jlf-feature-mode .card[class*="jl-tone-"] .jdu{font-size:13px!important}
 }
+
+/* 早子／晚子時辰提示 */
+body.jlf-feature-mode .zihelp{display:block;margin-top:7px;color:#8b647f;font-size:10px;line-height:1.55}
+body.jlf-feature-mode #h option[value="early-zi"],
+body.jlf-feature-mode #h option[value="late-zi"]{font-weight:800;color:#681078}
