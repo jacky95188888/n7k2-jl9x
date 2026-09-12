@@ -1101,7 +1101,7 @@ background:url('hero.jpeg') center top/cover no-repeat;
     <div><label id="ylab">年</label><input id="y" type="number" inputmode="numeric" value="1980"></div>
     <div><label>月</label><select id="m"></select></div>
     <div><label>日</label><select id="d"></select></div>
-    <div><label>時辰</label><select id="h"></select></div>
+    <div><label>時辰（早子／晚子分開）</label><select id="h"></select><small id="zihelp" class="zihelp">晚子 23:00–23:59 依老師規則換到次日排盤</small></div>
     <div><label>性別</label><select id="g"><option>男</option><option>女</option></select></div>
     <div><label>關注點</label><select id="k">
       <option>財運</option><option>婚姻</option><option>學業</option>
@@ -1188,8 +1188,14 @@ background:url('hero.jpeg') center top/cover no-repeat;
 const XUN=[[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[1,"11,12"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[11,"9,10"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[9,"7,8"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[7,"5,6"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[5,"3,4"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"],[3,"1,2"]];
 const GZ='零子丑寅卯辰巳午未申酉戌亥';
 const ZHI=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
-const HRS=['子 23-01','丑 01-03','寅 03-05','卯 05-07','辰 07-09','巳 09-11',
-           '午 11-13','未 13-15','申 15-17','酉 17-19','戌 19-21','亥 21-23'];
+const HRS=[
+  ['早子 00:00–00:59','early-zi'],
+  ['丑 01:00–02:59','2'],['寅 03:00–04:59','3'],['卯 05:00–06:59','4'],
+  ['辰 07:00–08:59','5'],['巳 09:00–10:59','6'],['午 11:00–12:59','7'],
+  ['未 13:00–14:59','8'],['申 15:00–16:59','9'],['酉 17:00–18:59','10'],
+  ['戌 19:00–20:59','11'],['亥 21:00–22:59','12'],
+  ['晚子 23:00–23:59（換日）','late-zi']
+];
 const PLAB=['年','月','日','日','日','時'];
 
 /* ---------- 引擎 ---------- */
@@ -1232,8 +1238,8 @@ let cal='ad', cur=null, sel=0;
 (function init(){
   for(let i=1;i<=12;i++)$('m').add(new Option(i+' 月',i));
   for(let i=1;i<=31;i++)$('d').add(new Option(i+' 日',i));
-  HRS.forEach((t,i)=>$('h').add(new Option(t,i+1)));
-  $('m').value=1;$('d').value=1;$('h').value=1;
+  HRS.forEach(t=>$('h').add(new Option(t[0],t[1])));
+  $('m').value=1;$('d').value=1;$('h').value='early-zi';
   $('cal').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
     cal=b.dataset.c;
@@ -1289,28 +1295,59 @@ function lunarToSolar(y,m,d){
   }catch(e){return null;}
 }
 
+function plusOneSolar(y,m,d){
+  const dt=new Date(Date.UTC(y,m-1,d));
+  dt.setUTCDate(dt.getUTCDate()+1);
+  return {y:dt.getUTCFullYear(),m:dt.getUTCMonth()+1,d:dt.getUTCDate()};
+}
+
+function hourChoice(){
+  const raw=$('h').value;
+  if(raw==='early-zi')return {h:1,zi:'early'};
+  if(raw==='late-zi')return {h:1,zi:'late'};
+  return {h:+raw,zi:''};
+}
+
+function hourLabel(h,zi){
+  if(zi==='early')return '早子時（00:00–00:59）';
+  if(zi==='late')return '晚子時（23:00–23:59・換日）';
+  return ZHI[h-1]+'時（'+HRS.find(x=>x[1]===String(h))[0].split(' ').slice(1).join(' ')+'）';
+}
+
 function run(){
   $('err').textContent='';
   let y=parseInt($('y').value,10);
-  const m=+$('m').value, d=+$('d').value, h=+$('h').value;
+  const m=+$('m').value, d=+$('d').value, hc=hourChoice(), h=hc.h, zi=hc.zi;
   if(!y||isNaN(y)){$('err').textContent='請輸入年份。';return;}
   if(cal==='roc')y=y+1911;
   let ly=y,lm=m,ld=d,sy=y,sm=m,sd=d,conv='';
   if(cal!=='lun'){
-    const L=toLunar(y,m,d);
+    let calc={y:y,m:m,d:d};
+    if(zi==='late')calc=plusOneSolar(y,m,d);
+    sy=calc.y;sm=calc.m;sd=calc.d;
+    const L=toLunar(calc.y,calc.m,calc.d);
     if(!L){$('err').textContent='國曆換算元件沒有載入。請檢查網路後重試，或切換到「農曆」直接輸入。';return;}
     ly=L.y;lm=L.m;ld=L.d;
-    conv='國曆 '+y+'/'+m+'/'+d+' → 農曆 '+ly+' 年 '+(L.leap?'閏':'')+lm+' 月 '+ld+' 日';
+    conv='國曆 '+y+'/'+m+'/'+d+(zi==='late'?' 晚子換日 → 國曆 '+sy+'/'+sm+'/'+sd+' → ':' → ')
+      +'農曆 '+ly+' 年 '+(L.leap?'閏':'')+lm+' 月 '+ld+' 日';
   }else{
     if(d>30){$('err').textContent='農曆日最大為 30。';return;}
     const S=lunarToSolar(ly,lm,ld);
     if(!S){$('err').textContent='這個農曆日期不存在，請重新確認年月日。';return;}
     sy=S.y;sm=S.m;sd=S.d;
-    conv='農曆 '+ly+' 年 '+lm+' 月 '+ld+' 日';
+    if(zi==='late'){
+      const N=plusOneSolar(sy,sm,sd);
+      const L=toLunar(N.y,N.m,N.d);
+      if(!L){$('err').textContent='晚子換日資料無法換算，請重新確認日期。';return;}
+      sy=N.y;sm=N.m;sd=N.d;ly=L.y;lm=L.m;ld=L.d;
+      conv='農曆 '+y+' 年 '+m+' 月 '+d+' 日 晚子換日 → 農曆 '+ly+' 年 '+lm+' 月 '+ld+' 日';
+    }else{
+      conv='農曆 '+ly+' 年 '+lm+' 月 '+ld+' 日';
+    }
   }
   const s=slotsOf(ly,lm,ld,h);
   cur={s:s,r:ringOf(s),b:bounds(s),lab:labelsOf(s),cal:cal,
-       iy:y,im:m,id:d,ly:ly,lm:lm,ld:ld,sy:sy,sm:sm,sd:sd,h:h,conv:conv,
+       iy:y,im:m,id:d,ly:ly,lm:lm,ld:ld,sy:sy,sm:sm,sd:sd,h:h,zi:zi,conv:conv,
        g:$('g').value,k:$('k').value};
   sel=0;
   render();
@@ -1354,7 +1391,7 @@ function chartData(){
   return {slots:cur.s,ring:cur.r,lab:cur.lab,bounds:cur.b,
           segs:segs(cur.s),wins:windows(cur.r),xun:xunOf(cur.ly),
           cal:cur.cal,iy:cur.iy,im:cur.im,id:cur.id,
-          ly:cur.ly,lm:cur.lm,ld:cur.ld,sy:cur.sy,sm:cur.sm,sd:cur.sd,h:cur.h,
+          ly:cur.ly,lm:cur.lm,ld:cur.ld,sy:cur.sy,sm:cur.sm,sd:cur.sd,h:cur.h,zi:cur.zi,
           sex:cur.g,focus:cur.k,conv:cur.conv};
 }
 function runStatics(){
@@ -1485,7 +1522,7 @@ function drawPro(){
   const r=cur.r,b=cur.b,sg=segs(cur.s),xn=xunOf(cur.ly);
   let h='<table><tr><th>項目</th><th>內容</th></tr>';
   h+='<tr><td>換算</td><td>'+cur.conv+'</td></tr>';
-  h+='<tr><td>時辰</td><td>'+ZHI[cur.h-1]+'時（'+cur.h+'）</td></tr>';
+  h+='<tr><td>時辰</td><td>'+hourLabel(cur.h,cur.zi)+'</td></tr>';
   h+='<tr><td>性別 / 關注點</td><td>'+cur.g+'　'+cur.k+'</td></tr>';
   h+='<tr><td>柱數</td><td>'+r.length+' 柱</td></tr>';
   h+='<tr><td>出生旬</td><td>第 '+xn[0]+' 旬　旬空 '+xn[1]+'</td></tr>';
