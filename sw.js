@@ -4,7 +4,7 @@
    - 圖片 / 字型 一律「先用快取、背景更新」→ 省流量、開得快。
    - 改版時只要把下面 VERSION 的數字 +1，舊快取會自動清掉。
 */
-const VERSION = 'jl-v14-jiugong-palette-20260914';
+const VERSION = 'jl-v15-qimen-full-theme-20260914';
 const CORE = [
   './',
   './index.html',
@@ -25,7 +25,6 @@ self.addEventListener('install', e => {
   self.skipWaiting();
   e.waitUntil(
     caches.open(VERSION).then(c =>
-      // 個別加入，任何一支檔案不存在也不會讓整個安裝失敗
       Promise.all(CORE.map(u => c.add(u).catch(() => null)))
     )
   );
@@ -49,7 +48,6 @@ self.addEventListener('fetch', e => {
   try { url = new URL(req.url); } catch (_) { return; }
   if (!/^https?:$/.test(url.protocol)) return;
 
-  // 圖片、字型：快取優先，背景默默更新
   if (isAsset(url)) {
     e.respondWith(
       caches.match(req).then(hit => {
@@ -63,11 +61,8 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // 其他（HTML / JS / CDN 程式庫）：連網優先，斷線才回快取
   e.respondWith(
     fetch(req).then(res => {
-      // 跨網域的 <script> 會回傳 opaque（status 0），res.ok 是 false，
-      // 但還是要存起來，不然離線時 lunar-javascript 讀不到，排盤會整個掛掉。
       const storable = res && (res.ok || res.type === 'opaque');
       if (storable) {
         const copy = res.clone();
