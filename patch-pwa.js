@@ -29,6 +29,12 @@
   add('meta', { name: 'apple-mobile-web-app-title', content: '筠玲易數' });
   add('meta', { name: 'mobile-web-app-capable', content: 'yes' });
 
+  // 奇門手機號論斷：整區統一新版玉石／米金／霧紫配色，只覆蓋視覺。
+  var qimenTheme = document.createElement('link');
+  qimenTheme.rel = 'stylesheet';
+  qimenTheme.href = 'qimen-theme-v2.css?v=20260914-2';
+  head.appendChild(qimenTheme);
+
   // Service Worker：只在 https（GitHub Pages）或 localhost 下註冊
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
