@@ -11,7 +11,9 @@
      上中（離九）、下中（坎一）不用 —— 老師：「那格不用」。
      老師：「第七碼永遠是中宮」＝倒數第七碼落中宮，吻合。
 
-   老師確認：九宮格內只列數字，不顯示宮名國字。\n\n   驗證例：0921725239，末七碼 1725239
+   老師確認：九宮格內只列數字，不顯示宮名國字。
+
+   驗證例：0921725239，末七碼 1725239
        2  ·  7
        3  1  5
        9  ·  2
@@ -41,43 +43,52 @@ var CELL = {
 
 var CSS = [
   '.jg-in{display:flex;gap:10px;margin-bottom:16px}',
-  '.jg-in input{flex:1;height:48px;padding:0 14px;border:1px solid #bda98f;',
-    'border-radius:2px;background:#fffefb;font-size:17px;letter-spacing:.08em}',
-  '.jg-in button{min-width:92px;height:48px;border:1px solid var(--zhu,#7d1d1d);',
-    'background:var(--zhu,#7d1d1d);color:#f7f3ea;font-family:var(--ser,serif);',
-    'font-size:15px;letter-spacing:.14em;cursor:pointer}',
+  '.jg-in input{flex:1;height:48px;padding:0 14px;border:1px solid #cbb99a;',
+    'border-radius:12px;background:linear-gradient(180deg,#fffefa,#faf6ee);font-size:17px;letter-spacing:.08em;',
+    'box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 3px 10px rgba(88,67,39,.06)}',
+  '.jg-in button{min-width:92px;height:48px;border:1px solid #9f874f;border-radius:24px;',
+    'background:linear-gradient(145deg,#2f6d5f,#1e5148);color:#fffaf0;font-family:var(--ser,serif);',
+    'font-size:15px;letter-spacing:.14em;cursor:pointer;box-shadow:0 4px 12px rgba(31,81,72,.18),inset 0 0 0 1px rgba(229,205,143,.26)}',
   '.jg-err{min-height:1.4em;margin-bottom:10px;color:#a12626;font-size:13px}',
-  '.jg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;',
-    'background:#cdbfa7;border:1px solid #cdbfa7}',
-  '.jg-c{position:relative;padding:10px 4px;text-align:center;min-height:88px;',
-    'display:flex;align-items:center;justify-content:center;overflow:hidden}',
-  '.jg-c:after{content:"";position:absolute;inset:5px;border:1px solid rgba(255,255,255,.3);pointer-events:none}',
+  '.jg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:7px;',
+    'background:linear-gradient(180deg,rgba(255,253,247,.95),rgba(247,242,232,.92));border:1px solid #d7c7a8;border-radius:15px;',
+    'box-shadow:0 8px 24px rgba(76,58,34,.08),inset 0 0 0 1px rgba(255,255,255,.76)}',
+  '.jg-c{position:relative;padding:10px 4px;text-align:center;min-height:88px;border:1px solid rgba(188,164,116,.48);border-radius:11px;',
+    'display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.92),0 2px 8px rgba(71,57,37,.045)}',
+  '.jg-c:after{content:"";position:absolute;inset:4px;border:1px solid rgba(255,255,255,.7);border-radius:8px;pointer-events:none}',
   '.jg-c .jg-n{position:relative;z-index:1;font-family:Arial,sans-serif;font-size:38px;font-weight:900;',
-    'line-height:1;color:#fff;text-shadow:0 2px 5px rgba(20,8,28,.35)}',
-  '.jg-c.jg-mu{background:linear-gradient(145deg,#2f9b6a,#166c4b)}',
-  '.jg-c.jg-huo{background:linear-gradient(145deg,#df515e,#a91f3d)}',
-  '.jg-c.jg-tu{background:linear-gradient(145deg,#e8b949,#b97914)}',
-  '.jg-c.jg-jin{background:linear-gradient(145deg,#50586b,#252a38)}',
-  '.jg-c.jg-shui{background:linear-gradient(145deg,#3678a8,#16456e)}',
-  '.jg-c.jg-off{filter:saturate(.86)}',
+    'line-height:1;color:#2b4942;text-shadow:0 1px 0 rgba(255,255,255,.9)}',
+  '.jg-c.jg-mu{background:linear-gradient(145deg,#f4fbf7,#e4f1ea)}',
+  '.jg-c.jg-huo{background:linear-gradient(145deg,#fff7f8,#f5e8ec)}',
+  '.jg-c.jg-tu{background:linear-gradient(145deg,#fffaf0,#f2e8ce)}',
+  '.jg-c.jg-jin{background:linear-gradient(145deg,#f8f9fb,#e9edf3)}',
+  '.jg-c.jg-shui{background:linear-gradient(145deg,#f5f9fc,#e4eef5)}',
+  '.jg-c.jg-off{filter:none;opacity:.9}',
   '.jg-c.jg-off .jg-n{display:none}',
-  '.jg-c.jg-mid{box-shadow:inset 0 0 0 3px rgba(255,235,159,.45)}',
+  '.jg-c.jg-mid{background:linear-gradient(145deg,#3f7869,#245b50);border-color:#c5a95f;',
+    'box-shadow:inset 0 0 0 2px rgba(229,204,135,.34),0 4px 12px rgba(39,89,78,.2)}',
+  '.jg-c.jg-mid .jg-n{color:#fffaf0;text-shadow:0 2px 5px rgba(20,54,48,.28)}',
   '.jg-note{margin-top:12px;font-size:12px;color:#85776c;line-height:1.8}',
-  '.jg-star-card{margin-top:24px;padding:16px 12px 14px;border:1px solid #cdbfa7;background:#fffdf9}',
-  '.jg-star-title{text-align:center;margin:0 0 12px;color:#5d2c20;font-family:var(--ser,serif);font-size:16px;font-weight:700;letter-spacing:.12em}',
-  '.jg-axis{text-align:center;color:#5d2c20;font-size:14px;font-weight:800;line-height:1.5}',
+  '.jg-star-card{margin-top:24px;padding:16px 12px 14px;border:1px solid #d7c7a8;border-radius:15px;',
+    'background:linear-gradient(180deg,#fffefa,#faf6ee);box-shadow:0 8px 24px rgba(76,58,34,.06)}',
+  '.jg-star-title{text-align:center;margin:0 0 12px;color:#3e665c;font-family:var(--ser,serif);font-size:16px;font-weight:700;letter-spacing:.12em}',
+  '.jg-axis{text-align:center;color:#6e5835;font-size:14px;font-weight:800;line-height:1.5}',
   '.jg-star-row{display:grid;grid-template-columns:22px minmax(0,1fr) 22px;align-items:center;gap:5px}',
   '.jg-axis-side{writing-mode:vertical-rl;text-orientation:upright;letter-spacing:.1em}',
-  '.jg-star-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #9c8b74;background:#9c8b74;gap:1px}',
-  '.jg-star-cell{position:relative;min-height:75px;display:flex;align-items:center;justify-content:center;padding:16px 3px 8px;color:#fff;text-align:center;font-family:var(--ser,serif);font-size:15px;font-weight:800;text-shadow:0 1px 3px rgba(20,8,28,.35)}',
-  '.jg-star-cell.jg-mu{background:linear-gradient(145deg,#2f9b6a,#166c4b)}',
-  '.jg-star-cell.jg-huo{background:linear-gradient(145deg,#df515e,#a91f3d)}',
-  '.jg-star-cell.jg-tu{background:linear-gradient(145deg,#e8b949,#b97914)}',
-  '.jg-star-cell.jg-jin{background:linear-gradient(145deg,#50586b,#252a38)}',
-  '.jg-star-cell.jg-shui{background:linear-gradient(145deg,#3678a8,#16456e)}',
-  '.jg-star-cell em{position:absolute;right:7px;top:4px;color:#fff5bd;font-family:Arial,sans-serif;font-size:16px;font-style:normal;font-weight:900;text-shadow:0 1px 3px rgba(20,8,28,.5)}',
+  '.jg-star-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:transparent}',
+  '.jg-star-cell{position:relative;min-height:75px;display:flex;align-items:center;justify-content:center;padding:16px 3px 8px;',
+    'border:1px solid rgba(188,164,116,.46);border-radius:10px;color:#304b45;text-align:center;font-family:var(--ser,serif);font-size:15px;',
+    'font-weight:800;text-shadow:0 1px 0 rgba(255,255,255,.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}',
+  '.jg-star-cell.jg-mu{background:linear-gradient(145deg,#f4fbf7,#e4f1ea)}',
+  '.jg-star-cell.jg-huo{background:linear-gradient(145deg,#fff7f8,#f5e8ec)}',
+  '.jg-star-cell.jg-tu{background:linear-gradient(145deg,#fffaf0,#f2e8ce)}',
+  '.jg-star-cell.jg-jin{background:linear-gradient(145deg,#f8f9fb,#e9edf3)}',
+  '.jg-star-cell.jg-shui{background:linear-gradient(145deg,#f5f9fc,#e4eef5)}',
+  '.jg-star-cell em{position:absolute;right:7px;top:4px;color:#a78335;font-family:Arial,sans-serif;font-size:16px;font-style:normal;font-weight:900;',
+    'text-shadow:0 1px 0 rgba(255,255,255,.9)}',
   '.jg-star-note{margin:10px 0 0;text-align:center;color:#85776c;font-size:11px;letter-spacing:.06em}',
-  '@media(max-width:390px){.jg-star-card{padding-left:8px;padding-right:8px}.jg-star-row{grid-template-columns:18px minmax(0,1fr) 18px;gap:3px}.jg-star-cell{min-height:68px;font-size:13px}.jg-star-cell em{right:5px;font-size:14px}}'
+  '@media(max-width:390px){.jg-grid{gap:6px;padding:6px}.jg-c{min-height:82px}.jg-star-card{padding-left:8px;padding-right:8px}',
+    '.jg-star-row{grid-template-columns:18px minmax(0,1fr) 18px;gap:3px}.jg-star-cell{min-height:68px;font-size:13px}.jg-star-cell em{right:5px;font-size:14px}}'
 ].join('');
 
 function css(){
