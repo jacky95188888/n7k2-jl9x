@@ -1,98 +1,108 @@
-/* 筠玲易數｜奇門手機號論斷 Contrast V4
-   2026-09-16：針對洛書九宮、九宮增運、詳解卡片加深色彩與層次。
+/* 筠玲易數｜奇門手機號論斷 Luxury V5
+   2026-09-16：把洛書九宮、九宮增運、詳解卡片提升到參考圖同級質感。
    只改視覺，不改排盤與文字內容。
 */
 
-/* 區段標題 */
 .qm-h{
-  background:linear-gradient(90deg,#d7f1e8 0%,#edf1d9 56%,#f6ddb1 100%)!important;
-  border-color:#7fb9a9!important;
+  background:linear-gradient(90deg,#d6efe8 0%,#f3f2dd 58%,#f6dca7 100%)!important;
+  border:1.5px solid #75b5a4!important;
   color:#155d50!important;
-  box-shadow:0 7px 18px rgba(48,92,77,.12),inset 0 1px 0 rgba(255,255,255,.78)!important;
+  box-shadow:0 8px 20px rgba(48,92,77,.14),inset 0 1px 0 rgba(255,255,255,.86)!important;
 }
-.qm-h:before{color:#b77711!important}
+.qm-h:before{color:#b87910!important}
 
-/* 洛書九宮外框 */
 .qm-plate{
-  background:linear-gradient(145deg,#ecf5ef,#eadfc8)!important;
-  border-color:#ad8a32!important;
-  box-shadow:0 14px 30px rgba(55,78,67,.16),inset 0 0 0 2px rgba(255,255,255,.72)!important;
+  gap:9px!important;
+  padding:11px!important;
+  background:linear-gradient(145deg,#f7f1df 0%,#e8d6b0 100%)!important;
+  border:1.5px solid #b78e2e!important;
+  border-radius:22px!important;
+  box-shadow:0 15px 32px rgba(78,62,41,.17),inset 0 0 0 2px rgba(255,255,255,.78)!important;
 }
-
-/* 九宮格：整體比原版再加深一階 */
 .qm-cell{
-  background:linear-gradient(145deg,#d9efe7,#bfe0d5)!important;
-  border-color:#82b8a8!important;
-  box-shadow:0 5px 12px rgba(50,74,64,.10),inset 0 1px 0 rgba(255,255,255,.75)!important;
+  min-height:96px!important;
+  border:1.5px solid #6fb09e!important;
+  border-radius:16px!important;
+  background:
+    radial-gradient(circle at 20% 78%,rgba(23,119,78,.16) 0 11%,transparent 12%),
+    linear-gradient(145deg,#d8f4e5 0%,#9edfb8 56%,#72c996 100%)!important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.48),inset 0 1px 0 rgba(255,255,255,.86),0 6px 14px rgba(44,63,55,.12)!important;
 }
 .qm-cell:nth-child(2),.qm-cell:nth-child(6){
-  background:linear-gradient(145deg,#f7dfe7,#ecc0ce)!important;
-  border-color:#c98fa2!important;
+  background:
+    radial-gradient(circle at 75% 77%,rgba(190,44,75,.16) 0 14%,transparent 15%),
+    linear-gradient(145deg,#ffe0e5 0%,#f5a8b5 56%,#e97f93 100%)!important;
+  border-color:#cf5b72!important;
 }
 .qm-cell:nth-child(3),.qm-cell:nth-child(7){
-  background:linear-gradient(145deg,#f6e4b8,#e6c36d)!important;
-  border-color:#bd963e!important;
+  background:
+    linear-gradient(145deg,transparent 0 64%,rgba(153,102,14,.14) 65% 70%,transparent 71%),
+    linear-gradient(145deg,#fff0bb 0%,#f2cf6c 57%,#dda935 100%)!important;
+  border-color:#bd8b24!important;
 }
 .qm-cell:nth-child(5),.qm-cell:nth-child(9){
-  background:linear-gradient(145deg,#e3ddf2,#c9bfdf)!important;
-  border-color:#9e8fbd!important;
+  background:
+    radial-gradient(circle at 24% 80%,rgba(73,79,131,.14) 0 14%,transparent 15%),
+    linear-gradient(145deg,#f3f1fb 0%,#d9d5ea 56%,#b6bfd9 100%)!important;
+  border-color:#8996b8!important;
 }
-.qm-cell .gn{color:#5f2e6b!important}
-.qm-cell .nu{color:#2d2926!important}
+.qm-cell .gn{color:#5a1f66!important;font-size:15px!important;text-shadow:0 1px 0 rgba(255,255,255,.72)!important}
+.qm-cell .nu{color:#1f2927!important;font-size:31px!important;text-shadow:0 1px 0 rgba(255,255,255,.78)!important}
 .qm-cell.on{
-  background:radial-gradient(circle at 22% 14%,rgba(74,199,164,.42),transparent 34%),linear-gradient(145deg,#1f8068 0%,#0f5c4c 56%,#623267 100%)!important;
-  border-color:#d6aa35!important;
-  box-shadow:0 10px 24px rgba(27,88,73,.32),0 0 0 3px rgba(211,166,50,.12),inset 0 0 0 1px rgba(255,232,157,.35)!important;
+  min-height:106px!important;
+  background:
+    radial-gradient(circle at 26% 17%,rgba(63,205,166,.34),transparent 33%),
+    radial-gradient(circle at 60% 55%,transparent 0 33%,rgba(235,195,74,.13) 34% 35%,transparent 36%),
+    linear-gradient(145deg,#17725e 0%,#0c584a 58%,#5a2f64 100%)!important;
+  border:2px solid #d6aa35!important;
+  box-shadow:0 10px 24px rgba(27,88,73,.31),0 0 0 3px rgba(211,166,50,.12),inset 0 0 0 1px rgba(255,232,157,.34)!important;
 }
+.qm-cell.on .gn{color:#f0c956!important}
+.qm-cell.on .nu{color:#fffdf4!important}
+.qm-cell.on .st2 u{color:#fff8e8!important}
+.qm-cell.on .st2 i{color:#f0ce69!important}
 
-/* 說明／詳解卡 */
 .qm-card,.qm-gj,.qm-jie,.qm-zi{
-  background:linear-gradient(145deg,#f1f8f4,#e4eee8)!important;
-  border-color:#8fbaad!important;
-  box-shadow:0 9px 22px rgba(47,78,66,.12)!important;
+  background:
+    radial-gradient(circle at 90% 8%,rgba(235,207,143,.19),transparent 25%),
+    linear-gradient(145deg,#f5fbf7 0%,#e8f0e9 65%,#efe5cf 100%)!important;
+  border:1.5px solid #8db7aa!important;
+  border-radius:20px!important;
+  box-shadow:0 10px 24px rgba(47,78,66,.13),inset 0 1px 0 rgba(255,255,255,.76)!important;
 }
-.qm-card h4,.qm-zi h5{color:#5c126f!important}
-.qm-card .wx,.qm-zi h5 span{color:#956620!important}
+.qm-card h4,.qm-zi h5{color:#59106b!important;text-shadow:0 1px 0 #fff!important}
+.qm-card .wx,.qm-zi h5 span{color:#9b6a20!important}
 
-/* 九宮增運九格 */
 .qm-zg{gap:10px!important}
 .qm-zg button{
-  background:linear-gradient(145deg,#eee6f2,#ddd0e7)!important;
-  border-color:#b08abd!important;
-  color:#5b2c62!important;
-  box-shadow:0 5px 12px rgba(87,49,93,.10),inset 0 1px 0 rgba(255,255,255,.74)!important;
+  min-height:60px!important;
+  border:1.5px solid #af8dbd!important;
+  border-radius:15px!important;
+  background:linear-gradient(145deg,#efe6f4 0%,#dacbe6 100%)!important;
+  color:#5a2a63!important;
+  font-weight:800!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.52),0 5px 13px rgba(87,49,93,.11)!important;
 }
-.qm-zg button:nth-child(3n+1){
-  background:linear-gradient(145deg,#d8eee5,#bcdcd0)!important;
-  border-color:#7eb09f!important;
-}
-.qm-zg button:nth-child(3n+2){
-  background:linear-gradient(145deg,#f2dce5,#e5bdcd)!important;
-  border-color:#c58da3!important;
-}
-.qm-zg button:nth-child(3n){
-  background:linear-gradient(145deg,#f5e2ad,#e5be61)!important;
-  border-color:#bc9130!important;
-}
-.qm-zg button.self{border-color:#b98518!important;box-shadow:0 0 0 3px rgba(185,133,24,.13),0 5px 12px rgba(75,56,33,.10)!important}
+.qm-zg button:nth-child(3n+1){background:linear-gradient(145deg,#d7efe5,#b6d9cc)!important;border-color:#77aa99!important}
+.qm-zg button:nth-child(3n+2){background:linear-gradient(145deg,#f5dfe7,#e4b9ca)!important;border-color:#c4869e!important}
+.qm-zg button:nth-child(3n){background:linear-gradient(145deg,#f7e4aa,#e3bb5b)!important;border-color:#ba8c28!important}
+.qm-zg button.self{border-color:#b78016!important;box-shadow:0 0 0 3px rgba(185,133,24,.13),0 6px 14px rgba(75,56,33,.10)!important}
 .qm-zg button.on,.qm-zg button.mid,.qm-zg button.mid.on{
-  background:linear-gradient(145deg,#6a1588 0%,#8f11a2 58%,#b214cb 100%)!important;
-  border-color:#d5aa36!important;
+  background:linear-gradient(135deg,#5e0f85 0%,#8b13a6 55%,#bb16cf 100%)!important;
+  border:2px solid #d5aa36!important;
   color:#fff8df!important;
-  box-shadow:0 8px 18px rgba(111,22,132,.27),inset 0 1px 0 rgba(255,255,255,.22)!important;
+  box-shadow:0 9px 20px rgba(111,22,132,.29),inset 0 1px 0 rgba(255,255,255,.22)!important;
 }
-.qm-zg em{color:#89662f!important}
-.qm-zg button.on em,.qm-zg button.mid em{color:#f5d66f!important}
+.qm-zg em{color:#876126!important}
+.qm-zg button.on em,.qm-zg button.mid em{color:#f4d468!important}
 
-/* 下方本命所落詳解卡再加深一些 */
-.qm-zi{
-  background:linear-gradient(145deg,#e5f2ec 0%,#eee7cb 100%)!important;
-  border-color:#91bbaa!important;
-}
-.qm-zi dt{color:#68452f!important}
-.qm-zi p.xs{border-top-color:#cab78f!important}
+.qm-zi{background:linear-gradient(145deg,#e7f3ed 0%,#eee4c8 100%)!important}
+.qm-zi dt{color:#6b452e!important}
+.qm-zi p.xs{border-top-color:#c7b283!important}
 
 @media(max-width:390px){
-  .qm-cell{min-height:84px!important}
+  .qm-plate{gap:7px!important;padding:8px!important}
+  .qm-cell{min-height:88px!important}
+  .qm-cell .nu{font-size:28px!important}
   .qm-zg button{min-height:56px!important}
 }
