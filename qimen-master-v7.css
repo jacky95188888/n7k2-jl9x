@@ -1,0 +1,102 @@
+/* 筠玲易數｜奇門手機號論斷 MASTER V7
+   2026-09-16
+   以參考圖為唯一視覺母版：九格全部有完整五行色、雙層框、紋理、陰影。
+   僅改視覺，不動排盤、資料與文字。
+*/
+
+/* 整個奇門模組：奶油紙張＋紫金邊 */
+.card:has(#qmOut){
+  position:relative;
+  overflow:hidden;
+  padding:22px 16px 24px!important;
+  border:1.5px solid #d1a558!important;
+  border-radius:24px!important;
+  background:
+    radial-gradient(circle at 12% 4%,rgba(255,255,255,.95),transparent 24%),
+    radial-gradient(circle at 88% 8%,rgba(228,205,248,.40),transparent 28%),
+    linear-gradient(145deg,#fffaf2 0%,#f8efe3 62%,#ecdec7 100%)!important;
+  box-shadow:0 18px 38px rgba(87,57,36,.14),inset 0 0 0 2px rgba(255,255,255,.68)!important;
+}
+.card:has(#qmOut):before{
+  content:"";position:absolute;inset:8px;pointer-events:none;border-radius:18px;
+  border:1px solid rgba(211,166,78,.25);
+  background:
+    radial-gradient(circle at 7% 9%,rgba(191,148,64,.10) 0 1px,transparent 2px),
+    radial-gradient(circle at 91% 14%,rgba(93,50,127,.08) 0 1px,transparent 2px);
+  background-size:18px 18px,20px 20px;
+}
+.card:has(#qmOut)>*{position:relative;z-index:1}
+
+/* 輸入區 */
+.qm-in{gap:10px!important;margin-top:12px!important;padding:10px!important;border:1px solid rgba(196,155,73,.38)!important;border-radius:18px!important;background:linear-gradient(135deg,#fffdf8,#f3ebfb 52%,#fff3d8)!important;box-shadow:0 9px 22px rgba(67,45,74,.09),inset 0 1px 0 #fff!important}
+.qm-in input{min-height:56px!important;border:1.5px solid #b78bcb!important;border-radius:15px!important;background:linear-gradient(180deg,#fff,#faf5ff)!important;color:#30164f!important;font-size:20px!important;font-weight:800!important;letter-spacing:.12em!important;box-shadow:inset 0 1px 0 #fff,0 4px 12px rgba(89,52,109,.08)!important}
+.qm-in button{min-width:112px!important;border:1.5px solid #d0a23a!important;border-radius:16px!important;background:linear-gradient(135deg,#3e0b73 0%,#7515a4 54%,#ba17cf 100%)!important;color:#fff6d8!important;font-size:16px!important;font-weight:900!important;box-shadow:0 8px 18px rgba(94,19,125,.27),inset 0 1px 0 rgba(255,255,255,.28)!important}
+.qm-note{color:#6f5c52!important;font-size:13px!important}
+
+/* 區段標題 */
+.qm-h{position:relative!important;overflow:hidden!important;margin:26px 0 12px!important;padding:12px 16px!important;border:1.5px solid #84b9ab!important;border-radius:999px!important;background:linear-gradient(90deg,#d9f1e8 0%,#f2f0dc 56%,#f7dda8 100%)!important;color:#155e52!important;font-size:14px!important;font-weight:900!important;letter-spacing:.14em!important;box-shadow:0 7px 17px rgba(47,88,75,.12),inset 0 1px 0 rgba(255,255,255,.86)!important}
+.qm-h:before{content:'✦';margin-right:10px;color:#b87811!important}
+.qm-h:after{content:'';position:absolute;right:-18px;top:-30px;width:90px;height:90px;border:1px solid rgba(181,139,55,.16);border-radius:50%}
+
+/* 四綱 */
+.qm-sg{gap:10px!important}
+.qm-sg .c{padding:13px 4px!important;border:1.5px solid #baa5c8!important;border-radius:14px!important;background:linear-gradient(145deg,#f8effb,#e9ddef)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.58),0 5px 12px rgba(70,50,78,.09)!important}
+.qm-sg .c:nth-child(1){background:linear-gradient(145deg,#dbf1e8,#bfe1d4)!important;border-color:#84b7a7!important}
+.qm-sg .c:nth-child(2){background:linear-gradient(145deg,#f8e2e9,#e9bfd0)!important;border-color:#c88da3!important}
+.qm-sg .c:nth-child(3){background:linear-gradient(145deg,#f7e8b9,#e6c46d)!important;border-color:#be963d!important}
+.qm-sg .c b{color:#3a243f!important;font-weight:900!important}.qm-sg .c s{color:#826841!important}.qm-sg .c em{color:#8c3159!important;font-weight:800!important}
+
+/* 洛書九宮外框 */
+.qm-plate{gap:9px!important;padding:10px!important;border:1.5px solid #bd9130!important;border-radius:20px!important;background:linear-gradient(180deg,#fff6df 0%,#ead5a8 100%)!important;box-shadow:0 13px 29px rgba(88,63,35,.16),inset 0 0 0 2px rgba(255,255,255,.76)!important}
+
+/* 九格通用 */
+.qm-cell{position:relative!important;overflow:hidden!important;min-height:98px!important;padding:10px 4px!important;border:1.5px solid #7fb7a6!important;border-radius:15px!important;background:linear-gradient(145deg,#d8f2e5,#8ed5ad)!important;box-shadow:inset 0 0 0 2px rgba(255,255,255,.48),inset 0 1px 0 rgba(255,255,255,.86),0 6px 13px rgba(43,55,51,.13)!important}
+.qm-cell:before{content:"";position:absolute;left:7px;right:7px;bottom:5px;height:30px;opacity:.19;pointer-events:none;background:radial-gradient(ellipse at 20% 100%,currentColor 0 9%,transparent 10%),radial-gradient(ellipse at 45% 100%,currentColor 0 8%,transparent 9%),radial-gradient(ellipse at 72% 100%,currentColor 0 11%,transparent 12%)}
+.qm-cell:after{content:"";position:absolute!important;inset:5px!important;border:1px solid rgba(255,255,255,.72)!important;border-radius:11px!important;pointer-events:none}
+.qm-cell .gn{position:relative;z-index:2;color:#5c1d67!important;font-size:15px!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,255,255,.78)!important}
+.qm-cell .nu{position:relative;z-index:2;color:#172c29!important;font-size:31px!important;font-weight:900!important;text-shadow:0 1px 0 rgba(255,255,255,.82),0 3px 8px rgba(0,0,0,.07)!important}
+
+/* 4 巽：翠綠 */
+.qm-cell:nth-child(1){color:#14623f!important;background:radial-gradient(circle at 20% 80%,rgba(19,109,64,.20) 0 12%,transparent 13%),linear-gradient(145deg,#d7f4e3 0%,#9ce0b7 58%,#70c993 100%)!important;border-color:#4eaa72!important}
+/* 9 離：玫瑰紅 */
+.qm-cell:nth-child(2){color:#9d2447!important;background:radial-gradient(circle at 76% 78%,rgba(180,32,67,.19) 0 14%,transparent 15%),linear-gradient(145deg,#ffe0e5 0%,#f6a7b4 58%,#e97b90 100%)!important;border-color:#d65a72!important}
+/* 2 坤：金黃山色 */
+.qm-cell:nth-child(3){color:#96630e!important;background:linear-gradient(145deg,transparent 0 62%,rgba(160,103,11,.15) 63% 69%,transparent 70%),linear-gradient(145deg,#fff0b8 0%,#f2cd68 58%,#dfa936 100%)!important;border-color:#c28a1f!important}
+/* 3 震：青藍 */
+.qm-cell:nth-child(4){color:#147081!important;background:radial-gradient(circle at 20% 82%,rgba(20,117,140,.18) 0 13%,transparent 14%),linear-gradient(145deg,#d9f6f8 0%,#9edfe8 58%,#65c7d8 100%)!important;border-color:#42a9bc!important}
+/* 5 中：柔紫金 */
+.qm-cell:nth-child(5){color:#6b3d78!important;background:radial-gradient(circle at 50% 50%,rgba(197,152,62,.12),transparent 38%),linear-gradient(145deg,#f5effb 0%,#d9c9e9 58%,#bfa6d5 100%)!important;border-color:#9d82b8!important}
+/* 7 兌：銀灰紫 */
+.qm-cell:nth-child(6){color:#596489!important;background:radial-gradient(circle at 28% 82%,rgba(78,88,132,.16) 0 14%,transparent 15%),linear-gradient(145deg,#f3f4fb 0%,#d8dbea 58%,#b7bfd7 100%)!important;border-color:#8795b5!important}
+/* 8 艮：暖金 */
+.qm-cell:nth-child(7){color:#8a5f12!important;background:linear-gradient(145deg,transparent 0 63%,rgba(151,97,10,.12) 64% 70%,transparent 71%),linear-gradient(145deg,#fff2c3 0%,#f0d27a 58%,#dcae48 100%)!important;border-color:#bd9131!important}
+/* 1 坎：水藍 */
+.qm-cell:nth-child(8){color:#176c96!important;background:radial-gradient(ellipse at 26% 96%,rgba(25,111,164,.19) 0 18%,transparent 19%),radial-gradient(ellipse at 60% 103%,rgba(25,111,164,.13) 0 23%,transparent 24%),linear-gradient(145deg,#ddf5ff 0%,#a4dcf5 58%,#69bce5 100%)!important;border-color:#489acc!important}
+/* 6 乾：銀紫 */
+.qm-cell:nth-child(9){color:#5a5f88!important;background:radial-gradient(circle at 72% 82%,rgba(73,81,131,.16) 0 15%,transparent 16%),linear-gradient(145deg,#f2f2fb 0%,#d3d4e8 58%,#adb6d1 100%)!important;border-color:#8390b1!important}
+
+/* 亮宮：深翠＋紫金 */
+.qm-cell.on{min-height:108px!important;background:radial-gradient(circle at 25% 16%,rgba(77,214,174,.34),transparent 33%),radial-gradient(circle at 55% 55%,transparent 0 32%,rgba(236,196,75,.13) 33% 35%,transparent 36%),linear-gradient(145deg,#14715d 0%,#0b5548 58%,#5a2f64 100%)!important;border:2px solid #d8ac37!important;color:#fff8e6!important;box-shadow:0 10px 24px rgba(24,85,70,.32),0 0 0 3px rgba(214,172,55,.12),inset 0 0 0 1px rgba(255,230,151,.35)!important}
+.qm-cell.on .gn{color:#f1cd65!important}.qm-cell.on .nu{color:#fffdf5!important}.qm-cell.on .st2{position:relative;z-index:2}.qm-cell.on .st2 u{color:#fff9e8!important;font-weight:800!important}.qm-cell.on .st2 i{color:#f2d16f!important;font-weight:900!important}
+
+.qm-cap{color:#7d654f!important;font-size:12px!important;line-height:1.9!important}
+
+/* 本命卡、格局卡 */
+.qm-card,.qm-gj,.qm-jie,.qm-zi{border:1.5px solid #8fb8ab!important;border-radius:18px!important;background:radial-gradient(circle at 90% 8%,rgba(236,208,142,.18),transparent 24%),linear-gradient(145deg,#f7fbf8 0%,#e9f1eb 64%,#efe5d0 100%)!important;box-shadow:0 9px 22px rgba(47,77,66,.12),inset 0 1px 0 rgba(255,255,255,.82)!important}
+.qm-card h4,.qm-zi h5{color:#5a116d!important;font-size:20px!important;font-weight:900!important}.qm-card .wx,.qm-zi h5 span{color:#9a6a22!important}
+.qm-gj{border-left:5px solid #a56a91!important}.qm-gj .nm{color:#5b136f!important}.qm-gj .jx{color:#8b4f6c!important}.qm-gj .pr{color:#9c742e!important}
+
+/* 逐碼詳解 */
+.qm-ly{margin-bottom:8px!important;border:1px solid #9dc8d7!important;border-radius:14px!important;overflow:hidden!important;background:linear-gradient(145deg,#f7fcff,#e4f2f7)!important;box-shadow:0 4px 12px rgba(49,91,105,.08)!important}
+.qm-ly summary{padding:14px 16px!important}.qm-ly .tt{color:#17675f!important;font-weight:900!important}.qm-ly .vl{color:#64206d!important;font-weight:900!important}.qm-ly .ps{color:#9a773a!important}.qm-ly .bd{padding:0 16px 15px!important;color:#403a35!important}
+
+/* 九宮增運 */
+.qm-zg{gap:10px!important}.qm-zg button{min-height:60px!important;padding:12px 5px!important;border:1.5px solid #aa8cbc!important;border-radius:15px!important;background:linear-gradient(145deg,#f1e8f5,#dacbe6)!important;color:#572960!important;font-weight:900!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.52),0 5px 12px rgba(84,47,92,.10)!important}
+.qm-zg button:nth-child(3n+1){background:linear-gradient(145deg,#d8efe5,#b5d9cc)!important;border-color:#77aa99!important}.qm-zg button:nth-child(3n+2){background:linear-gradient(145deg,#f5dfe8,#e5bbca)!important;border-color:#c4889e!important}.qm-zg button:nth-child(3n){background:linear-gradient(145deg,#f8e5ae,#e4bd5d)!important;border-color:#b98c28!important}.qm-zg button.self{border-color:#b77e15!important;box-shadow:0 0 0 3px rgba(185,133,24,.13),0 6px 14px rgba(75,56,33,.10)!important}.qm-zg button.on,.qm-zg button.mid,.qm-zg button.mid.on{background:linear-gradient(135deg,#5d0d83 0%,#8a12a4 56%,#bc16cf 100%)!important;border:2px solid #d5aa36!important;color:#fff8df!important;box-shadow:0 8px 18px rgba(111,22,132,.28),inset 0 1px 0 rgba(255,255,255,.22)!important}.qm-zg em{color:#876126!important}.qm-zg button.on em,.qm-zg button.mid em{color:#f4d468!important}
+
+@media(max-width:390px){
+  .card:has(#qmOut){padding:18px 12px 20px!important;border-radius:20px!important}
+  .qm-in{gap:8px!important;padding:8px!important}.qm-in input{min-height:52px!important;font-size:17px!important}.qm-in button{min-width:94px!important;min-height:52px!important;font-size:15px!important}
+  .qm-plate{gap:7px!important;padding:7px!important}.qm-cell{min-height:90px!important}.qm-cell .nu{font-size:28px!important}.qm-cell.on{min-height:102px!important}
+  .qm-zg button{min-height:56px!important}
+}
