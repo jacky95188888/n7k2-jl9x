@@ -1,0 +1,83 @@
+/* 筠玲易數｜Premium Depth V1
+   2026-09-16：針對目前仍偏淡的區塊補強層次。
+   僅改視覺，不改排盤、資料、版面結構。
+*/
+
+/* 十年大運：由純文字感改成更完整的卡片感 */
+#sz-card .sz-dayun-block{
+  margin-top:20px!important;
+  padding:16px 14px 15px!important;
+  border:1.5px solid #c8a669!important;
+  border-radius:18px!important;
+  background:linear-gradient(145deg,#fff8e7 0%,#f0e2c9 100%)!important;
+  box-shadow:0 9px 22px rgba(80,58,35,.11),inset 0 0 0 1px rgba(255,255,255,.75)!important;
+}
+#sz-card .sz-dayun-title h3{color:#5b176d!important;font-size:18px!important}
+#sz-card .sz-dayun-title span{color:#725e72!important;font-size:10px!important}
+#sz-card .sz-dayun-item{
+  min-height:118px!important;
+  border:1.5px solid #c79fc8!important;
+  border-radius:14px!important;
+  background:linear-gradient(180deg,#f8edf9 0%,#e8d8ec 100%)!important;
+  color:#4d334f!important;
+  box-shadow:0 4px 10px rgba(75,45,76,.08),inset 0 1px 0 rgba(255,255,255,.82)!important;
+}
+#sz-card .sz-dayun-item:nth-child(3n+1){background:linear-gradient(180deg,#e7f2ee,#cfe3db)!important;border-color:#9bbcae!important}
+#sz-card .sz-dayun-item:nth-child(3n+2){background:linear-gradient(180deg,#f6e2e8,#e9c9d3)!important;border-color:#c799aa!important}
+#sz-card .sz-dayun-item:nth-child(3n){background:linear-gradient(180deg,#f6ebc8,#e7cf87)!important;border-color:#c6a24e!important}
+#sz-card .sz-dayun-item[data-on="1"],#sz-card .sz-dayun-item.active{
+  background:linear-gradient(145deg,#651079,#8e119e)!important;
+  color:#fff8e8!important;
+  border-color:#d1aa3d!important;
+  box-shadow:0 7px 16px rgba(95,18,115,.22)!important;
+}
+
+/* 六柱環：保留原圖形，只強化背景與節點層次 */
+.ringbox{
+  background:radial-gradient(circle at 50% 45%,#fff6df 0%,#ead9ee 54%,#d9c1e4 100%)!important;
+  border:1.5px solid #b98e63!important;
+  box-shadow:0 10px 24px rgba(85,54,90,.11),inset 0 0 34px rgba(103,62,116,.08)!important;
+}
+.ringbox::before{background:radial-gradient(circle,rgba(145,76,170,.13),transparent 70%)!important}
+.pbg{fill:#fff7e8!important;stroke:#b99a62!important;stroke-width:1.7!important}
+.pill[data-on="1"] .pbg{fill:#791b2b!important;stroke:#d0aa45!important;stroke-width:2.7!important}
+.pill[data-on="1"] .pnum,.pill[data-on="1"] .plab{fill:#fff8e9!important}
+
+/* 逐碼詳解：目前仍太像淡藍空白卡，補上分層 */
+.qm-ly summary{
+  margin:8px 0!important;
+  padding:14px 14px!important;
+  border:1px solid #8fb8c7!important;
+  border-radius:14px!important;
+  background:linear-gradient(135deg,#e6f3f5 0%,#d8e6f0 52%,#eadff3 100%)!important;
+  box-shadow:0 4px 10px rgba(53,80,92,.08)!important;
+}
+.qm-ly:nth-of-type(3n+2) summary{background:linear-gradient(135deg,#f2e3eb,#e9d1de)!important;border-color:#c19aae!important}
+.qm-ly:nth-of-type(3n) summary{background:linear-gradient(135deg,#f3e8c7,#e7d093)!important;border-color:#c2a253!important}
+.qm-ly .tt{color:#176858!important;font-weight:900!important}
+.qm-ly .vl{color:#622b69!important;font-weight:900!important}
+.qm-ly .ps{color:#8a6b3e!important;font-weight:700!important}
+.qm-ly .bd{
+  margin:0 4px 10px!important;
+  padding:13px 14px!important;
+  border-left:4px solid #8d6bb3!important;
+  border-radius:0 12px 12px 0!important;
+  background:linear-gradient(145deg,#fffaf0,#efe6d5)!important;
+}
+
+/* 奇門未選九宮：再補一階，不讓亮宮之外全部發白 */
+.qm-cell{
+  filter:saturate(1.12) brightness(.97)!important;
+}
+.qm-cell.on{filter:none!important}
+
+/* 本命詳解與說明卡：文字區塊要更有層次 */
+.qm-zi,.qm-jie,.qm-card,.qm-gj{
+  border-width:1.5px!important;
+  box-shadow:0 9px 22px rgba(47,78,66,.13),inset 0 1px 0 rgba(255,255,255,.62)!important;
+}
+
+@media(max-width:390px){
+  #sz-card .sz-dayun-block{padding:14px 11px!important}
+  #sz-card .sz-dayun-list{grid-template-columns:repeat(8,86px)!important}
+}
