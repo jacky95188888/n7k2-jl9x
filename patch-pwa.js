@@ -28,34 +28,33 @@
   add('meta', { name: 'apple-mobile-web-app-title', content: '筠玲易數' });
   add('meta', { name: 'mobile-web-app-capable', content: 'yes' });
 
-  var qimenTheme = document.createElement('link');
-  qimenTheme.rel = 'stylesheet';
-  qimenTheme.href = 'qimen-theme-v2.css?v=20260916-6';
-  head.appendChild(qimenTheme);
-
+  // 全站色彩層次
   var toneTheme = document.createElement('link');
   toneTheme.rel = 'stylesheet';
-  toneTheme.href = 'tone-deepen-v1.css?v=20260916-6';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-7';
   head.appendChild(toneTheme);
 
-  var qimenContrast = document.createElement('link');
-  qimenContrast.rel = 'stylesheet';
-  qimenContrast.href = 'qimen-contrast-v4.css?v=20260916-6';
-  head.appendChild(qimenContrast);
-
+  // 四柱、六柱環、逐碼詳解等補強
   var premiumDepth = document.createElement('link');
   premiumDepth.rel = 'stylesheet';
-  premiumDepth.href = 'premium-depth-v1.css?v=20260916-6';
+  premiumDepth.href = 'premium-depth-v1.css?v=20260916-7';
   head.appendChild(premiumDepth);
 
+  // 數字九宮（獨立模組）高質感版
   var jiugongLuxury = document.createElement('link');
   jiugongLuxury.rel = 'stylesheet';
-  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-6';
+  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-7';
   head.appendChild(jiugongLuxury);
+
+  // 奇門手機號論斷：單一 MASTER 母版，取代先前多層疊加樣式。
+  var qimenMaster = document.createElement('link');
+  qimenMaster.rel = 'stylesheet';
+  qimenMaster.href = 'qimen-master-v7.css?v=20260916-7';
+  head.appendChild(qimenMaster);
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js?v=20260916-6').catch(function (err) {
+      navigator.serviceWorker.register('sw.js?v=20260916-7').catch(function (err) {
         console.warn('[PWA] Service Worker 註冊失敗：', err && err.message);
       });
     });
