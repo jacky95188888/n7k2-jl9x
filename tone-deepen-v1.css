@@ -1,0 +1,54 @@
+/* 筠玲易數｜全站色彩加深 V1
+   2026-09-16：只調整視覺層次，不改排盤、路由與版面結構。
+   原則：原本偏白、偏淡的底色加深約一階，保留既有紫／藍／綠／金／米色系。
+*/
+:root{
+  --paper:#f2ecdf;
+  --paper2:#f7f2e8;
+  --paper3:#e8decb;
+  --line:#cbb99e;
+  --muted:#74685e;
+  --gold2:#c49c52;
+}
+body{
+  background:
+    radial-gradient(circle at 50% -10%,rgba(255,255,255,.72),transparent 42%),
+    linear-gradient(135deg,#e6ddce 0%,#f2ebdf 48%,#dfd2bf 100%);
+}
+.card{
+  background:linear-gradient(145deg,rgba(252,247,238,.98),rgba(239,229,212,.97));
+  border-color:rgba(167,139,101,.68);
+  box-shadow:0 7px 20px rgba(64,48,31,.11);
+}
+.seg{background:#ece1cf;border-color:#9d8568}
+select,input{background:linear-gradient(180deg,#fffaf0,#eee2d0);border-color:#b9a184}
+.ringbox{background:radial-gradient(circle,#fff9ed 0%,#eee2cf 70%,#dfcfb7 100%);border-color:#c4ad8b}
+.pbg{fill:#f8f0e2;stroke:#b59c77}
+.feats,.feats div{border-color:#d1bea2}
+
+/* 常見白底／淡底容器：加深但不改尺寸與排版 */
+.card section,.card article,.card .box,.card .panel,.card .result,.card .item{
+  border-color:rgba(178,151,112,.54);
+}
+
+/* 數字九宮：再把整體淡色往下壓一階 */
+.jg-grid{background:linear-gradient(180deg,#f5ead8,#e8d8be)!important;border-color:#b99a68!important}
+.jg-c.jg-mu,.jg-star-cell.jg-mu{background:linear-gradient(145deg,#c9efd7,#82cf9f)!important;border-color:#4eaa72!important}
+.jg-c.jg-huo,.jg-star-cell.jg-huo{background:linear-gradient(145deg,#ffd0d7,#ef8fa0)!important;border-color:#d35d72!important}
+.jg-c.jg-tu,.jg-star-cell.jg-tu{background:linear-gradient(145deg,#ffe8a8,#e9bd50)!important;border-color:#c79525!important}
+.jg-c.jg-jin,.jg-star-cell.jg-jin{background:linear-gradient(145deg,#e2e6f1,#b9c3d9)!important;border-color:#8998b5!important}
+.jg-c.jg-shui,.jg-star-cell.jg-shui{background:linear-gradient(145deg,#ccecff,#7fc3ea)!important;border-color:#4b9dce!important}
+.jg-c.jg-mid{background:linear-gradient(145deg,#267663,#104f45)!important;border-color:#c99d35!important}
+.jg-c .jg-n{color:#173d36!important;text-shadow:0 1px 0 rgba(255,255,255,.72)!important}
+.jg-c.jg-mid .jg-n{color:#fff8df!important}
+.jg-star-card{background:linear-gradient(180deg,#faf3e5,#ecdfc9)!important;border-color:#bea477!important}
+
+/* 桃花與擇日頁常見的純白漸層：只壓低亮度，不動功能 */
+body.jl-page-taohua .guide article{box-shadow:0 5px 15px rgba(74,42,68,.08)}
+body.jl-page-rz .rz-meta-card .meta-item,
+body.jl-page-rz .rz-detail-card .detail-row,
+body.jl-page-rz .rz-astro-card{filter:saturate(1.12) brightness(.97)}
+
+@media(max-width:390px){
+  .card{box-shadow:0 5px 15px rgba(64,48,31,.10)}
+}
