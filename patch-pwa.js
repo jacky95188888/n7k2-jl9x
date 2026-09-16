@@ -30,33 +30,32 @@
 
   var qimenTheme = document.createElement('link');
   qimenTheme.rel = 'stylesheet';
-  qimenTheme.href = 'qimen-theme-v2.css?v=20260916-5';
+  qimenTheme.href = 'qimen-theme-v2.css?v=20260916-6';
   head.appendChild(qimenTheme);
 
   var toneTheme = document.createElement('link');
   toneTheme.rel = 'stylesheet';
-  toneTheme.href = 'tone-deepen-v1.css?v=20260916-5';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-6';
   head.appendChild(toneTheme);
 
   var qimenContrast = document.createElement('link');
   qimenContrast.rel = 'stylesheet';
-  qimenContrast.href = 'qimen-contrast-v4.css?v=20260916-5';
+  qimenContrast.href = 'qimen-contrast-v4.css?v=20260916-6';
   head.appendChild(qimenContrast);
 
   var premiumDepth = document.createElement('link');
   premiumDepth.rel = 'stylesheet';
-  premiumDepth.href = 'premium-depth-v1.css?v=20260916-5';
+  premiumDepth.href = 'premium-depth-v1.css?v=20260916-6';
   head.appendChild(premiumDepth);
 
-  // 參考圖規格：數字九宮盤高質感版，最後載入確保覆蓋前面較淡的樣式。
   var jiugongLuxury = document.createElement('link');
   jiugongLuxury.rel = 'stylesheet';
-  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-5';
+  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-6';
   head.appendChild(jiugongLuxury);
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js?v=20260916-5').catch(function (err) {
+      navigator.serviceWorker.register('sw.js?v=20260916-6').catch(function (err) {
         console.warn('[PWA] Service Worker 註冊失敗：', err && err.message);
       });
     });
