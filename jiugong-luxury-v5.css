@@ -1,0 +1,223 @@
+/* 筠玲易數｜數字九宮盤 Luxury V5
+   2026-09-16：依照參考圖升級實際網頁質感。
+   僅改視覺，不改九宮排盤算法、不加回宮名文字。
+*/
+
+/* 整張九宮卡：奶油紙張＋紫金框＋細緻光暈 */
+.card:has(#jg-out){
+  position:relative;
+  overflow:hidden;
+  padding:24px 18px 22px!important;
+  border:1.5px solid #d1a65d!important;
+  border-radius:24px!important;
+  background:
+    radial-gradient(circle at 12% 5%,rgba(255,255,255,.95),transparent 26%),
+    radial-gradient(circle at 88% 13%,rgba(241,215,255,.45),transparent 27%),
+    linear-gradient(145deg,#fffaf2 0%,#f8efe2 58%,#efe1cb 100%)!important;
+  box-shadow:0 18px 38px rgba(93,60,38,.13),inset 0 0 0 2px rgba(255,255,255,.66)!important;
+}
+.card:has(#jg-out):before{
+  content:"";
+  position:absolute;
+  inset:8px;
+  pointer-events:none;
+  border:1px solid rgba(223,177,89,.28);
+  border-radius:18px;
+  background:
+    radial-gradient(circle at 6% 8%,rgba(214,174,89,.13) 0 1px,transparent 2px),
+    radial-gradient(circle at 94% 9%,rgba(122,55,144,.08) 0 1px,transparent 2px);
+  background-size:16px 16px,18px 18px;
+}
+.card:has(#jg-out)>h2{
+  position:relative;
+  z-index:1;
+  margin-bottom:22px!important;
+  color:#173d77!important;
+  font-size:23px!important;
+  font-weight:900!important;
+  letter-spacing:.22em!important;
+  text-shadow:0 1px 0 #fff,0 2px 8px rgba(32,55,100,.10)!important;
+}
+.card:has(#jg-out)>h2:before{
+  content:""!important;
+  display:inline-block!important;
+  width:36px;height:36px;
+  margin-right:10px!important;
+  border-radius:50%;
+  vertical-align:-11px;
+  border:2px solid rgba(199,157,62,.65);
+  background:
+    radial-gradient(circle at 36% 34%,#fff 0 8%,transparent 9%),
+    radial-gradient(circle at 65% 66%,#163f76 0 8%,transparent 9%),
+    conic-gradient(from 90deg,#153f76 0 50%,#f7ecd1 50% 100%);
+  box-shadow:0 4px 12px rgba(24,57,103,.20),inset 0 0 0 2px rgba(255,255,255,.40);
+}
+.card:has(#jg-out)>h2:after{background:linear-gradient(90deg,transparent,#c99a3d,transparent)!important;height:2px!important;width:110px!important}
+
+/* 輸入區 */
+.card:has(#jg-out) .jg-in{position:relative;z-index:1;gap:12px!important;margin-bottom:18px!important}
+.card:has(#jg-out) .jg-in input{
+  height:58px!important;
+  border:1.5px solid #b88ad0!important;
+  border-radius:16px!important;
+  background:linear-gradient(180deg,#fff,#faf5ff)!important;
+  color:#2f1856!important;
+  font-size:20px!important;
+  font-weight:800!important;
+  letter-spacing:.12em!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.95),0 5px 14px rgba(91,54,116,.10)!important;
+}
+.card:has(#jg-out) .jg-in button{
+  height:58px!important;
+  min-width:118px!important;
+  border:1.5px solid #d4a23a!important;
+  border-radius:16px!important;
+  background:linear-gradient(135deg,#3e0b75 0%,#7415a4 52%,#bd17d3 100%)!important;
+  color:#fff5d3!important;
+  font-size:17px!important;
+  font-weight:900!important;
+  box-shadow:0 9px 20px rgba(91,23,123,.28),inset 0 1px 0 rgba(255,255,255,.28),inset 0 0 0 1px rgba(255,231,155,.18)!important;
+}
+
+/* 九宮外框 */
+.card:has(#jg-out) .jg-grid{
+  position:relative;
+  z-index:1;
+  gap:10px!important;
+  padding:11px!important;
+  border:1.5px solid #d0a24c!important;
+  border-radius:20px!important;
+  background:
+    linear-gradient(180deg,rgba(255,250,235,.98),rgba(240,224,193,.98))!important;
+  box-shadow:0 12px 28px rgba(90,62,34,.14),inset 0 0 0 2px rgba(255,255,255,.72)!important;
+}
+
+/* 通用格 */
+.card:has(#jg-out) .jg-c{
+  min-height:104px!important;
+  border-width:1.5px!important;
+  border-radius:16px!important;
+  isolation:isolate;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.48),inset 0 1px 0 rgba(255,255,255,.86),0 6px 13px rgba(35,42,58,.13)!important;
+}
+.card:has(#jg-out) .jg-c:after{
+  inset:5px!important;
+  border:1px solid rgba(255,255,255,.74)!important;
+  border-radius:12px!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.20)!important;
+}
+.card:has(#jg-out) .jg-c .jg-n{
+  font-size:46px!important;
+  color:#132c28!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.86),0 3px 8px rgba(0,0,0,.08)!important;
+}
+
+/* 木：竹影／山霧質感 */
+.card:has(#jg-out) .jg-c.jg-mu,.card:has(#jg-out) .jg-star-cell.jg-mu{
+  background:
+    radial-gradient(circle at 18% 78%,rgba(24,116,69,.22) 0 10%,transparent 11%),
+    radial-gradient(circle at 31% 88%,rgba(24,116,69,.13) 0 12%,transparent 13%),
+    linear-gradient(145deg,#d9f6e5 0%,#a6e5bf 56%,#72cb98 100%)!important;
+  border-color:#4cae73!important;
+}
+/* 火：暖紅光暈 */
+.card:has(#jg-out) .jg-c.jg-huo,.card:has(#jg-out) .jg-star-cell.jg-huo{
+  background:
+    radial-gradient(circle at 72% 74%,rgba(192,42,72,.20) 0 16%,transparent 17%),
+    radial-gradient(circle at 82% 58%,rgba(224,94,113,.16) 0 10%,transparent 11%),
+    linear-gradient(145deg,#ffe1e5 0%,#f6aab6 55%,#ec7f94 100%)!important;
+  border-color:#d55b72!important;
+}
+/* 土：金黃山勢 */
+.card:has(#jg-out) .jg-c.jg-tu,.card:has(#jg-out) .jg-star-cell.jg-tu{
+  background:
+    linear-gradient(145deg,transparent 0 62%,rgba(167,112,17,.14) 63% 69%,transparent 70%),
+    linear-gradient(38deg,transparent 0 68%,rgba(167,112,17,.10) 69% 75%,transparent 76%),
+    linear-gradient(145deg,#fff1bd 0%,#f3d16f 57%,#dfa936 100%)!important;
+  border-color:#c38a1e!important;
+}
+/* 金：銀紫層次 */
+.card:has(#jg-out) .jg-c.jg-jin,.card:has(#jg-out) .jg-star-cell.jg-jin{
+  background:
+    radial-gradient(circle at 25% 76%,rgba(88,97,146,.16) 0 13%,transparent 14%),
+    linear-gradient(145deg,#f6f4fd 0%,#ddd8ef 55%,#b7bedc 100%)!important;
+  border-color:#8a94b8!important;
+}
+/* 水：波紋 */
+.card:has(#jg-out) .jg-c.jg-shui,.card:has(#jg-out) .jg-star-cell.jg-shui{
+  background:
+    radial-gradient(ellipse at 25% 95%,rgba(32,121,177,.18) 0 17%,transparent 18%),
+    radial-gradient(ellipse at 58% 103%,rgba(32,121,177,.14) 0 22%,transparent 23%),
+    linear-gradient(145deg,#def5ff 0%,#a6dcf5 55%,#70bee7 100%)!important;
+  border-color:#4c9dce!important;
+}
+
+/* 中宮 */
+.card:has(#jg-out) .jg-c.jg-mid{
+  background:
+    radial-gradient(circle at 50% 50%,rgba(45,174,136,.16),transparent 44%),
+    radial-gradient(circle at 50% 50%,transparent 0 34%,rgba(227,187,75,.14) 35% 36%,transparent 37%),
+    linear-gradient(145deg,#0f705c 0%,#084e43 55%,#052e2a 100%)!important;
+  border:2px solid #d4aa35!important;
+  box-shadow:inset 0 0 0 2px rgba(245,205,86,.34),inset 0 0 22px rgba(3,45,38,.45),0 8px 18px rgba(12,77,64,.27)!important;
+}
+.card:has(#jg-out) .jg-c.jg-mid .jg-n{color:#fff9df!important;font-size:48px!important}
+.card:has(#jg-out) .jg-c.jg-mid:after{border-color:rgba(243,208,102,.70)!important}
+
+/* 排盤說明 */
+.card:has(#jg-out) .jg-note{
+  position:relative;
+  z-index:1;
+  margin-top:16px!important;
+  padding:15px 16px 15px 18px!important;
+  border:1px solid #bfa7d4!important;
+  border-radius:15px!important;
+  background:linear-gradient(135deg,#f9f3ff 0%,#eee6f7 100%)!important;
+  color:#5a486e!important;
+  font-size:13px!important;
+  line-height:1.9!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86)!important;
+}
+
+/* 九星對照表 */
+.card:has(#jg-out) .jg-star-card{
+  position:relative;
+  z-index:1;
+  margin-top:26px!important;
+  padding:18px 12px 16px!important;
+  border:1.5px solid #cfaa65!important;
+  border-radius:20px!important;
+  background:
+    radial-gradient(circle at 15% 0,rgba(255,255,255,.88),transparent 28%),
+    linear-gradient(180deg,#fffaf0,#eee0c4)!important;
+  box-shadow:0 10px 24px rgba(90,63,34,.11),inset 0 0 0 1px rgba(255,255,255,.70)!important;
+}
+.card:has(#jg-out) .jg-star-title{
+  color:#451067!important;
+  font-size:20px!important;
+  font-weight:900!important;
+  letter-spacing:.12em!important;
+}
+.card:has(#jg-out) .jg-star-cell{
+  min-height:82px!important;
+  border-width:1.5px!important;
+  border-radius:13px!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.48),0 4px 9px rgba(40,44,59,.09)!important;
+}
+.card:has(#jg-out) .jg-star-cell span{font-size:15px!important;color:#2e3433!important}
+.card:has(#jg-out) .jg-star-cell em{color:#6d481b!important;font-size:17px!important}
+
+/* 手機比例 */
+@media(max-width:390px){
+  .card:has(#jg-out){padding:20px 12px 18px!important;border-radius:20px!important}
+  .card:has(#jg-out)>h2{font-size:20px!important;letter-spacing:.15em!important}
+  .card:has(#jg-out)>h2:before{width:31px;height:31px;vertical-align:-10px}
+  .card:has(#jg-out) .jg-in{gap:8px!important}
+  .card:has(#jg-out) .jg-in input{height:54px!important;font-size:17px!important}
+  .card:has(#jg-out) .jg-in button{height:54px!important;min-width:94px!important;font-size:15px!important}
+  .card:has(#jg-out) .jg-grid{gap:7px!important;padding:7px!important}
+  .card:has(#jg-out) .jg-c{min-height:90px!important;border-radius:13px!important}
+  .card:has(#jg-out) .jg-c .jg-n{font-size:40px!important}
+  .card:has(#jg-out) .jg-c.jg-mid .jg-n{font-size:43px!important}
+  .card:has(#jg-out) .jg-star-cell{min-height:70px!important;font-size:13px!important}
+}
