@@ -1,0 +1,55 @@
+/* 筠玲易數｜奇門手機號論斷 MASTER V9
+   單一母版。只改視覺，不改排盤、資料、文字。
+   目標：九格全部有完整五行色、雙層框、立體光影；亮宮再加深。
+*/
+
+.card:has(#qmOut){
+  position:relative;overflow:hidden;padding:22px 16px 24px!important;
+  border:1.5px solid #d1a558!important;border-radius:24px!important;
+  background:radial-gradient(circle at 12% 4%,rgba(255,255,255,.96),transparent 24%),radial-gradient(circle at 88% 8%,rgba(228,205,248,.36),transparent 28%),linear-gradient(145deg,#fffaf2 0%,#f8efe3 62%,#ecdec7 100%)!important;
+  box-shadow:0 18px 38px rgba(87,57,36,.14),inset 0 0 0 2px rgba(255,255,255,.70)!important;
+}
+.card:has(#qmOut)>*{position:relative;z-index:1}
+
+.qm-note{color:#6f5c52!important;font-size:13px!important;line-height:1.9!important}
+.qm-in{gap:10px!important;margin-top:12px!important;padding:10px!important;border:1px solid rgba(196,155,73,.38)!important;border-radius:18px!important;background:linear-gradient(135deg,#fffdf8,#f3ebfb 52%,#fff3d8)!important;box-shadow:0 9px 22px rgba(67,45,74,.09),inset 0 1px 0 #fff!important}
+.qm-in input{min-height:56px!important;border:1.5px solid #b78bcb!important;border-radius:15px!important;background:linear-gradient(180deg,#fff,#faf5ff)!important;color:#30164f!important;font-size:20px!important;font-weight:800!important;letter-spacing:.12em!important;box-shadow:inset 0 1px 0 #fff,0 4px 12px rgba(89,52,109,.08)!important}
+.qm-in button{min-width:112px!important;border:1.5px solid #d0a23a!important;border-radius:16px!important;background:linear-gradient(135deg,#3e0b73 0%,#7515a4 54%,#ba17cf 100%)!important;color:#fff6d8!important;font-size:16px!important;font-weight:900!important;box-shadow:0 8px 18px rgba(94,19,125,.27),inset 0 1px 0 rgba(255,255,255,.28)!important}
+
+.qm-h{position:relative!important;overflow:hidden!important;margin:26px 0 12px!important;padding:12px 16px!important;border:1.5px solid #84b9ab!important;border-radius:999px!important;background:linear-gradient(90deg,#d9f1e8 0%,#f2f0dc 56%,#f7dda8 100%)!important;color:#155e52!important;font-size:14px!important;font-weight:900!important;letter-spacing:.14em!important;box-shadow:0 7px 17px rgba(47,88,75,.12),inset 0 1px 0 rgba(255,255,255,.86)!important}
+.qm-h:before{content:'✦'!important;margin-right:10px;color:#b87811!important}
+.qm-h:after{content:''!important;position:absolute!important;right:-18px!important;top:-30px!important;width:90px!important;height:90px!important;border:1px solid rgba(181,139,55,.16)!important;border-radius:50%!important}
+
+.qm-sg{gap:10px!important}
+.qm-sg .c{padding:13px 4px!important;border:1.5px solid #baa5c8!important;border-radius:14px!important;background:linear-gradient(145deg,#f8effb,#e9ddef)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.58),0 5px 12px rgba(70,50,78,.09)!important}
+.qm-sg .c:nth-child(1){background:linear-gradient(145deg,#dbf1e8,#bfe1d4)!important;border-color:#84b7a7!important}.qm-sg .c:nth-child(2){background:linear-gradient(145deg,#f8e2e9,#e9bfd0)!important;border-color:#c88da3!important}.qm-sg .c:nth-child(3){background:linear-gradient(145deg,#f7e8b9,#e6c46d)!important;border-color:#be963d!important}.qm-sg .c b{color:#3a243f!important;font-weight:900!important}.qm-sg .c s{color:#826841!important}.qm-sg .c em{color:#8c3159!important;font-weight:800!important}
+
+.qm-plate{gap:10px!important;padding:10px!important;border:2px solid #c69a35!important;border-radius:22px!important;background:linear-gradient(180deg,#fff9ec 0%,#f0dfb9 100%)!important;box-shadow:0 10px 24px rgba(83,58,28,.16),inset 0 0 0 2px rgba(255,255,255,.92),inset 0 0 0 4px rgba(212,170,78,.16)!important}
+.qm-cell{position:relative!important;overflow:hidden!important;min-height:104px!important;padding:10px 4px!important;border:2px solid #77af9f!important;border-radius:16px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.92),inset 0 -8px 16px rgba(60,50,60,.05),0 5px 12px rgba(41,43,55,.14)!important}
+.qm-cell:before{content:none!important;display:none!important;background:none!important}
+.qm-cell:after{content:""!important;position:absolute!important;inset:5px!important;border:1.5px solid rgba(255,255,255,.82)!important;border-radius:12px!important;pointer-events:none!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)!important}
+.qm-cell .gn{position:relative!important;z-index:2!important;font-size:16px!important;font-weight:900!important;color:#5d1d68!important;text-shadow:0 1px 0 rgba(255,255,255,.9)!important}.qm-cell .nu{position:relative!important;z-index:2!important;margin-top:5px!important;font-size:36px!important;line-height:1!important;font-weight:900!important;color:#17201e!important;text-shadow:0 1px 0 rgba(255,255,255,.9),0 3px 8px rgba(0,0,0,.08)!important}
+
+.qm-cell:nth-child(1){border-color:#36a96c!important;background:linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),linear-gradient(145deg,#ccf7dc 0%,#86dfa9 58%,#4fc27f 100%)!important}
+.qm-cell:nth-child(2){border-color:#e15d78!important;background:linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),linear-gradient(145deg,#ffd9e0 0%,#f99fb0 58%,#ee6f88 100%)!important}
+.qm-cell:nth-child(3){border-color:#d19a24!important;background:linear-gradient(160deg,rgba(255,255,255,.52),transparent 34%),linear-gradient(145deg,#fff0a9 0%,#f4cf58 58%,#e0aa23 100%)!important}
+.qm-cell:nth-child(4){border-color:#2aa9bf!important;background:linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),linear-gradient(145deg,#ccf7fa 0%,#82dce8 58%,#42bdd1 100%)!important}
+.qm-cell:nth-child(5){border-color:#9b72b8!important;background:linear-gradient(160deg,rgba(255,255,255,.5),transparent 34%),linear-gradient(145deg,#f0e9fb 0%,#d2bce8 58%,#b18bcf 100%)!important}
+.qm-cell:nth-child(6){border-color:#d37aa4!important;background:linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),linear-gradient(145deg,#ffe5f0 0%,#f0bed6 58%,#dda0c2 100%)!important}
+.qm-cell:nth-child(7){border-color:#d0a036!important;background:linear-gradient(160deg,rgba(255,255,255,.52),transparent 34%),linear-gradient(145deg,#fff1b7 0%,#f0cf68 58%,#dbaa32 100%)!important}
+.qm-cell:nth-child(8){border-color:#3b9fd2!important;background:linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),linear-gradient(145deg,#d4f3ff 0%,#8dd7f5 58%,#52b8e5 100%)!important}
+.qm-cell:nth-child(9){border-color:#8394bb!important;background:linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),linear-gradient(145deg,#f0f3ff 0%,#cbd2ea 58%,#9eacd0 100%)!important}
+
+.qm-cell.on{min-height:112px!important;border:2.5px solid #ddb23e!important;background:linear-gradient(160deg,rgba(255,255,255,.14),transparent 30%),radial-gradient(circle at 22% 18%,rgba(71,208,168,.34),transparent 32%),linear-gradient(145deg,#0f7c62 0%,#08614f 58%,#5c2a68 100%)!important;box-shadow:0 8px 18px rgba(20,80,66,.32),0 0 0 3px rgba(218,177,63,.14),inset 0 0 0 1px rgba(255,229,145,.38),inset 0 -14px 20px rgba(39,12,55,.16)!important}.qm-cell.on:before{content:none!important;display:none!important}.qm-cell.on:after{border-color:rgba(255,232,158,.72)!important}.qm-cell.on .gn{color:#ffd45e!important;text-shadow:0 1px 0 rgba(0,0,0,.16)!important}.qm-cell.on .nu{color:#fffdf5!important;text-shadow:0 2px 5px rgba(0,0,0,.28)!important}.qm-cell.on .st2{position:relative!important;z-index:3!important;margin-top:4px!important}.qm-cell.on .st2 u{color:#fff8eb!important;font-weight:900!important}.qm-cell.on .st2 i{color:#ffd668!important;font-weight:900!important}
+.qm-cap{color:#7d654f!important;font-size:12px!important;line-height:1.9!important}
+
+.qm-card,.qm-gj,.qm-jie,.qm-zi{border:1.5px solid #8fb8ab!important;border-radius:18px!important;background:radial-gradient(circle at 90% 8%,rgba(236,208,142,.18),transparent 24%),linear-gradient(145deg,#f7fbf8 0%,#e9f1eb 64%,#efe5d0 100%)!important;box-shadow:0 9px 22px rgba(47,77,66,.12),inset 0 1px 0 rgba(255,255,255,.82)!important}.qm-card h4,.qm-zi h5{color:#5a116d!important;font-size:20px!important;font-weight:900!important}.qm-card .wx,.qm-zi h5 span{color:#9a6a22!important}.qm-gj{border-left:5px solid #a56a91!important}.qm-gj .nm{color:#5b136f!important}.qm-gj .jx{color:#8b4f6c!important}.qm-gj .pr{color:#9c742e!important}
+.qm-classic .qm-classic-body{background:linear-gradient(145deg,#fff8eb,#f1e4ca)!important;border-radius:12px!important}
+
+.qm-ly{margin-bottom:8px!important;border:1px solid #9dc8d7!important;border-radius:14px!important;overflow:hidden!important;background:linear-gradient(145deg,#f7fcff,#e4f2f7)!important;box-shadow:0 4px 12px rgba(49,91,105,.08)!important}.qm-ly summary{padding:14px 16px!important}.qm-ly .tt{color:#17675f!important;font-weight:900!important}.qm-ly .vl{color:#64206d!important;font-weight:900!important}.qm-ly .ps{color:#9a773a!important}.qm-ly .bd{padding:0 16px 15px!important;color:#403a35!important}
+
+.qm-zg{gap:10px!important}.qm-zg button{min-height:60px!important;padding:12px 5px!important;border:1.5px solid #aa8cbc!important;border-radius:15px!important;background:linear-gradient(145deg,#f1e8f5,#dacbe6)!important;color:#572960!important;font-weight:900!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.52),0 5px 12px rgba(84,47,92,.10)!important}.qm-zg button:nth-child(3n+1){background:linear-gradient(145deg,#d8efe5,#b5d9cc)!important;border-color:#77aa99!important}.qm-zg button:nth-child(3n+2){background:linear-gradient(145deg,#f5dfe8,#e5bbca)!important;border-color:#c4889e!important}.qm-zg button:nth-child(3n){background:linear-gradient(145deg,#f8e5ae,#e4bd5d)!important;border-color:#b98c28!important}.qm-zg button.self{border-color:#b77e15!important;box-shadow:0 0 0 3px rgba(185,133,24,.13),0 6px 14px rgba(75,56,33,.10)!important}.qm-zg button.on,.qm-zg button.mid,.qm-zg button.mid.on{background:linear-gradient(135deg,#5f0c83 0%,#8e13a5 55%,#bb17d0 100%)!important;border:2px solid #d6aa35!important;color:#fff8df!important;box-shadow:0 9px 20px rgba(111,22,132,.29),inset 0 1px 0 rgba(255,255,255,.22)!important}.qm-zg button.on em,.qm-zg button.mid em{color:#f5d66f!important}
+
+.qm-zs li{border-bottom-color:#cdbb95!important}.qm-zs b{color:#6a1d5f!important}
+
+@media(max-width:390px){.card:has(#qmOut){padding:18px 11px 22px!important}.qm-in{padding:8px!important}.qm-in input{min-height:52px!important;font-size:17px!important}.qm-in button{min-width:92px!important}.qm-plate{gap:7px!important;padding:7px!important}.qm-cell{min-height:92px!important}.qm-cell .gn{font-size:14px!important}.qm-cell .nu{font-size:32px!important}.qm-cell.on{min-height:101px!important}.qm-zg button{min-height:56px!important}}
