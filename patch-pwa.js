@@ -35,6 +35,12 @@
   qimenTheme.href = 'qimen-theme-v2.css?v=20260914-2';
   head.appendChild(qimenTheme);
 
+  // 2026-09-16：全站淡色區塊統一加深一階，只覆蓋視覺，不動排盤與版面。
+  var toneTheme = document.createElement('link');
+  toneTheme.rel = 'stylesheet';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-1';
+  head.appendChild(toneTheme);
+
   // Service Worker：只在 https（GitHub Pages）或 localhost 下註冊
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
