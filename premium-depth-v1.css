@@ -1,83 +1,27 @@
-/* 筠玲易數｜Premium Depth V1
+/* 筠玲易數｜Premium Depth V2
    2026-09-16：針對目前仍偏淡的區塊補強層次。
    僅改視覺，不改排盤、資料、版面結構。
 */
 
 /* 十年大運：由純文字感改成更完整的卡片感 */
-#sz-card .sz-dayun-block{
-  margin-top:20px!important;
-  padding:16px 14px 15px!important;
-  border:1.5px solid #c8a669!important;
-  border-radius:18px!important;
-  background:linear-gradient(145deg,#fff8e7 0%,#f0e2c9 100%)!important;
-  box-shadow:0 9px 22px rgba(80,58,35,.11),inset 0 0 0 1px rgba(255,255,255,.75)!important;
-}
-#sz-card .sz-dayun-title h3{color:#5b176d!important;font-size:18px!important}
-#sz-card .sz-dayun-title span{color:#725e72!important;font-size:10px!important}
-#sz-card .sz-dayun-item{
-  min-height:118px!important;
-  border:1.5px solid #c79fc8!important;
-  border-radius:14px!important;
-  background:linear-gradient(180deg,#f8edf9 0%,#e8d8ec 100%)!important;
-  color:#4d334f!important;
-  box-shadow:0 4px 10px rgba(75,45,76,.08),inset 0 1px 0 rgba(255,255,255,.82)!important;
-}
-#sz-card .sz-dayun-item:nth-child(3n+1){background:linear-gradient(180deg,#e7f2ee,#cfe3db)!important;border-color:#9bbcae!important}
-#sz-card .sz-dayun-item:nth-child(3n+2){background:linear-gradient(180deg,#f6e2e8,#e9c9d3)!important;border-color:#c799aa!important}
-#sz-card .sz-dayun-item:nth-child(3n){background:linear-gradient(180deg,#f6ebc8,#e7cf87)!important;border-color:#c6a24e!important}
-#sz-card .sz-dayun-item[data-on="1"],#sz-card .sz-dayun-item.active{
-  background:linear-gradient(145deg,#651079,#8e119e)!important;
-  color:#fff8e8!important;
-  border-color:#d1aa3d!important;
-  box-shadow:0 7px 16px rgba(95,18,115,.22)!important;
-}
+#sz-card .sz-dayun-block{margin-top:20px!important;padding:16px 14px 15px!important;border:1.5px solid #c8a669!important;border-radius:18px!important;background:linear-gradient(145deg,#fff8e7 0%,#f0e2c9 100%)!important;box-shadow:0 9px 22px rgba(80,58,35,.11),inset 0 0 0 1px rgba(255,255,255,.75)!important}
+#sz-card .sz-dayun-title h3{color:#5b176d!important;font-size:18px!important}#sz-card .sz-dayun-title span{color:#725e72!important;font-size:10px!important}
+#sz-card .sz-dayun-item{min-height:118px!important;border:1.5px solid #c79fc8!important;border-radius:14px!important;background:linear-gradient(180deg,#f8edf9 0%,#e8d8ec 100%)!important;color:#4d334f!important;box-shadow:0 4px 10px rgba(75,45,76,.08),inset 0 1px 0 rgba(255,255,255,.82)!important}
+#sz-card .sz-dayun-item:nth-child(3n+1){background:linear-gradient(180deg,#e7f2ee,#cfe3db)!important;border-color:#9bbcae!important}#sz-card .sz-dayun-item:nth-child(3n+2){background:linear-gradient(180deg,#f6e2e8,#e9c9d3)!important;border-color:#c799aa!important}#sz-card .sz-dayun-item:nth-child(3n){background:linear-gradient(180deg,#f6ebc8,#e7cf87)!important;border-color:#c6a24e!important}
+#sz-card .sz-dayun-item[data-on="1"],#sz-card .sz-dayun-item.active{background:linear-gradient(145deg,#651079,#8e119e)!important;color:#fff8e8!important;border-color:#d1aa3d!important;box-shadow:0 7px 16px rgba(95,18,115,.22)!important}
 
-/* 六柱環：保留原圖形，只強化背景與節點層次 */
-.ringbox{
-  background:radial-gradient(circle at 50% 45%,#fff6df 0%,#ead9ee 54%,#d9c1e4 100%)!important;
-  border:1.5px solid #b98e63!important;
-  box-shadow:0 10px 24px rgba(85,54,90,.11),inset 0 0 34px rgba(103,62,116,.08)!important;
-}
-.ringbox::before{background:radial-gradient(circle,rgba(145,76,170,.13),transparent 70%)!important}
-.pbg{fill:#fff7e8!important;stroke:#b99a62!important;stroke-width:1.7!important}
-.pill[data-on="1"] .pbg{fill:#791b2b!important;stroke:#d0aa45!important;stroke-width:2.7!important}
-.pill[data-on="1"] .pnum,.pill[data-on="1"] .plab{fill:#fff8e9!important}
+/* 六柱環 */
+.ringbox{background:radial-gradient(circle at 50% 45%,#fff6df 0%,#ead9ee 54%,#d9c1e4 100%)!important;border:1.5px solid #b98e63!important;box-shadow:0 10px 24px rgba(85,54,90,.11),inset 0 0 34px rgba(103,62,116,.08)!important}.ringbox::before{background:radial-gradient(circle,rgba(145,76,170,.13),transparent 70%)!important}.pbg{fill:#fff7e8!important;stroke:#b99a62!important;stroke-width:1.7!important}.pill[data-on="1"] .pbg{fill:#791b2b!important;stroke:#d0aa45!important;stroke-width:2.7!important}.pill[data-on="1"] .pnum,.pill[data-on="1"] .plab{fill:#fff8e9!important}
 
-/* 逐碼詳解：目前仍太像淡藍空白卡，補上分層 */
-.qm-ly summary{
-  margin:8px 0!important;
-  padding:14px 14px!important;
-  border:1px solid #8fb8c7!important;
-  border-radius:14px!important;
-  background:linear-gradient(135deg,#e6f3f5 0%,#d8e6f0 52%,#eadff3 100%)!important;
-  box-shadow:0 4px 10px rgba(53,80,92,.08)!important;
-}
-.qm-ly:nth-of-type(3n+2) summary{background:linear-gradient(135deg,#f2e3eb,#e9d1de)!important;border-color:#c19aae!important}
-.qm-ly:nth-of-type(3n) summary{background:linear-gradient(135deg,#f3e8c7,#e7d093)!important;border-color:#c2a253!important}
-.qm-ly .tt{color:#176858!important;font-weight:900!important}
-.qm-ly .vl{color:#622b69!important;font-weight:900!important}
-.qm-ly .ps{color:#8a6b3e!important;font-weight:700!important}
-.qm-ly .bd{
-  margin:0 4px 10px!important;
-  padding:13px 14px!important;
-  border-left:4px solid #8d6bb3!important;
-  border-radius:0 12px 12px 0!important;
-  background:linear-gradient(145deg,#fffaf0,#efe6d5)!important;
-}
+/* 逐碼詳解：由淡卡升成有辨識度的精品卡 */
+.qm-ly summary{margin:8px 0!important;padding:14px!important;border:1.5px solid #77ad9e!important;border-radius:14px!important;background:radial-gradient(circle at 92% 20%,rgba(30,125,89,.12),transparent 28%),linear-gradient(135deg,#e1f3ec 0%,#c8e4d9 100%)!important;box-shadow:inset 0 0 0 2px rgba(255,255,255,.38),0 5px 12px rgba(53,80,70,.10)!important}.qm-ly:nth-of-type(3n+2) summary{background:radial-gradient(circle at 92% 20%,rgba(160,48,86,.10),transparent 28%),linear-gradient(135deg,#f5dce5,#e8bdcd)!important;border-color:#c4829c!important}.qm-ly:nth-of-type(3n) summary{background:radial-gradient(circle at 92% 20%,rgba(155,104,22,.12),transparent 28%),linear-gradient(135deg,#f8e8b4,#e6c568)!important;border-color:#b98a29!important}.qm-ly .tt{color:#176858!important;font-weight:900!important}.qm-ly .vl{color:#622b69!important;font-weight:900!important}.qm-ly .ps{color:#7b592b!important;font-weight:800!important}.qm-ly .bd{margin:0 4px 12px!important;padding:14px!important;border:1px solid #c8b07c!important;border-left:4px solid #7b3589!important;border-radius:0 12px 12px 0!important;background:radial-gradient(circle at 95% 12%,rgba(177,133,45,.11),transparent 24%),linear-gradient(145deg,#fffaf0,#eee1c9)!important;box-shadow:0 5px 12px rgba(76,56,34,.08)!important}
 
-/* 奇門未選九宮：再補一階，不讓亮宮之外全部發白 */
-.qm-cell{
-  filter:saturate(1.12) brightness(.97)!important;
-}
-.qm-cell.on{filter:none!important}
+/* 奇門未選九宮：不發白 */
+.qm-cell{filter:saturate(1.12) brightness(.97)!important}.qm-cell.on{filter:none!important}
 
-/* 本命詳解與說明卡：文字區塊要更有層次 */
-.qm-zi,.qm-jie,.qm-card,.qm-gj{
-  border-width:1.5px!important;
-  box-shadow:0 9px 22px rgba(47,78,66,.13),inset 0 1px 0 rgba(255,255,255,.62)!important;
-}
+/* 本命詳解／格局／說明：MASTER 玉石＋金邊＋淡山水紋 */
+.qm-card,.qm-gj,.qm-jie,.qm-zi{position:relative;overflow:hidden;border:1.5px solid #88b4a6!important;border-radius:18px!important;background:radial-gradient(circle at 92% 14%,rgba(36,122,88,.13),transparent 27%),radial-gradient(circle at 80% 100%,rgba(181,137,47,.13),transparent 30%),linear-gradient(145deg,#edf7f2 0%,#dcebe4 60%,#efe1bd 100%)!important;box-shadow:0 10px 24px rgba(47,78,66,.14),inset 0 0 0 2px rgba(255,255,255,.43),inset 0 1px 0 rgba(255,255,255,.78)!important}
+.qm-card:after,.qm-gj:after,.qm-jie:after,.qm-zi:after{content:"";position:absolute;right:-12px;bottom:-10px;width:112px;height:74px;pointer-events:none;opacity:.13;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 90'%3E%3Cg fill='none' stroke='%235c4b73' stroke-width='3'%3E%3Cpath d='M4 86l32-40 19 24 21-35 57 51'/%3E%3Cpath d='M10 67c14-12 27-12 40 0 13-14 27-14 41 0 12-10 25-10 39 0'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat}
+.qm-card h4,.qm-zi h5,.qm-gj strong{color:#5d176e!important;text-shadow:0 1px 0 rgba(255,255,255,.82)!important}.qm-card .wx,.qm-zi h5 span{color:#94651f!important;font-weight:800!important}.qm-jie{border-color:#c4a25c!important;background:radial-gradient(circle at 90% 10%,rgba(191,145,47,.16),transparent 28%),linear-gradient(145deg,#fff8e7,#ecdfc4)!important}.qm-gj{border-color:#a28ab1!important;background:radial-gradient(circle at 90% 10%,rgba(109,36,132,.13),transparent 27%),linear-gradient(145deg,#f2eaf5,#ddd1e5 62%,#eadbb9)!important}.qm-zi{border-color:#78a998!important;background:radial-gradient(circle at 90% 12%,rgba(29,118,84,.15),transparent 28%),linear-gradient(145deg,#e3f2eb,#cfdfd7 60%,#ecddb9)!important}.qm-zi p.xs{border-top-color:#bea56f!important}
 
-@media(max-width:390px){
-  #sz-card .sz-dayun-block{padding:14px 11px!important}
-  #sz-card .sz-dayun-list{grid-template-columns:repeat(8,86px)!important}
-}
+@media(max-width:390px){#sz-card .sz-dayun-block{padding:14px 11px!important}#sz-card .sz-dayun-list{grid-template-columns:repeat(8,86px)!important}.qm-card,.qm-gj,.qm-jie,.qm-zi{border-radius:16px!important}}
