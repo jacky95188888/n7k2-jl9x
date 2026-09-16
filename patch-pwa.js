@@ -28,33 +28,35 @@
   add('meta', { name: 'apple-mobile-web-app-title', content: '筠玲易數' });
   add('meta', { name: 'mobile-web-app-capable', content: 'yes' });
 
-  // 全站色彩層次
   var toneTheme = document.createElement('link');
   toneTheme.rel = 'stylesheet';
-  toneTheme.href = 'tone-deepen-v1.css?v=20260916-7';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-8';
   head.appendChild(toneTheme);
 
-  // 四柱、六柱環、逐碼詳解等補強
   var premiumDepth = document.createElement('link');
   premiumDepth.rel = 'stylesheet';
-  premiumDepth.href = 'premium-depth-v1.css?v=20260916-7';
+  premiumDepth.href = 'premium-depth-v1.css?v=20260916-8';
   head.appendChild(premiumDepth);
 
-  // 數字九宮（獨立模組）高質感版
   var jiugongLuxury = document.createElement('link');
   jiugongLuxury.rel = 'stylesheet';
-  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-7';
+  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-8';
   head.appendChild(jiugongLuxury);
 
-  // 奇門手機號論斷：單一 MASTER 母版，取代先前多層疊加樣式。
   var qimenMaster = document.createElement('link');
   qimenMaster.rel = 'stylesheet';
-  qimenMaster.href = 'qimen-master-v7.css?v=20260916-7';
+  qimenMaster.href = 'qimen-master-v7.css?v=20260916-8';
   head.appendChild(qimenMaster);
+
+  // V8：針對奇門洛書九宮九格做最終高飽和雙框覆蓋，最後載入。
+  var qimenMasterV8 = document.createElement('link');
+  qimenMasterV8.rel = 'stylesheet';
+  qimenMasterV8.href = 'qimen-master-v8.css?v=20260916-8';
+  head.appendChild(qimenMasterV8);
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js?v=20260916-7').catch(function (err) {
+      navigator.serviceWorker.register('sw.js?v=20260916-8').catch(function (err) {
         console.warn('[PWA] Service Worker 註冊失敗：', err && err.message);
       });
     });
