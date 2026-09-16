@@ -1,6 +1,6 @@
-/* 筠玲易數｜全站色彩加深 V1
-   2026-09-16：只調整視覺層次，不改排盤、路由與版面結構。
-   原則：原本偏白、偏淡的底色加深約一階，保留既有紫／藍／綠／金／米色系。
+/* 筠玲易數｜全站色彩加深 V2
+   2026-09-16：依照老師示範規格加深顏色、框線與層次。
+   僅調整視覺，不改排盤、路由、資料、版面結構。
 */
 :root{
   --paper:#f2ecdf;
@@ -25,30 +25,133 @@ select,input{background:linear-gradient(180deg,#fffaf0,#eee2d0);border-color:#b9
 .ringbox{background:radial-gradient(circle,#fff9ed 0%,#eee2cf 70%,#dfcfb7 100%);border-color:#c4ad8b}
 .pbg{fill:#f8f0e2;stroke:#b59c77}
 .feats,.feats div{border-color:#d1bea2}
+.card section,.card article,.card .box,.card .panel,.card .result,.card .item{border-color:rgba(178,151,112,.54)}
 
-/* 常見白底／淡底容器：加深但不改尺寸與排版 */
-.card section,.card article,.card .box,.card .panel,.card .result,.card .item{
-  border-color:rgba(178,151,112,.54);
+/* =========================================================
+   數字九宮｜依照示範圖的層次與配色
+   ========================================================= */
+.jg-in{gap:12px!important;margin-bottom:18px!important}
+.jg-in input{
+  height:52px!important;
+  background:linear-gradient(180deg,#fffdf8,#f4eaf8)!important;
+  border:1.5px solid #b96ad7!important;
+  border-radius:14px!important;
+  color:#36125a!important;
+  font-weight:800!important;
+  font-size:18px!important;
+  box-shadow:inset 0 1px 0 #fff,0 3px 10px rgba(96,43,128,.10)!important;
+}
+.jg-in button{
+  height:52px!important;
+  min-width:104px!important;
+  border-radius:15px!important;
+  border:1px solid #b47b20!important;
+  background:linear-gradient(135deg,#4e0b79 0%,#7611a9 55%,#a212d2 100%)!important;
+  color:#fff7de!important;
+  font-weight:900!important;
+  box-shadow:0 7px 16px rgba(93,13,126,.24),inset 0 1px 0 rgba(255,255,255,.27)!important;
+}
+.jg-grid{
+  gap:8px!important;
+  padding:9px!important;
+  background:linear-gradient(180deg,#fff8e8,#ead7b8)!important;
+  border:1.5px solid #c9a45c!important;
+  border-radius:18px!important;
+  box-shadow:0 9px 22px rgba(102,69,35,.12),inset 0 0 0 2px rgba(255,255,255,.74)!important;
+}
+.jg-c{
+  min-height:94px!important;
+  border-width:1.5px!important;
+  border-radius:14px!important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.52),inset 0 1px 0 rgba(255,255,255,.9),0 4px 10px rgba(45,45,60,.11)!important;
+}
+.jg-c:after{
+  inset:5px!important;
+  border:1px solid rgba(255,255,255,.78)!important;
+  border-radius:10px!important;
+}
+.jg-c .jg-n{
+  font-size:42px!important;
+  color:#163c35!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.80),0 2px 5px rgba(20,40,35,.08)!important;
 }
 
-/* 數字九宮：再把整體淡色往下壓一階 */
-.jg-grid{background:linear-gradient(180deg,#f5ead8,#e8d8be)!important;border-color:#b99a68!important}
-.jg-c.jg-mu,.jg-star-cell.jg-mu{background:linear-gradient(145deg,#c9efd7,#82cf9f)!important;border-color:#4eaa72!important}
-.jg-c.jg-huo,.jg-star-cell.jg-huo{background:linear-gradient(145deg,#ffd0d7,#ef8fa0)!important;border-color:#d35d72!important}
-.jg-c.jg-tu,.jg-star-cell.jg-tu{background:linear-gradient(145deg,#ffe8a8,#e9bd50)!important;border-color:#c79525!important}
-.jg-c.jg-jin,.jg-star-cell.jg-jin{background:linear-gradient(145deg,#e2e6f1,#b9c3d9)!important;border-color:#8998b5!important}
-.jg-c.jg-shui,.jg-star-cell.jg-shui{background:linear-gradient(145deg,#ccecff,#7fc3ea)!important;border-color:#4b9dce!important}
-.jg-c.jg-mid{background:linear-gradient(145deg,#267663,#104f45)!important;border-color:#c99d35!important}
-.jg-c .jg-n{color:#173d36!important;text-shadow:0 1px 0 rgba(255,255,255,.72)!important}
-.jg-c.jg-mid .jg-n{color:#fff8df!important}
-.jg-star-card{background:linear-gradient(180deg,#faf3e5,#ecdfc9)!important;border-color:#bea477!important}
+/* 五行色：比原版鮮明，但保留高級柔和感 */
+.jg-c.jg-mu,.jg-star-cell.jg-mu{
+  background:linear-gradient(145deg,#d3f6df 0%,#99dfb4 55%,#71c994 100%)!important;
+  border-color:#48a96e!important;
+}
+.jg-c.jg-huo,.jg-star-cell.jg-huo{
+  background:linear-gradient(145deg,#ffd7de 0%,#f5a1ae 55%,#ea788e 100%)!important;
+  border-color:#d75069!important;
+}
+.jg-c.jg-tu,.jg-star-cell.jg-tu{
+  background:linear-gradient(145deg,#fff0b8 0%,#f2cd67 56%,#dfa934 100%)!important;
+  border-color:#c58b1d!important;
+}
+.jg-c.jg-jin,.jg-star-cell.jg-jin{
+  background:linear-gradient(145deg,#f2f3fb 0%,#d3d9eb 56%,#b1bbd4 100%)!important;
+  border-color:#8191b2!important;
+}
+.jg-c.jg-shui,.jg-star-cell.jg-shui{
+  background:linear-gradient(145deg,#ddf4ff 0%,#9dd9f4 56%,#69bbe6 100%)!important;
+  border-color:#4296ca!important;
+}
 
-/* 桃花與擇日頁常見的純白漸層：只壓低亮度，不動功能 */
-body.jl-page-taohua .guide article{box-shadow:0 5px 15px rgba(74,42,68,.08)}
+/* 中宮：深翠綠＋金色雙框 */
+.jg-c.jg-mid{
+  background:radial-gradient(circle at 50% 35%,rgba(30,137,111,.35),transparent 45%),linear-gradient(145deg,#126955,#063f37)!important;
+  border:2px solid #d3a631!important;
+  box-shadow:inset 0 0 0 2px rgba(244,204,82,.42),inset 0 0 20px rgba(4,58,47,.40),0 5px 13px rgba(16,75,63,.27)!important;
+}
+.jg-c.jg-mid:after{border-color:rgba(244,210,101,.70)!important}
+.jg-c.jg-mid .jg-n{color:#fff8df!important;text-shadow:0 2px 5px rgba(0,0,0,.30)!important}
+
+/* 淡淡的元素紋理，只做裝飾，不加宮名文字 */
+.jg-c.jg-mu:before,.jg-c.jg-huo:before,.jg-c.jg-tu:before,.jg-c.jg-jin:before,.jg-c.jg-shui:before{
+  content:"";position:absolute;left:8px;right:8px;bottom:6px;height:28px;opacity:.18;pointer-events:none;
+  background:radial-gradient(ellipse at 20% 100%,currentColor 0 8%,transparent 9%),radial-gradient(ellipse at 42% 100%,currentColor 0 7%,transparent 8%),radial-gradient(ellipse at 70% 100%,currentColor 0 10%,transparent 11%);
+}
+.jg-c.jg-mu:before{color:#126f43}
+.jg-c.jg-huo:before{color:#a91836}
+.jg-c.jg-tu:before{color:#98640d}
+.jg-c.jg-jin:before{color:#54658d}
+.jg-c.jg-shui:before{color:#176f9f}
+
+.jg-note{
+  margin-top:14px!important;padding:13px 14px!important;
+  border:1px solid #c9aedc!important;border-radius:13px!important;
+  background:linear-gradient(135deg,#f8f0ff,#eee2f8)!important;
+  color:#5d4971!important;line-height:1.85!important;
+}
+
+/* 九宮九星對照表：同步示範圖規格 */
+.jg-star-card{
+  margin-top:22px!important;
+  background:linear-gradient(180deg,#fffaf0,#eee0c8)!important;
+  border:1.5px solid #c5a269!important;
+  border-radius:18px!important;
+  box-shadow:0 8px 20px rgba(92,67,35,.10),inset 0 0 0 1px rgba(255,255,255,.72)!important;
+}
+.jg-star-title{color:#4b176d!important;font-size:18px!important;font-weight:900!important}
+.jg-star-grid{gap:7px!important}
+.jg-star-cell{
+  min-height:78px!important;
+  border-width:1.5px!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.55),0 3px 8px rgba(44,45,60,.08)!important;
+}
+.jg-star-cell em{color:#704616!important}
+
+/* 擇日／桃花等淡色區塊只加強飽和與邊界，不改版型 */
+body.jl-page-taohua .guide article{box-shadow:0 5px 15px rgba(74,42,68,.10)}
 body.jl-page-rz .rz-meta-card .meta-item,
 body.jl-page-rz .rz-detail-card .detail-row,
-body.jl-page-rz .rz-astro-card{filter:saturate(1.12) brightness(.97)}
+body.jl-page-rz .rz-astro-card{filter:saturate(1.16) brightness(.965)}
 
 @media(max-width:390px){
   .card{box-shadow:0 5px 15px rgba(64,48,31,.10)}
+  .jg-grid{gap:7px!important;padding:7px!important}
+  .jg-c{min-height:86px!important}
+  .jg-c .jg-n{font-size:39px!important}
+  .jg-in button{min-width:92px!important}
 }
