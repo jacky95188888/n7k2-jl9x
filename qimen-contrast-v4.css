@@ -1,0 +1,98 @@
+/* 筠玲易數｜奇門手機號論斷 Contrast V4
+   2026-09-16：針對洛書九宮、九宮增運、詳解卡片加深色彩與層次。
+   只改視覺，不改排盤與文字內容。
+*/
+
+/* 區段標題 */
+.qm-h{
+  background:linear-gradient(90deg,#d7f1e8 0%,#edf1d9 56%,#f6ddb1 100%)!important;
+  border-color:#7fb9a9!important;
+  color:#155d50!important;
+  box-shadow:0 7px 18px rgba(48,92,77,.12),inset 0 1px 0 rgba(255,255,255,.78)!important;
+}
+.qm-h:before{color:#b77711!important}
+
+/* 洛書九宮外框 */
+.qm-plate{
+  background:linear-gradient(145deg,#ecf5ef,#eadfc8)!important;
+  border-color:#ad8a32!important;
+  box-shadow:0 14px 30px rgba(55,78,67,.16),inset 0 0 0 2px rgba(255,255,255,.72)!important;
+}
+
+/* 九宮格：整體比原版再加深一階 */
+.qm-cell{
+  background:linear-gradient(145deg,#d9efe7,#bfe0d5)!important;
+  border-color:#82b8a8!important;
+  box-shadow:0 5px 12px rgba(50,74,64,.10),inset 0 1px 0 rgba(255,255,255,.75)!important;
+}
+.qm-cell:nth-child(2),.qm-cell:nth-child(6){
+  background:linear-gradient(145deg,#f7dfe7,#ecc0ce)!important;
+  border-color:#c98fa2!important;
+}
+.qm-cell:nth-child(3),.qm-cell:nth-child(7){
+  background:linear-gradient(145deg,#f6e4b8,#e6c36d)!important;
+  border-color:#bd963e!important;
+}
+.qm-cell:nth-child(5),.qm-cell:nth-child(9){
+  background:linear-gradient(145deg,#e3ddf2,#c9bfdf)!important;
+  border-color:#9e8fbd!important;
+}
+.qm-cell .gn{color:#5f2e6b!important}
+.qm-cell .nu{color:#2d2926!important}
+.qm-cell.on{
+  background:radial-gradient(circle at 22% 14%,rgba(74,199,164,.42),transparent 34%),linear-gradient(145deg,#1f8068 0%,#0f5c4c 56%,#623267 100%)!important;
+  border-color:#d6aa35!important;
+  box-shadow:0 10px 24px rgba(27,88,73,.32),0 0 0 3px rgba(211,166,50,.12),inset 0 0 0 1px rgba(255,232,157,.35)!important;
+}
+
+/* 說明／詳解卡 */
+.qm-card,.qm-gj,.qm-jie,.qm-zi{
+  background:linear-gradient(145deg,#f1f8f4,#e4eee8)!important;
+  border-color:#8fbaad!important;
+  box-shadow:0 9px 22px rgba(47,78,66,.12)!important;
+}
+.qm-card h4,.qm-zi h5{color:#5c126f!important}
+.qm-card .wx,.qm-zi h5 span{color:#956620!important}
+
+/* 九宮增運九格 */
+.qm-zg{gap:10px!important}
+.qm-zg button{
+  background:linear-gradient(145deg,#eee6f2,#ddd0e7)!important;
+  border-color:#b08abd!important;
+  color:#5b2c62!important;
+  box-shadow:0 5px 12px rgba(87,49,93,.10),inset 0 1px 0 rgba(255,255,255,.74)!important;
+}
+.qm-zg button:nth-child(3n+1){
+  background:linear-gradient(145deg,#d8eee5,#bcdcd0)!important;
+  border-color:#7eb09f!important;
+}
+.qm-zg button:nth-child(3n+2){
+  background:linear-gradient(145deg,#f2dce5,#e5bdcd)!important;
+  border-color:#c58da3!important;
+}
+.qm-zg button:nth-child(3n){
+  background:linear-gradient(145deg,#f5e2ad,#e5be61)!important;
+  border-color:#bc9130!important;
+}
+.qm-zg button.self{border-color:#b98518!important;box-shadow:0 0 0 3px rgba(185,133,24,.13),0 5px 12px rgba(75,56,33,.10)!important}
+.qm-zg button.on,.qm-zg button.mid,.qm-zg button.mid.on{
+  background:linear-gradient(145deg,#6a1588 0%,#8f11a2 58%,#b214cb 100%)!important;
+  border-color:#d5aa36!important;
+  color:#fff8df!important;
+  box-shadow:0 8px 18px rgba(111,22,132,.27),inset 0 1px 0 rgba(255,255,255,.22)!important;
+}
+.qm-zg em{color:#89662f!important}
+.qm-zg button.on em,.qm-zg button.mid em{color:#f5d66f!important}
+
+/* 下方本命所落詳解卡再加深一些 */
+.qm-zi{
+  background:linear-gradient(145deg,#e5f2ec 0%,#eee7cb 100%)!important;
+  border-color:#91bbaa!important;
+}
+.qm-zi dt{color:#68452f!important}
+.qm-zi p.xs{border-top-color:#cab78f!important}
+
+@media(max-width:390px){
+  .qm-cell{min-height:84px!important}
+  .qm-zg button{min-height:56px!important}
+}
