@@ -30,33 +30,28 @@
 
   var toneTheme = document.createElement('link');
   toneTheme.rel = 'stylesheet';
-  toneTheme.href = 'tone-deepen-v1.css?v=20260916-8';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-9';
   head.appendChild(toneTheme);
 
   var premiumDepth = document.createElement('link');
   premiumDepth.rel = 'stylesheet';
-  premiumDepth.href = 'premium-depth-v1.css?v=20260916-8';
+  premiumDepth.href = 'premium-depth-v1.css?v=20260916-9';
   head.appendChild(premiumDepth);
 
   var jiugongLuxury = document.createElement('link');
   jiugongLuxury.rel = 'stylesheet';
-  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-8';
+  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-9';
   head.appendChild(jiugongLuxury);
 
-  var qimenMaster = document.createElement('link');
-  qimenMaster.rel = 'stylesheet';
-  qimenMaster.href = 'qimen-master-v7.css?v=20260916-8';
-  head.appendChild(qimenMaster);
-
-  // V8：針對奇門洛書九宮九格做最終高飽和雙框覆蓋，最後載入。
-  var qimenMasterV8 = document.createElement('link');
-  qimenMasterV8.rel = 'stylesheet';
-  qimenMasterV8.href = 'qimen-master-v8.css?v=20260916-8';
-  head.appendChild(qimenMasterV8);
+  // 奇門手機號論斷：只載入單一 V9 MASTER，避免 V7/V8 互相覆蓋。
+  var qimenMasterV9 = document.createElement('link');
+  qimenMasterV9.rel = 'stylesheet';
+  qimenMasterV9.href = 'qimen-master-v9.css?v=20260916-9';
+  head.appendChild(qimenMasterV9);
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js?v=20260916-8').catch(function (err) {
+      navigator.serviceWorker.register('sw.js?v=20260916-9').catch(function (err) {
         console.warn('[PWA] Service Worker 註冊失敗：', err && err.message);
       });
     });
