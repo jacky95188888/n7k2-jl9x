@@ -30,28 +30,33 @@
 
   var toneTheme = document.createElement('link');
   toneTheme.rel = 'stylesheet';
-  toneTheme.href = 'tone-deepen-v1.css?v=20260916-10';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-11';
   head.appendChild(toneTheme);
 
   var premiumDepth = document.createElement('link');
   premiumDepth.rel = 'stylesheet';
-  premiumDepth.href = 'premium-depth-v1.css?v=20260916-10';
+  premiumDepth.href = 'premium-depth-v1.css?v=20260916-11';
   head.appendChild(premiumDepth);
 
   var jiugongLuxury = document.createElement('link');
   jiugongLuxury.rel = 'stylesheet';
-  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-10';
+  jiugongLuxury.href = 'jiugong-luxury-v5.css?v=20260916-11';
   head.appendChild(jiugongLuxury);
 
-  // 奇門手機號論斷：只載入單一 V10 高質感插畫母版。
   var qimenMasterV10 = document.createElement('link');
   qimenMasterV10.rel = 'stylesheet';
-  qimenMasterV10.href = 'qimen-master-v10.css?v=20260916-10';
+  qimenMasterV10.href = 'qimen-master-v10.css?v=20260916-11';
   head.appendChild(qimenMasterV10);
+
+  // 全站 V11：最後載入，統一處理所有仍過淡、過白、過平的區塊；特殊九宮母版排除。
+  var globalMasterV11 = document.createElement('link');
+  globalMasterV11.rel = 'stylesheet';
+  globalMasterV11.href = 'global-master-v11.css?v=20260916-11';
+  head.appendChild(globalMasterV11);
 
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js?v=20260916-10').catch(function (err) {
+      navigator.serviceWorker.register('sw.js?v=20260916-11').catch(function (err) {
         console.warn('[PWA] Service Worker 註冊失敗：', err && err.message);
       });
     });
