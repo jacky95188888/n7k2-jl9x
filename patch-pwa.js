@@ -29,22 +29,28 @@
   add('meta', { name: 'apple-mobile-web-app-title', content: '筠玲易數' });
   add('meta', { name: 'mobile-web-app-capable', content: 'yes' });
 
-  // 奇門手機號論斷：整區統一新版玉石／米金／霧紫配色，只覆蓋視覺。
+  // 奇門手機號論斷：基礎玉石／米金／霧紫配色。
   var qimenTheme = document.createElement('link');
   qimenTheme.rel = 'stylesheet';
-  qimenTheme.href = 'qimen-theme-v2.css?v=20260914-2';
+  qimenTheme.href = 'qimen-theme-v2.css?v=20260916-3';
   head.appendChild(qimenTheme);
 
-  // 2026-09-16：全站淡色區塊統一加深一階，只覆蓋視覺，不動排盤與版面。
+  // 2026-09-16：全站淡色區塊統一加深一階。
   var toneTheme = document.createElement('link');
   toneTheme.rel = 'stylesheet';
-  toneTheme.href = 'tone-deepen-v1.css?v=20260916-1';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-3';
   head.appendChild(toneTheme);
+
+  // 2026-09-16：奇門頁「洛書九宮／九宮增運／本命詳解」再加深，確保覆蓋在基礎主題之後。
+  var qimenContrast = document.createElement('link');
+  qimenContrast.rel = 'stylesheet';
+  qimenContrast.href = 'qimen-contrast-v4.css?v=20260916-3';
+  head.appendChild(qimenContrast);
 
   // Service Worker：只在 https（GitHub Pages）或 localhost 下註冊
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js').catch(function (err) {
+      navigator.serviceWorker.register('sw.js?v=20260916-3').catch(function (err) {
         console.warn('[PWA] Service Worker 註冊失敗：', err && err.message);
       });
     });
