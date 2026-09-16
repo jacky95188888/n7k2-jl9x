@@ -10,7 +10,6 @@
   function add(tag, attrs) {
     for (var k in attrs) {
       if (k === 'rel' || k === 'name') {
-        // 已經有同名的就不重複加，避免蓋掉你手寫的設定
         var sel = tag + '[' + k + '="' + attrs[k] + '"]';
         if (document.querySelector(sel)) return;
       }
@@ -29,28 +28,30 @@
   add('meta', { name: 'apple-mobile-web-app-title', content: '筠玲易數' });
   add('meta', { name: 'mobile-web-app-capable', content: 'yes' });
 
-  // 奇門手機號論斷：基礎玉石／米金／霧紫配色。
   var qimenTheme = document.createElement('link');
   qimenTheme.rel = 'stylesheet';
-  qimenTheme.href = 'qimen-theme-v2.css?v=20260916-3';
+  qimenTheme.href = 'qimen-theme-v2.css?v=20260916-4';
   head.appendChild(qimenTheme);
 
-  // 2026-09-16：全站淡色區塊統一加深一階。
   var toneTheme = document.createElement('link');
   toneTheme.rel = 'stylesheet';
-  toneTheme.href = 'tone-deepen-v1.css?v=20260916-3';
+  toneTheme.href = 'tone-deepen-v1.css?v=20260916-4';
   head.appendChild(toneTheme);
 
-  // 2026-09-16：奇門頁「洛書九宮／九宮增運／本命詳解」再加深，確保覆蓋在基礎主題之後。
   var qimenContrast = document.createElement('link');
   qimenContrast.rel = 'stylesheet';
-  qimenContrast.href = 'qimen-contrast-v4.css?v=20260916-3';
+  qimenContrast.href = 'qimen-contrast-v4.css?v=20260916-4';
   head.appendChild(qimenContrast);
 
-  // Service Worker：只在 https（GitHub Pages）或 localhost 下註冊
+  // 第二輪：十年大運、六柱環、逐碼詳解等仍偏淡區塊補強。
+  var premiumDepth = document.createElement('link');
+  premiumDepth.rel = 'stylesheet';
+  premiumDepth.href = 'premium-depth-v1.css?v=20260916-4';
+  head.appendChild(premiumDepth);
+
   if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
     window.addEventListener('load', function () {
-      navigator.serviceWorker.register('sw.js?v=20260916-3').catch(function (err) {
+      navigator.serviceWorker.register('sw.js?v=20260916-4').catch(function (err) {
         console.warn('[PWA] Service Worker 註冊失敗：', err && err.message);
       });
     });
