@@ -1,0 +1,168 @@
+/* 筠玲易數｜奇門手機號論斷 MASTER V8
+   2026-09-16：依照參考圖重做九宮視覺。
+   重點：九格全部有飽和五行色、雙層邊框、立體陰影；移除 V7 底部圓點紋理。
+   僅改視覺，不改排盤、資料與文字。
+*/
+
+/* 九宮外盤：更接近參考圖的奶油金邊 */
+.qm-plate{
+  gap:10px!important;
+  padding:10px!important;
+  border:2px solid #c69a35!important;
+  border-radius:22px!important;
+  background:linear-gradient(180deg,#fff9ec 0%,#f0dfb9 100%)!important;
+  box-shadow:
+    0 10px 24px rgba(83,58,28,.16),
+    inset 0 0 0 2px rgba(255,255,255,.92),
+    inset 0 0 0 4px rgba(212,170,78,.16)!important;
+}
+
+/* 先清除上一版造成底部一排圓點的紋理 */
+.qm-cell:before{display:none!important}
+.qm-cell:after{
+  content:""!important;
+  position:absolute!important;
+  inset:5px!important;
+  border:1.5px solid rgba(255,255,255,.82)!important;
+  border-radius:12px!important;
+  pointer-events:none!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)!important;
+}
+
+/* 每一格統一更立體 */
+.qm-cell{
+  min-height:104px!important;
+  border-width:2px!important;
+  border-style:solid!important;
+  border-radius:16px!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -8px 16px rgba(60,50,60,.05),
+    0 5px 12px rgba(41,43,55,.14)!important;
+}
+.qm-cell .gn{
+  font-size:16px!important;
+  font-weight:900!important;
+  color:#5d1d68!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.9)!important;
+}
+.qm-cell .nu{
+  margin-top:5px!important;
+  font-size:36px!important;
+  line-height:1!important;
+  font-weight:900!important;
+  color:#17201e!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.9),0 3px 8px rgba(0,0,0,.08)!important;
+}
+
+/* 4 巽：翠綠 */
+.qm-cell:nth-child(1){
+  border-color:#36a96c!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),
+    radial-gradient(circle at 15% 82%,rgba(21,112,64,.22) 0 16%,transparent 17%),
+    linear-gradient(145deg,#ccf7dc 0%,#86dfa9 58%,#4fc27f 100%)!important;
+}
+/* 9 離：玫瑰粉 */
+.qm-cell:nth-child(2){
+  border-color:#e15d78!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),
+    radial-gradient(circle at 82% 78%,rgba(181,38,71,.22) 0 18%,transparent 19%),
+    linear-gradient(145deg,#ffd9e0 0%,#f99fb0 58%,#ee6f88 100%)!important;
+}
+/* 2 坤：明亮金黃 */
+.qm-cell:nth-child(3){
+  border-color:#d19a24!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.52),transparent 34%),
+    linear-gradient(35deg,transparent 0 66%,rgba(151,96,13,.15) 67% 74%,transparent 75%),
+    linear-gradient(145deg,#fff0a9 0%,#f4cf58 58%,#e0aa23 100%)!important;
+}
+/* 3 震：青藍 */
+.qm-cell:nth-child(4){
+  border-color:#2aa9bf!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),
+    radial-gradient(circle at 18% 80%,rgba(20,117,140,.22) 0 17%,transparent 18%),
+    linear-gradient(145deg,#ccf7fa 0%,#82dce8 58%,#42bdd1 100%)!important;
+}
+/* 5 中：紫金 */
+.qm-cell:nth-child(5){
+  border-color:#9b72b8!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.5),transparent 34%),
+    radial-gradient(circle at 50% 50%,rgba(201,157,62,.16),transparent 42%),
+    linear-gradient(145deg,#f0e9fb 0%,#d2bce8 58%,#b18bcf 100%)!important;
+}
+/* 7 兌：粉紫 */
+.qm-cell:nth-child(6){
+  border-color:#d37aa4!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),
+    radial-gradient(circle at 28% 80%,rgba(155,74,119,.15) 0 16%,transparent 17%),
+    linear-gradient(145deg,#ffe5f0 0%,#f0bed6 58%,#dda0c2 100%)!important;
+}
+/* 8 艮：暖金 */
+.qm-cell:nth-child(7){
+  border-color:#d0a036!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.52),transparent 34%),
+    linear-gradient(35deg,transparent 0 66%,rgba(147,94,12,.13) 67% 73%,transparent 74%),
+    linear-gradient(145deg,#fff1b7 0%,#f0cf68 58%,#dbaa32 100%)!important;
+}
+/* 1 坎：水藍 */
+.qm-cell:nth-child(8){
+  border-color:#3b9fd2!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),
+    radial-gradient(ellipse at 30% 100%,rgba(29,114,168,.22) 0 20%,transparent 21%),
+    radial-gradient(ellipse at 68% 104%,rgba(29,114,168,.16) 0 25%,transparent 26%),
+    linear-gradient(145deg,#d4f3ff 0%,#8dd7f5 58%,#52b8e5 100%)!important;
+}
+/* 6 乾：銀紫 */
+.qm-cell:nth-child(9){
+  border-color:#8394bb!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.55),transparent 34%),
+    radial-gradient(circle at 72% 82%,rgba(80,87,140,.17) 0 17%,transparent 18%),
+    linear-gradient(145deg,#f0f3ff 0%,#cbd2ea 58%,#9eacd0 100%)!important;
+}
+
+/* 亮宮：參考圖的深翠＋金框＋紫尾 */
+.qm-cell.on{
+  min-height:112px!important;
+  border:2.5px solid #ddb23e!important;
+  background:
+    linear-gradient(160deg,rgba(255,255,255,.14),transparent 30%),
+    radial-gradient(circle at 22% 18%,rgba(71,208,168,.34),transparent 32%),
+    linear-gradient(145deg,#0f7c62 0%,#08614f 58%,#5c2a68 100%)!important;
+  box-shadow:
+    0 8px 18px rgba(20,80,66,.32),
+    0 0 0 3px rgba(218,177,63,.14),
+    inset 0 0 0 1px rgba(255,229,145,.38),
+    inset 0 -14px 20px rgba(39,12,55,.16)!important;
+}
+.qm-cell.on:after{border-color:rgba(255,232,158,.72)!important}
+.qm-cell.on .gn{color:#ffd45e!important;text-shadow:0 1px 0 rgba(0,0,0,.16)!important}
+.qm-cell.on .nu{color:#fffdf5!important;text-shadow:0 2px 5px rgba(0,0,0,.28)!important}
+.qm-cell.on .st2{position:relative;z-index:3;margin-top:4px!important}
+.qm-cell.on .st2 u{color:#fff8eb!important;font-weight:900!important}
+.qm-cell.on .st2 i{color:#ffd668!important;font-weight:900!important}
+
+/* 本命詳解卡同步加深，不再像白底框 */
+.qm-card,.qm-zi{
+  background:
+    radial-gradient(circle at 88% 10%,rgba(234,205,132,.22),transparent 28%),
+    linear-gradient(145deg,#edf8f3 0%,#dbece4 62%,#eee2c5 100%)!important;
+  border:1.5px solid #79af9f!important;
+  box-shadow:0 8px 20px rgba(45,77,65,.12),inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+
+@media(max-width:390px){
+  .qm-plate{gap:7px!important;padding:7px!important}
+  .qm-cell{min-height:92px!important}
+  .qm-cell .gn{font-size:14px!important}
+  .qm-cell .nu{font-size:32px!important}
+  .qm-cell.on{min-height:101px!important}
+}
