@@ -116,9 +116,19 @@
     document.body.appendChild(script);
   }
 
+  function loadBxccChain(){
+    if(!document.body.classList.contains('jl-page-bxcc')) return;
+    if(document.getElementById('bxcc-chain-loader')) return;
+    var script=document.createElement('script');
+    script.id='bxcc-chain-loader';
+    script.src='bxcc-chain-v1.js?v=20260917-1';
+    document.body.appendChild(script);
+  }
+
   function boot(){
     mountCatalog();
     loadTaohuaGuide();
+    loadBxccChain();
   }
 
   if(document.readyState==='loading'){
