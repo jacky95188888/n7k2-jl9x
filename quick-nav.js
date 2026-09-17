@@ -116,19 +116,20 @@
     document.body.appendChild(script);
   }
 
-  function loadBxccChain(){
+  function loadBxccPremium(){
     if(!document.body.classList.contains('jl-page-bxcc')) return;
-    if(document.getElementById('bxcc-chain-loader')) return;
-    var script=document.createElement('script');
-    script.id='bxcc-chain-loader';
-    script.src='bxcc-chain-v1.js?v=20260917-1';
-    document.body.appendChild(script);
+    if(document.getElementById('bxcc-premium-v2')) return;
+    var link=document.createElement('link');
+    link.id='bxcc-premium-v2';
+    link.rel='stylesheet';
+    link.href='bxcc-premium-v2.css?v=20260917-2';
+    document.head.appendChild(link);
   }
 
   function boot(){
     mountCatalog();
     loadTaohuaGuide();
-    loadBxccChain();
+    loadBxccPremium();
   }
 
   if(document.readyState==='loading'){
