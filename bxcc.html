@@ -99,6 +99,27 @@ dt.xiong{color:var(--seal)}
 dd{margin:0;font-size:12.5px;color:var(--ink2)}
 
 footer{text-align:center;font-size:11.5px;color:var(--ink2);padding:26px 18px 0;line-height:1.9}
+
+/* 2026-09-20 老師確認：手機號碼改成連續磁場排列 */
+.bx-chain-card{margin:18px 0 14px;padding:16px 14px 14px;border:1.5px solid #c9a24a;border-radius:20px;background:linear-gradient(145deg,#fffaf0,#f3e4bf);box-shadow:0 10px 24px rgba(93,64,24,.14),inset 0 1px 0 #fff}
+.bx-chain-title{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:12px}
+.bx-chain-title b{color:#5d166b;font-size:16px;letter-spacing:.08em}
+.bx-chain-title span{color:#8a735b;font-size:10.5px}
+.bx-chain-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 2px 12px;scrollbar-width:thin}
+.bx-chain-track{display:flex;align-items:center;width:max-content;min-width:100%}
+.bx-chain-node{position:relative;flex:0 0 74px;min-height:86px;display:grid;place-items:center;align-content:center;border:1.5px solid #c69b43;border-radius:16px;background:linear-gradient(145deg,#fffdf7,#f2ead7);box-shadow:inset 0 0 0 2px rgba(255,255,255,.8),0 6px 14px rgba(76,57,31,.12)}
+.bx-chain-node strong{font-size:30px;line-height:1;color:#221d1b}
+.bx-chain-node small{margin-top:7px;font-size:11px;color:#7f6c58}
+.bx-chain-node em{margin-top:2px;font-style:normal;font-size:9px;color:#9b2f4d}
+.bx-chain-link{position:relative;flex:0 0 70px;height:86px;display:flex;align-items:center;justify-content:center}
+.bx-chain-link i{position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,#cba54e,#9c7c38,#cba54e)}
+.bx-chain-link b{position:relative;z-index:2;align-self:flex-start;margin-top:0;padding:3px 6px;border-radius:999px;background:#fffaf2;font-size:12px;letter-spacing:.05em;white-space:nowrap;box-shadow:0 2px 8px rgba(70,45,24,.08)}
+.bx-chain-link b.ji{color:#26704f;border:1px solid rgba(38,112,79,.25)}
+.bx-chain-link b.xiong{color:#a12b32;border:1px solid rgba(161,43,50,.23)}
+.bx-chain-note{margin:2px 0 0;color:#786654;font-size:11.5px;line-height:1.8}
+.bx-detail{margin-top:14px;border-top:1px solid #dcc89b;padding-top:10px}
+.bx-detail summary{cursor:pointer;color:#5c1d69;font-weight:800;font-size:13px;letter-spacing:.06em;padding:6px 0}
+@media(max-width:430px){.bx-chain-card{padding:14px 11px 12px}.bx-chain-node{flex-basis:68px;min-height:80px}.bx-chain-node strong{font-size:28px}.bx-chain-link{flex-basis:58px;height:80px}.bx-chain-link b{font-size:11px;padding:3px 4px}}
 </style>
 <link rel="stylesheet" href="theme-v3.css?v=1">
 <link rel="stylesheet" href="inner-theme-v4.css?v=annual-premium-v1">
@@ -332,21 +353,32 @@ function makePairs(arr){
 }
 
 function render(raw){
-  var all = parseInput(raw);
+  var rawText = String(raw || '').trim();
+  var all = parseInput(rawText);
   if (all.length < 2){
     out.innerHTML = '<p class="empty">至少要有兩個數字才能相接成場。</p>';
     return;
   }
-  var arr = usable(all);
+
+  /* 老師手機號排法：連續輸入的手機號碼，0 以 12（亥・乾）入盤。
+     空格／逗號分隔的命盤數仍維持原本 1～12 規則。 */
+  var isPhoneNumber = /^\d+$/.test(rawText);
+  var normalized = all.slice();
+  if (rule === 'younian' && isPhoneNumber){
+    normalized = normalized.map(function(n){ return n === 0 ? 12 : n; });
+  }
+
+  var arr = usable(normalized);
   if (arr.length < 2){
     out.innerHTML = '<p class="empty">' + (rule === 'younian'
-      ? '可用的數字不足兩個。遊年法取 1 至 12，0 不成場。'
+      ? '可用的數字不足兩個。遊年法取 1 至 12；手機連續號碼中的 0 以 12 入盤。'
       : '扣掉 0 與 5 之後不足兩位，這組號碼不成磁場。') + '</p>';
     return;
   }
 
   var pairs = makePairs(arr);
-  var html = '', ji = 0, xiong = 0, tally = {};
+  var detailHtml = '', ji = 0, xiong = 0, tally = {};
+  var chainStars = [];
 
   pairs.forEach(function(p){
     var name = lookup(p[0], p[1]);
@@ -354,28 +386,59 @@ function render(raw){
     var info = STAR[name];
     if (info.t === 'ji') ji++; else xiong++;
     tally[name] = (tally[name] || 0) + 1;
+    chainStars.push({name:name, type:info.t});
 
     var sub = '';
     if (rule === 'younian'){
       sub = '<small>' + ZHI[p[0]] + GUA[p[0]] + '　' + ZHI[p[1]] + GUA[p[1]] + '</small>';
     }
-    html += '<div class="pair">'
+    detailHtml += '<div class="pair">'
           +   '<div class="num">' + esc(p[0] + '－' + p[1]) + sub + '</div>'
           +   '<div class="star ' + info.t + '">' + name + '</div>'
           +   '<div class="desc">' + info.s + '｜' + info.d + '</div>'
           + '</div>';
   });
 
-  if (!html){
+  if (!detailHtml){
     out.innerHTML = '<p class="empty">這組數字沒有成形的磁場。</p>';
     return;
+  }
+
+  var html = '';
+  if (pairMode === 'overlap'){
+    var chain = '<div class="bx-chain-card">'
+      + '<div class="bx-chain-title"><b>手機號碼磁場排列</b><span>依老師確認格式・相鄰兩數成場</span></div>'
+      + '<div class="bx-chain-scroll"><div class="bx-chain-track">';
+
+    for (var i = 0; i < arr.length; i++){
+      var rawDigit = (isPhoneNumber && rule === 'younian' && all[i] === 0) ? '0→12' : '';
+      chain += '<div class="bx-chain-node">'
+            + '<strong>' + arr[i] + '</strong>'
+            + '<small>' + (rule === 'younian' ? ((ZHI[arr[i]] || '') + (GUA[arr[i]] || '')) : '') + '</small>'
+            + (rawDigit ? '<em>' + rawDigit + '</em>' : '')
+            + '</div>';
+      if (i < arr.length - 1){
+        var st = chainStars[i] || {name:'—',type:''};
+        chain += '<div class="bx-chain-link">'
+              + '<b class="' + st.type + '">' + st.name + '</b>'
+              + '<i></i>'
+              + '</div>';
+      }
+    }
+    chain += '</div></div>'
+      + '<p class="bx-chain-note">手機號碼維持原順序；0 依老師舊盤換成 12（亥・乾）後再判定相鄰磁場。左右滑動可看完整號碼。</p>'
+      + '</div>';
+    html += chain;
+    html += '<details class="bx-detail"><summary>查看逐組白話解讀</summary>' + detailHtml + '</details>';
+  } else {
+    html += detailHtml;
   }
 
   var names = Object.keys(tally).sort(function(a, b){ return tally[b] - tally[a]; });
   var top = names[0];
   var line = '共 <b>' + (ji + xiong) + '</b> 組：吉星 <b>' + ji + '</b>、凶星 <b>' + xiong + '</b>。'
            + '主導磁場為 <b>' + top + '</b>（' + tally[top] + ' 組）。';
-  var dropped = all.length - arr.length;
+  var dropped = normalized.length - arr.length;
   if (dropped > 0){
     line += '<br><span style="color:var(--ink2)">已略去 ' + dropped + ' 個數：'
           + (rule === 'younian' ? '遊年法只取 1 至 12。' : '0 依附前數，5 為連接數，兩者本身不成場。')
@@ -412,7 +475,7 @@ function drawGrid(){
 
     g.innerHTML = h;
     note.innerHTML = '數字先轉地支，地支再配卦，兩卦查八宅遊年。'
-      + '此法 1 至 12 全部成場，5（辰巽）也算，0 不參與。'
+      + '此法 1 至 12 全部成場，5（辰巽）也算；連續手機號碼中的 0 依老師舊盤換成 12（亥乾）入盤。'
       + '<br>遊年關係由變爻法即時推導：上爻變生氣、中爻變絕命、下爻變禍害、'
       + '上中變五鬼、中下變天醫、上下變六煞、三爻全變延年、不變伏位。';
     return;
