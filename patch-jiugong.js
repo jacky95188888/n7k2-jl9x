@@ -1,5 +1,5 @@
 /* ============================================================
-   patch-jiugong.js　數字九宮盤（手機號後七碼倒填）
+   patch-jiugong.js　奇門手機號碼預測盤（手機號後七碼倒填）
    規則不變；2026-09-16 僅升級五行配色、層次與手機辨識度
    ============================================================ */
 (function () {
@@ -126,7 +126,7 @@ document.addEventListener('keydown', function(e){
   if(e.key!=='Enter')return;var t=e.target;if(!t||t.id!=='jg-ph')return;e.preventDefault();render(t.value);
 });
 function boot(){
-  if(!window.PP||typeof window.PP.addStatic!=='function')return false;if(window.__jgAdded)return true;window.__jgAdded=true;window.PP.addStatic('奇 門 數 字 九 宮 盤',panel);return true;
+  if(!window.PP||typeof window.PP.addStatic!=='function')return false;if(window.__jgAdded)return true;window.__jgAdded=true;window.PP.addStatic('奇 門 手 機 號 碼 預 測 盤',panel);return true;
 }
 var tries=0;(function wait(){if(boot())return;if(++tries<60)setTimeout(wait,200);})();
 })();
