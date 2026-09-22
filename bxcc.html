@@ -100,26 +100,39 @@ dd{margin:0;font-size:12.5px;color:var(--ink2)}
 
 footer{text-align:center;font-size:11.5px;color:var(--ink2);padding:26px 18px 0;line-height:1.9}
 
-/* 2026-09-20 老師確認：手機號碼改成連續磁場排列 */
-.bx-chain-card{margin:18px 0 14px;padding:16px 14px 14px;border:1.5px solid #c9a24a;border-radius:20px;background:linear-gradient(145deg,#fffaf0,#f3e4bf);box-shadow:0 10px 24px rgba(93,64,24,.14),inset 0 1px 0 #fff}
-.bx-chain-title{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-bottom:12px}
-.bx-chain-title b{color:#5d166b;font-size:16px;letter-spacing:.08em}
-.bx-chain-title span{color:#8a735b;font-size:10.5px}
-.bx-chain-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 2px 12px;scrollbar-width:thin}
-.bx-chain-track{display:flex;align-items:center;width:max-content;min-width:100%}
-.bx-chain-node{position:relative;flex:0 0 74px;min-height:86px;display:grid;place-items:center;align-content:center;border:1.5px solid #c69b43;border-radius:16px;background:linear-gradient(145deg,#fffdf7,#f2ead7);box-shadow:inset 0 0 0 2px rgba(255,255,255,.8),0 6px 14px rgba(76,57,31,.12)}
-.bx-chain-node strong{font-size:30px;line-height:1;color:#221d1b}
-.bx-chain-node small{margin-top:7px;font-size:11px;color:#7f6c58}
-.bx-chain-node em{margin-top:2px;font-style:normal;font-size:9px;color:#9b2f4d}
-.bx-chain-link{position:relative;flex:0 0 70px;height:86px;display:flex;align-items:center;justify-content:center}
-.bx-chain-link i{position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,#cba54e,#9c7c38,#cba54e)}
-.bx-chain-link b{position:relative;z-index:2;align-self:flex-start;margin-top:0;padding:3px 6px;border-radius:999px;background:#fffaf2;font-size:12px;letter-spacing:.05em;white-space:nowrap;box-shadow:0 2px 8px rgba(70,45,24,.08)}
-.bx-chain-link b.ji{color:#26704f;border:1px solid rgba(38,112,79,.25)}
-.bx-chain-link b.xiong{color:#a12b32;border:1px solid rgba(161,43,50,.23)}
-.bx-chain-note{margin:2px 0 0;color:#786654;font-size:11.5px;line-height:1.8}
+/* 2026-09-22 老師確認：手機號碼整組固定列出，不使用左右滑動 */
+.bx-chain-card{margin:18px 0 14px;padding:16px 12px 14px;border:1.5px solid #c9a24a;border-radius:20px;background:linear-gradient(145deg,#fffaf0,#f3e4bf);box-shadow:0 10px 24px rgba(93,64,24,.14),inset 0 1px 0 #fff}
+.bx-chain-title{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin-bottom:10px}
+.bx-chain-title b{color:#5d166b;font-size:16px;letter-spacing:.06em}
+.bx-chain-title span{color:#8a735b;font-size:10px;text-align:right}
+.bx-seq-stage{position:relative;padding-top:28px}
+.bx-seq-line{position:absolute;left:4%;right:4%;top:54px;height:2px;background:linear-gradient(90deg,#cba54e,#9c7c38,#cba54e);z-index:0}
+.bx-seq-stars{position:absolute;left:0;right:0;top:0;height:26px}
+.bx-seq-star{position:absolute;transform:translateX(-50%);padding:2px 4px;border-radius:999px;background:#fffaf2;font-size:9.5px;line-height:1.2;font-weight:800;white-space:nowrap;box-shadow:0 2px 6px rgba(70,45,24,.08)}
+.bx-seq-star.ji{color:#26704f;border:1px solid rgba(38,112,79,.22)}
+.bx-seq-star.xiong{color:#a12b32;border:1px solid rgba(161,43,50,.22)}
+.bx-seq-numbers{position:relative;z-index:2;display:grid;gap:3px;align-items:stretch}
+.bx-seq-node{min-width:0;min-height:58px;display:grid;place-items:center;align-content:center;padding:5px 1px;border:1.2px solid #c69b43;border-radius:10px;background:linear-gradient(145deg,#fffdf7,#f2ead7);box-shadow:inset 0 0 0 1px rgba(255,255,255,.8),0 3px 8px rgba(76,57,31,.09)}
+.bx-seq-node strong{font-size:20px;line-height:1;color:#221d1b}
+.bx-seq-node small{margin-top:5px;font-size:8px;line-height:1;color:#7f6c58;white-space:nowrap}
+.bx-seq-node em{margin-top:3px;font-style:normal;font-size:7px;line-height:1;color:#9b2f4d;white-space:nowrap}
+.bx-chain-note{margin:10px 0 0;color:#786654;font-size:11px;line-height:1.75}
 .bx-detail{margin-top:14px;border-top:1px solid #dcc89b;padding-top:10px}
 .bx-detail summary{cursor:pointer;color:#5c1d69;font-weight:800;font-size:13px;letter-spacing:.06em;padding:6px 0}
-@media(max-width:430px){.bx-chain-card{padding:14px 11px 12px}.bx-chain-node{flex-basis:68px;min-height:80px}.bx-chain-node strong{font-size:28px}.bx-chain-link{flex-basis:58px;height:80px}.bx-chain-link b{font-size:11px;padding:3px 4px}}
+@media(max-width:390px){
+  .bx-chain-card{padding:14px 8px 12px}
+  .bx-chain-title{align-items:flex-start}
+  .bx-chain-title b{font-size:15px}
+  .bx-chain-title span{font-size:9px;max-width:120px}
+  .bx-seq-stage{padding-top:27px}
+  .bx-seq-line{top:51px}
+  .bx-seq-star{font-size:8.5px;padding:2px 3px}
+  .bx-seq-numbers{gap:2px}
+  .bx-seq-node{min-height:54px;border-radius:9px}
+  .bx-seq-node strong{font-size:18px}
+  .bx-seq-node small{font-size:7px}
+  .bx-seq-node em{font-size:6px}
+}
 </style>
 <link rel="stylesheet" href="theme-v3.css?v=1">
 <link rel="stylesheet" href="inner-theme-v4.css?v=annual-premium-v1">
@@ -406,27 +419,32 @@ function render(raw){
 
   var html = '';
   if (pairMode === 'overlap'){
+    var n = arr.length;
     var chain = '<div class="bx-chain-card">'
-      + '<div class="bx-chain-title"><b>手機號碼磁場排列</b><span>依老師確認格式・相鄰兩數成場</span></div>'
-      + '<div class="bx-chain-scroll"><div class="bx-chain-track">';
+      + '<div class="bx-chain-title"><b>手機號碼磁場排列</b><span>整組固定列出・不需左右移動</span></div>'
+      + '<div class="bx-seq-stage">'
+      + '<div class="bx-seq-stars">';
+
+    for (var s = 0; s < chainStars.length; s++){
+      var pos = ((s + 1) / n) * 100;
+      var st = chainStars[s] || {name:'—',type:''};
+      chain += '<span class="bx-seq-star ' + st.type + '" style="left:' + pos + '%">' + st.name + '</span>';
+    }
+
+    chain += '</div><div class="bx-seq-line"></div>'
+      + '<div class="bx-seq-numbers" style="grid-template-columns:repeat(' + n + ',minmax(0,1fr))">';
 
     for (var i = 0; i < arr.length; i++){
       var rawDigit = (isPhoneNumber && rule === 'younian' && all[i] === 0) ? '0→12' : '';
-      chain += '<div class="bx-chain-node">'
+      chain += '<div class="bx-seq-node">'
             + '<strong>' + arr[i] + '</strong>'
             + '<small>' + (rule === 'younian' ? ((ZHI[arr[i]] || '') + (GUA[arr[i]] || '')) : '') + '</small>'
             + (rawDigit ? '<em>' + rawDigit + '</em>' : '')
             + '</div>';
-      if (i < arr.length - 1){
-        var st = chainStars[i] || {name:'—',type:''};
-        chain += '<div class="bx-chain-link">'
-              + '<b class="' + st.type + '">' + st.name + '</b>'
-              + '<i></i>'
-              + '</div>';
-      }
     }
+
     chain += '</div></div>'
-      + '<p class="bx-chain-note">手機號碼維持原順序；0 依老師舊盤換成 12（亥・乾）後再判定相鄰磁場。左右滑動可看完整號碼。</p>'
+      + '<p class="bx-chain-note">依老師確認方式：手機號碼整組一次排出，八星磁場直接標在相鄰數字之間；連續手機號碼中的 0 以 12（亥・乾）入盤。</p>'
       + '</div>';
     html += chain;
     html += '<details class="bx-detail"><summary>查看逐組白話解讀</summary>' + detailHtml + '</details>';
