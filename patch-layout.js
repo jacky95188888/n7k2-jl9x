@@ -116,7 +116,7 @@ function rankOf(t){
 var MENU = [
   {k:'paipan', c:'main', n:'生 辰 排 盤', d:'六柱、卦義、大運流年'},
   {k:'qimen',  n:'手機號論斷',   d:'奇門．末七碼落宮'},
-  {k:'jiugong',n:'數字九宮盤',   d:'後七碼倒填九宮'},
+  {k:'jiugong',n:'手機號碼預測盤', d:'奇門．後七碼倒填九宮'},
   {k:'pro',    n:'專 業 版',     d:'需密碼解鎖'},
   {h:'bxcc.html', n:'八星磁場查詢', d:'手機、車牌、門牌'},
   {h:'rz.html',   n:'看 日 子',     d:'宜忌、方位、吉時'}
@@ -169,7 +169,7 @@ function jump(key){
     target = findCard(['奇門手機號']);
     if (!target) return hint('手機號論斷載入中，請稍候再試。');
   } else if (key === 'jiugong'){
-    target = findCard(['奇門數字九宮']);
+    target = findCard(['奇門手機號碼預測','奇門數字九宮']);
     if (!target) return hint('數字九宮盤載入中，請稍候再試。');
   } else if (key === 'pro'){
     target = findCard(['專業版']);
