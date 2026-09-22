@@ -1,0 +1,302 @@
+/* =========================================================
+   筠玲易數｜P0 MASTER UPGRADE 2026-09-22
+   目的：統一品牌色、加深過淡區塊、提升手機辨識度。
+   原則：只改視覺，不改排盤／八星／九宮演算法。
+   ========================================================= */
+:root{
+  --jlu-purple:#5d116f;
+  --jlu-purple-2:#8b1ca1;
+  --jlu-violet:#b928d0;
+  --jlu-gold:#c99a2e;
+  --jlu-gold-2:#efd277;
+  --jlu-jade:#0f7562;
+  --jlu-ink:#24182b;
+  --jlu-muted:#6e5d70;
+  --jlu-cream:#fff9ed;
+  --jlu-paper:#fffdf8;
+  --jlu-line:rgba(160,113,46,.48);
+  --jlu-shadow:0 14px 34px rgba(73,30,83,.15);
+}
+
+/* ---------- 全站底色與文字 ---------- */
+body.jl-page{
+  color:var(--jlu-ink)!important;
+  background:
+    radial-gradient(circle at 12% 8%,rgba(194,135,224,.18),transparent 26%),
+    radial-gradient(circle at 90% 18%,rgba(239,210,119,.18),transparent 24%),
+    linear-gradient(180deg,#fbf4ff 0%,#fff9ee 48%,#f6effc 100%)!important;
+}
+body.jl-page .wrap{position:relative}
+body.jl-page p,body.jl-page .note,body.jl-page .hint{color:#66566a}
+body.jl-page input,body.jl-page select{
+  background:rgba(255,255,255,.94)!important;
+  border-color:rgba(113,50,127,.42)!important;
+  color:#2d2031!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important;
+}
+body.jl-page input:focus,body.jl-page select:focus{
+  border-color:#8e24aa!important;
+  box-shadow:0 0 0 3px rgba(142,36,170,.13)!important;
+}
+
+/* ---------- 首頁：品牌與六入口 ---------- */
+#jl-home-final{
+  color:var(--jlu-ink);
+  background:
+    radial-gradient(circle at 15% 15%,rgba(203,147,232,.18),transparent 25%),
+    radial-gradient(circle at 86% 34%,rgba(232,193,91,.16),transparent 22%);
+}
+#jl-home-final .jlf-header{
+  border-color:rgba(139,87,150,.34)!important;
+  background:rgba(255,251,246,.90)!important;
+  box-shadow:0 8px 24px rgba(70,28,80,.10)!important;
+  backdrop-filter:blur(14px);
+}
+#jl-home-final .jlf-seal{
+  background:linear-gradient(145deg,#741080,#3f0a55)!important;
+  color:#ffe49a!important;
+  border:1px solid #d8ac46!important;
+  box-shadow:0 5px 14px rgba(92,20,107,.24)!important;
+}
+#jl-home-final .jlf-brand strong,
+#jl-home-final .jlf-section-title{color:#4f0f61!important}
+#jl-home-final .jlf-my,
+#jl-home-final .jlf-card button{
+  background:linear-gradient(135deg,#681078,#b51ed0)!important;
+  color:#fff!important;
+  border:1px solid #d0a43c!important;
+  box-shadow:0 8px 18px rgba(107,18,126,.22)!important;
+}
+#jl-home-final .jlf-hero{
+  border:1.5px solid rgba(194,151,62,.64)!important;
+  box-shadow:0 18px 42px rgba(67,31,75,.16)!important;
+  overflow:hidden;
+}
+#jl-home-final .jlf-kicker{color:#9a6817!important;font-weight:800}
+#jl-home-final .jlf-hero-copy h1{color:#471058!important;text-shadow:0 2px 0 rgba(255,255,255,.72)}
+#jl-home-final .jlf-hero-copy h2{color:#6b2678!important}
+#jl-home-final .jlf-quote{
+  background:linear-gradient(145deg,rgba(255,251,239,.94),rgba(246,226,255,.90))!important;
+  border:1px solid rgba(180,126,56,.55)!important;
+  color:#4c3152!important;
+}
+#jl-home-final .jlf-card{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 100% 0,rgba(226,190,92,.18),transparent 35%),
+    linear-gradient(145deg,#fffdf8 0%,#f7eefd 100%)!important;
+  border:1.5px solid rgba(147,93,159,.48)!important;
+  box-shadow:0 12px 26px rgba(74,35,82,.12),inset 0 1px 0 #fff!important;
+}
+#jl-home-final .jlf-card:before{
+  content:"";
+  position:absolute;inset:0 0 auto;height:4px;
+  background:linear-gradient(90deg,#641075,#d3a63e,#a51bbb);
+}
+#jl-home-final .jlf-card h3{color:#511064!important}
+#jl-home-final .jlf-card p{color:#77517d!important;font-weight:700}
+#jl-home-final .jlf-card small{color:#695b69!important}
+#jl-home-final .jlf-badge img{
+  filter:saturate(1.15) contrast(1.05);
+  drop-shadow:0 6px 12px rgba(69,26,80,.15);
+}
+
+/* ---------- 內頁通用卡片：不再灰白一片 ---------- */
+#jl-feature-shell-final .card:not(:has(#jg-out)):not(:has(#qmOut)),
+body.jl-page-bxcc .card{
+  border:1.5px solid rgba(184,139,56,.58)!important;
+  background:
+    radial-gradient(circle at 96% 0,rgba(214,172,70,.12),transparent 28%),
+    linear-gradient(145deg,#fffdf8,#f9effc)!important;
+  box-shadow:var(--jlu-shadow)!important;
+  border-radius:22px!important;
+}
+#jl-feature-shell-final .card h2,
+body.jl-page-bxcc .card h2{color:#5d116f!important}
+
+/* ---------- 數字九宮：參考精品圖，五行色要看得出來 ---------- */
+.card:has(#jg-out){
+  border:1.5px solid #c79a31!important;
+  background:
+    radial-gradient(circle at 8% 10%,rgba(164,87,197,.12),transparent 30%),
+    linear-gradient(145deg,#fffdf8,#fff3d8)!important;
+  box-shadow:0 18px 42px rgba(76,42,83,.16)!important;
+  border-radius:24px!important;
+}
+.card:has(#jg-out) .jg-grid{
+  gap:8px!important;
+  padding:9px!important;
+  border:2px solid #c99a2e!important;
+  border-radius:20px!important;
+  background:linear-gradient(145deg,#fff4cf,#f3dd9f)!important;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.78),0 12px 28px rgba(91,61,26,.15)!important;
+}
+.card:has(#jg-out) .jg-c{
+  min-height:102px!important;
+  border-width:1.6px!important;
+  border-radius:15px!important;
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.40),inset 0 1px 0 #fff,0 6px 14px rgba(46,34,48,.13)!important;
+}
+.card:has(#jg-out) .jg-c .jg-n{
+  font-size:44px!important;
+  color:#172a27!important;
+  text-shadow:0 1px 0 #fff,0 2px 6px rgba(0,0,0,.10)!important;
+}
+.card:has(#jg-out) .jg-c.jg-mu,
+.card:has(#jg-out) .jg-star-cell.jg-mu{
+  border-color:#2caf72!important;
+  background:
+    linear-gradient(160deg,transparent 56%,rgba(12,124,77,.16) 57%,transparent 74%),
+    linear-gradient(145deg,#d8ffe8,#75ddb0 62%,#bdf4d6)!important;
+}
+.card:has(#jg-out) .jg-c.jg-huo,
+.card:has(#jg-out) .jg-star-cell.jg-huo{
+  border-color:#ef6d83!important;
+  background:
+    radial-gradient(circle at 78% 76%,rgba(214,43,79,.18),transparent 28%),
+    linear-gradient(145deg,#ffe5ea,#f49aae 62%,#ffc6d1)!important;
+}
+.card:has(#jg-out) .jg-c.jg-tu,
+.card:has(#jg-out) .jg-star-cell.jg-tu{
+  border-color:#d7a41d!important;
+  background:
+    linear-gradient(155deg,transparent 58%,rgba(173,117,8,.16) 59%,transparent 76%),
+    linear-gradient(145deg,#fff3b9,#f2c64d 62%,#ffe18a)!important;
+}
+.card:has(#jg-out) .jg-c.jg-jin,
+.card:has(#jg-out) .jg-star-cell.jg-jin{
+  border-color:#8e8fd8!important;
+  background:
+    linear-gradient(155deg,transparent 58%,rgba(90,78,165,.13) 59%,transparent 76%),
+    linear-gradient(145deg,#f2f1ff,#c6c2f1 62%,#e2ddff)!important;
+}
+.card:has(#jg-out) .jg-c.jg-shui,
+.card:has(#jg-out) .jg-star-cell.jg-shui{
+  border-color:#35a8d8!important;
+  background:
+    radial-gradient(ellipse at 70% 82%,rgba(18,135,190,.18),transparent 30%),
+    linear-gradient(145deg,#dcf6ff,#79cfef 62%,#bcecff)!important;
+}
+.card:has(#jg-out) .jg-c.jg-mid{
+  border:2px solid #e0b844!important;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(38,156,127,.40),transparent 38%),
+    linear-gradient(145deg,#08725e,#03443d)!important;
+  box-shadow:inset 0 0 0 4px rgba(232,193,83,.32),inset 0 0 0 7px rgba(255,255,255,.12),0 7px 18px rgba(2,71,59,.28)!important;
+}
+.card:has(#jg-out) .jg-c.jg-mid .jg-n{color:#fff9df!important;text-shadow:0 2px 7px rgba(0,0,0,.28)!important}
+.card:has(#jg-out) .jg-star-card{
+  border-color:#cda344!important;
+  background:linear-gradient(145deg,#fffdf8,#f8efff)!important;
+  box-shadow:0 10px 24px rgba(77,39,86,.10)!important;
+}
+.card:has(#jg-out) .jg-star-title{color:#591269!important}
+.card:has(#jg-out) .jg-in button{
+  background:linear-gradient(135deg,#641075,#bd20d2)!important;
+  border:1px solid #d0a23b!important;
+  color:#fff!important;
+  box-shadow:0 8px 18px rgba(102,16,120,.24)!important;
+}
+
+/* ---------- 八星磁場：輸入、整組排列、兩數對照 ---------- */
+body.jl-page-bxcc .bx-guide,
+body.jl-page-bxcc #jli-reading{
+  border:1.5px solid rgba(191,148,57,.64)!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 100% 0,rgba(207,158,63,.14),transparent 28%),
+    linear-gradient(145deg,#fffdf8,#f5eafb)!important;
+  box-shadow:var(--jlu-shadow)!important;
+}
+body.jl-page-bxcc .bx-guide-head span,
+body.jl-page-bxcc .jli-reading-title>span{
+  background:linear-gradient(145deg,#71107f,#3e0a51)!important;
+  border-color:#d6a83e!important;
+  color:#ffe49a!important;
+}
+body.jl-page-bxcc .modes button{
+  min-height:48px!important;
+  border:1.5px solid #a66ab0!important;
+  background:linear-gradient(145deg,#fffaff,#f2e5f7)!important;
+  color:#6b3272!important;
+  border-radius:14px!important;
+  font-weight:800!important;
+}
+body.jl-page-bxcc .modes button[aria-pressed=true]{
+  background:linear-gradient(135deg,#681078,#c020d3)!important;
+  border-color:#c99a2e!important;
+  color:#fff!important;
+  box-shadow:0 7px 16px rgba(104,16,120,.20)!important;
+}
+body.jl-page-bxcc .btn{
+  min-height:56px!important;
+  border-radius:999px!important;
+  background:linear-gradient(135deg,#5c0d6d,#c124d5)!important;
+  border:1.5px solid #d2a43b!important;
+  color:#fff!important;
+  font-weight:900!important;
+  box-shadow:0 10px 22px rgba(102,17,119,.25)!important;
+}
+body.jl-page-bxcc .bx-chain-card{
+  border:2px solid #c89a2d!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 94% 10%,rgba(231,190,76,.22),transparent 25%),
+    linear-gradient(145deg,#fffdf6,#f5e4b8)!important;
+  box-shadow:0 14px 30px rgba(84,55,25,.16),inset 0 0 0 3px rgba(255,255,255,.55)!important;
+}
+body.jl-page-bxcc .bx-chain-title b{color:#5a1269!important;font-size:17px!important}
+body.jl-page-bxcc .bx-chain-title span{color:#725f54!important;font-weight:700!important}
+body.jl-page-bxcc .bx-seq-node{
+  border-color:#b98a2c!important;
+  background:linear-gradient(145deg,#fffef9,#f4ead0)!important;
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.70),0 4px 10px rgba(75,53,28,.10)!important;
+}
+body.jl-page-bxcc .bx-seq-node strong{color:#1f1720!important;font-weight:900!important}
+body.jl-page-bxcc .bx-seq-star.ji{
+  color:#086d4d!important;background:#e5fff1!important;border-color:#56b58f!important;
+}
+body.jl-page-bxcc .bx-seq-star.xiong{
+  color:#a11e32!important;background:#fff0f2!important;border-color:#e08a98!important;
+}
+/* 老師不需要看的施工說明直接拿掉 */
+body.jl-page-bxcc .bx-chain-note{display:none!important}
+body.jl-page-bxcc .bx-detail{margin-top:16px!important}
+body.jl-page-bxcc .bx-grid-card table{
+  border:1.5px solid #b46ac0!important;
+  border-radius:14px!important;
+  overflow:hidden!important;
+}
+body.jl-page-bxcc .bx-grid-card th{
+  background:linear-gradient(180deg,#7b198c,#5a1068)!important;
+  color:#fff7df!important;
+  border-color:#9d65a8!important;
+  font-weight:900!important;
+}
+body.jl-page-bxcc .bx-grid-card td{
+  background:#fffdf9!important;
+  border-color:#d8bddc!important;
+  color:#3e2d42!important;
+}
+body.jl-page-bxcc .bx-grid-card td.ji{
+  background:#e4f7ed!important;color:#08714e!important;font-weight:900!important;
+}
+body.jl-page-bxcc .bx-grid-card td.xiong{
+  background:#fff0f2!important;color:#a32234!important;font-weight:900!important;
+}
+body.jl-page-bxcc .bx-grid-card td.self{
+  background:#f4e5fb!important;color:#6c2a78!important;font-weight:800!important;
+}
+
+/* ---------- 手機尺寸 ---------- */
+@media(max-width:430px){
+  #jl-home-final .jlf-card{border-radius:20px!important}
+  .card:has(#jg-out) .jg-grid{gap:7px!important;padding:7px!important}
+  .card:has(#jg-out) .jg-c{min-height:92px!important;border-radius:13px!important}
+  .card:has(#jg-out) .jg-c .jg-n{font-size:41px!important}
+  body.jl-page-bxcc .bx-chain-card{padding:14px 8px!important}
+  body.jl-page-bxcc .bx-seq-stage{padding-top:29px!important}
+  body.jl-page-bxcc .bx-seq-node{min-height:56px!important;padding:4px 0!important}
+  body.jl-page-bxcc .bx-seq-node strong{font-size:19px!important}
+}
