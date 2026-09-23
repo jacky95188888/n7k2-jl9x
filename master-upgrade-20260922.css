@@ -98,8 +98,7 @@ body.jl-page input:focus,body.jl-page select:focus{
 #jl-home-final .jlf-card p{color:#77517d!important;font-weight:700}
 #jl-home-final .jlf-card small{color:#695b69!important}
 #jl-home-final .jlf-badge img{
-  filter:saturate(1.15) contrast(1.05);
-  drop-shadow:0 6px 12px rgba(69,26,80,.15);
+  filter:saturate(1.15) contrast(1.05) drop-shadow(0 6px 12px rgba(69,26,80,.15));
 }
 
 /* ---------- 內頁通用卡片：不再灰白一片 ---------- */
@@ -299,4 +298,257 @@ body.jl-page-bxcc .bx-grid-card td.self{
   body.jl-page-bxcc .bx-seq-stage{padding-top:29px!important}
   body.jl-page-bxcc .bx-seq-node{min-height:56px!important;padding:4px 0!important}
   body.jl-page-bxcc .bx-seq-node strong{font-size:19px!important}
+}
+
+
+/* =========================================================
+   AWARD-INSPIRED UX PASS · 2026-09-23
+   參考國際網站獎項共通重點：清楚層級、直覺導覽、可讀性、
+   有目的的互動、跨裝置與無障礙。保留筠玲易數紫金東方識別。
+   ========================================================= */
+
+/* 導覽保持可見，但不搶主視覺 */
+#jl-home-final .jlf-header{
+  position:sticky!important;
+  top:0;
+  z-index:80;
+}
+#jl-home-final .jlf-brand,
+#jl-home-final .jlf-my{
+  min-height:40px;
+}
+#jl-home-final .jlf-nav a{
+  position:relative;
+  padding:12px 2px;
+  transition:color .2s ease;
+}
+#jl-home-final .jlf-nav a:after{
+  content:"";
+  position:absolute;
+  left:50%;right:50%;bottom:7px;
+  height:1.5px;
+  background:linear-gradient(90deg,#7a168e,#d2a43d);
+  transition:left .2s ease,right .2s ease;
+}
+#jl-home-final .jlf-nav a:hover:after,
+#jl-home-final .jlf-nav a:focus-visible:after{left:0;right:0}
+
+/* Hero：資訊層級更明確，避免裝飾壓過內容 */
+#jl-home-final .jlf-hero-copy h1{
+  letter-spacing:.06em!important;
+}
+#jl-home-final .jlf-hero-copy h2{
+  font-weight:900!important;
+  letter-spacing:.04em!important;
+}
+#jl-home-final .jlf-hero-copy p{
+  max-width:31em;
+}
+#jl-home-final .jlf-section-title{
+  letter-spacing:.08em;
+}
+
+/* 功能卡：整張卡建立一致的互動回饋 */
+#jl-home-final .jlf-card{
+  transform:translateZ(0);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+}
+#jl-home-final .jlf-card button,
+#jl-home-final .jlf-card>a,
+#jl-home-final .jlf-date a,
+#jl-home-final .jlf-taohua,
+#jl-home-final .jlf-line{
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease;
+}
+#jl-home-final .jlf-card button:active,
+#jl-home-final .jlf-card>a:active,
+#jl-home-final .jlf-date a:active,
+#jl-home-final .jlf-taohua:active{transform:scale(.98)}
+#jl-home-final button:focus-visible,
+#jl-home-final a:focus-visible{
+  outline:3px solid rgba(201,154,46,.72)!important;
+  outline-offset:3px!important;
+}
+
+/* 觸控目標至少維持容易點擊的尺寸 */
+#jl-home-final .jlf-card button,
+#jl-home-final .jlf-card>a{
+  min-height:40px;
+}
+#jl-home-final .jlf-date a{min-height:36px}
+
+/* 桌面／平板才使用浮起效果，手機不靠 hover 傳達功能 */
+@media(hover:hover) and (pointer:fine){
+  #jl-home-final .jlf-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(201,154,46,.72)!important;
+    box-shadow:0 18px 38px rgba(74,35,82,.18),inset 0 1px 0 #fff!important;
+  }
+  #jl-home-final .jlf-card button:hover,
+  #jl-home-final .jlf-card>a:hover,
+  #jl-home-final .jlf-date a:hover{
+    filter:brightness(1.06);
+    box-shadow:0 10px 22px rgba(102,16,120,.28)!important;
+  }
+}
+
+/* 手機：由「縮小桌面版」改成真正可閱讀的行動版 */
+@media(max-width:430px){
+  body.jlf-home-mode .wrap{max-width:430px!important}
+  #jl-home-final .jlf-header{
+    min-height:54px!important;
+    height:54px!important;
+    padding:0 12px!important;
+  }
+  #jl-home-final .jlf-brand strong{font-size:17px!important}
+  #jl-home-final .jlf-seal{width:30px!important;height:30px!important;font-size:12px!important}
+  #jl-home-final .jlf-my{
+    min-height:38px!important;
+    padding:7px 12px!important;
+    font-size:11px!important;
+  }
+
+  #jl-home-final .jlf-hero{
+    height:300px!important;
+  }
+  #jl-home-final .jlf-hero-copy{
+    width:61%!important;
+    padding:30px 0 0 18px!important;
+  }
+  #jl-home-final .jlf-kicker{
+    font-size:9px!important;
+    line-height:1.45!important;
+    letter-spacing:.05em!important;
+  }
+  #jl-home-final .jlf-hero-copy h1{
+    margin:10px 0 7px!important;
+    font-size:34px!important;
+  }
+  #jl-home-final .jlf-hero-copy h2{
+    font-size:12px!important;
+    line-height:1.55!important;
+  }
+  #jl-home-final .jlf-hero-copy p{
+    margin-top:10px!important;
+    font-size:10px!important;
+    line-height:1.65!important;
+  }
+  #jl-home-final .jlf-quote{
+    right:3%!important;
+    top:auto!important;
+    bottom:18px!important;
+    width:31%!important;
+    padding:9px!important;
+    border-radius:12px!important;
+    font-size:9px!important;
+    line-height:1.55!important;
+    text-shadow:none!important;
+  }
+  #jl-home-final .jlf-quote b{font-size:10px!important}
+
+  #jl-home-final .jlf-section-title{
+    min-height:44px!important;
+    height:auto!important;
+    padding:9px 36px!important;
+    font-size:13px!important;
+    line-height:1.45!important;
+    text-align:center;
+  }
+  #jl-home-final .jlf-tools{padding:12px 10px 14px!important}
+  #jl-home-final .jlf-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  #jl-home-final .jlf-card{
+    height:auto!important;
+    min-height:208px!important;
+    padding:13px 8px 10px!important;
+    border-radius:18px!important;
+  }
+  #jl-home-final .jlf-badge{
+    width:64px!important;
+    height:64px!important;
+    margin-bottom:7px!important;
+  }
+  #jl-home-final .jlf-card h3{
+    margin-bottom:4px!important;
+    font-size:15px!important;
+  }
+  #jl-home-final .jlf-card p{
+    font-size:11px!important;
+    line-height:1.4!important;
+  }
+  #jl-home-final .jlf-card small{
+    min-height:34px;
+    margin-top:5px!important;
+    font-size:9px!important;
+    line-height:1.55!important;
+  }
+  #jl-home-final .jlf-card button,
+  #jl-home-final .jlf-card>a{
+    width:118px!important;
+    max-width:92%!important;
+    min-height:42px!important;
+    height:42px!important;
+    margin-top:7px!important;
+    font-size:11px!important;
+  }
+
+  #jl-home-final .jlf-taohua{
+    margin:2px 10px 10px!important;
+    min-height:112px!important;
+    grid-template-columns:72px minmax(0,1fr)!important;
+    padding:13px!important;
+  }
+  #jl-home-final .jlf-taohua>b{
+    grid-column:1/-1;
+    justify-self:stretch;
+    text-align:center;
+    font-size:11px!important;
+  }
+  #jl-home-final .jlf-taohua small{font-size:9px!important}
+  #jl-home-final .jlf-taohua p{font-size:10px!important}
+
+  #jl-home-final .jlf-date{
+    min-height:166px!important;
+    margin:0 10px 10px!important;
+    border-radius:18px!important;
+  }
+  #jl-home-final .jlf-date-copy{
+    width:62%!important;
+    padding:20px 0 16px 16px!important;
+  }
+  #jl-home-final .jlf-date h2{font-size:23px!important}
+  #jl-home-final .jlf-date p{font-size:9px!important;line-height:1.6!important}
+  #jl-home-final .jlf-date a{font-size:10px!important;margin-top:8px!important}
+
+  #jl-home-final .jlf-contact{
+    margin:0 10px 10px!important;
+    padding:10px!important;
+    border-radius:16px!important;
+  }
+  #jl-home-final .jlf-mini-teacher{width:48px!important;height:56px!important}
+  #jl-home-final .jlf-consult h3{font-size:12px!important}
+  #jl-home-final .jlf-consult p{font-size:9px!important;line-height:1.5!important}
+  #jl-home-final .jlf-line{min-height:48px!important}
+  #jl-home-final .jlf-line-icon{width:30px!important;height:30px!important;font-size:6px!important}
+  #jl-home-final .jlf-line b{font-size:11px!important}
+  #jl-home-final .jlf-line small{font-size:9px!important}
+
+  #jl-home-final .jlf-footer{
+    min-height:72px!important;
+    padding:12px 10px 9px!important;
+    font-size:8px!important;
+  }
+  #jl-home-final .jlf-footer small{font-size:7px!important}
+}
+
+/* 尊重使用者的減少動態效果設定 */
+@media(prefers-reduced-motion:reduce){
+  #jl-home-final *,
+  #jl-feature-shell-final *{
+    scroll-behavior:auto!important;
+    transition:none!important;
+    animation:none!important;
+  }
 }
