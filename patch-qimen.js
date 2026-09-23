@@ -39,14 +39,14 @@ function css(){
   var s=document.createElement('style');
   s.id='qm-css';
   s.textContent=[
-  '.qm-in{display:flex;gap:8px;margin:10px 0 0}',
+  '.qm-in{display:flex;gap:8px;margin:6px 0 0}',
   '.qm-in input{flex:1;min-width:0;font-family:var(--ser);font-size:20px;letter-spacing:.14em;padding:11px 12px;border:1px solid var(--line);border-radius:2px;background:#fff;color:#241f1c}',
   '.qm-in input:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}',
   '.qm-in button{font-family:var(--ser);font-size:16px;font-weight:600;letter-spacing:.14em;padding:11px 18px;border:none;border-radius:2px;background:var(--zhu);color:#f7f3ea;cursor:pointer}',
   '.qm-in button:active{opacity:.85}',
-  '.qm-err{color:var(--zhu);font-size:13px;margin:7px 0 0;min-height:18px}',
-  '.qm-note{font-size:12px;color:#8f8069;line-height:1.8;margin:6px 0 0}',
-  '.qm-h{font-size:13px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:24px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line);text-indent:.24em}',
+  '.qm-err{color:var(--zhu);font-size:13px;margin:4px 0 0;min-height:10px}',
+  '.qm-note{font-size:12px;color:#8f8069;line-height:1.65;margin:4px 0 0}',
+  '.qm-h{font-size:13px;font-weight:600;letter-spacing:.24em;color:var(--gold);margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--line);text-indent:.24em}',
   '.qm-sg{display:flex;gap:6px}',
   '.qm-sg .c{flex:1;text-align:center;padding:8px 2px;border:1px solid var(--line);background:#fff;border-radius:2px}',
   '.qm-sg .c b{display:block;font-size:21px;font-weight:600;color:#241f1c}',
@@ -63,7 +63,7 @@ function css(){
     'justify-content:center;text-align:center;font-size:12.5px;line-height:1.45;letter-spacing:.03em}',
   '.qm-cell.on .st2 u{text-decoration:none;color:#f7e9cd;font-weight:600}',
   '.qm-cell.on .st2 i{font-style:normal;color:#e0c98f}',
-  '.qm-cap{font-size:11px;color:#9c8b74;text-align:center;margin:7px 0 0;letter-spacing:.1em}',
+  '.qm-cap{font-size:11px;color:#9c8b74;text-align:center;margin:4px 0 0;letter-spacing:.1em}',
   '.qm-card{border:1px solid var(--line);background:#fff;border-radius:2px;padding:14px 15px;margin:11px 0 0}',
   '.qm-card h4{margin:0 0 3px;font-size:19px;color:var(--zhu);letter-spacing:.08em;font-weight:700}',
   '.qm-card .wx{font-size:11px;color:#a08d72;letter-spacing:.14em}',
