@@ -45,7 +45,7 @@
 
   var qimenMasterV10 = document.createElement('link');
   qimenMasterV10.rel = 'stylesheet';
-  qimenMasterV10.href = 'qimen-master-v10.css?v=20260916-11';
+  qimenMasterV10.href = 'qimen-master-v10.css?v=20260924-tight-1';
   head.appendChild(qimenMasterV10);
 
   // 全站 V11：最後載入，統一處理所有仍過淡、過白、過平的區塊；特殊九宮母版排除。
