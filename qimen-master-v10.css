@@ -81,3 +81,19 @@
 .qm-zg{gap:10px!important}.qm-zg button{min-height:62px!important;padding:12px 5px!important;border:1.5px solid #aa8cbc!important;border-radius:15px!important;background:linear-gradient(145deg,#f1e8f5,#dacbe6)!important;color:#572960!important;font-weight:900!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.52),0 5px 12px rgba(84,47,92,.10)!important}.qm-zg button:nth-child(3n+1){background:linear-gradient(145deg,#d8efe5,#b5d9cc)!important;border-color:#77aa99!important}.qm-zg button:nth-child(3n+2){background:linear-gradient(145deg,#f5dfe8,#e5bbca)!important;border-color:#c4889e!important}.qm-zg button:nth-child(3n){background:linear-gradient(145deg,#f8e5ae,#e4bd5d)!important;border-color:#b98c28!important}.qm-zg button.on,.qm-zg button.mid,.qm-zg button.mid.on{background:linear-gradient(135deg,#5f0c83 0%,#8e13a5 55%,#bb17d0 100%)!important;border:2px solid #d6aa35!important;color:#fff8df!important;box-shadow:0 9px 20px rgba(111,22,132,.29),inset 0 1px 0 rgba(255,255,255,.22)!important}
 
 @media(max-width:390px){.card:has(#qmOut){padding:18px 11px 22px!important}.qm-in{padding:8px!important}.qm-in input{min-height:52px!important;font-size:17px!important}.qm-in button{min-width:92px!important}.qm-plate{gap:7px!important;padding:7px!important}.qm-cell{min-height:94px!important}.qm-cell .gn{font-size:14px!important}.qm-cell .nu{font-size:33px!important}.qm-cell.on{min-height:103px!important}.qm-zg button{min-height:56px!important}}
+
+
+/* 手機版閱讀密度：縮短四綱、落宮、九宮格與解說之間的上下留白 */
+@media(max-width:430px){
+  #qmOut>.qm-h{
+    margin:14px 0 7px!important;
+    padding:9px 14px!important;
+  }
+  #qmSgCap,#qmCap{
+    margin:3px 0 0!important;
+    line-height:1.5!important;
+  }
+  #qmOut>.qm-card{
+    margin-top:7px!important;
+  }
+}
