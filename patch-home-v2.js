@@ -401,6 +401,11 @@ function boot(){
 
   </a>
 
+  <div class="jlf-direct-contact" aria-label="電話與電子郵件聯絡資訊">
+    <a href="tel:0978312931">電話聯絡　0978-312-931</a>
+    <a href="mailto:hjk60725@yahoo.com.tw">電子郵件　hjk60725@yahoo.com.tw</a>
+  </div>
+
 </section>
 
 
@@ -2186,6 +2191,9 @@ body.jlf-feature-mode
 }
 
 
+.jlf-direct-contact{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px}
+.jlf-direct-contact a{display:block;padding:12px 14px;border:1px solid #d9b6e2;border-radius:12px;background:linear-gradient(135deg,#fff,#fff8ff);color:#61117b;text-decoration:none;font-size:14px;font-weight:800;overflow-wrap:anywhere}
+.jlf-direct-contact a:focus-visible{outline:3px solid #d9b34d;outline-offset:2px}
 .jlf-line{
   height:33px;
 
